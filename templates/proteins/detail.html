@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %} Protein Detail {% endblock %}
+{% block content %}
+<h2>{{ protein }}</h2>
+
+{% if antibodies %}
+<table>
+ <thead>
+  <tr>
+   <th>Antibodies ({{ antibodies.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for antibody in antibodies %}
+   <tr>
+   <td><a href="/experimentdb/antibody/{{antibody}}">{{ antibody }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+
+{% if constructs %}
+<table>
+ <thead>
+  <tr>
+   <th>Constructs ({{ constructs.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for construct in constructs %}
+   <tr>
+   <td><a href="/experimentdb/construct/{{construct}}">{{ construct }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+
+{% if purified_proteins %}
+<table>
+ <thead>
+  <tr>
+   <th>Purified Proteins ({{ purified_proteins.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for protein in purified_proteins %}
+   <tr>
+   <td><a href="/experimentdb/purified_proteins/{{protein}}">{{ protein }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+
+{% if primers %}
+<table>
+ <thead>
+  <tr>
+   <th>Primers ({{ primers.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for primer in primers %}
+   <tr>
+   <td><a href="/experimentdb/primer/{{primer}}">{{ primer }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+
+
+
+
+{% if experiment_protein %}
+<table>
+ <thead>
+  <tr>
+   <th>Experiments ({{ experiment_protein.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for experiment in experiment_protein %}
+   <tr>
+   <td><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+{% endblock %}

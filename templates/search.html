@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head_title %}Search{% if query %} Results{% endif %}{% endblock %}
+{% block content %} <form action="." method="GET">
+    <label for="q">Search: </label>
+    <input type="text" name="q" value="{{ query|escape }}">
+    <input type="submit" value="Search">
+  </form>
+
+  {% if query %}
+    <h2>Results for "{{ query|escape }}":</h2>
+
+    {% if results %}
+      <ul>
+      {% for experiment in results %}
+        <li><a href="{{ experiment.get_absolute_url}}">{{ experiment }}</a></l1>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No experiments found</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
