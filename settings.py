@@ -78,7 +78,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-	'experimentdb.data',
+	'experimentdb.experimentdata',
 	'experimentdb.projects',
 	'experimentdb.proteins',
 	'experimentdb.reagents',
