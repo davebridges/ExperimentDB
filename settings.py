@@ -83,5 +83,6 @@ INSTALLED_APPS = (
 	'experimentdb.proteins',
 	'experimentdb.reagents',
 	'experimentdb.external',
+	'experimentdb.cloning',
 	'django.contrib.admin',
 )
