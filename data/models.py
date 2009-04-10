@@ -4,12 +4,6 @@ from experimentdb.proteins.models import Protein
 from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell, Purified_Protein, Primer
 from experimentdb.external.models import Reference, Contact, Vendor
 
-CLONING_TYPE = (
-	('PCR', 'PCR Based'),
-	('digest', 'Digestion and Ligation'),
-	('LIC', 'Ligation Independent Cloning'),
-)
-
 class Protocol(models.Model):
 	protocol = models.CharField(max_length=50)
 	protocol_slug = models.SlugField(max_length=25)
@@ -36,7 +30,7 @@ class Experiment(models.Model):
 	antibodies = models.ManyToManyField(Antibody, blank=True)
 	chemicals = models.ManyToManyField(Chemical, blank=True)
 	constructs = models.ManyToManyField(Construct, blank=True)
-	siRNA = models.ManyToManyField(Primer, blank=True)
+	siRNA = models.ManyToManyField(Primer, blank=True, null=True)
 	comments = models.TextField(max_length=500, blank=True)
 	researcher = models.ManyToManyField(Contact, blank=True)
 	protein = models.ManyToManyField(Protein, blank=True)
@@ -87,24 +81,3 @@ class Sequencing(models.Model):
 	lane_number = models.IntegerField(max_length=3, blank=True, null=True)
 	def __unicode__(self):
 		return u'%s-%s' % (self.construct,self.clone_name)
-
-class Cloning(models.Model):
-	date_completed = models.DateField(blank=True, null=True)
-	cloning_type = models.CharField(max_length=25, choices=CLONING_TYPE)
-	vector = models.ForeignKey('Construct')
-	vector_CIP = models.BooleanField()
-	insert = models.CharField(max_length=100, blank=True)
-	primer_5prime = models.ForeignKey(Primer, blank=True)
-	restriction_enzyme_5prime = models.CharField(max_length=7, blank=True)
-	destroyed_5prime = models.BooleanField()
-	primer_3prime = models.ForeignKey(Primer, blank=True)
-	restriction_enzyme_3prime = models.CharField(max_length=7, blank=True)
-	destroyed_3prime = models.BooleanField()
-	ligation_temperaturee = models.IntegerField(blank=True, null=True, help_text = "in degrees Celsius")
-	ligation_time = models.TimeField(blank=True, null=True)
-	gel = models.ImageField(upload_to = 'cloning/%Y/%m/%d', blank=True)
-	sequencing = models.ManyToManyField(Sequencing, blank=True, null=True)
-	notes = models.TextField(max_length=250, blank=True)
-	
-	
-	

@@ -11,6 +11,7 @@ class ProtocolAdmin(admin.ModelAdmin):
 admin.site.register(Protocol, ProtocolAdmin)
 
 class ExperimentAdmin(admin.ModelAdmin):
+	fields = ('project', 'subproject', 'experimentID', 'experiment', 'protocol', 'assay', 'experiment_date', 'cellline', 'antibodies', 'chemicals', 'constructs', 'siRNA', 'researcher', 'protein', 'purified_protein')
 	inlines = [ResultInline, ]
 	date_hierarchy = 'experiment_date'
 	list_filter = ('protein', 'assay')
