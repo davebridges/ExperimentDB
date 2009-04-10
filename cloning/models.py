@@ -1,7 +1,7 @@
 from django.db import models
-from experimentdb.data.models import Sequencing
+from experimentdb.data.models import Sequencing, Protocol
 from experimentdb.reagents.models import Primer
-
+from experimentdb.external.models import Contact
 
 
 CLONING_TYPE = (
@@ -26,5 +26,19 @@ class Cloning(models.Model):
 	ligation_time = models.TimeField(blank=True, null=True)
 	gel = models.ImageField(upload_to = 'cloning/%Y/%m/%d', blank=True)
 	sequencing = models.ManyToManyField(Sequencing, blank=True, null=True)
+	researcher = models.ManyToManyField(Contact, blank=True, null=True)
 	notes = models.TextField(max_length=250, blank=True)
+
 	
+
+class Mutagenesis(models.Model):
+	mutation = models.CharField(max_length=25)
+	date_completed = models.DateField()
+	method = models.CharField(max_length=50, default = "Stratagene QuickChange")
+	protocol = models.ForeignKey(Protocol, blank=True, null=True)
+	sense_primer = models.ForeignKey(Primer, blank=True, related_name="sense_primer")
+	antisense_primer = models.ForeignKey(Primer, blank=True, related_name="antisense_primer")
+	colonies = models.IntegerField(blank=True, null=True)
+	sequencing = models.ManyToManyField(Sequencing, blank=True, null=True)
+	researcher = models.ManyToManyField(Contact, blank=True, null=True)
+	notes = models.TextField(max_length=250, blank=True)
