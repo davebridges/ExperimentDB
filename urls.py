@@ -13,4 +13,5 @@ urlpatterns = patterns('',
 	(r'^subprojects?/(?P<subproject>[-\w]+)/$', 'experimentdb.projects.views.subproject_detail'),
 	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),		
 	(r'^proteins?/$', 'experimentdb.proteins.views.index'),
+	(r'^sgd/(?P<gene>[-\w\d]+)/$', 'experimentdb.datasets.views.sgd_gene_detail'),
 )
