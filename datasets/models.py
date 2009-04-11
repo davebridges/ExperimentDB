@@ -11,6 +11,9 @@ class SGD_GeneNames(models.Model):
 	SGDID = models.CharField(max_length=25) 
 	def __unicode__(self):
 		return u'%s' % self.Locus_name
+	def get_absolute_url(self):
+		return "/sgd/%s/" % self.Locus_name
+
 
 
 class SGD_phenotypes(models.Model):

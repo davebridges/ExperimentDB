@@ -47,8 +47,8 @@
 	<tbody>
 {% for interaction in interactions_physical_bait %}
 		<tr>
-		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
-		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Bait }}">{{ interaction.Standard_Gene_Name_Bait }}</a></td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Hit }}">{{ interaction.Standard_Gene_Name_Hit }}</td>
 		<td>{{ interaction.Experiment_Type }}</td>
 		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
 		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
@@ -57,8 +57,8 @@
 {% endfor %}
 {% for interaction in interactions_physical_hit %}
 		<tr>
-		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
-		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Bait }}">{{ interaction.Standard_Gene_Name_Bait }}</a></td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Hit }}">{{ interaction.Standard_Gene_Name_Hit }}</td>
 		<td>{{ interaction.Experiment_Type }}</td>
 		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
 		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
@@ -82,8 +82,8 @@
 	<tbody>
 {% for interaction in interactions_genetic_bait %}
 		<tr>
-		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
-		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Bait }}">{{ interaction.Standard_Gene_Name_Bait }}</a></td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Hit }}">{{ interaction.Standard_Gene_Name_Hit }}</td>
 		<td>{{ interaction.Experiment_Type }}</td>
 		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
 		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
@@ -92,8 +92,8 @@
 {% endfor %}
 {% for interaction in interactions_genetic_hit %}
 		<tr>
-		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
-		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Bait }}">{{ interaction.Standard_Gene_Name_Bait }}</a></td>
+		<td><a href="/experimentdb/sgd/{{ interaction.Standard_Gene_Name_Hit }}">{{ interaction.Standard_Gene_Name_Hit }}</td>
 		<td>{{ interaction.Experiment_Type }}</td>
 		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
 		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
