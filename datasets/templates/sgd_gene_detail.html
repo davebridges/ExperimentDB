@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block head_title %}SGD Gene Detail - {{ genename }}{% endblock %}
+{% block title %}SGD Gene Detail - {{ genename }}{% endblock %}
+{% block content %}
+<h1>Gene Information</h1>
+{{ genename }}
+<p><b>Aliases:</b> {{ genename.Other_name }}</p>
+<p><b>Description:</b> {{ genename.Description }}</p>
+<p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
+<h1>Phenotypes ({{ phenotypes.count }})</h1>
+<table>
+	<thead>
+		<tr>
+		<th>Phenotype</th>
+		<th>Experiment</th>
+		<th>Mutant Type</th>
+		<th>Chemical</th>
+		<th>Condition</th>
+		<th>Details</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for phenotype in phenotypes %}
+		<tr>
+		<td>{{ phenotype.Phenotype }}</td>
+		<td>{{ phenotype.Experiment_Type }}</td>
+		<td>{{ phenotype.Mutant_Type }}</td>
+		<td>{{ phenotype.Chemical }}</td>
+		<td>{{ phenotype.Condition }}</td>
+		<td>{{ phenotype.Details }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+<h1>Physical Interactions</h1>
+<table>
+	<thead>
+		<tr>
+		<th>Bait</th>
+		<th>Hit</th>
+		<th>Experiment</th>
+		<th>Screen</th>
+		<th>Type</th>
+		<th>Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for interaction in interactions_physical_bait %}
+		<tr>
+		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
+		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td>{{ interaction.Experiment_Type }}</td>
+		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
+		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
+		<td>{{ interaction.Notes }}</td>
+		</tr>
+{% endfor %}
+{% for interaction in interactions_physical_hit %}
+		<tr>
+		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
+		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td>{{ interaction.Experiment_Type }}</td>
+		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
+		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
+		<td>{{ interaction.Notes }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+<h1>Genetic Interactions</h1>
+<table>
+	<thead>
+		<tr>
+		<th>Bait</th>
+		<th>Hit</th>
+		<th>Experiment</th>
+		<th>Screen</th>
+		<th>Type</th>
+		<th>Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for interaction in interactions_genetic_bait %}
+		<tr>
+		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
+		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td>{{ interaction.Experiment_Type }}</td>
+		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
+		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
+		<td>{{ interaction.Notes }}</td>
+		</tr>
+{% endfor %}
+{% for interaction in interactions_genetic_hit %}
+		<tr>
+		<td>{{ interaction.Standard_Gene_Name_Bait }}</td>
+		<td>{{ interaction.Standard_Gene_Name_Hit }}</td>
+		<td>{{ interaction.Experiment_Type }}</td>
+		<td>{{ interaction.Genetic_or_Physical_Interaction }}</td>
+		<td>{{ interaction.Manually_Curated_or_High_Throughput }}</td>
+		<td>{{ interaction.Notes }}</td>
+		</tr>
+{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}
