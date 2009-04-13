@@ -15,13 +15,13 @@ $(document).ready(function(){
 </script>
 {% endblock scripts %}
 {% block content %}
-<h1>Gene Information</h1>
+<h3>Gene Information</h3>
 {{ genename }}
 <p><b>Aliases:</b> {{ genename.Other_name }}</p>
 <p><b>Description:</b> {{ genename.Description }}</p>
 <p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
 <div class="hide">
-<h1>Phenotypes ({{ phenotypes.count }})<input type="button" value="Hide" class="delete"/></h1>
+<h3>Phenotypes ({{ phenotypes.count }}) <input type="button" value="Hide" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
@@ -48,7 +48,7 @@ $(document).ready(function(){
 </table>
 </div>
 <div class="hide">
-<h1>Physical Interactions<input type="button" value="Hide" class="delete"/></h1>
+<h3>Physical Interactions <input type="button" value="Hide" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
@@ -85,7 +85,7 @@ $(document).ready(function(){
 </table>
 </div>
 <div class="hide">
-<h1>Genetic Interactions<input type="button" value="Hide" class="delete"/></h1>
+<h3>Genetic Interactions <input type="button" value="Hide" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
