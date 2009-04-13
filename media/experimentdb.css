@@ -1,0 +1,44 @@
+.outer{
+	margin:0px;
+	padding:0px;
+
+.hide {
+	border: solid 1px;
+}
+}	
+.main{
+}
+#menu {
+	width: 100%;
+	overflow: hidden;
+	border-bottom: 1px solid black; /*bottom horizontal line that runs beneath tabs*/
+}
+#menu ul{
+	margin: 0;
+	padding: 0;
+	padding-left: 10px; /*offset of tabs relative to browser left edge*/
+	font: bold 12px Verdana;
+	list-style-type: none;
+}
+	
+#menu li{
+	display: inline;
+	margin: 0;
+}
+#menu li a {
+	float: left;
+	display: block;
+	text-decoration: none;
+	margin: 0;
+	padding: 7px 8px; /*padding inside each tab*/
+	border-right: 1px solid white; /*right divider between tabs*/
+	color: white;
+	background: #414141; /*background of tabs (default state)*/
+}	
+	
+
+#menu li a:hover li.selected a{
+	background: black; /*background of tabs for hover state, plus tab with "selected" class assigned to its LI */
+}
+
+

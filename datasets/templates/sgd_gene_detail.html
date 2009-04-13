@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 {% block head_title %}SGD Gene Detail - {{ genename }}{% endblock %}
 {% block title %}SGD Gene Detail - {{ genename }}{% endblock %}
+{% block scripts %}
+<script type = "text/javascript" src ="/media/javascript/jquery-1.3.2.js">
+</script>
+<script type = "text/javascript">
+$(document).ready(function(){
+
+	$(".hide .delete").click(function(){
+	  $(this).parents(".hide").animate({ opacity: "hide" }, "slow");
+	});
+
+});
+</script>
+{% endblock scripts %}
 {% block content %}
 <h1>Gene Information</h1>
 {{ genename }}
 <p><b>Aliases:</b> {{ genename.Other_name }}</p>
 <p><b>Description:</b> {{ genename.Description }}</p>
 <p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
-<h1>Phenotypes ({{ phenotypes.count }})</h1>
+<div class="hide">
+<h1>Phenotypes ({{ phenotypes.count }})<input type="button" value="Hide" class="delete"/></h1>
 <table>
 	<thead>
 		<tr>
@@ -32,7 +46,9 @@
 {% endfor %}
 	</tbody>
 </table>
-<h1>Physical Interactions</h1>
+</div>
+<div class="hide">
+<h1>Physical Interactions<input type="button" value="Hide" class="delete"/></h1>
 <table>
 	<thead>
 		<tr>
@@ -67,7 +83,9 @@
 {% endfor %}
 	</tbody>
 </table>
-<h1>Genetic Interactions</h1>
+</div>
+<div class="hide">
+<h1>Genetic Interactions<input type="button" value="Hide" class="delete"/></h1>
 <table>
 	<thead>
 		<tr>
@@ -102,4 +120,5 @@
 {% endfor %}
 	</tbody>
 </table>
+<div>
 {% endblock content %}
