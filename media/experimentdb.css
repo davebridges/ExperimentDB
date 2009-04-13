@@ -41,8 +41,4 @@ td {
 	background: LightGrey; /*background of tabs (default state)*/
 }	
 
-.delete {
-	position: absolute;
-	right: 10px;
-	background-color: LightGrey;
-	border: 1px solid black;
+

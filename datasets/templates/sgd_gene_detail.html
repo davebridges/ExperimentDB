@@ -7,8 +7,16 @@
 <script type = "text/javascript">
 $(document).ready(function(){
 
-	$(".hide .delete").click(function(){
-	  $(this).parents(".hide").animate({ opacity: "hide" }, "slow");
+	$(".hide h3:first").addClass("active");
+	$(".hide table:not(:first)").hide();
+
+	$(".hide h3").click(function(){
+
+	  $(this).next("table").slideToggle("slow")
+	  .siblings("table:visible").slideUp("slow");
+	  $(this).toggleClass("active");
+	  $(this).siblings("h3").removeClass("active");
+
 	});
 
 });
@@ -21,7 +29,7 @@ $(document).ready(function(){
 <p><b>Description:</b> {{ genename.Description }}</p>
 <p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
 <div class="hide">
-<h3>Phenotypes ({{ phenotypes.count }}) <input type="button" value="Hide" class="delete"/></h3>
+<h3>Phenotypes ({{ phenotypes.count }}) <input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
@@ -48,7 +56,7 @@ $(document).ready(function(){
 </table>
 </div>
 <div class="hide">
-<h3>Physical Interactions <input type="button" value="Hide" class="delete"/></h3>
+<h3>Physical Interactions ({{ interactions_physical_bait.count }} Bait and {{interactions_physical_hit.count }} Hits)<input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
@@ -85,7 +93,7 @@ $(document).ready(function(){
 </table>
 </div>
 <div class="hide">
-<h3>Genetic Interactions <input type="button" value="Hide" class="delete"/></h3>
+<h3>Genetic Interactions ({{ interactions_genetic_bait.count }} Bait and {{interactions_genetic_hit.count }} Hits)<input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
 		<tr>
