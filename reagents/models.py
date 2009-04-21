@@ -1,7 +1,7 @@
 from django.db import models
 from experimentdb.proteins.models import Protein
 from experimentdb.external.models import Contact, Reference, Vendor
-#from experimentdb.cloning.models import Cloning
+
 
 ANTIBODY_SPECIES = (
 	('rabbit', 'rabbit'),
@@ -36,7 +36,6 @@ class Construct(models.Model):
 	construct = models.CharField(max_length=30)
 	plasmid = models.CharField(max_length=30, blank=True)
 	protein = models.ManyToManyField(Protein)
-#	cloning = models.ForeignKey(Cloning)
 	source = models.CharField(max_length=20, blank=True)
 	resistance = models.CharField(max_length=20, default="Ampicillin")
 	notes = models.TextField(max_length=250, blank=True)
