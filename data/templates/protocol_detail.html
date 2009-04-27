@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block head_title %}Protocol: {{ protocol }}{% endblock %}
+{% block title %}{{ protocol }}{% endblock %}
+
+
+{% block content %}
+<h2>Download Protocol</h2>
+{% if protocol.protocol_file %}<ul><li><a href="{{protocol.protocol_file.url}}">{{ protocol }}</a></li></ul>{% endif %}
+<h2>Experiments</h2>
+<ul>
+{% for experiment in protocol_experiments %}
+<li><a href="/experimentdb{{ experiment.get_absolute_url }}">{{ experiment }}</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}

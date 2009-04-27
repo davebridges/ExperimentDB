@@ -27,6 +27,13 @@ def experiment(request, experimentID):
 	exp_subproject=SubProject.objects.filter(experiment__experimentID=exp_ID)
 	return render_to_response('data/experiment.html', {'experiment':experiment, 'exp_result':exp_result, 'exp_protocol':exp_protocol, 'exp_researcher':exp_researcher, 'exp_chemical':exp_chemical, 'exp_cell': exp_cell,  'exp_project': exp_project, 'exp_protein': exp_protein, 'exp_subproject':exp_subproject})
 
+@login_required
+def protocol_list(request):
+	protocol_list = Protocol.objects.all()
+	return render_to_response('protocol_list.html', {'protocol_list':protocol_list, })
 
-
-
+@login_required
+def protocol_detail(request, protocol_slug):
+	protocol = get_object_or_404(Protocol, protocol_slug=protocol_slug)
+	protocol_experiments = Experiment.objects.filter(protocol=protocol)	
+	return render_to_response ('protocol_detail.html', {'protocol': protocol, 'protocol_experiments':protocol_experiments})
