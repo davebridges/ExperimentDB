@@ -73,7 +73,12 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 "/home/dave/src/experimentdb/templates",
 "/home/dave/src/experimentdb/datasets/templates",
-"/home/dave/src/experimentdb/reagents/templates"
+"/home/dave/src/experimentdb/reagents/templates",
+"/home/dave/src/experimentdb/proteins/templates",
+"/home/dave/src/experimentdb/data/templates",
+"/home/dave/src/experimentdb/projects/templates",
+"/home/dave/src/experimentdb/cloning/templates",
+"/home/dave/src/experimentdb/reagents/templates",
 )
 
 INSTALLED_APPS = (
