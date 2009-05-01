@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def index(request):
 	protein_list = Protein.objects.order_by('name')
-	return render_to_response('proteins/index.html', {'protein_list': protein_list})
+	return render_to_response('protein_index.html', {'protein_list': protein_list})
 
 @login_required
 def detail(request, protein):
@@ -18,6 +18,6 @@ def detail(request, protein):
 	purified_proteins = Purified_Protein.objects.filter(protein = protein)
 	primers = Primer.objects.filter(protein = protein)
 	experiment_protein = Experiment.objects.filter(protein=protein)
-	return render_to_response('proteins/detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers})
+	return render_to_response('protein_detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers})
 
 

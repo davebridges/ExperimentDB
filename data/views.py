@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def index(request):
 	experiment_list = Experiment.objects.order_by('-experiment_date')
-	return render_to_response('data/experiment_list.html', {'experiment_list': experiment_list})
+	return render_to_response('experiment_list.html', {'experiment_list': experiment_list})
 
 @login_required
 def experiment(request, experimentID):
@@ -25,7 +25,7 @@ def experiment(request, experimentID):
 	exp_protein=Protein.objects.filter(experiment__experimentID=exp_ID)
 	exp_project=Project.objects.filter(experiment__experimentID=exp_ID)
 	exp_subproject=SubProject.objects.filter(experiment__experimentID=exp_ID)
-	return render_to_response('data/experiment.html', {'experiment':experiment, 'exp_result':exp_result, 'exp_protocol':exp_protocol, 'exp_researcher':exp_researcher, 'exp_chemical':exp_chemical, 'exp_cell': exp_cell,  'exp_project': exp_project, 'exp_protein': exp_protein, 'exp_subproject':exp_subproject})
+	return render_to_response('experiment.html', {'experiment':experiment, 'exp_result':exp_result, 'exp_protocol':exp_protocol, 'exp_researcher':exp_researcher, 'exp_chemical':exp_chemical, 'exp_cell': exp_cell,  'exp_project': exp_project, 'exp_protein': exp_protein, 'exp_subproject':exp_subproject})
 
 @login_required
 def protocol_list(request):
