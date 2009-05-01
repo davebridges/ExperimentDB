@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}Project List{% endblock %}
+{% block title %}Project List{% endblock %}
+{% block content %}
+{% for project in project_list %}
+<h2><a href="/experimentdb/project/{{ project.project_slug }}"> {{ project.project }}.</a></h2>
+<p>{{ project.comments }}</p>
+{% endfor %}
+{% endblock %}

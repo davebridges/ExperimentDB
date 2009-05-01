@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %} SubProject Detail {% endblock %}
+{% block content %}
+<h2>{{ subproject.subproject }}</h2>
+<p>{{ subproject.comments }}</p>
+<h3>Experiments</h3>
+<ul>{% for experiment in proj_experiment %}
+<li><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a>
+{% endfor %}
+</ul>
+{% endblock %}
