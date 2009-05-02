@@ -9,7 +9,7 @@ class Protocol(models.Model):
 	protocol_slug = models.SlugField(max_length=25)
 	reference = models.ManyToManyField(Reference, blank=True)
 	protocol_file = models.FileField(upload_to='protocol', blank=True)
-	wiki_page = models.CharField(max_length=50, blank=True)
+	wiki_page = models.CharField(max_length=75, blank=True)
 	comments = models.TextField(max_length=500, blank=True)	
 	public = models.BooleanField()
 	published = models.BooleanField()
