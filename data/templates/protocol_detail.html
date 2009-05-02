@@ -4,8 +4,9 @@
 
 
 {% block content %}
-<h2>Download Protocol</h2>
-{% if protocol.protocol_file %}<ul><li><a href="{{protocol.protocol_file.url}}">{{ protocol }}</a></li></ul>{% endif %}
+<h2>View Protocol</h2>
+{% if protocol.wiki_page %}<ul><li>Wiki - <a href="/wiki/{{protocol.wiki_page}}">{{ protocol }}</a></li></ul>{% endif %}
+{% if protocol.protocol_file %}<ul><li>File - <a href="{{protocol.protocol_file.url}}">{{ protocol }}</a></li></ul>{% endif %}
 <h2>Experiments</h2>
 <ul>
 {% for experiment in protocol_experiments %}
