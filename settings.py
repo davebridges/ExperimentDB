@@ -35,7 +35,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = "C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb_files"
+MEDIA_ROOT = '/work/research/experimentdb_files'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -71,15 +71,16 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/datasets/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
+"/home/dave/src/experimentdb/templates",
+"/home/dave/src/experimentdb/datasets/templates",
+"/home/dave/src/experimentdb/reagents/templates",
+"/home/dave/src/experimentdb/proteins/templates",
+"/home/dave/src/experimentdb/data/templates",
+"/home/dave/src/experimentdb/projects/templates",
+"/home/dave/src/experimentdb/cloning/templates",
+"/home/dave/src/experimentdb/reagents/templates",
 )
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',

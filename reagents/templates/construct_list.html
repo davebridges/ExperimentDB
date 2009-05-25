@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head_title %}Construct List{% endblock %}
+{% block title %}Construct List{% endblock %}
+{% block content %}
+<table>
+<thead>
+<th>Construct</th>
+<th>Plasmid</th>
+<th>Resistance<th>
+{% for construct in object_list %}
+<tr>
+<th><a href="/experimentdb/construct/{{ construct.id }}">{{ construct }}</a></th>
+<td>{{construct.plasmid}}</td>
+<td>{{construct.resistance}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

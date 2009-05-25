@@ -1,6 +1,19 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
+from experimentdb.reagents.models import Construct
+
+
+construct_info = {
+	"queryset": Construct.objects.all(),
+	'template_name': 'construct_list.html',
+}
+
+construct_detail_info = {
+	"queryset": Construct.objects.all(),
+	'template_name': 'construct_detail.html',
+}
+
 
 urlpatterns = patterns('',
 	(r'^admin/(.*)', admin.site.root),
@@ -17,4 +30,6 @@ urlpatterns = patterns('',
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
 	(r'^protocol?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),
 	(r'^sgd/(?P<gene>[-\w\d]+)/$', 'experimentdb.datasets.views.sgd_gene_detail'),
+	(r'^constructs?/$', 'django.views.generic.list_detail.object_list', construct_info),
+	(r'^constructs?/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', construct_detail_info),
 )
