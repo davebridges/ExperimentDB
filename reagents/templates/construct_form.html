@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}Construct{% endblock %}
+{% block title %}Construct{% endblock %}
+{% block content %}
+<form method="POST" action="/experimentdb/construct/new/">
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}

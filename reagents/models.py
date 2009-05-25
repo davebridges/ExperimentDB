@@ -46,7 +46,7 @@ class Construct(models.Model):
 	def __unicode__(self):
 		return u'%s' % self.construct
 	def get_absolute_url(self):
-		return "/construct/%i/" % self.id
+		return "/experimentdb/construct/%i/" % self.id
 
 class Purified_Protein(models.Model):
 	name = models.CharField(max_length=20, primary_key=True, help_text="ie GST-2xFYVE 2008-11-17")

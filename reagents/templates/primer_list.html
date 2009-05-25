@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block head_title %}Primer List{% endblock %}
+{% block title %}Primer List{% endblock %}
+{% block content %}
+<table>
+<thead>
+<tr>
+	<th>Primer</th>
+	<th>Type</th>
+	<th>Ordered</th>
+	<th>Protein</th>
+	<th>Vendor</th>
+	<th>Sequence</th>
+</tr>
+{% for primer in object_list %}
+<tr>
+	<td><a href="/experimentdb/primer/{{ primer.id }}">{{ primer }}</a></td>
+	<td>{{primer.primer_type}}</td>
+	<td>{{primer.date_ordered}}</td>
+	<td><a href="/experimentdb/protein/{{primer.protein}}">{{primer.protein}}</a></td>
+	<td>{{primer.vendor}}</td>
+	<td>{{primer.sequence}}</td>
+</tr>
+{% endfor %}
+</table>
+<p>Click <a href="/experimentdb/primer/new">here</a> for a new primer</p>
+{% endblock %}
