@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head_title %}Cell Line List{% endblock %}
+{% block title %}Cell Line List{% endblock %}
+{% block content %}
+<table>
+<thead>
+	<tr>
+	<th>Name</th>
+	<th>Source</th>
+	<th>Notes</th>
+	</tr>
+</thead>
+{% for cell in object_list %}
+<tbody>
+<tr>
+	<td><a href="/experimentdb/cell/{{ cell.id }}">{{ cell }}</a></td>
+	<td>{{cell.source}}</td>
+	<td>{{cell.notes}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Click <a href="/experimentdb/cell/new">here</a> for a new cell line</p>
+{% endblock %}

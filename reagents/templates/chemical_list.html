@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head_title %}Chemical List{% endblock %}
+{% block title %}Chemical List{% endblock %}
+{% block content %}
+<table>
+<thead>
+	<tr>
+	<th>Chemical</th>
+	<th>Source</th>
+	<th>Vendor</th>
+	</tr>
+</thead>
+{% for chemical in object_list %}
+<tbody>
+<tr>
+	<td><a href="/experimentdb/chemical/{{ chemical.id }}">{{ chemical }}</a></td>
+	<td>{{chemical.source}}</td>
+	<td>{{chemical.vendor}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Click <a href="/experimentdb/chemical/new">here</a> for a new chemical</p>
+{% endblock %}

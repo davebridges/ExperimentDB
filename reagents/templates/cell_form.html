@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}Cell Line{% endblock %}
+{% block title %}Cell Line{% endblock %}
+{% block content %}
+<form method="POST" action="/experimentdb/antibody/new/">
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}

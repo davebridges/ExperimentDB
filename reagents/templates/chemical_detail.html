@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head_title %}Chemical Detail - {{ object }}{% endblock %}
+{% block title %}Chemical Detail - {{ object }}{% endblock %}
+{% block content %}
+<table>
+<thead>
+	<tr>
+	<th>Chemical</th>
+	<th>Source</th>
+	<th>Vendor</th>
+	<th>Notes</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td><a href="/experimentdb/chemical/{{ object.name }}">{{ object }}</a></td>
+	<td>{{object.source}}</td>
+	<td>{{object.vendor}}</td>
+	<td>{{object.notes}}</td>
+</tr>
+{% endblock %}
