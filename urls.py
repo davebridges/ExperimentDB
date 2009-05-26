@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
-from experimentdb.reagents.models import Construct, Antibody, Primer
+from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_Protein, Chemical, Cell
 
 urlpatterns = patterns('',
 	(r'^admin/(.*)', admin.site.root),
@@ -57,4 +57,46 @@ urlpatterns = patterns('',
 		'template_name': 'primer_form.html', 
 		'login_required':True 
 		}),
+	(r'^cell/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": Cell.objects.all(), 
+		'template_name': 'cell_list.html',
+		}),
+	(r'^cell/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		"queryset": Cell.objects.all(), 
+		'template_name': 'cell_detail.html'
+		,}),
+	(r'^cell/new/$', 'django.views.generic.create_update.create_object', {
+		'model': Cell, 
+		'template_name': 'cell_form.html', 
+		'login_required':True 
+		}),	
+	(r'^purified/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": Purified_Protein.objects.all(), 
+		'template_name': 'purified_list.html',
+		}),
+	(r'^purified/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		"queryset": Primer.objects.all(), 
+		'template_name': 'purified_detail.html'
+		,}),
+	(r'^purified/new/$', 'django.views.generic.create_update.create_object', {
+		'model': Purified_Protein, 
+		'template_name': 'purified_form.html', 
+		'login_required':True 
+		}),
+	(r'^chemical/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": Chemical.objects.all(), 
+		'template_name': 'chemical_list.html',
+		}),
+	(r'^chemical/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		"queryset": Chemical.objects.all(), 
+		'template_name': 'chemical_detail.html'
+		,}),
+	(r'^chemical/new/$', 'django.views.generic.create_update.create_object', {
+		'model': Chemical, 
+		'template_name': 'chemical_form.html', 
+		'login_required':True 
+		}),
+
+
+
 	)
