@@ -9,21 +9,26 @@ class AntibodyAdmin(admin.ModelAdmin):
 admin.site.register(Antibody, AntibodyAdmin)
 
 class ChemicalAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('chemical', 'source')
 admin.site.register(Chemical, ChemicalAdmin)
 
 class CellAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('cellline', 'source')
 admin.site.register(Cell, CellAdmin)
 
 class ConstructAdmin(admin.ModelAdmin):
 	fields = ('construct', 'plasmid', 'protein', 'resistance', 'source','notes', 'contact')
+	list_display = ('construct', 'plasmid', 'resistance', 'source')
+	list_filter = ('protein', 'plasmid')
 admin.site.register(Construct, ConstructAdmin)
 
 class Purified_ProteinAdmin(admin.ModelAdmin):
 	prepopulated_fields = {"name_slug" : ("name",)}
+	list_display = ('name', 'tag', 'construct')
+	list_filter = ('tag', 'protein', 'construct')
 admin.site.register(Purified_Protein, Purified_ProteinAdmin)
 
 class PrimerAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('primer', 'primer_type', 'date_ordered', 'vendor', 'protein', 'sequence')
+	list_filter = ('primer_type', 'protein')
 admin.site.register(Primer, PrimerAdmin)

@@ -14,7 +14,7 @@
  <tbody>
 {% for antibody in antibodies %}
    <tr>
-   <td><a href="/experimentdb/antibody/{{antibody}}">{{ antibody }}</a></td>
+   <td><a href="/experimentdb/antibody/{{antibody.id}}">{{ antibody }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
@@ -31,7 +31,7 @@
  <tbody>
 {% for construct in constructs %}
    <tr>
-   <td><a href="/experimentdb/construct/{{construct}}">{{ construct }}</a></td>
+   <td><a href="/experimentdb/construct/{{construct.id}}">{{ construct }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
@@ -48,7 +48,7 @@
  <tbody>
 {% for protein in purified_proteins %}
    <tr>
-   <td><a href="/experimentdb/purified_proteins/{{protein}}">{{ protein }}</a></td>
+   <td><a href="/experimentdb/purified_proteins/{{protein.id}}">{{ protein }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
@@ -65,7 +65,7 @@
  <tbody>
 {% for primer in primers %}
    <tr>
-   <td><a href="/experimentdb/primer/{{primer}}">{{ primer }}</a></td>
+   <td><a href="/experimentdb/primer/{{primer.id}}">{{ primer }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
