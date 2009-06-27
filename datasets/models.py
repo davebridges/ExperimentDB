@@ -9,6 +9,8 @@ class SGD_GeneNames(models.Model):
 	Phenotype = models.TextField(max_length=500, blank=True)
 	ORF_name = models.CharField(max_length=50)
 	SGDID = models.CharField(max_length=25) 
+	class Meta:
+		verbose_name_plural = "SGD Gene Names"
 	def __unicode__(self):
 		return u'%s' % self.Locus_name
 	def get_absolute_url(self):
@@ -33,6 +35,8 @@ class SGD_phenotypes(models.Model):
 	Condition  = models.CharField(max_length=250, help_text="Condition under which the phenotype was observed") 
 	Details  = models.CharField(max_length=250, blank=True, help_text="Details about the phenotype")
 	Reporter  = models.CharField(max_length=250, blank=True, help_text="The protein(s) or RNA(s) used in an experiment to track a process")
+	class Meta:
+		verbose_name_plural = "SGD Phenotypes"
 	def __unicode__(self):
 		return u'%s, %s' % (self.Gene_Name, self.Phenotype)
 
@@ -49,6 +53,8 @@ class SGD_interactions(models.Model):
 	Phenotype = models.CharField(max_length=50, help_text="Contains the phenotype of the interaction", blank=True)
 	Reference = models.CharField(max_length=100, help_text="Lists the identifiers for the reference as an SGDID (SGD_REF:) or a PubMed ID (PMID:)")
 	Citation = models.TextField(max_length=500, help_text = "Lists the citation for the reference")
+	class Meta:
+		verbose_name_plural = "SGD Interactions"
 	def __unicode__(self):
 		return u'%s with %s' % (self.Feature_Name_Bait, self.Feature_Name_Hit)
 

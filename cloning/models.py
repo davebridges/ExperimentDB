@@ -53,6 +53,8 @@ class Mutagenesis(models.Model):
 	sequencing = models.ManyToManyField(Sequencing, blank=True, null=True)
 	researcher = models.ManyToManyField(Contact, blank=True, null=True)
 	notes = models.TextField(max_length=250, blank=True)
+	class Meta:
+		verbose_name_plural = "Mutageneses"
 	def __unicode__(self):
 		return u'%s ' % self.construct
 	def get_absolute_url(self):

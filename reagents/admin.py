@@ -3,7 +3,7 @@ from django.contrib import admin
 
 class AntibodyAdmin(admin.ModelAdmin):
 	list_display = ('antibody', 'protein_size', 'source_species', 'source', 'catalog')
-	fields = ('antibody', 'protein', 'protein_size', 'source_species', 'source', 'catalog', 'notes', 'antibody_slug')
+	fields = ('antibody', 'protein', 'protein_size', 'source_species', 'source', 'location', 'catalog', 'notes', 'antibody_slug')
 	radio_fields = {"source_species" : admin.HORIZONTAL}
 	prepopulated_fields = {"antibody_slug" : ("antibody",)}
 admin.site.register(Antibody, AntibodyAdmin)
@@ -17,7 +17,7 @@ class CellAdmin(admin.ModelAdmin):
 admin.site.register(Cell, CellAdmin)
 
 class ConstructAdmin(admin.ModelAdmin):
-	fields = ('construct', 'plasmid', 'protein', 'resistance', 'source','notes', 'contact')
+	fields = ('construct', 'plasmid', 'protein', 'resistance', 'source', 'location', 'notes', 'contact')
 	list_display = ('construct', 'plasmid', 'resistance', 'source')
 	list_filter = ('protein', 'plasmid')
 admin.site.register(Construct, ConstructAdmin)

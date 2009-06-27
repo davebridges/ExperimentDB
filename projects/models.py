@@ -23,6 +23,8 @@ class SubProject(models.Model):
 	published = models.BooleanField()
 	collaborators = models.ManyToManyField(Contact, blank=True)
 	papers = models.ManyToManyField(Reference, blank=True)
+	class Meta:
+		verbose_name_plural = "Sub-Projects"
 	def __unicode__(self):
 		return u'%s ' % self.subproject
 	def get_absolute_url(self):

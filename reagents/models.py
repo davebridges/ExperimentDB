@@ -17,6 +17,11 @@ PRIMER_TYPE = (
 	('mutagenesis', 'mutagenesis'),
 )
 
+LOCATIONS = (
+	('-20', '-20 Freezer'),
+	('4', 'Small Fridge'),
+)
+
 
 class Antibody(models.Model):
 	antibody = models.CharField(max_length=50)
@@ -26,7 +31,11 @@ class Antibody(models.Model):
 	source_species = models.CharField(max_length=25, choices=ANTIBODY_SPECIES)
 	source = models.CharField(max_length=50, blank=True)
 	catalog = models.CharField(max_length=25, blank =True)
-	notes = models.TextField(max_length=250, blank=True)	
+	notes = models.TextField(max_length=250, blank=True)
+	location = models.CharField(max_length=25, choices=LOCATIONS)
+	class Meta:
+		ordering = ['antibody']
+		verbose_name_plural = "Antibodies"
 	def __unicode__(self):
 		return u'%s' % self.antibody
 	def get_absolute_url(self):
@@ -43,6 +52,7 @@ class Construct(models.Model):
 	published = models.BooleanField()
 	reference = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True)
+	location = models.CharField(max_length=25, choices=LOCATIONS)
 	def __unicode__(self):
 		return u'%s' % self.construct
 	def get_absolute_url(self):
@@ -65,6 +75,8 @@ class Purified_Protein(models.Model):
 	published = models.BooleanField()
 	reference = models.ManyToManyField(Reference, blank=True)
 	researcher = models.ManyToManyField(Contact, blank=True)
+	class Meta:
+		verbose_name_plural = "Purified Proteins"
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
