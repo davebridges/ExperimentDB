@@ -37,6 +37,8 @@ class Antibody(models.Model):
 	catalog = models.CharField(max_length=25, blank =True)
 	notes = models.TextField(max_length=250, blank=True)
 	location = models.CharField(max_length=25, choices=LOCATIONS)
+	vendor = models.ForeignKey(Vendor, blank=True, null=True)
+	contact = models.ForeignKey(Contact, blank=True, null=True)
 	class Meta:
 		ordering = ['antibody']
 		verbose_name_plural = "Antibodies"

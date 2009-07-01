@@ -31,5 +31,7 @@ class Reference(models.Model):
 	
 class Vendor(models.Model):
 	company = models.CharField(max_length = 100)
+	class Meta:
+		ordering = ['company',]
 	def __unicode__(self):
 		return u'%s' % self.company
