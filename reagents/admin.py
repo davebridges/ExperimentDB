@@ -13,7 +13,9 @@ class ChemicalAdmin(admin.ModelAdmin):
 admin.site.register(Chemical, ChemicalAdmin)
 
 class CellAdmin(admin.ModelAdmin):
-	list_display = ('cellline', 'source')
+	list_display = ('description', 'species', 'source')
+	fields = ('description', 'species', 'notes', 'cellline')
+	prepopulated_fields = {"cellline" : ("description",)}
 admin.site.register(Cell, CellAdmin)
 
 class ConstructAdmin(admin.ModelAdmin):

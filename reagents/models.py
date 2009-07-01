@@ -3,10 +3,14 @@ from experimentdb.proteins.models import Protein
 from experimentdb.external.models import Contact, Reference, Vendor
 
 
-ANTIBODY_SPECIES = (
+SPECIES = (
 	('rabbit', 'rabbit'),
 	('mouse', 'mouse'),
-	('goat', 'goat')
+	('human', 'human'),
+	('monkey', 'monkey'),
+	('goat', 'goat'),
+	('sheep', 'sheep'),
+	('rat', 'rat'),
 )
 
 PRIMER_TYPE = (
@@ -28,7 +32,7 @@ class Antibody(models.Model):
 	antibody_slug = models.SlugField(max_length=20)
 	protein = models.ManyToManyField(Protein)
 	protein_size = models.CharField(max_length=30, blank=True)
-	source_species = models.CharField(max_length=25, choices=ANTIBODY_SPECIES)
+	source_species = models.CharField(max_length=25, choices=SPECIES)
 	source = models.CharField(max_length=50, blank=True)
 	catalog = models.CharField(max_length=25, blank =True)
 	notes = models.TextField(max_length=250, blank=True)
@@ -98,6 +102,8 @@ class Chemical(models.Model):
 	
 class Cell(models.Model):
 	cellline = models.SlugField(max_length=50, primary_key=True)
+	description = models.CharField(max_length=50, blank=True)
+	species = models.CharField(max_length=50, choices=SPECIES, blank=True)
 	source = models.CharField(max_length=50, blank=True)
 	notes = models.TextField(max_length=250, blank=True)	
 	public = models.BooleanField()
@@ -105,7 +111,7 @@ class Cell(models.Model):
 	reference = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True)
 	def __unicode__(self):
-		return u'%s' % self.cellline
+		return u'%s' % self.description
 	def get_absolute_url(self):
 		return "/project/%i/" % self.cellline
 
