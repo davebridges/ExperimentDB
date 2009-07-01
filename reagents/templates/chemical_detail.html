@@ -19,4 +19,9 @@
 	<td>{{object.vendor}}</td>
 	<td>{{object.notes}}</td>
 </tr>
+<div = "experiments">
+{% with object.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
 {% endblock %}

@@ -3,9 +3,8 @@
 {% block title %}Experiment List{% endblock %}
 {% block content %}
 {% for experiment in experiment_list %}
-<a href="/experimentdb{{ experiment.get_absolute_url }}">{{ experiment }}</a></br>
-<b>Date: </b>{{ experiment.experiment_date }}</br>
-<b>Comments: </b>{{experiment.comments}}</br>
-</br>
+<div = "experiments">
+{% include "experiment_list_table.html" %}
+</div>
 {% endfor %}
 {% endblock %}

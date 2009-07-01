@@ -1,0 +1,5 @@
+<h2>Experiments ({{experiment_list.count}})</h2>
+<ul>{% for experiment in experiment_list %}
+<li><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a>
+{% endfor %}
+</ul>

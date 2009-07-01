@@ -3,5 +3,19 @@
 {% block head_title %}Construct Detail - {{ object }}{% endblock %}
 {% block title %}Construct Detail - {{ object }}{% endblock %}
 {% block content %}
-{{ object }}
+<div = "summary">
+<table>
+ <thead>
+ </thead>
+ <tdata>
+  <tr><th>Construct</th><td>{{ object.construct }}</td></tr>
+  <tr><th>Plasmid</th><td>{{ object.plasmid }}</td></tr>
+  <tr><th>Source</th><td>{{ object.source }}</td></tr>
+  </tdata>
+</div>
+<div = "experiments">
+{% with object.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
 {% endblock %}
