@@ -7,6 +7,8 @@ class ProteinFamily(models.Model):
 		return '%s' % self.name
 	class Meta:
 		ordering = ['name']
+		verbose_name = "Protein Family"
+		verbose_name_plural = "Protein Families"
 
 class Protein(models.Model):
 	protein_family = models.ManyToManyField('ProteinFamily')
@@ -17,6 +19,7 @@ class Protein(models.Model):
 		return "/protein/%i/" % self.id
 	class Meta:
 		ordering = ['name']
+		verbose_name_plural = "Proteins"
 		
 class Species(models.Model):
 	common_name = models.CharField(max_length=50)
@@ -24,9 +27,12 @@ class Species(models.Model):
 	taxonomy_id = models.IntegerField(blank=True)
 	def __unicode__(self):
 		return '%s' % self.common_name
+	class Meta:
+		verbose_name_plural = "Species"
+	
 		
 class ProteinDetail(models.Model):
-	name = models.CharField(max_length=50)
+	name = models.CharField(max_length=50, help_text="Our Name for the Protein")
 	protein = models.ForeignKey('Protein')
 	gene = models.CharField(max_length=10, blank=True)
 	species = models.ForeignKey('Species')
@@ -42,4 +48,6 @@ class ProteinDetail(models.Model):
 	published = models.BooleanField()
 	def __unicode__(self):
 		return u'%s' % self.name
+	class Meta:
+		verbose_name_plural = "Protein Isoforms"
 	

@@ -1,7 +1,9 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
+from experimentdb.proteins.models import Protein, ProteinFamily
 from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_Protein, Chemical, Cell
+
 
 urlpatterns = patterns('',
 	(r'^admin/(.*)', admin.site.root),
@@ -12,7 +14,15 @@ urlpatterns = patterns('',
 	(r'^projects?/(?P<project>[-\w]+)/$', 'experimentdb.projects.views.detail'),		
 	(r'^projects?/$', 'experimentdb.projects.views.index'),
 	(r'^subprojects?/(?P<subproject>[-\w]+)/$', 'experimentdb.projects.views.subproject_detail'),
-	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),		
+	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),	
+	(r'^protein/family/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": Protein.objects.all(), 
+		'template_name': 'protein_family_list.html',
+		}),	
+	(r'^protein/family/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		"queryset": ProteinFamily.objects.all(), 
+		'template_name': 'protein_family_detail.html'
+		,}),
 	(r'^proteins?/$', 'experimentdb.proteins.views.index'),
 	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),

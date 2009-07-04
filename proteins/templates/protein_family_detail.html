@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head_title %}Protein List{% endblock %}
+{% block title %}Protein List{% endblock %}
+{% block content %}
+{{ object }}
+<table>
+ <thead>
+ </thead>
+ <tdata>
+  {% for protein in object.protein_set.all %}
+  <tr><td><a href="/experimentdb/protein/{{ protein.name }}"> {{ protein }}.</td></tr>
+{% endfor %}
+ </tdata>
+{% endblock %}
