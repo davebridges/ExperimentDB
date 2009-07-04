@@ -19,8 +19,8 @@ class CellAdmin(admin.ModelAdmin):
 admin.site.register(Cell, CellAdmin)
 
 class ConstructAdmin(admin.ModelAdmin):
-	fields = ('construct', 'plasmid', 'protein', 'resistance', 'source', 'location', 'notes', 'contact')
-	list_display = ('construct', 'plasmid', 'resistance', 'source')
+	fields = ('construct', 'plasmid', 'protein', 'resistance', 'source', 'location', 'box', 'notes', 'contact')
+	list_display = ('construct', 'plasmid', 'location', 'box', 'resistance', 'source')
 	list_filter = ('protein', 'plasmid')
 admin.site.register(Construct, ConstructAdmin)
 

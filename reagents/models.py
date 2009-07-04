@@ -58,7 +58,8 @@ class Construct(models.Model):
 	published = models.BooleanField()
 	reference = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True)
-	location = models.CharField(max_length=25, choices=LOCATIONS)
+	location = models.CharField(max_length=25, choices=LOCATIONS, default="-20")
+	box = models.CharField(max_length=50, blank=True)
 	def __unicode__(self):
 		return u'%s' % self.construct
 	def get_absolute_url(self):
