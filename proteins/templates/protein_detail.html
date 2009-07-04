@@ -3,6 +3,31 @@
 {% block title %} Protein Detail {% endblock %}
 {% block content %}
 <h2>{{ protein }}</h2>
+<table>
+ <thead>
+  <tr>
+   <th>Protein</th>
+   <th>Species</th>
+   <th>Gene</th>
+   <th>Protein Sequence</th>
+   <th>Nucleotide Sequence</th>
+  </tr>
+ </thead>
+ <tbody>
+  {% for protein_detail in protein.proteindetail_set.all %}
+ <tr>
+  <td>{{ protein_detail }}</td>
+  <td>{{ protein_detail.species }}</td>
+  <td><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=gene&Cmd=ShowDetailView&TermToSearch={{ protein_detail.geneID}}&ordinalpos=3&itool=EntrezSystem2.PEntrez.Gene.Gene_ResultsPanel.Gene_RVDocSum", title = "NCBI Gene Record for {{protein_detail.gene}}", target="_blank">{{ protein_detail.gene }}</a></td>
+  <td><a href="http://www.ncbi.nlm.nih.gov/protein/{{ protein_detail.RefSeqProtein_gi}}", title ="NCBI Protein Record for {{protein_detail.RefSeqProtein}}", target="_blank">{{ protein_detail.RefSeqProtein }}</a></td>
+  <td><a href="http://www.ncbi.nlm.nih.gov/nuccore/{{ protein_detail.RefSeqNucleotide_gi}}", title ="NCBI Nucleotide Record for {{protein_detail.RefSeqNucleotide}}", target="_blank">{{ protein_detail.RefSeqNucleotide }}</a></td>
+  {% ifequal protein_detail.species.scientific_name "Drosophila melanogaster" %}<td><a href="http://flybase.org/reports/{{ protein_detail.FlyBaseID }}.html", title="FlyBase Record for {{ protein_detail.FlyBaseID }}", target="_blank">FlyBase</a></td>{% endifequal %}
+  {% ifequal protein_detail.species.scientific_name "Caenorhabditis elegans" %}<td><a href="http://www.wormbase.org/db/gene/gene?class=CDS;name={{ protein_detail.WormBaseID }}.html", title="WormBase Record for {{ protein_detail.WormBaseID }}", target="_blank">WormBase</a></td>{% endifequal %}
+  {% ifequal protein_detail.species.scientific_name "Saccharomyces cerevisiae" %}<td><a href="http://www.yeastgenome.org/cgi-bin/locus.fpl?locus={{ protein_detail.SGD_ID }}", title="SGD Record for {{ protein_detail.SGD_ID }}", target="_blank">SGD</a></td>{% endifequal %}
+  </tr>
+{% endfor %}
+ </tbody>
+ </table>
 
 {% if antibodies %}
 <table>
