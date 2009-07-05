@@ -5,10 +5,11 @@
 {% block content %}
 <table>
  <thead>
+ <th>Protein</th><th>Family</th>
  </thead>
  <tdata>
-  {% for name in protein_list %}
-  <tr><td><a href="/experimentdb/protein/{{ name }}"> {{ name }}.</td></tr>
+   {% for protein in protein_list %}
+  <tr><td><a href="/experimentdb/protein/{{ protein }}"> {{ protein }}</td><td>{% for family in protein.protein_family.all %}<a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a> {% endfor %}</tr>
 {% endfor %}
  </tdata>
 {% endblock %}
