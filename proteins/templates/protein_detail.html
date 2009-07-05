@@ -28,7 +28,7 @@
   <td><a href="http://www.ncbi.nlm.nih.gov/nuccore/{{ protein_detail.RefSeqNucleotide_gi}}", title ="NCBI Nucleotide Record for {{protein_detail.RefSeqNucleotide}}", target="_blank">{{ protein_detail.RefSeqNucleotide }}</a></td>
   {% ifequal protein_detail.species.scientific_name "Drosophila melanogaster" %}<td><a href="http://flybase.org/reports/{{ protein_detail.FlyBaseID }}.html", title="FlyBase Record for {{ protein_detail.FlyBaseID }}", target="_blank"><img src="http://www.fly-ted.org/images/fly_logo.png", height="25px"></a></td>{% endifequal %}
   {% ifequal protein_detail.species.scientific_name "Caenorhabditis elegans" %}<td><a href="http://www.wormbase.org/db/gene/gene?class=CDS;name={{ protein_detail.WormBaseID }}.html", title="WormBase Record for {{ protein_detail.WormBaseID }}", target="_blank"><img src="http://www.its.caltech.edu/~wormbase/logo.jpg", height="25px"</a></td>{% endifequal %}
-  {% ifequal protein_detail.species.scientific_name "Saccharomyces cerevisiae" %}<td><a href="http://www.yeastgenome.org/cgi-bin/locus.fpl?locus={{ protein_detail.SGD_ID }}", title="SGD Record for {{ protein_detail.SGD_ID }}", target="_blank"><img src="http://www.pebc.cat/Bioinformatic/SGD_logo.png", height="25px"</a></td>{% endifequal %}
+  {% ifequal protein_detail.species.scientific_name "Saccharomyces cerevisiae" %}<td><a href="/experimentdb/sgd/{{protein_detail.gene}}">{{protein_detail.gene}}</a></td><td><a href="http://www.yeastgenome.org/cgi-bin/locus.fpl?locus={{ protein_detail.SGD_ID }}", title="SGD Record for {{ protein_detail.SGD_ID }}", target="_blank"><img src="http://www.pebc.cat/Bioinformatic/SGD_logo.png", height="25px"</a></td>{% endifequal %}
   </tr>
 {% endfor %}
  </tbody>
