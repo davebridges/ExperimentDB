@@ -3,6 +3,7 @@ from django.contrib import admin
 admin.autodiscover()
 from experimentdb.proteins.models import Protein, ProteinFamily
 from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_Protein, Chemical, Cell
+from experimentdb.datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_Binding_Screen_SP
 
 
 urlpatterns = patterns('',
@@ -105,6 +106,10 @@ urlpatterns = patterns('',
 		'model': Chemical, 
 		'template_name': 'chemical_form.html', 
 		'login_required':True 
+		}),
+	(r'^pi35p2bp/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": PI35P2_Binding_Screen_SP.objects.all(),
+		'template_name': 'gene_list.html',
 		}),
 
 

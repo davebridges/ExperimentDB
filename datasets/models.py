@@ -1,5 +1,18 @@
 from django.db import models
 
+STRENGTH_CHOICES = (
+	('1', 'Strongest'),
+	('2', 'Strong'),
+	('3', 'Detectable'),
+)
+
+EFFECT_CHOICES = (
+	('1', 'Not Tested'),
+	('2', 'No Change'),
+	('3', 'Changes with KD/KO'),
+	('4', 'No Change with KD/KO'),
+)
+	
 
 class SGD_GeneNames(models.Model):
 	Locus_name = models.CharField(max_length=50, primary_key=True)
@@ -57,4 +70,19 @@ class SGD_interactions(models.Model):
 		verbose_name_plural = "SGD Interactions"
 	def __unicode__(self):
 		return u'%s with %s' % (self.Feature_Name_Bait, self.Feature_Name_Hit)
+
+		
+class PI35P2_Binding_Screen_SP(models.Model):
+	Gene_Name = models.ForeignKey(SGD_GeneNames, related_name="PI3PBP_Gene_Name")
+	Gain_of_Function = models.IntegerField(choices=STRENGTH_CHOICES)
+	Loss_of_Function = models.IntegerField(choices=EFFECT_CHOICES, blank=True, null=True)
+	Candidate = models.CharField(max_length=50, blank=True, null=True)
+	Comments = models.TextField(max_length=100, blank=True, null=True)
+	class Meta:
+		verbose_name = "In vivo PI(3,5)P2 Effector"
+		verbose_name_plural = "In vivo PI(3,5)P2 Effectors"
+		ordering = ('Gene_Name',)
+	def __unicode__(self):
+		return u'%s' % self.Gene_Name
+	
 

@@ -10,3 +10,6 @@ alter table datasets_sgd_interactions add `id` integer AUTO_INCREMENT NOT NULL P
 
 load data local infile 'H:\registry.genenames.tab' into table datasets_sgd_genenames fields terminated by '\t' lines terminated by '\n' ;
 
+alter table datasets_pi35p2_binding_screen_sp drop id;
+load data local infile 'H:\summary.txt' into table datasets_pi35p2_binding_screen_sp fields terminated by '\t' lines terminated by '\n' ;
+alter table datasets_pi35p2_binding_screen_sp add `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY;

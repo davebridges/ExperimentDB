@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block head_title %}Gene List{% endblock %}
+{% block title %}Gene List{% endblock %}
+{% block scripts %}
+<script type = "text/javascript" src ="/media/javascript/jquery-1.3.2.js">
+</script>
+<script type = "text/javascript">
+$(document).ready(function(){
+
+	$(".hide h3:first").addClass("active");
+	$(".hide table:not(:first)").hide();
+
+	$(".hide h3").click(function(){
+
+	  $(this).next("table").slideToggle("slow")
+	  .siblings("table:visible").slideUp("slow");
+	  $(this).toggleClass("active");
+	  $(this).siblings("h3").removeClass("active");
+
+	});
+
+});
+</script>
+{% endblock scripts %}
+{% block content %}
+<table>
+ <thead>
+  <tr>
+    <th>Gene</th>
+	<th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for object in object_list %}
+   <tr>
+    <td>{{object}}</td>
+	<td>{{object.Description}}</td>
+   </tr>
+  {% endfor %}
+ </tbody>
+</table>
+{% endblock content %}

@@ -28,6 +28,12 @@ $(document).ready(function(){
 <p><b>Aliases:</b> {{ genename.Other_name }}</p>
 <p><b>Description:</b> {{ genename.Description }}</p>
 <p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
+<div class="hide>
+{% if screen %}
+<p>Sujin's Screen</p>
+{% endif %}
+</div>
+
 <div class="hide">
 <h3>Phenotypes ({{ phenotypes.count }}) <input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
