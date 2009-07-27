@@ -1,23 +1,38 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
 
+{% endblock scripts %}
 {% block head_title %}Construct List{% endblock %}
 {% block title %}Construct List{% endblock %}
 {% block content %}
-<table>
-<thead>
-<th>Construct</th>
-<th>Protein</th>
-<th>Plasmid</th>
-<th>Resistance<th>
+<table class="sortable">
+	<thead>
+		<tr>
+			<th>Construct</th>
+			<th>Protein</th>
+			<th>Plasmid</th>
+			<th>Resistance</th>
+		</tr>
+	</thead>
+	<tbody>
 {% for construct in object_list %}
-<tr>
-<td><a href="/experimentdb/construct/{{ construct.id }}">{{ construct }}</a></td>
-<td>{%for protein in construct.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}}</a> {% endfor %}</td>
-
-<td>{{construct.plasmid}}</td>
-<td>{{construct.resistance}}</td>
-</tr>
+		<tr>
+			<td><a href="/experimentdb/construct/{{ construct.id }}">{{ construct }}</a></td>
+			<td>{% for protein in construct.protein.all %}<a href="/experimentdb/protein/{{protein}}">{{protein}}</a> {% endfor %}</td>
+			<td>{{construct.plasmid}}</td>
+			<td>{{construct.resistance}}</td>
+		</tr>
 {% endfor %}
+	</tbody>
 </table>
 <p>Click <a href="/experimentdb/construct/new">here</a> for a new construct</p>
 {% endblock %}

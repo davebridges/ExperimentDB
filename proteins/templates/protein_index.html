@@ -1,15 +1,33 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
 
+{% endblock scripts %}
 {% block head_title %}Protein List{% endblock %}
 {% block title %}Protein List{% endblock %}
 {% block content %}
-<table>
+<table class="sortable">
  <thead>
- <th>Protein</th><th>Family</th>
+	<tr>
+		<th>Protein</th>
+		<th>Family</th>
+	</tr>
  </thead>
- <tdata>
+ <tbody>
    {% for protein in protein_list %}
-  <tr><td><a href="/experimentdb/protein/{{ protein }}"> {{ protein }}</td><td>{% for family in protein.protein_family.all %}<a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a> {% endfor %}</tr>
+	<tr>
+		<td><a href="/experimentdb/protein/{{ protein }}"> {{ protein }}</td>
+		<td>{% for family in protein.protein_family.all %}<a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a> {% endfor %}</td>
+	</tr>
 {% endfor %}
- </tdata>
+ </tbody>
+ </table>
 {% endblock %}

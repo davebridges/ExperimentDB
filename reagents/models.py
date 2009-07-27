@@ -60,6 +60,8 @@ class Construct(models.Model):
 	contact = models.ManyToManyField(Contact, blank=True)
 	location = models.CharField(max_length=25, choices=LOCATIONS, default="-20")
 	box = models.CharField(max_length=50, blank=True)
+	class Meta:
+		ordering = ['construct']
 	def __unicode__(self):
 		return u'%s' % self.construct
 	def get_absolute_url(self):

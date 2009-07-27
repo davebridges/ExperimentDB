@@ -1,9 +1,21 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
+
+{% endblock scripts %}
 
 {% block head_title %}Primer List{% endblock %}
 {% block title %}Primer List{% endblock %}
 {% block content %}
-<table>
+<table class="sortable">
 <thead>
 <tr>
 	<th>Primer</th>
@@ -13,6 +25,8 @@
 	<th>Vendor</th>
 	<th>Sequence</th>
 </tr>
+</thead>
+<tbody>
 {% for primer in object_list %}
 <tr>
 	<td><a href="/experimentdb/primer/{{ primer.id }}">{{ primer }}</a></td>
@@ -23,6 +37,7 @@
 	<td>{{primer.sequence}}</td>
 </tr>
 {% endfor %}
+</tbody>
 </table>
 <p>Click <a href="/experimentdb/primer/new">here</a> for a new primer</p>
 {% endblock %}
