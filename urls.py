@@ -7,7 +7,7 @@ from experimentdb.datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_B
 
 
 urlpatterns = patterns('',
-	(r'^admin/(.*)', admin.site.root),
+	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
 	(r'^experiment/(?P<experimentID>[-\w]+)/$', 'experimentdb.data.views.experiment'),
 	(r'^experiments?/$', 'experimentdb.data.views.index'),
