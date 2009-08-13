@@ -18,6 +18,7 @@ PRIMER_TYPE = (
 	('sequencing', 'sequencing'),
 	('RT-PCR', 'RT-PCR'),
 	('siRNA', 'siRNA'),
+	('dsRNA', 'dsRNA Amplification'),
 	('mutagenesis', 'mutagenesis'),
 )
 
@@ -60,6 +61,8 @@ class Construct(models.Model):
 	contact = models.ManyToManyField(Contact, blank=True)
 	location = models.CharField(max_length=25, choices=LOCATIONS, default="-20")
 	box = models.CharField(max_length=50, blank=True)
+	sequencing_contig = models.FileField(upload_to='contig/%Y/%m/%d', blank=True, help_text="LaserGene Assembled Sequencing Runs")
+	sequenced_object = models.FileField(upload_to='sequenced_object/%Y/%m/%d', blank=True, help_text="LaserGene Assembled Sequence")
 	class Meta:
 		ordering = ['construct']
 	def __unicode__(self):

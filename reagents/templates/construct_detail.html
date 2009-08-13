@@ -13,6 +13,16 @@
   <tr><th>Source</th><td>{{ object.source }}</td></tr>
   </tdata>
 </div>
+<div = "sharing">
+{% if object.constructshipment_set.all %}
+<h2>Shipments</h2>
+<ul>
+{% for shared in object.constructshipment_set.all %}
+<li>{{ shared.ship_date }} to {{ shared.recipient }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+</div>
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}

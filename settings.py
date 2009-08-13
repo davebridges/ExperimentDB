@@ -101,5 +101,6 @@ INSTALLED_APPS = (
 	'experimentdb.external',
 	'experimentdb.cloning',
 	'experimentdb.datasets',
+	'experimentdb.sharing',
 	'django.contrib.admin',
 )

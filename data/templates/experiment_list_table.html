@@ -1,5 +1,19 @@
 <h2>Experiments ({{experiment_list.count}})</h2>
-<ul>{% for experiment in experiment_list %}
-<li><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a>
+<table>
+	<thead>
+		<tr>
+		<th>ID</th>
+		<th>Assay</th>
+		<th>Experiment</th>
+		</tr>
+	<thead>
+	<tbody>
+	{% for experiment in experiment_list %}
+		<tr>
+		<td><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment.experimentID }}</td>
+		<td>{{ experiment.assay }}</td>
+		<td>{{ experiment.experiment }}</td>
+		</tr>
+	</tbody>
 {% endfor %}
-</ul>
+</table>

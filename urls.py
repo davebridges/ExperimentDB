@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
-from experimentdb.proteins.models import Protein, ProteinFamily
+from experimentdb.proteins.models import Protein, ProteinFamily, ProteinDetail
 from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_Protein, Chemical, Cell
 from experimentdb.datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_Binding_Screen_SP
 
@@ -25,6 +25,11 @@ urlpatterns = patterns('',
 		'template_name': 'protein_family_detail.html'
 		,}),
 	(r'^proteins?/$', 'experimentdb.proteins.views.index'),
+	(r'^protein_isoform/new/$', 'django.views.generic.create_update.create_object', {
+		'model': ProteinDetail, 
+		'template_name': 'proteindetail_form.html', 
+		'login_required':True 
+		}),
 	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
 	(r'^protocol?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),
