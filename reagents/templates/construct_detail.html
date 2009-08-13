@@ -12,6 +12,32 @@
   <tr><th>Plasmid</th><td>{{ object.plasmid }}</td></tr>
   <tr><th>Source</th><td>{{ object.source }}</td></tr>
   </tdata>
+ </table>
+</div>
+<div = "sequencing">
+{% if object.sequencing_set.all %}
+<h2>Sequencing Results:</h2>
+<table>
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Primer</th>
+		<th>File</th>
+		<th>Notes</th>
+	</tr>
+	</thead>
+	<tdata>
+{% for sequencing in object.sequencing_set.all %}
+	<tr>
+		<td>{{sequencing.date}}</td>
+		<td>{{sequencing.primer}}</td>
+		<td><a href="{{sequencing.file.url}}">Chromatogram</a></td>
+		<td>{{sequencing.notes}}</td>
+	</tr>
+{% endfor %}
+	</tdata>
+</table>
+{% endif %}
 </div>
 <div = "sharing">
 {% if object.constructshipment_set.all %}
