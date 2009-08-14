@@ -31,7 +31,7 @@ class Experiment(models.Model):
 	antibodies = models.ManyToManyField(Antibody, blank=True)
 	chemicals = models.ManyToManyField(Chemical, blank=True)
 	constructs = models.ManyToManyField(Construct, blank=True)
-	siRNA = models.ManyToManyField(Primer, blank=True, null=True)
+	siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
 	comments = models.TextField(max_length=500, blank=True)
 	researcher = models.ManyToManyField(Contact, blank=True)
 	protein = models.ManyToManyField(Protein, blank=True)
