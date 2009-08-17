@@ -11,6 +11,9 @@
   <tr><th>Construct</th><td>{{ object.construct }}</td></tr>
   <tr><th>Plasmid</th><td>{{ object.plasmid }}</td></tr>
   <tr><th>Source</th><td>{{ object.source }}</td></tr>
+  <tr><th>Location</th><td>{{ object.location }}</td></tr>
+  <tr><th>Box</th><td>{{ object.box }}</td></tr>
+  <tr><th>Notes</th><td>{{ object.notes }}</td></tr>
   </tdata>
  </table>
 </div>
@@ -37,8 +40,12 @@
 {% endfor %}
 	</tdata>
 </table>
+<ul>
+{% if object.sequencing_contig %}<li><a href="{{object.sequencing_contig.url}}">Assembled Sequence File</a></li>{% endif %}
+{% if object.sequenced_object %}<li><a href="{{object.sequenced_object.url}}">Assembled Plasmid</a></li>{% endif %}
 {% endif %}
 </div>
+<p>To update construct details click <a href="/experimentdb/construct/{{object.id}}/update">here</a></p>
 <div = "sharing">
 {% if object.constructshipment_set.all %}
 <h2>Shipments</h2>

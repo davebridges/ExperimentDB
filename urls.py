@@ -47,6 +47,11 @@ urlpatterns = patterns('',
 		'template_name': 'construct_form.html', 
 		'login_required':True 
 		}),
+	(r'^construct/(?P<object_id>[\d]+)/update/$', 'django.views.generic.create_update.update_object', {
+		'model': Construct, 
+		'template_name': 'construct_update.html', 
+		'login_required':True 
+		}),
 	(r'^antibody/$', 'django.views.generic.list_detail.object_list', {
 		"queryset": Antibody.objects.all(), 
 		'template_name': 'antibody_list.html',
