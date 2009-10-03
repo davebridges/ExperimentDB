@@ -1,5 +1,9 @@
 # Django settings for experimentdb project.
 
+import os.path
+PROJECT_DIR = os.path.dirname(__file__)
+STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -35,7 +39,7 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = "C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb_files"
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -45,7 +49,7 @@ MEDIA_URL = '/media/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/admin-media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'ci%^08ig-0qu*&b(kz_=n6lvbx*puyx6=8!yxzm0+*z)w@7+%6'
@@ -71,22 +75,15 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-"/home/dave/src/experimentdb/templates",
-"/home/dave/src/experimentdb/datasets/templates",
-"/home/dave/src/experimentdb/reagents/templates",
-"/home/dave/src/experimentdb/proteins/templates",
-"/home/dave/src/experimentdb/data/templates",
-"/home/dave/src/experimentdb/projects/templates",
-"/home/dave/src/experimentdb/cloning/templates",
-"/home/dave/src/experimentdb/reagents/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/datasets/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
-"C:/Documents and Settings/davebrid/My Documents/SRC/experimentdb/templates",
+os.path.join(PROJECT_DIR, "data/templates"),
+os.path.join(PROJECT_DIR, "data/projects"),
+os.path.join(PROJECT_DIR, "data/proteins"),
+os.path.join(PROJECT_DIR, "data/reagents"),
+os.path.join(PROJECT_DIR, "data/external"),
+os.path.join(PROJECT_DIR, "data/cloning"),
+os.path.join(PROJECT_DIR, "data/datasets"),
+os.path.join(PROJECT_DIR, "data/sharing"),
+os.path.join(PROJECT_DIR, "templates"),
 )
 
 
