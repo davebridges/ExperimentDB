@@ -15,12 +15,23 @@ urlpatterns = patterns('',
 	(r'^projects?/(?P<project>[-\w]+)/$', 'experimentdb.projects.views.detail'),		
 	(r'^projects?/$', 'experimentdb.projects.views.index'),
 	(r'^subprojects?/(?P<subproject>[-\w]+)/$', 'experimentdb.projects.views.subproject_detail'),
-	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),	
-	(r'^protein/family/$', 'django.views.generic.list_detail.object_list', {
-		"queryset": Protein.objects.all(), 
+	(r'^proteins?/new/$', 'django.views.generic.create_update.create_object', {
+		'model': Protein, 
+		'template_name': 'protein_form.html', 
+		'login_required':True ,
+		'post_save_redirect':"/experimentdb/protein"
+		}),
+	(r'^proteins?/family/$', 'django.views.generic.list_detail.object_list', {
+		"queryset": ProteinFamily.objects.all(), 
 		'template_name': 'protein_family_list.html',
+		}),
+	(r'^proteins?/family/new/$', 'django.views.generic.create_update.create_object', {
+		'model': ProteinFamily, 
+		'template_name': 'protein_family_form.html', 
+		'login_required':True ,
+		'post_save_redirect': "/experimentdb/protein/family"
 		}),	
-	(r'^protein/family/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+	(r'^proteins?/family/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
 		"queryset": ProteinFamily.objects.all(), 
 		'template_name': 'protein_family_detail.html'
 		,}),
@@ -30,6 +41,7 @@ urlpatterns = patterns('',
 		'template_name': 'proteindetail_form.html', 
 		'login_required':True 
 		}),
+	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),	
 	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
 	(r'^protocol?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),

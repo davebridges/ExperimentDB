@@ -8,7 +8,9 @@
  </thead>
  <tdata>
   {% for family in object_list %}
-  <tr><td><a href="/experimentdb/protein/family/{{ family }}"> {{ family }}.</td><td>{{ family.notes }}</tr>
+  <tr><td><a href="/experimentdb/protein/family/{{ family.id }}"> {{ family }}</td><td>{{ family.notes }}</tr>
 {% endfor %}
  </tdata>
+</table>
+<p>To add a new protein family click <a href="/experimentdb/protein/family/new" title="Add New Protein Family">here</a></p>
 {% endblock %}

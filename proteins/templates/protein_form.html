@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block head_title %}New Protein{% endblock %}
+{% block title %}New Protein{% endblock %}
+{% block content %}
+<form method="POST" action="/experimentdb/protein/new/">
+<table class="sortable">
+{{form}}
+ </table>
+ <input type="submit" value="Submit" />
+ </form>
+ 
+{% endblock %}
