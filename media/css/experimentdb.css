@@ -8,14 +8,14 @@ p {
 }
 
 th {
+	padding: 7px 8px; /*padding inside each tab*/
+	border-right: 1px solid white; /*right divider between tabs*/
 	background-color: LightGrey;
 }
-td {
-	padding: 0.2em;
-}
+
 
 #menu {
-	width: 100%;
+	font-size: 15px;	
 	overflow: hidden;
 	border-bottom: 1px solid black; /*bottom horizontal line that runs beneath tabs*/
 }

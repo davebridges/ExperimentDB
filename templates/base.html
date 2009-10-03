@@ -1,43 +1,70 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:dc="http://purl.org/dc/terms/"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:doap="http://usefulinc.com/ns/doap#" >
+
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
-<link rel = "stylesheet" type="text/css" href="/media/experimentdb.css"/>
-{% block scripts %}{% endblock %}
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" media="all" href="/media/css/960/reset.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/media/css/960/text.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/media/css/experimentdb.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/media/css/960/960_12_10_10.css" />
+	<link rel="meta" title="DOAP" href="/media/doap.rdf" type="application/rdf+xml"/>
+
+	{% block scripts %}{% endblock %}
 	
-<title>{% block head_title %}{% endblock %}</title>
+	<title>{% block head_title %}{% endblock %}</title>
 </head>
+
 <body>
-<div id="menu">
+
+<div class="container_12">
+
+<div id = "identification" class = "grid_3">
+        {% if user.is_authenticated %}
+                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }}</span> <span property="foaf:surname">{{ user.last_name }}</span>.  <a href="/mousedb/accounts/login/">Change</a></p>
+        {% else %}
+                <p>Welcome, please <a href="/experimentdb/accounts/login/">log in.</a></p>
+        {% endif %}
+</div>
+<div id = "menu" class = "grid_9">
 	<ul>
 	<li><a href="/experimentdb/project" target="_self">Projects</a></li>
 	<li><a href="/experimentdb/experiments" target="_self">Experiments</a></li>
 	<li><a href="/experimentdb/proteins" target="_self">Proteins</a></li>
-	<li><a href="/experimentdb/reagents", target="_self">Reagents</a></li>
-	<li><a href="/experimentdb/protocol", target="_self">Protocols</a></li>
+	<li><a href="/experimentdb/reagents" target="_self">Reagents</a></li>
+	<li><a href="/experimentdb/protocol" target="_self">Protocols</a></li>
 	<li><a href="/experimentdb/admin" target="_self">Admin</a></li>
 	<li><a href="/experimentdb/search" target="_self">Search</a></li>
-</ul>
+	</ul>
 </div>
-<div class="main">
-	<h1>ExperimentDB</h1>
-	<h2>{% block title %}{% endblock %}</h2>
-	<p>{% block content %}{% endblock %}</p>
-	<p>{% block footer %}</p>
-    <hr>
-    <p>Thanks for visiting my site.</p>
-  <p>
-    <a href="http://validator.w3.org/check?uri=referer"><img
-        src="http://www.w3.org/Icons/valid-html401"
-        alt="Valid HTML 4.01 Transitional" height="31" width="88"></a>
-    <a href="http://jigsaw.w3.org/css-validator/">
-        <img style="border:0;width:88px;height:31px"
-            src="http://jigsaw.w3.org/css-validator/images/vcss"
-            alt="Valid CSS!" />
-    </a>
-</p>
-    {% endblock %}
-</div>
-</body>
-</html>
 
+<div id ="main" class="grid_12">
+	<h1>ExperimentDB</h1>
+	<h2 property="dc:title">{% block title %}{% endblock %}</h2>
+	<p>{% block content %}{% endblock %}</p>
+	<p>{% block footer %}{% endblock %}</p>
+</div>
+
+<div id="footer" class="grid_8">
+	<p>The contents of this site are restricted and requires the written consent of the investigators.  <span about="doap:Project">Source code for <span property="doap:Name">ExperimentDB</span> is freely available under the <a rel="doap:license" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a> from <a rel="doap:homepage" title="ExperimentDB Homepage" href="http://code.google.com/p/experimentdb/">here</a>.  Please report any bugs or suggestions <a rel="doap:bug-database" href="http://code.google.com/p/experimentdb/issues/list" title="Issues Database">here</a>.  For instructions please see the <a rel="doap:wiki" href="http://code.google.com/p/experimentdb/w/list">project wiki</a>.</span></p>
+</div>
+
+<div id="validators" class="grid_4">
+	<a href="http://validator.w3.org/check?uri=referer">
+		<img src="http://www.w3.org/Icons/valid-xhtml-rdfa" alt="Valid XHTML + RDFa" />
+	</a>
+	<a href="http://jigsaw.w3.org/css-validator/">
+		<img src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS" />
+	</a>
+</div>
+
+</div>
+
+</body>
+
+</html>
