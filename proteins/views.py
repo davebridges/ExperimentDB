@@ -4,6 +4,8 @@ from experimentdb.proteins.models import Protein
 from experimentdb.data.models import Experiment
 from experimentdb.reagents.models import Antibody, Construct, Primer, Purified_Protein
 from django.contrib.auth.decorators import login_required
+from Bio import Entrez
+from Bio import SeqIO
 
 @login_required
 def index(request):
@@ -19,5 +21,14 @@ def detail(request, protein):
 	primers = Primer.objects.filter(protein = protein)
 	experiment_protein = Experiment.objects.filter(protein=protein)
 	return render_to_response('protein_detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers})
+
+@login_required
+def protein_isoform_detail(request, protein_id):
+	"""fetch and parse a genbank protein record"""
+	#uses the Biopython Entrez module to fetch the genbank protein record
+	handle = Entrez.efetch(db="protein", rettype="gb", id=protein_id)
+	#uses the Biopython SeqIO module to read the record
+	record = SeqIO.read(handle, "gb")
+	return render_to_response('protein_isoform_detail.html', {'record_id':record.annotations['gi'],'name':record.name, 'description':record.description, 'sequence':record.seq, 'species':record.annotations['organism'], 'papers':record.annotations['references'], 'xrefs':record.dbxrefs})
 
 

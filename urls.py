@@ -41,6 +41,7 @@ urlpatterns = patterns('',
 		'template_name': 'proteindetail_form.html', 
 		'login_required':True 
 		}),
+	(r'^protein_isoform/(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail'),
 	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),	
 	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
