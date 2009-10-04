@@ -29,6 +29,14 @@ def protein_isoform_detail(request, protein_id):
 	handle = Entrez.efetch(db="protein", rettype="gb", id=protein_id)
 	#uses the Biopython SeqIO module to read the record
 	record = SeqIO.read(handle, "gb")
-	return render_to_response('protein_isoform_detail.html', {'record_id':record.annotations['gi'],'name':record.name, 'description':record.description, 'sequence':record.seq, 'species':record.annotations['organism'], 'papers':record.annotations['references'], 'xrefs':record.dbxrefs})
+	return render_to_response('protein_isoform_detail.html', {
+		'record_id':record.annotations['gi'],
+		'name':record.name, 
+		'description':record.description, 
+		'sequence':record.seq, 
+		'species':record.annotations['organism'], 
+		'papers':record.annotations['references'], 
+		'xrefs':record.dbxrefs,
+		'features':record.features})
 
 
