@@ -4,51 +4,89 @@
 
 
 {% block content %}
-<b>Date: </b>{{ experiment.experiment_date}}</br>
-<b>Assay: </b>{{ experiment.assay}}</br>
-<b>Experiment: </b>{{ experiment.experiment}}</br>
+<div class="grid_5">
+<table>
+<tr><th>Date</th><td>{{ experiment.experiment_date}}</td></tr>
+<tr><th>Assay</th><td>{{ experiment.assay}}</td></tr>
+<tr><th>Experiment</th><td>{{ experiment.experiment}}</td></tr>
 {% for exp_protocol in exp_protocol %}
-<b>Protocol: </b>{{exp_protocol.protocol}}</br>
+<tr><th>Protocol</th><td>{{exp_protocol.protocol}}</td></tr>
 {% endfor %}
-<b>Comments: </b>{{experiment.comments}}</br>
+</table>
+<h3>Comments</h3>
+<p>{{experiment.comments}}</p>
 {% for exp_result in exp_result %}
-<b>Conclusions: </b>{{ exp_result.conclusions }}</br>
+</div>
+<div class="grid_5">
+<h3>Conclusions</h3>
+<p>{{ exp_result.conclusions }}</p>
 {% endfor %}
-{% for exp_result in exp_result %}
+</div>
+<div class="grid_12">
 <h3>Figures</h3>
-{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img src="{{exp_result.result_figure1.url}}", width=400></a>{% endif %}
-{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}", width=400></a>{% endif %}</br>
-{% endfor %}
-{% for exp_project in exp_project %}
-<b>Project: </b><a href="/experimentdb/project/{{exp_project.project_slug}}">{{exp_project.project}}</a></br>
-{% endfor %}
-{% for exp_subproject in exp_subproject %}
-<b>Sub-Project: </b><a href="/experimentdb/subproject/{{exp_subproject.project_slug}}">{{exp_subproject.subproject}}</a></br>
-{% endfor %}
-{% for exp_researcher in exp_researcher %}
-<b>Researcher: </b>{{exp_researcher}}</br>
-{% endfor %}
-{% for exp_protein in exp_protein %}
-<b>Protein: </b><a href="/experimentdb/protein/{{exp_protein.name}}">{{exp_protein.name}}</a></br>
-{% endfor %}
-{% for exp_chemical in exp_chemical %}
-<b>Chemicals: </b>{{exp_chemical.chemical}}</br>
-{% endfor %}
-{% for exp_construct in exp_construct %}
-<b>Constructs: </b>{{exp_construct.construct}}</br>
-{% endfor %}
-{% for exp_antibody in exp_antibody %}
-<b>Antibodies: </b>{{exp_antibody.antibody}}</br>
-{% endfor %}
 {% for exp_result in exp_result %}
-<h3>Raw Data Files</h3>
-{% if exp_result.file1 %}<a href="{{exp_result.file1.url}}">{{exp_result.file1}}</a></br>{% endif %}
-{% if exp_result.file2 %}<a href="{{exp_result.file2.url}}">{{exp_result.file2}}</a></br>{% endif %}
-{% if exp_result.file3 %}<a href="{{exp_result.file3.url}}">{{exp_result.file3}}</a></br>{% endif %}
-{% if exp_result.rawscan1 %}<a href="{{exp_result.rawscan1.url}}">{{exp_result.rawscan1}}</a></br>{% endif %}
-{% if exp_result.rawscan2 %}<a href="{{exp_result.rawscan2.url}}">{{exp_result.rawscan2}}</a></br>{% endif %}
-{% if exp_result.rawscan3 %}<a href="{{exp_result.rawscan3.url}}">{{exp_result.rawscan3}}</a></br>{% endif %}
-{% if exp_result.rawscan4 %}<a href="{{exp_result.rawscan4.url}}">{{exp_result.rawscan4}}</a></br>{% endif %}
-{% if exp_result.rawscan5 %}<a href="{{exp_result.rawscan5.url}}">{{exp_result.rawscan5}}</a></br>{% endif %}
+{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img src="{{exp_result.result_figure1.url}}", width=400></a>{% endif %}
+{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}", width=400></a>{% endif %}
 {% endfor %}
+</div>
+<div class="grid_3">
+<p>
+{% if exp_project %}
+<h3>Projects:</h3>
+<ul>
+{% for exp_project in exp_project %}
+<li><a href="/experimentdb/project/{{exp_project.project_slug}}">{{exp_project.project}}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if exp_subproject %}
+<ul>
+<h3>Subprojects</h3>
+{% for exp_subproject in exp_subproject %}
+<li><a href="/experimentdb/subproject/{{exp_subproject.project_slug}}">{{exp_subproject.subproject}}</a>
+{% endfor %}
+</ul>
+{% endif %}
+</div>
+<div class="grid_3">
+{% if exp_researcher %}
+<ul>
+<h3>Researcher: </h3>
+{% for exp_researcher in exp_researcher %}
+<li>{{exp_researcher}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if exp_protein %}
+<h3>Proteins:</h3> <ul>{% for exp_protein in exp_protein %}<li><a href="/experimentdb/protein/{{exp_protein.name}}">{{exp_protein.name}}</a></li>{% endfor %}</ul>
+{% endif %}
+{% if exp_chemical %}
+<h3>Chemicals:</h3> <ul>{% for exp_chemical in exp_chemical %}<li><a href="/experimentdb/chemical/{{exp_chemical.chemical}}">{{exp_chemical.chemical}}</a></li>{% endfor %}</ul>
+{% endif %}
+<p>
+{% if exp_construct %}
+<h3>Constructs:</h3> <ul>{% for exp_construct in exp_construct %}<li><a href="/experimentdb/construct/{{exp_construct.name}}">{{exp_construct.name}}</a></li>{% endfor %}</ul>
+{% endif %}
+</p>
+<p>
+{% if exp_antibody %}
+<h3>Antibodies:</h3> <ul>{% for exp_antibody in exp_antibody %}<li><a href="/experimentdb/antibody/{{exp_antibody.name}}">{{exp_antibody.name}}</a></li>{% endfor %}</ul>
+{% endif %}
+</p>
+</div>
+{% for exp_result in exp_result %}
+<div class="grid_3">
+<h3>Raw Data Files</h3>
+<ul>
+{% if exp_result.file1 %}<li><a href="{{exp_result.file1.url}}">{{exp_result.file1}}</a></li>{% endif %}
+{% if exp_result.file2 %}<li><a href="{{exp_result.file2.url}}">{{exp_result.file2}}</a></li>{% endif %}
+{% if exp_result.file3 %}<li><a href="{{exp_result.file3.url}}">{{exp_result.file3}}</a></li>{% endif %}
+{% if exp_result.rawscan1 %}<li><a href="{{exp_result.rawscan1.url}}">{{exp_result.rawscan1}}</a></li>{% endif %}
+{% if exp_result.rawscan2 %}<li><a href="{{exp_result.rawscan2.url}}">{{exp_result.rawscan2}}</a></li>{% endif %}
+{% if exp_result.rawscan3 %}<li><a href="{{exp_result.rawscan3.url}}">{{exp_result.rawscan3}}</a></li>{% endif %}
+{% if exp_result.rawscan4 %}<li><a href="{{exp_result.rawscan4.url}}">{{exp_result.rawscan4}}</a></li>{% endif %}
+{% if exp_result.rawscan5 %}<li><a href="{{exp_result.rawscan5.url}}">{{exp_result.rawscan5}}</a></li>{% endif %}
+{% endfor %}
+</ul>
+</div>
 {% endblock %}
