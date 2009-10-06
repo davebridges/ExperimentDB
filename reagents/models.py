@@ -11,6 +11,7 @@ SPECIES = (
 	('goat', 'goat'),
 	('sheep', 'sheep'),
 	('rat', 'rat'),
+	('fly', 'fly'),
 )
 
 PRIMER_TYPE = (
@@ -20,6 +21,7 @@ PRIMER_TYPE = (
 	('siRNA', 'siRNA'),
 	('dsRNA', 'dsRNA Amplification'),
 	('mutagenesis', 'mutagenesis'),
+	('morpholino', 'morpholino'),
 )
 
 LOCATIONS = (

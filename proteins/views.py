@@ -6,11 +6,12 @@ from experimentdb.reagents.models import Antibody, Construct, Primer, Purified_P
 from django.contrib.auth.decorators import login_required
 from Bio import Entrez
 from Bio import SeqIO
+from django.template import RequestContext
 
 @login_required
 def index(request):
 	protein_list = Protein.objects.order_by('name')
-	return render_to_response('protein_index.html', {'protein_list': protein_list})
+	return render_to_response('protein_index.html', {'protein_list': protein_list},context_instance=RequestContext(request))
 
 @login_required
 def detail(request, protein):
@@ -20,7 +21,7 @@ def detail(request, protein):
 	purified_proteins = Purified_Protein.objects.filter(protein = protein)
 	primers = Primer.objects.filter(protein = protein)
 	experiment_protein = Experiment.objects.filter(protein=protein)
-	return render_to_response('protein_detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers})
+	return render_to_response('protein_detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers},context_instance=RequestContext(request))
 
 @login_required
 def protein_isoform_detail(request, protein_id):
@@ -37,6 +38,7 @@ def protein_isoform_detail(request, protein_id):
 		'species':record.annotations['organism'], 
 		'papers':record.annotations['references'], 
 		'xrefs':record.dbxrefs,
-		'features':record.features})
+		'features':record.features}
+		,context_instance=RequestContext(request))
 
 

@@ -39,8 +39,8 @@ urlpatterns = patterns('',
 	(r'^protein_isoform/new/$', 'django.views.generic.create_update.create_object', {
 		'model': ProteinDetail, 
 		'template_name': 'proteindetail_form.html', 
-		'login_required':True 
-		}),
+		'login_required':True
+	}),
 	(r'^protein_isoform/(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail'),
 	(r'^proteins?/(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail'),	
 	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
