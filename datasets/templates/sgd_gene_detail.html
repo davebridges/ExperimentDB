@@ -28,13 +28,10 @@ $(document).ready(function(){
 <p><b>Aliases:</b> {{ genename.Other_name }}</p>
 <p><b>Description:</b> {{ genename.Description }}</p>
 <p><b>Phenotype:</b> {{ genename.Phenotype }}</p>
-<div class="hide>
-{% if screen %}
-<p>Sujin's Screen</p>
-{% endif %}
-</div>
+
 
 <div class="hide">
+<div class="grid_12">
 <h3>Phenotypes ({{ phenotypes.count }}) <input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
@@ -61,7 +58,9 @@ $(document).ready(function(){
 	</tbody>
 </table>
 </div>
+</div>
 <div class="hide">
+<div class="grid_6"
 <h3>Physical Interactions ({{ interactions_physical_bait.count }} Bait and {{interactions_physical_hit.count }} Hits)<input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
@@ -98,7 +97,9 @@ $(document).ready(function(){
 	</tbody>
 </table>
 </div>
+</div>
 <div class="hide">
+<div class="grid_6">
 <h3>Genetic Interactions ({{ interactions_genetic_bait.count }} Bait and {{interactions_genetic_hit.count }} Hits)<input type="button" value="Hide/Show" class="delete"/></h3>
 <table>
 	<thead>
@@ -134,5 +135,6 @@ $(document).ready(function(){
 {% endfor %}
 	</tbody>
 </table>
+</div>
 <div>
 {% endblock content %}
