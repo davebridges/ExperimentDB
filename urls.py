@@ -6,11 +6,18 @@ from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_P
 from experimentdb.datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_Binding_Screen_SP
 
 from experimentdb.proteins.forms import ProteinForm
+from experimentdb.data.forms import ExperimentForm
 
 
 urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
+	(r'^experiment?/new/$', 'django.views.generic.create_update.create_object', {
+		'form_class': ExperimentForm, 
+		'template_name': 'experiment_form.html', 
+		'login_required':True ,
+		'post_save_redirect':"/experimentdb/experiments"
+		}),
 	(r'^experiment/(?P<experimentID>[-\w]+)/$', 'experimentdb.data.views.experiment'),
 	(r'^experiments?/$', 'experimentdb.data.views.index'),
 	(r'^search/$', 'experimentdb.views.search'),
