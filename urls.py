@@ -5,6 +5,8 @@ from experimentdb.proteins.models import Protein, ProteinFamily, ProteinDetail
 from experimentdb.reagents.models import Construct, Antibody, Primer, Purified_Protein, Chemical, Cell
 from experimentdb.datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_Binding_Screen_SP
 
+from experimentdb.proteins.forms import ProteinForm
+
 
 urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
@@ -16,7 +18,7 @@ urlpatterns = patterns('',
 	(r'^projects?/$', 'experimentdb.projects.views.index'),
 	(r'^subprojects?/(?P<subproject>[-\w]+)/$', 'experimentdb.projects.views.subproject_detail'),
 	(r'^proteins?/new/$', 'django.views.generic.create_update.create_object', {
-		'model': Protein, 
+		'form_class': ProteinForm, 
 		'template_name': 'protein_form.html', 
 		'login_required':True ,
 		'post_save_redirect':"/experimentdb/protein"
