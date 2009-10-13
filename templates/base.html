@@ -26,7 +26,7 @@
 
 <div id = "identification" class = "grid_3">
         {% if user.is_authenticated %}
-                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }}</span> <span property="foaf:surname">{{ user.last_name }}</span>.  <a href="/mousedb/accounts/login/">Change</a></p>
+                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }}</span> <span property="foaf:surname">{{ user.last_name }}</span>.  <a href="/experimentdb/accounts/login/">Change</a></p>
         {% else %}
                 <p>Welcome, please <a href="/experimentdb/accounts/login/">log in.</a></p>
         {% endif %}

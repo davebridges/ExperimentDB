@@ -10,8 +10,11 @@ class Contact(models.Model):
 	address = models.TextField(max_length=500, blank=True)
 	comments = models.TextField(max_length=250, blank=True)
 	public = models.BooleanField()
+	class Meta:
+		ordering = ['last_name',]
+	
 	def __unicode__(self):
-		return u'%s %s' % (self.first_name, self.last_name)
+		return u'%s, %s' % (self.last_name, self.first_name)
 	def get_absolute_url(self):
 		return "/contact/%i/" % self.contactID
 

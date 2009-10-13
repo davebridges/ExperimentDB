@@ -12,7 +12,7 @@ from experimentdb.data.forms import ExperimentForm
 urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
-	(r'^experiment?/new/$', 'django.views.generic.create_update.create_object', {
+	(r'^experiments?/new/$', 'django.views.generic.create_update.create_object', {
 		'form_class': ExperimentForm, 
 		'template_name': 'experiment_form.html', 
 		'login_required':True ,
