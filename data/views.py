@@ -1,12 +1,14 @@
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from experimentdb.data.models import Experiment, Result, Protocol
+from experimentdb.data.forms import ResultForm
 from experimentdb.proteins.models import Protein
 from experimentdb.reagents.models import Chemical, Antibody, Cell
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.external.models import Reference, Contact
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
 @login_required
 def index(request):
@@ -38,3 +40,18 @@ def protocol_detail(request, protocol_slug):
 	protocol = get_object_or_404(Protocol, protocol_slug=protocol_slug)
 	protocol_experiments = Experiment.objects.filter(protocol=protocol)	
 	return render_to_response ('protocol_detail.html', {'protocol': protocol, 'protocol_experiments':protocol_experiments},context_instance=RequestContext(request))
+
+@login_required
+def result_new(request, experimentID):
+	experiment = get_object_or_404(Experiment, pk=experimentID)
+	if request.method == "POST":
+		form = ResultForm(request.POST)
+		if form.is_valid():
+			result = form.save(commit=False)
+			result.experiment_id = experiment.experimentID
+			result.save()
+			form.save()
+			return HttpResponseRedirect("/experimentdb/experiments/")
+	else:
+		form = ResultForm()
+	return render_to_response('result_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))

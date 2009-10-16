@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 		'post_save_redirect':"/experimentdb/experiments"
 		}),
 	(r'^experiment/(?P<experimentID>[-\w]+)/$', 'experimentdb.data.views.experiment'),
+	(r'^experiment/(?P<experimentID>[-\w]+)/result/new/$', 'experimentdb.data.views.result_new'),
 	(r'^experiments?/$', 'experimentdb.data.views.index'),
 	(r'^search/$', 'experimentdb.views.search'),
 	(r'^projects?/(?P<project>[-\w]+)/$', 'experimentdb.projects.views.detail'),		
