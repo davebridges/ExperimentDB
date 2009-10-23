@@ -90,4 +90,14 @@
 {% endfor %}
 </ul>
 </div>
+<div id="comments" class="grid_12">
+<h2>Comments</h2>
+{% load comments %}
+{% get_comment_list for experiment as comment_list %}
+{% for comment in comment_list %}
+<p>{{ comment }}</p>
+{% if comment.user_email %}<p><a href="mailto:{{ comment.user_email }}">{{ comment.user_email }}</a></p>{% endif %}
+{% endfor %}
+{% render_comment_form for experiment %}
+</div>
 {% endblock %}
