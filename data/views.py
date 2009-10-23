@@ -45,7 +45,7 @@ def protocol_detail(request, protocol_slug):
 def result_new(request, experimentID):
 	experiment = get_object_or_404(Experiment, pk=experimentID)
 	if request.method == "POST":
-		form = ResultForm(request.POST)
+		form = ResultForm(request.POST, request.FILES)
 		if form.is_valid():
 			result = form.save(commit=False)
 			result.experiment_id = experiment.experimentID

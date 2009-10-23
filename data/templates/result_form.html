@@ -2,10 +2,10 @@
 {% block head_title %}New Result for {{ experiment }}{% endblock %}
 {% block title %}New Result {{experiment}}{% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/experiment/{{experiment.experimentID}}/result/new/">
-<table class="sortable">
+<form enctype="multipart/form-data" method="POST" action="/experimentdb/experiment/{{experiment.experimentID}}/result/new/">
+<table>
 {{form}}
- </table>
+</table>
  <input type="submit" value="Submit" />
  </form>
  
