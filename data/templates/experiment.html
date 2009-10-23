@@ -4,6 +4,7 @@
 
 
 {% block content %}
+<section>
 <div class="grid_5">
 <table>
 <tr><th>Date</th><td>{{ experiment.experiment_date}}</td></tr>
@@ -23,6 +24,8 @@
 {% endfor %}
 <p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a></p>
 </div>
+</section>
+<section>
 <div class="grid_12">
 <h3>Figures</h3>
 {% for exp_result in exp_result %}
@@ -30,6 +33,8 @@
 {% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}", width=400></a>{% endif %}
 {% endfor %}
 </div>
+</section>
+<section>
 <div class="grid_3">
 <p>
 {% if exp_project %}
@@ -49,6 +54,8 @@
 </ul>
 {% endif %}
 </div>
+</section>
+<section>
 <div class="grid_3">
 {% if exp_researcher %}
 <ul>
@@ -75,7 +82,11 @@
 {% endif %}
 </p>
 </div>
+</section>
+<div class="clear">
+</div>
 {% for exp_result in exp_result %}
+<section>
 <div class="grid_3">
 <h3>Raw Data Files</h3>
 <ul>
@@ -90,14 +101,18 @@
 {% endfor %}
 </ul>
 </div>
-<div id="comments" class="grid_12">
+</section>
+<hr>
+<aside>
+<div id="comments" class="grid_8">
 <h2>Comments</h2>
 {% load comments %}
 {% get_comment_list for experiment as comment_list %}
 {% for comment in comment_list %}
-<p>{{ comment }}</p>
-{% if comment.user_email %}<p><a href="mailto:{{ comment.user_email }}">{{ comment.user_email }}</a></p>{% endif %}
+<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
+<p>Posted on: {{comment.submit_date}}</p>
 {% endfor %}
 {% render_comment_form for experiment %}
 </div>
+</aside>
 {% endblock %}

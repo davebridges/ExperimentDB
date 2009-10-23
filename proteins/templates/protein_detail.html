@@ -122,13 +122,13 @@
 {% endfor %}
   </table>
 {% endif %}
-<div id="comments" class="grid_12">
+<div id="comments" class="grid_8">
 <h2>Comments</h2>
 {% load comments %}
 {% get_comment_list for protein as comment_list %}
 {% for comment in comment_list %}
-<p>{{ comment }}</p>
-<p><a href="mailto:{{ comment.user_email }}">{{ comment.user_email }}</a></p>
+<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
+<p>Posted on: {{comment.submit_date}}</p>
 {% endfor %}
 {% render_comment_form for protein %}
 </div>

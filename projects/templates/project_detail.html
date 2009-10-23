@@ -1,16 +1,40 @@
 {% extends "base.html" %}
-
+{% block head_title %} {{project}} Project Detail {% endblock %}
 {% block title %} Project Detail {% endblock %}
 {% block content %}
-<h2>{{ project.project }}</h2>
+<section>
+<div id="project" class="grid_5">
+<h1>{{ project.project }}</h1>
+<section>
 <p>{{ project.comments }}</p>
+</div>
+</section>
+<section
+<div id="subprojects" class="grid_5">
 {% for subproject in proj_subproject %}
 <h3>SubProject: <a href="/experimentdb/subproject/{{ subproject.project_slug }}">{{ subproject.subproject }}</a></h3>
 <p>{{ subproject.comments }}</p>
 {% endfor %}
-<div = "experiments">
+</div>
+</section>
+<section>
+<div = "experiments" class="grid_12">
 {% with project.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}
 {% endwith %}
 </div>
+</section>
+<hr>
+<section>
+<div id="comments" class="grid_8">
+<h2>Comments</h2>
+{% load comments %}
+{% get_comment_list for project as comment_list %}
+{% for comment in comment_list %}
+<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
+<p>Posted on: {{comment.submit_date}}</p>
+{% endfor %}
+{% render_comment_form for project %}
+</div>
+</section>
 {% endblock %}
