@@ -19,6 +19,7 @@
 			<doap:name>ExperimentDB v0.1</doap:name>
 			<doap:created>2009-10-24</doap:created>
 			<doap:revision>0.1</doap:revision>
+			<doap:file-release rdf:resource="http://experimentdb.googlecode.com/files/experimentdb-0.1.tar.gz"/>
 		</doap:Version>
 	</doap:release>
 
