@@ -16,7 +16,9 @@
 
 	<doap:release>
 		<doap:Version>
-			<doap:name>unstable source code</doap:name>
+			<doap:name>ExperimentDB v0.1</doap:name>
+			<doap:created>2009-10-24</doap:created>
+			<doap:revision>0.1</doap:revision>
 		</doap:Version>
 	</doap:release>
 
