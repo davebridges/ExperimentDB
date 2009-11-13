@@ -27,6 +27,8 @@ PRIMER_TYPE = (
 LOCATIONS = (
 	('-20', '-20 Freezer'),
 	('4', 'Small Fridge'),
+	('-80', '-80 Freezer'),
+	('liquid nitrogen', 'Liquid Nitrogen Tank'),
 )
 
 
@@ -56,6 +58,7 @@ class Construct(models.Model):
 	protein = models.ManyToManyField(Protein)
 	source = models.CharField(max_length=20, blank=True)
 	resistance = models.CharField(max_length=20, default="Ampicillin")
+	selection = models.ForeignKey('Selection')
 	notes = models.TextField(max_length=250, blank=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
@@ -135,3 +138,34 @@ class Primer(models.Model):
 	notes = models.TextField(max_length=250, blank=True)
 	def __unicode__(self):
 		return u'%s' % self.primer
+	def get_absolute_url(self):
+		return "/primer/%i/" % self.id
+		
+class Selection(models.Model):
+	'''model for selection of transformants'''
+	selection = models.CharField(max_length=20)
+	notes = models.TextField(max_length=250)
+	def __unicode__(self):
+		return u'%s' % self.selection
+		
+class ReagentInfo(models.Model):
+	'''abstract base model for all reagents, will not be used in isolation, only as part of other models'''
+	name = models.CharField(max_length=50)
+	location = models.CharField(max_length=25, choices=LOCATIONS, blank=True, default="-20")
+	box = models.CharField(max_length=25, blank=True)
+	source = models.CharField(max_length=25, blank=True)
+	researcher = models.ManyToManyField(Contact, blank=True)
+	vendor = models.ForeignKey(Vendor, blank=True, null=True)
+	notes = models.TextField(max_length=250, blank=True)
+	public = models.BooleanField()
+	published = models.BooleanField()
+	class Meta:
+		abstract=True
+		
+class Strain(ReagentInfo):
+	'''subclass of ReagentInfo abstract class'''
+	background = models.ForeignKey('Strain', blank=True, null=True)
+	plasmids = models.ForeignKey(Construct, blank=True, null=True)
+	selection = models.ForeignKey('Selection', blank=True, null=True)
+	
+

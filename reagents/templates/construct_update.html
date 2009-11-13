@@ -3,7 +3,7 @@
 {% block head_title %}Construct{% endblock %}
 {% block title %}Construct{% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/construct/{{object.id}}/update/">
+<form enctype="multipart/form-data" method="POST" action="/experimentdb/construct/{{object.id}}/update/">
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>

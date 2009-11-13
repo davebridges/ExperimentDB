@@ -1,4 +1,4 @@
-from experimentdb.reagents.models import Antibody, Chemical, Cell, Purified_Protein, Construct, Primer
+from experimentdb.reagents.models import Antibody, Chemical, Cell, Purified_Protein, Construct, Primer, Strain, Selection
 from django.contrib import admin
 
 class AntibodyAdmin(admin.ModelAdmin):
@@ -34,3 +34,11 @@ class PrimerAdmin(admin.ModelAdmin):
 	list_display = ('primer', 'primer_type', 'date_ordered', 'vendor', 'protein', 'sequence')
 	list_filter = ('primer_type', 'protein')
 admin.site.register(Primer, PrimerAdmin)
+
+class StrainAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Strain, StrainAdmin)
+
+class SelectionAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Selection, SelectionAdmin)
