@@ -79,8 +79,8 @@ class Purified_Protein(models.Model):
 	name = models.CharField(max_length=20, primary_key=True, help_text="ie GST-2xFYVE 2008-11-17")
 	name_slug = models.SlugField(max_length=20)
 	protein = models.ManyToManyField(Protein)
-	purification = models.ForeignKey("data.Experiment", related_name='protein purification')
-	result = models.ForeignKey("data.Result")
+	purification = models.ForeignKey("data.Experiment", related_name='protein purification', blank=True, null=True)
+	result = models.ForeignKey("data.Result", blank=True, null=True)
 	source = models.CharField(max_length=20, blank=True)
 	induction = models.CharField(max_length=50, blank=True)
 	cells = models.CharField(max_length=20, blank=True)
@@ -97,7 +97,7 @@ class Purified_Protein(models.Model):
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/purfieiedprotein/%s/" % self.name_slug
+		return "/purfiedprotein/%s/" % self.name_slug
 
 class Chemical(models.Model):
 	chemical = models.CharField(max_length=20, primary_key=True)
@@ -123,6 +123,8 @@ class Cell(models.Model):
 	published = models.BooleanField()
 	reference = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True)
+	class Meta:
+		ordering = ['cellline']
 	def __unicode__(self):
 		return u'%s' % self.description
 	def get_absolute_url(self):
