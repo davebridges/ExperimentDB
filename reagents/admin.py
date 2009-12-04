@@ -9,13 +9,13 @@ class AntibodyAdmin(admin.ModelAdmin):
 admin.site.register(Antibody, AntibodyAdmin)
 
 class ChemicalAdmin(admin.ModelAdmin):
-	list_display = ('chemical', 'source')
+	list_display = ('name', 'source')
 admin.site.register(Chemical, ChemicalAdmin)
 
 class CellAdmin(admin.ModelAdmin):
 	list_display = ('description', 'species', 'source')
-	fields = ('description', 'species', 'notes', 'cellline')
-	prepopulated_fields = {"cellline" : ("description",)}
+	fields = ('description', 'species', 'notes', 'name')
+	prepopulated_fields = {"name" : ("description",)}
 admin.site.register(Cell, CellAdmin)
 
 class ConstructAdmin(admin.ModelAdmin):
@@ -31,7 +31,7 @@ class Purified_ProteinAdmin(admin.ModelAdmin):
 admin.site.register(Purified_Protein, Purified_ProteinAdmin)
 
 class PrimerAdmin(admin.ModelAdmin):
-	list_display = ('primer', 'primer_type', 'date_ordered', 'vendor', 'protein', 'sequence')
+	list_display = ('name', 'primer_type', 'date_ordered', 'vendor', 'protein', 'sequence')
 	list_filter = ('primer_type', 'protein')
 admin.site.register(Primer, PrimerAdmin)
 

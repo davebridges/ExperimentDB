@@ -36,13 +36,17 @@ class ReagentInfo(models.Model):
 	location = models.CharField(max_length=25, choices=LOCATIONS, blank=True, default="-20")
 	box = models.CharField(max_length=25, blank=True)
 	source = models.CharField(max_length=25, blank=True)
-	researcher = models.ManyToManyField(Contact, blank=True)
-	vendor = models.ForeignKey(Vendor, blank=True, null=True)
+	researcher = models.ManyToManyField(Contact, blank=True, related_name="%(class)s_related")
+	vendor = models.ForeignKey(Vendor, blank=True, null=True, related_name="%(class)s_related")
 	notes = models.TextField(max_length=250, blank=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
 	class Meta:
 		abstract=True
+		ordering = ['name']
+	def __unicode__(self):
+		return u'%s' % self.name
+
 
 class Antibody(models.Model):
 	antibody = models.CharField(max_length=50)
@@ -99,11 +103,6 @@ class Purified_Protein(ReagentInfo):
 	protocol = models.ForeignKey("data.Protocol", blank=True)
 	tag = models.CharField(max_length=20, blank=True)
 	construct = models.ForeignKey(Construct, blank=True)
-	notes_old = models.TextField(max_length=250, blank=True)
-	public_old = models.BooleanField()
-	published_old = models.BooleanField()
-	reference_old = models.ManyToManyField(Reference, blank=True)
-	researcher_old = models.ManyToManyField(Contact, blank=True, related_name='protein purification researcher')
 	class Meta:
 		verbose_name_plural = "Purified Proteins"
 	def __unicode__(self):
@@ -112,46 +111,30 @@ class Purified_Protein(ReagentInfo):
 		return "/purfiedprotein/%s/" % self.name_slug
 
 class Chemical(ReagentInfo):
-	chemical = models.CharField(max_length=20, primary_key=True)
-	source_old = models.CharField(max_length=20, blank=True)
-	vendor_old = models.ForeignKey(Vendor, related_name='chemical vendor')
-	notes_old = models.TextField(max_length=250, blank=True)
-	public_old = models.BooleanField()
-	published_old = models.BooleanField()
-	reference_old = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True, related_name='chemical researcher')
 	def __unicode__(self):
-		return u'%s' % self.chemical
+		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/project/%i/" % self.chemical
+		return "/project/%i/" % self.name
 	
 class Cell(ReagentInfo):
-	cellline = models.SlugField(max_length=50, primary_key=True)
 	description = models.CharField(max_length=50, blank=True)
 	species = models.CharField(max_length=50, choices=SPECIES, blank=True)
-	source_old = models.CharField(max_length=50, blank=True)
-	notes_old = models.TextField(max_length=250, blank=True)	
-	public_old = models.BooleanField()
-	published_old = models.BooleanField()
-	reference_old = models.ManyToManyField(Reference, blank=True)
 	contact = models.ManyToManyField(Contact, blank=True, related_name='cell-line researcher')
 	class Meta:
-		ordering = ['cellline']
+		ordering = ['name']
 	def __unicode__(self):
-		return u'%s' % self.description
+		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/project/%i/" % self.cellline
+		return "/project/%i/" % self.name
 
 class Primer(ReagentInfo):
-	primer = models.CharField(max_length=30)
 	date_ordered = models.DateField(blank=True)
 	primer_type = models.CharField(max_length=20, choices=PRIMER_TYPE)
-	vendor_old = models.ForeignKey(Vendor, blank=True, related_name='primer vendor')
 	protein = models.ForeignKey(Protein, blank=True)
 	sequence = models.CharField(max_length=100, blank=True)
-	notes_old = models.TextField(max_length=250, blank=True)
 	def __unicode__(self):
-		return u'%s' % self.primer
+		return u'%s' % self.name
 	def get_absolute_url(self):
 		return "/primer/%i/" % self.id
 		

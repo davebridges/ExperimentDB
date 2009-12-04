@@ -15,7 +15,7 @@
 {% for purified in object_list %}
 <tbody>
 <tr>
-	<td><a href="/experimentdb/purified/{{ purified.id }}">{{ purified }}</a></td>
+	<td><a href="/experimentdb/purified/{{ purified.name_slug }}">{{ purified }}</a></td>
 	<td>{%for protein in purified.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
 	<td>{{purified.tag}}</td>
 	<td><a href="/experimentdb/construct/{{purified.construct.id}}">{{ purified.construct}}</td>

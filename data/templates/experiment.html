@@ -14,7 +14,7 @@
 <tr><th>Protocol</th><td>{{exp_protocol.protocol}}</td></tr>
 {% endfor %}
 </table>
-<h3>Comments</h3>
+<h3>Notes</h3>
 <p>{{experiment.comments}}</p>
 {% for exp_result in exp_result %}
 </div>
@@ -22,21 +22,20 @@
 <h3>Conclusions</h3>
 <p>{{ exp_result.conclusions }}</p>
 {% endfor %}
-<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a></p>
+<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a></p>
 </div>
 </section>
 <section>
 <div class="grid_12">
 <h3>Figures</h3>
 {% for exp_result in exp_result %}
-{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img src="{{exp_result.result_figure1.url}}", width=400></a>{% endif %}
-{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}", width=400></a>{% endif %}
+{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img src="{{exp_result.result_figure1.url}}" width=400/></a>{% endif %}
+{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}" width=400/></a>{% endif %}
 {% endfor %}
 </div>
 </section>
 <section>
 <div class="grid_3">
-<p>
 {% if exp_project %}
 <h3>Projects:</h3>
 <ul>
@@ -49,7 +48,7 @@
 <ul>
 <h3>Subprojects</h3>
 {% for exp_subproject in exp_subproject %}
-<li><a href="/experimentdb/subproject/{{exp_subproject.project_slug}}">{{exp_subproject.subproject}}</a>
+<li><a href="/experimentdb/subproject/{{exp_subproject.project_slug}}">{{exp_subproject.subproject}}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -71,21 +70,17 @@
 {% if exp_chemical %}
 <h3>Chemicals:</h3> <ul>{% for exp_chemical in exp_chemical %}<li><a href="/experimentdb/chemical/{{exp_chemical.chemical}}">{{exp_chemical.chemical}}</a></li>{% endfor %}</ul>
 {% endif %}
-<p>
 {% if exp_construct %}
 <h3>Constructs:</h3> <ul>{% for exp_construct in exp_construct %}<li><a href="/experimentdb/construct/{{exp_construct.name}}">{{exp_construct.name}}</a></li>{% endfor %}</ul>
 {% endif %}
-</p>
-<p>
 {% if exp_antibody %}
 <h3>Antibodies:</h3> <ul>{% for exp_antibody in exp_antibody %}<li><a href="/experimentdb/antibody/{{exp_antibody.name}}">{{exp_antibody.name}}</a></li>{% endfor %}</ul>
 {% endif %}
-</p>
 </div>
-</section>
 <div class="clear">
 </div>
 {% for exp_result in exp_result %}
+</section>
 <section>
 <div class="grid_3">
 <h3>Raw Data Files</h3>
