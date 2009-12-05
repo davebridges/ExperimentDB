@@ -1,9 +1,7 @@
 html {
 	font-family: Helvetica, Arial, sans-serif;
-	border-radius: 5px;
 	background: #121212;
 	color: #ffffff;
-	border: 2px #404040;
 }
 
 p {
@@ -18,13 +16,21 @@ a {
 }
 
 h1 { 
-	background: #888888;
+	background: #888888 url(/static/css/vader/images/ui-bg_highlight-hard_15_888888_1x100.png) 50% 50% repeat-x;
+	border: 2px solid #404040;
+	border-radius: 5px;
 	text-align: center;
 }
 
 th  {
 	padding: 7px 8px; 
-	background: #888888; 
+	background: #888888 url(/static/css/vader/images/ui-bg_highlight-hard_15_888888_1x100.png) 50% 50% repeat-x;
+	border: 2px solid #404040;
+	border-radius: 5px;
+}
+
+td  {
+	padding: 7px 8px; 
 }
 
 
@@ -51,7 +57,8 @@ th  {
 	margin: 0;
 	padding: 7px 8px; /*padding inside each tab*/
 	color: #ffffff;
-	background: #888888; /*background of tabs (default state)*/
+	background: #888888 url(/static/css/vader/images/ui-bg_highlight-hard_15_888888_1x100.png) 50% 50% repeat-x;
+	border: 2px solid #404040
 }
 
 #menu li a:hover {
