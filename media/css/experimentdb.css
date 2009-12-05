@@ -1,5 +1,9 @@
-body {
-	font-family: sans-serif;
+html {
+	font-family: Helvetica, Arial, sans-serif;
+	border-radius: 5px;
+	background: #121212;
+	color: #ffffff;
+	border: 2px #404040;
 }
 
 p {
@@ -7,18 +11,28 @@ p {
 	max-width: 450px;
 }
 
-th {
-	padding: 7px 8px; /*padding inside each tab*/
-	border-right: 1px solid white; /*right divider between tabs*/
-	background-color: LightGrey;
+a {
+	font-weight: bold; 
+	text-decoration: none;
+	color: #ffffff;
+}
+
+h1 { 
+	background: #888888;
+	text-align: center;
+}
+
+th  {
+	padding: 7px 8px; 
+	background: #888888; 
 }
 
 
 #menu {
 	font-size: 15px;	
 	overflow: hidden;
-	border-bottom: 1px solid black; /*bottom horizontal line that runs beneath tabs*/
 }
+
 #menu ul{
 	margin: 0;
 	padding: 0;
@@ -36,9 +50,22 @@ th {
 	text-decoration: none;
 	margin: 0;
 	padding: 7px 8px; /*padding inside each tab*/
-	border-right: 1px solid white; /*right divider between tabs*/
-	color: black;
-	background: LightGrey; /*background of tabs (default state)*/
-}	
+	color: #ffffff;
+	background: #888888; /*background of tabs (default state)*/
+}
 
+#menu li a:hover {
+	background: #dddddd;
+	color: #000000;	
+}
 
+div#identification {
+	background: #555555;
+	color: #cccccc;
+}
+
+.errorlist {
+	background: #fef1ec;
+	color: #cd0a0a;
+	border: 2px solid #cd0a0a;
+}
