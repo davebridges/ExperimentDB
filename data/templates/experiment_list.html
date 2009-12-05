@@ -2,8 +2,9 @@
 {% block head_title %}Experiment List{% endblock %}
 {% block title %}Experiment List{% endblock %}
 {% block content %}
-<p>To add a new experiment click <a href="/experimentdb/experiment/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a>.</p>
+<a class="fg-button ui-state-default ui-corner-all" href="/experimentdb/experiment/new" la>Add a new experiment</a>
 <div = "experiments">
 {% include "experiment_list_table.html" %}
 </div>
 {% endblock %}
+

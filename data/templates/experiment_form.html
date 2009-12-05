@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block head_title %}New Experiment{% endblock %}
 {% block title %}New Experiment{% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+	 $(document).ready(function() {	
+		$('#id_experiment_date').datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	</script>
+{% endblock %}
 {% block content %}
 <form method="POST" action="/experimentdb/experiment/new/">
 <table class="sortable">

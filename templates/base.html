@@ -13,6 +13,9 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/960/text.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/experimentdb.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/960/960_12_10_10.css" />
+	<link type="text/css" href="/static/css/vader/jquery-ui-1.7.2.custom.css" rel="Stylesheet" />
+	<script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script> 
+	<script type="text/javascript" src="/static/js/jquery-ui-1.7.2.custom.min.js"></script> 
 	<link rel="meta" title="DOAP" href="/static/doap.rdf" type="application/rdf+xml"/>
 
 	{% block scripts %}{% endblock %}
@@ -26,9 +29,10 @@
 
 <div id = "identification" class = "grid_3">
         {% if user.is_authenticated %}
-                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }}</span> <span property="foaf:surname">{{ user.last_name }}</span>.  <a href="/experimentdb/accounts/login/">Change</a></p>
+                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }} <span property="foaf:surname">{{ user.last_name }}</span><br>
+		<a class="fg-button ui-state-default ui-corner-all" href="/experimentdb/accounts/login/">Change User</a></p>
         {% else %}
-                <p>Welcome, please <a href="/experimentdb/accounts/login/">log in.</a></p>
+                <p>Welcome, please <a class="fg-button ui-state-default ui-corner-all"  href="/experimentdb/accounts/login/">log in.</a></p>
         {% endif %}
 </div>
 <nav>
