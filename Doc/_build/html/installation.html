@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MouseDB Installation &mdash; ExperimentDB v0.1 documentation</title>
+    <title>ExperimentDB Installation &mdash; ExperimentDB v0.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -48,24 +48,24 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="mousedb-installation">
-<h1>MouseDB Installation<a class="headerlink" href="#mousedb-installation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="experimentdb-installation">
+<h1>ExperimentDB Installation<a class="headerlink" href="#experimentdb-installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p>MouseDB requires both a database and a webserver to be set up.  Ideally, the database should be hosted separately from the webserver and MouseDB installation, but this is not necessary, as both can be used from the same server.  If you are using a remote server for the database, it is best to set up a user for this database that can only be accessed from the webserver.  If you want to set up several installations (ie for different users or different laboratories), you need separate databases and MouseDB installations for each.  You will also need to set up the webserver with different addresses for each installation.</p>
+<p>ExperimentDB requires both a database and a webserver to be set up.  Ideally, the database should be hosted separately from the webserver and ExperimentDB installation, but this is not necessary, as both can be used from the same server.  If you are using a remote server for the database, it is best to set up a user for this database that can only be accessed from the webserver.  If you want to set up several installations (ie for different users or different laboratories), you need separate databases and ExperimentDB installations for each.  You will also need to set up the webserver with different addresses for each installation.</p>
 </div>
 <div class="section" id="software-dependencies">
 <h2>Software Dependencies<a class="headerlink" href="#software-dependencies" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><strong>MouseDB source code</strong>.  Download from one of the following:</li>
+<li><strong>ExperimentDB source code</strong>.  Download from one of the following:</li>
 </ol>
 <blockquote>
 <ol class="loweralpha simple">
-<li><a class="reference external" href="http://github.com/davebridges/mousedb/downloads">http://github.com/davebridges/mousedb/downloads</a> for the current release</li>
-<li><a class="reference external" href="http://github.com/davebridges/mousedb">http://github.com/davebridges/mousedb</a> for the source code</li>
+<li><a class="reference external" href="http://github.com/davebridges/ExperimentDB/downloads">http://github.com/davebridges/ExperimentDB/downloads</a> for the current release</li>
+<li><a class="reference external" href="http://github.com/davebridges/ExperimentDB">http://github.com/davebridges/ExperimentDB</a> for the source code</li>
 </ol>
 </blockquote>
-<p>Downloading and/or unzipping will create a directory named mousedb.  You can update to the newest revision at any time either using git or downloading and re-installing the newer version.  Changing or updating software versions will not alter any saved data, but you will have to update the localsettings.py file (described below).</p>
+<p>Downloading and/or unzipping will create a directory named ExperimentDB.  You can update to the newest revision at any time either using git or downloading and re-installing the newer version.  Changing or updating software versions will not alter any saved data, but you will have to update the localsettings.py file (described below).</p>
 <ol class="arabic simple" start="2">
 <li><strong>Python</strong>.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from <a class="reference external" href="http://www.python.org/download/">http://www.python.org/download/</a>.</li>
 <li><strong>Django</strong>.  Download from <a class="reference external" href="http://www.djangoproject.com/download/">http://www.djangoproject.com/download/</a></li>
@@ -88,42 +88,27 @@
 </ul>
 </blockquote>
 <ol class="arabic simple" start="3">
-<li>Save this file as localsettings.py in the main mousedb directory.</li>
-</ol>
-</div>
-<div class="section" id="mousedb-setup">
-<h2>MouseDB Setup<a class="headerlink" href="#mousedb-setup" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Open a command line window and navigate to the mousedb directory</p>
-</li>
-<li><p class="first">Instantiate the database tables by entering python manage.py syncdb and enter a superuser account username, password and email.</p>
-</li>
-<li><p class="first">Enter python manage.py shell to open a python shell and enter the following commands, where &#8220;group name&#8221; is the name of your group (keep the quotation marks):</p>
-<div class="highlight-python"><pre>&gt;&gt;from mousedb.groups.models import Group
-&gt;&gt;g = Group(group="group name")
-&gt;&gt;g.save()</pre>
-</div>
-</li>
+<li>Save this file as localsettings.py in the main ExperimentDB directory.</li>
 </ol>
 </div>
 <div class="section" id="web-server-setup">
 <h2>Web Server Setup<a class="headerlink" href="#web-server-setup" title="Permalink to this headline">¶</a></h2>
-<p>You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod_python.  The following is a httpd.conf example where the code is placed in /usr/src/mousedb:</p>
-<div class="highlight-python"><pre>Alias /static /usr/src/mousedb/media
-Alias /mousedb-media /usr/src/mousedb/media
-&lt;Directory /usr/mousedb/media&gt;
+<p>You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod_python.  The following is a httpd.conf example where the code is placed in /usr/src/ExperimentDB:</p>
+<div class="highlight-python"><pre>Alias /static /usr/src/experimentdb/media
+Alias /media /usr/src/experimentdb/media
+&lt;Directory /usr/experimentdb/media&gt;
    Order allow,deny
    Allow from all
 &lt;/Directory&gt;
-&lt;Location "/mousedb/"&gt;
+&lt;Location "/experimentdb/"&gt;
    SetHandler python-program
    PythonHandler django.core.handlers.modpython
-   SetEnv DJANGO_SETTINGS_MODULE mousedb.settings
+   SetEnv DJANGO_SETTINGS_MODULE experimentdb.settings
    SetEnv PYTHON_EGG_CACHE /var/www/eggs
-   PythonOption django.root /mousedb
+   PythonOption django.root /experimentdb
    PythonDebug On
    PythonPath "['/usr/src'] + sys.path"
-   PythonInterpreter mousedb
+   PythonInterpreter experimentdb
 &lt;/Location&gt;</pre>
 </div>
 <p>If you want to restrict access to these files, change the Allow from all directive to specific domains or ip addresses (for example Allow from 192.168.0.0/99 would allow from 192.168.0.0 to 192.168.0.99)</p>
@@ -131,10 +116,7 @@ Alias /mousedb-media /usr/src/mousedb/media
 <div class="section" id="final-configuration-and-user-setup">
 <h2>Final Configuration and User Setup<a class="headerlink" href="#final-configuration-and-user-setup" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li>Go to your server then /mousedb/admin/groups/group/1/ and log in as superuser.</li>
-<li>Edit the details of your group, the main contact and create data sharing license (or point out the restrictions for use only by authorized users)</li>
-<li>Next go to /mousedb/admin/auth/group/ and create user groups.  This will define permissions for users.  Select a name for the group (ie data entry) and select the add, change or delete permissions for that group.  Users can be members of several groups.</li>
-<li>Go to mousedb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.</li>
+<li>Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.</li>
 </ol>
 </div>
 </div>
@@ -147,11 +129,10 @@ Alias /mousedb-media /usr/src/mousedb/media
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
-<li><a class="reference external" href="">MouseDB Installation</a><ul>
+<li><a class="reference external" href="">ExperimentDB Installation</a><ul>
 <li><a class="reference external" href="#configuration">Configuration</a></li>
 <li><a class="reference external" href="#software-dependencies">Software Dependencies</a></li>
 <li><a class="reference external" href="#database-setup">Database Setup</a></li>
-<li><a class="reference external" href="#mousedb-setup">MouseDB Setup</a></li>
 <li><a class="reference external" href="#web-server-setup">Web Server Setup</a></li>
 <li><a class="reference external" href="#final-configuration-and-user-setup">Final Configuration and User Setup</a></li>
 </ul>
