@@ -24,6 +24,7 @@ sys.path.append('/home/dave/src/experimentdb')
 import settings
 from django.core.management import setup_environ
 setup_environ(settings)
+import experimentdb
 
 # -- General configuration -----------------------------------------------------
 

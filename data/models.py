@@ -5,18 +5,29 @@ from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell, Pu
 from experimentdb.external.models import Reference, Contact, Vendor
 
 class Protocol(models.Model):
-	protocol = models.CharField(max_length=50)
-	protocol_slug = models.SlugField(max_length=25)
-	reference = models.ManyToManyField(Reference, blank=True)
-	protocol_file = models.FileField(upload_to='protocol', blank=True)
-	wiki_page = models.CharField(max_length=75, blank=True)
-	comments = models.TextField(max_length=500, blank=True)	
-	public = models.BooleanField()
-	published = models.BooleanField()
-	def __unicode__(self):
-		return u'%s ' % self.protocol
-	def get_absolute_url(self):
-		return "/protocol/%s/" % self.protocol_slug 
+    """Describes the protocol or protocols used to perform each experiment.  
+    
+    This model stores information about the protocol used for an experiment.    
+
+    An experiment may have several protocols attached to it.  For example, one could culture and transfect cells, then generate lysates then do some western blots.
+    
+    Since migrating to a mediawiki based protocol storage system, the wiki_page attribute indicates the protocol wiki page.  In this model, the **protocol_revision** attribute indicates the particular revision of the protocol used for that particular experiment.  In this way a permalink can be generated to the specific protocol used for a particular experiment.  To find the protocol revision number, mouse over the permanent link on the protocol and record the number at the end of the url.
+    """
+       
+    protocol = models.CharField(max_length=50)
+    protocol_slug = models.SlugField(max_length=25)
+    reference = models.ManyToManyField(Reference, blank=True)
+    protocol_file = models.FileField(upload_to='protocol', blank=True)
+    protocol_revision = models.IntegerField(blank=True, null=True, help_text="ProtocolWiki page revision number")
+    wiki_page = models.CharField(max_length=75, blank=True, help_text="ProtocolWiki page (via MediaWiki)")
+    comments = models.TextField(max_length=500, blank=True)	
+    public = models.BooleanField()
+    published = models.BooleanField()
+    active = models.BooleanField()
+    def __unicode__(self):
+        return u'%s ' % self.protocol
+    def get_absolute_url(self):
+        return "/protocol/%s/" % self.protocol_slug 
 
 
 class Experiment(models.Model):

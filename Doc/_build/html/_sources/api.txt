@@ -1,60 +1,69 @@
 Database Models
-==================
+===============
 Data Package
---------------
+------------
 
-.. automodule:: experimentdb.data.models
+.. automodule:: data.models
    :members:
    :undoc-members:
    :inherited-members:
 
 
 Datasets Package
-------------
+----------------
 
-.. automodule:: experimentdb.datasets.models
+.. automodule:: datasets.models
    :members:
    :undoc-members:
    :inherited-members:
 
 
 Reagents Package
---------------------
+----------------
 
-.. automodule:: experimentdb.reagents.models
+.. automodule:: reagents.models
    :members:
    :undoc-members:
    :inherited-members:
 
 
 Externals Package
---------------------------
+-----------------
 
-.. automodule:: experimentdb.external.models
+.. automodule:: external.models
    :members:
    :undoc-members:
    :inherited-members:
 
 Proteins Package
---------------------------
+----------------
 
-.. automodule:: experimentdb.proteins.models
+.. automodule:: proteins.models
    :members:
    :undoc-members:
    :inherited-members:
 
 Projects Package
---------------------------
+----------------
 
-.. automodule:: experimentdb.projects.models
+.. automodule:: projects.models
    :members:
    :undoc-members:
    :inherited-members:
 
-Construct Sharing Package
---------------------------
+Cloning Package
+----------------
 
-.. automodule:: experimentdb.sharing.models
+.. automodule:: cloning.models
+   :members:
+   :undoc-members:
+   :inherited-members:
+
+
+Construct Sharing Package
+-------------------------
+
+.. automodule:: sharing.models
    :members:
    :undoc-members:
    :inherited-members:
