@@ -80,3 +80,7 @@ div#identification {
 	color: #cd0a0a;
 	border: 2px solid #cd0a0a;
 }
+
+img.figure {
+	background: white;
+}

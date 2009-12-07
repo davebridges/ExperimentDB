@@ -77,8 +77,8 @@
 	<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a></p>
 	<h4>Results</h4>
 	{% for exp_result in exp_result %}
-	{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img src="{{exp_result.result_figure1.url}}" width=400/></a>{% endif %}
-	{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img src="{{exp_result.result_figure2.url}}" width=400/></a>{% endif %}
+	{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img class="figure" src="{{exp_result.result_figure1.url}}" width=400 /></a>{% endif %}
+	{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img class="figure" src="{{exp_result.result_figure2.url}}" width=400 /></a>{% endif %}
 	{% endfor %}
 	</div>
 
