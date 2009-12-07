@@ -1,3 +1,7 @@
+"""This module provides the views for working with the data package.
+This module will generate index and detail views for experiments and protocols as well as for the form to enter new results through an experiment.  Several other generic views are found in data.urls.
+"""
+
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from experimentdb.data.models import Experiment, Result, Protocol
@@ -9,6 +13,7 @@ from experimentdb.external.models import Reference, Contact
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+
 
 @login_required
 def index(request):

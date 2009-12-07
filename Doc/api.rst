@@ -3,6 +3,12 @@ Package Details
 Data Package
 ------------
 
+.. automodule:: data
+   :members:
+   :undoc-members:
+   :inherited-members:
+
+
 Models
 ++++++
 .. automodule:: data.models
@@ -10,12 +16,32 @@ Models
    :undoc-members:
    :inherited-members:
 
-Views
+Forms
 +++++
+.. automodule:: data.forms
+   :members:
+   :undoc-members:
+   :inherited-members:
+
+Views and URLs
+++++++++++++++
 .. automodule:: data.views
    :members:
    :undoc-members:
    :inherited-members:
+
+.. automodule:: data.urls
+   :members:
+   :undoc-members:
+   :inherited-members:
+
+Administrative Site Configuration
++++++++++++++++++++++++++++++++++
+.. automodule:: data.admin
+   :members:
+   :undoc-members:
+   :inherited-members:
+
 
 Datasets Package
 ----------------
