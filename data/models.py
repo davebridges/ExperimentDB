@@ -23,7 +23,7 @@ class Protocol(models.Model):
     comments = models.TextField(max_length=500, blank=True)	
     public = models.BooleanField()
     published = models.BooleanField()
-    active = models.BooleanField()
+    inactive = models.BooleanField()
     def __unicode__(self):
         return u'%s ' % self.protocol
     def get_absolute_url(self):

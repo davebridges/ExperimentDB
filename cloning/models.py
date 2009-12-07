@@ -17,9 +17,9 @@ class Cloning(models.Model):
     """
 
     date_completed = models.DateField(blank=True, null=True)
-    construct = models.ForeignKey(Construct, help_text="Result of Cloning Project")
+    construct = models.ForeignKey(Construct, help_text="Result of Cloning Project", related_name="final clone")
     cloning_type = models.CharField(max_length=25, choices=CLONING_TYPE)
-    vector = models.CharField(max_length=25, blank=True)
+    vector = models.ForeignKey(Construct, blank=True, null=True, related_name="recipient vector")
     vector_CIP = models.BooleanField()
     insert = models.CharField(max_length=100, blank=True)
     primer_5prime = models.ForeignKey(Primer, blank=True, related_name='5_Primer', verbose_name="5' PCR Primer")
