@@ -152,5 +152,7 @@ class Strain(ReagentInfo):
 	plasmids = models.ManyToManyField(Construct, blank=True, null=True)
 	selection = models.ForeignKey('Selection', blank=True, null=True)
 	genotype = models.CharField(max_length=200, blank=True, help_text="'D' indicates delta")
-	
+	protein = models.ManyToManyField(Protein, blank=True, null=True)
+	def get_absolute_url(self):
+	    return "/experimentdb/strain/%i" % self.id
 

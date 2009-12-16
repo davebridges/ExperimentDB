@@ -103,6 +103,23 @@
   </table>
 {% endif %}
 
+{% if protein.strain_set %}
+<table>
+ <thead>
+  <tr>
+   <th>Strains ({{ primers.count }})</td>
+  </tr>
+ </thead>
+ <tbody>
+{% for strain in protein.strain_set.all %}
+   <tr>
+   <td><a href="{{strain.get_absolute_url}}" title="strain">{{ strain }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+{% endif %}
+
 
 
 
