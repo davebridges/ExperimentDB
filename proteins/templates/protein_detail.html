@@ -45,6 +45,7 @@
  <p>Add new protein isoform <a href="/experimentdb/protein_isoform/new">here</a></p>
 
 <div id ="accordion">
+{% if antibodies %}
 <h3><a href="#">Antibodies ({{ antibodies.count }})</a></h3>
 <div>
 <table>
@@ -59,12 +60,13 @@
 {% endfor %}
   </table>
   </div>
+ {% endif %}
 
 
 
 
-
-	<h3><a href="#">Constructs ({{ constructs.count }})</a></h3>
+{% if constructs %}
+<h3><a href="#">Constructs ({{ constructs.count }})</a></h3>
 <div>
 <table>
  <thead>
@@ -78,12 +80,13 @@
 {% endfor %}
   </table>
   </div>
+  {% endif %}
 
 
 
 
-
-	<h3><a href="#">Purified Proteins ({{ purified_proteins.count }})</a></h3>
+{% if purified_proteins %}
+<h3><a href="#">Purified Proteins ({{ purified_proteins.count }})</a></h3>
 <div>
 <table>
  <thead>
@@ -97,11 +100,10 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
 
-
-
-
+{% if primers %}
 <h3><a href="#">Primers ({{primers.count}})</a></h3>
 <div>
 <table>
@@ -116,10 +118,10 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
 
-
-
+{% if protein.strain_set %}
 <h3><a href="#">Strains ({{protein.strain_set.count}})</a></h3>
 <div>
 <table>
@@ -134,9 +136,9 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
-
-
+{% if experiment_protein %}
 <h3><a href="#">Experiments ({{ experiment_protein.count }})</a></h3>
 <table>
  <thead>
@@ -150,9 +152,8 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
   </div>
-
-
 
 <div id="comments" class="grid_8">
 <h2>Comments</h2>
