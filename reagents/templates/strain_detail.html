@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head_title %}Construct Detail - {{ object }}{% endblock %}
+{% block title %}Construct Detail - {{ object }}{% endblock %}
+{% block content %}
+<div id= "summary" class="grid_4">
+<table>
+ <thead>
+ </thead>
+ <tdata>
+  <tr><th>Strain</th><td>{{ objectt }}</td></tr>
+  <tr><th>Source</th><td>{{ object.source }}</td></tr>
+  <tr><th>Location</th><td>{{ object.location }}</td></tr>
+  <tr><th>Box</th><td>{{ object.box }}</td></tr>
+  <tr><th>Researcher</th><td>{% for researcer in object.researcher_set %}{{ researcher }}{% endfor %}</td>
+  <tr><th>Background</th><td>{{ object.background }}</td>
+  <tr><th>Selection</th><td>{{ object.selection }}</td>
+  <tr><th>Genotype</th><td>{{ object.genotype }}</td>
+  <tr><th>Notes</th><td>{{ object.notes }}</td></tr>
+  </tdata>
+ </table>
+<p>To update strain details click <a href="/experimentdb/strain/{{object.id}}/update"><img src="/static/img/icons/Clipboard.png" width=25 title ="Edit Strain" alt="here"></a></p>
+ </div>
+<div = "experiments" class="grid_4">
+{% with object.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
+<div id="comments" class="grid_4">
+<h2>Comments</h2>
+{% load comments %}
+{% get_comment_list for object as comment_list %}
+{% for comment in comment_list %}
+<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
+<p>Posted on: {{comment.submit_date}}</p>
+{% endfor %}
+{% render_comment_form for object %}
+</div>
+{% endblock %}

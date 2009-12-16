@@ -45,6 +45,10 @@ urlpatterns = patterns('',
 	(r'^drugs?/', include('experimentdb.reagents.urls.purified')),
 	(r'^pharmaceuticals?/', include('experimentdb.reagents.urls.purified')),
 	(r'^biopharmaceuticals?/', include('experimentdb.reagents.urls.purified')),
+	
+	(r'^strains?/', include('experimentdb.reagents.urls.strain')),
+	(r'^yeast_?strains?/', include('experimentdb.reagents.urls.strain')),
+	(r'^yeasts?/', include('experimentdb.reagents.urls.strain')),
 
 	(r'^pi35p2bp/$', 'django.views.generic.list_detail.object_list', {
 		"queryset": PI35P2_Binding_Screen_SP.objects.all(),

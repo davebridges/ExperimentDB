@@ -151,6 +151,6 @@ class Strain(ReagentInfo):
 	background = models.ForeignKey('Strain', blank=True, null=True)
 	plasmids = models.ManyToManyField(Construct, blank=True, null=True)
 	selection = models.ForeignKey('Selection', blank=True, null=True)
-	genotype = models.CharField(max_length=200, blank=True)
+	genotype = models.CharField(max_length=200, blank=True, help_text="'D' indicates delta")
 	
 

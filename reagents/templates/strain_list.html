@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
+
+{% endblock scripts %}
+{% block head_title %}Strain List{% endblock %}
+{% block title %}Strain List{% endblock %}
+{% block content %}
+<table class="sortable">
+<thead>
+	<tr>
+	<th>Strain</th>
+	<th>Background</th>
+	<th>Genotype</th>
+	<th>Plasmids</th>
+	<th>Selection</th>
+	</tr>
+</thead>
+{% for strain in object_list %}
+<tbody>
+<tr>
+	<td><a href="/experimentdb/strain/{{ strain.id }}">{{ strain }}</a></td>
+	<td>{{strain.background}}</td>
+	<td>{{strain.genotype}}</td>
+	<td><ul>{% for construct in strain.plasmids_set %}<li><a href="/experimentdb/construct/{{construct.id}}" title="{{construct}}">{{construct}}</a></li>{% endfor %}</ul></td>
+	<td>{{strain.selection}}</td>
+	<td>
+		<a href="/experimentdb/strain/{{strain.id}}/edit"><img src="/static/img/icons/Clipboard.png" width=25 title="Edit Strain" alt="edit"></a>
+		<a href="/experimentdb/strain/{{strain.id}}/delete"><img src="/static/img/icons/Close.png" width=25 title="Delete Strain" alt="delete"></a>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Click <a href="/experimentdb/strain/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new strain</p>
+{% endblock %}
