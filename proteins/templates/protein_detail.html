@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block head_title %}{{ protein }} - Detail {% endblock %}
 {% block title %} {{ protein }} Detail {% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+	$(function() {
+		$("#accordion").accordion({
+			autoHeight: false
+		});
+	});
+	</script>
+{% endblock %}
 {% block content %}
 <h2>{{ protein }}</h2>
 <h3>Protein Families</h3>
@@ -33,14 +42,13 @@
 {% endfor %}
  </tbody>
  </table>
- <p>Add new protein isoform <a href="/experimentdb/protein_isoform/new">here</a>
+ <p>Add new protein isoform <a href="/experimentdb/protein_isoform/new">here</a></p>
 
-{% if antibodies %}
+<div id ="accordion">
+<h3><a href="#">Antibodies ({{ antibodies.count }})</a></h3>
+<div>
 <table>
  <thead>
-  <tr>
-   <th>Antibodies ({{ antibodies.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for antibody in antibodies %}
@@ -50,14 +58,16 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
 
-{% if constructs %}
+
+
+
+
+	<h3><a href="#">Constructs ({{ constructs.count }})</a></h3>
+<div>
 <table>
  <thead>
-  <tr>
-   <th>Constructs ({{ constructs.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for construct in constructs %}
@@ -67,14 +77,16 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
 
-{% if purified_proteins %}
+
+
+
+
+	<h3><a href="#">Purified Proteins ({{ purified_proteins.count }})</a></h3>
+<div>
 <table>
  <thead>
-  <tr>
-   <th>Purified Proteins ({{ purified_proteins.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for protein in purified_proteins %}
@@ -84,14 +96,16 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
 
-{% if primers %}
+
+
+
+
+<h3><a href="#">Primers ({{primers.count}})</a></h3>
+<div>
 <table>
  <thead>
-  <tr>
-   <th>Primers ({{ primers.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for primer in primers %}
@@ -101,14 +115,15 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
 
-{% if protein.strain_set %}
+
+
+
+<h3><a href="#">Strains ({{protein.strain_set.count}})</a></h3>
+<div>
 <table>
  <thead>
-  <tr>
-   <th>Strains ({{ primers.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for strain in protein.strain_set.all %}
@@ -118,17 +133,13 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
 
 
 
-
-{% if experiment_protein %}
+<h3><a href="#">Experiments ({{ experiment_protein.count }})</a></h3>
 <table>
  <thead>
-  <tr>
-   <th>Experiments ({{ experiment_protein.count }})</td>
-  </tr>
  </thead>
  <tbody>
 {% for experiment in experiment_protein %}
@@ -138,7 +149,11 @@
   </tbody>
 {% endfor %}
   </table>
-{% endif %}
+  </div>
+  </div>
+
+
+
 <div id="comments" class="grid_8">
 <h2>Comments</h2>
 {% load comments %}
