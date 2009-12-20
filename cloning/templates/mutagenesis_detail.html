@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head_title %}Antibody Detail - {{ object }}{% endblock %}
+{% block title %}Antibody Detail - {{ object }}{% endblock %}
+{% block content %}
+<table>
+<thead>
+	<tr>
+	<th>Preparation</th>
+	<th>Protein</th>
+	<th>Tag</th>
+	<th>Construct</th>
+	</tr>
+</thead>
+<tbody>
+<tr>
+	<td><a href="/experimentdb/purified/{{ object.name }}">{{ object.name }}</a></td>
+	<td>{%for protein in object.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
+	<td>{{purified.tag}}</td>
+	<td><a href="/experimentdb/construct/{{object.construct.id}}">{{ object.construct}}</td>
+</tr>
+</tbody>
+</table>
+<p>Purification: <a href="/experimentdb/experiment/{{ object.purification.experimentID }}">{{ object.purification }}</a></p>
+<div = "experiments">
+{% with object.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
+{% endblock %}
