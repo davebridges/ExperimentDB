@@ -6,10 +6,17 @@
 {{ object }}
 <table>
  <thead>
+    <tr><th>Protein</th><th>Experiments</th><th>Constructs</th><th>Antibodies</th></tr>
  </thead>
  <tdata>
   {% for protein in object.protein_set.all %}
-  <tr><td><a href="/experimentdb/protein/{{ protein.name }}"> {{ protein }}.</td></tr>
-{% endfor %}
+  <tr>
+   <td><a href="{{ protein.get_absolute.url }}" title="{{ protein }}"> {{ protein }}</td>
+   <td>{{ protein.experiment_set.count }}</td>
+   <td>{{ protein.construct_set.count }}</td>
+   <td>{{ protein.antibody_set.count }}</td>
+  </tr>
+  {% endfor %}
  </tdata>
+</table>
 {% endblock %}
