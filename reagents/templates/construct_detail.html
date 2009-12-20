@@ -46,6 +46,24 @@
 {% if object.sequenced_object %}<li><a href="{{object.sequenced_object.url}}">Assembled Plasmid</a></li>{% endif %}
 {% endif %}
 </div>
+
+<div = "mutagenesis and cloning" class="grid_4">
+<h2>Mutagenesis</h2>
+<table>
+<th>Used as Template</th><th>Generated</th>
+<tr>
+	<td><ul>{% for mutagenesis in object.template.all %}<li><a href="{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
+	<td><ul>{% for mutagenesis in object.mutant.all %}<li><a href="{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
+</tr>
+</table>
+<h2>Cloning</h2>
+<ul>
+{% for cloning in object.cloning_set.all %}
+<li><a href="{{cloning.get_absolute_url}}" title="{{ cloning }}">{{ cloning }}</li>
+{% endfor %}
+</ul>
+</div>
+
 <div = "sharing" class="grid_4">
 {% if object.constructshipment_set.all %}
 <h2>Shipments</h2>

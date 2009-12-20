@@ -17,9 +17,9 @@ class Cloning(models.Model):
     """
 
     date_completed = models.DateField(blank=True, null=True)
-    construct = models.ForeignKey(Construct, help_text="Result of Cloning Project", related_name="final clone")
+    construct = models.ForeignKey(Construct, help_text="Result of Cloning Project", related_name="final_clone")
     cloning_type = models.CharField(max_length=25, choices=CLONING_TYPE)
-    vector = models.ForeignKey(Construct, blank=True, null=True, related_name="recipient vector")
+    vector = models.ForeignKey(Construct, blank=True, null=True, related_name="recipient_vector")
     vector_CIP = models.BooleanField()
     insert = models.CharField(max_length=100, blank=True)
     primer_5prime = models.ForeignKey(Primer, blank=True, related_name='5_Primer', verbose_name="5' PCR Primer")
@@ -39,12 +39,13 @@ class Cloning(models.Model):
     def __unicode__(self):
         return u'%s ' % self.construct
     def get_absolute_url(self):
-        return "/cloning/%i/" % self.id
+        return "experimentdb/clones/cloning/%i/" % self.id
 
 
 	
 
 class Mutagenesis(models.Model):
+    """This model contains data describing the generation of muationns in clones"""
     construct = models.ForeignKey(Construct, related_name="mutant")
     mutation = models.CharField(max_length=25)
     template = models.ForeignKey(Construct, related_name="template")
@@ -62,4 +63,4 @@ class Mutagenesis(models.Model):
     def __unicode__(self):
         return u'%s ' % self.construct
     def get_absolute_url(self):
-        return "/cloning/%i/" % self.id
+        return "experimentdb/clones/mutagenesis/%i/" % self.id
