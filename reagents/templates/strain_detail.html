@@ -8,7 +8,7 @@
  <thead>
  </thead>
  <tdata>
-  <tr><th>Strain</th><td>{{ objectt }}</td></tr>
+  <tr><th>Strain</th><td>{{ object|safe }}</td></tr>
   <tr><th>Protein</th><td><ul>{% for protein in object.protein_set %}<li><a href="/experimentdb/protein/{{protein.id}}" title="{{protein}}">{{protein}}</a></li>{% endfor%}</ul></td>
   <tr><th>Source</th><td>{{ object.source }}</td></tr>
   <tr><th>Location</th><td>{{ object.location }}</td></tr>
@@ -16,7 +16,7 @@
   <tr><th>Researcher</th><td>{% for researcer in object.researcher_set %}{{ researcher }}{% endfor %}</td>
   <tr><th>Background</th><td>{{ object.background }}</td>
   <tr><th>Selection</th><td>{{ object.selection }}</td>
-  <tr><th>Genotype</th><td>{{ object.genotype }}</td>
+  <tr><th>Genotype</th><td>{{ object.genotype|safe }}</td>
   <tr><th>Notes</th><td>{{ object.notes }}</td></tr>
   </tdata>
  </table>

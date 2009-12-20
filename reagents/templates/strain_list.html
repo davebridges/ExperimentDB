@@ -27,9 +27,9 @@
 {% for strain in object_list %}
 <tbody>
 <tr>
-	<td><a href="/experimentdb/strain/{{ strain.id }}">{{ strain }}</a></td>
-	<td>{{strain.background}}</td>
-	<td>{{strain.genotype}}</td>
+	<td><a href="/experimentdb/strain/{{ strain.id }}">{{ strain|safe }}</a></td>
+	<td>{{strain.background|safe}}</td>
+	<td>{{strain.genotype|safe}}</td>
 	<td><ul>{% for construct in strain.plasmids_set %}<li><a href="/experimentdb/construct/{{construct.id}}" title="{{construct}}">{{construct}}</a></li>{% endfor %}</ul></td>
 	<td>{{strain.selection}}</td>
 	<td>

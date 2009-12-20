@@ -130,7 +130,7 @@
  <tbody>
 {% for strain in protein.strain_set.all %}
    <tr>
-   <td><a href="{{strain.get_absolute_url}}" title="strain">{{ strain }}</a></td>
+   <td><a href="{{strain.get_absolute_url}}" title="strain">{{ strain|safe }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
