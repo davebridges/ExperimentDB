@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
-{% block head_title %}Purified Protein{% endblock %}
-{% block title %}Purified Protein{% endblock %}
+{% block head_title %}Mutagenesis{% endblock %}
+{% block title %}Mutagenesis{% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+	 $(document).ready(function() {	
+		$('#id_date_completed').datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	</script>
+{% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/purified/new/">
+<form method="POST" action="/experimentdb/cloning/mutagenesis/new/">
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>
