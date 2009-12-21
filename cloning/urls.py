@@ -15,6 +15,12 @@ urlpatterns = patterns('',
 		'login_required':True ,
 		'post_save_redirect':"/experimentdb/cloning/mutagenesis"
 		}),
+	(r'^mutagenesis/(?P<object_id>[\d]+)/edit/$', 'django.views.generic.create_update.update_object', {
+		'model': Mutagenesis, 
+		'template_name': 'mutagenesis_form.html', 
+		'login_required':True ,
+		'post_save_redirect':"/experimentdb/cloning/mutagenesis"
+		}),
 	(r'^mutagenesis/$', 'django.views.generic.list_detail.object_list', {
 		"queryset": Mutagenesis.objects.all(), 
 		'template_name': 'mutagenesis_list.html',

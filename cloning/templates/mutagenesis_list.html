@@ -15,14 +15,14 @@
 {% for mutagenesis in object_list %}
 <tbody>
 <tr>
-	<td><a href="{{mutagenesis.construct.get_absolute_url}}">{{ mutagenesis.construct }}</a></td>
+	<td><a href="/{{mutagenesis.construct.get_absolute_url}}">{{ mutagenesis.construct }}</a></td>
 	<td>{{mutagenesis.mutation}}</td>
-	<td><a href="{{mutagenesis.template.get_absolute_url}}">{{ mutagenesis.template }}</a></td>
+	<td><a href="/{{mutagenesis.template.get_absolute_url}}">{{ mutagenesis.template }}</a></td>
 	<td>{{ mutagenesis.date_completed }}</td>
-	<td><a href="{{mutagenesis.get_absolute_url}}"><img src="/static/img/icons/Zoom.png" width=25 title="{{mutagenesis}} Mutagenesis Detail" alt="here">
+	<td><a href="/{{mutagenesis.get_absolute_url}}"><img src="/static/img/icons/Zoom.png" width=25 title="{{mutagenesis}} Mutagenesis Detail" alt="here">
 </tr>
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="experimentdb/clones/mutagenesis/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new mutagenesis.</p>
+<p>Click <a href="/experimentdb/clones/mutagenesis/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new mutagenesis.</p>
 {% endblock %}
