@@ -35,15 +35,15 @@
 	<tr>
 		<td>{{sequencing.date}}</td>
 		<td>{{sequencing.primer}}</td>
-		<td><a href="{{sequencing.file.url}}">Chromatogram</a></td>
+		<td><a href="/{{sequencing.file.url}}">Chromatogram</a></td>
 		<td>{{sequencing.notes}}</td>
 	</tr>
 {% endfor %}
 	</tdata>
 </table>
 <ul>
-{% if object.sequencing_contig %}<li><a href="{{object.sequencing_contig.url}}">Assembled Sequence File</a></li>{% endif %}
-{% if object.sequenced_object %}<li><a href="{{object.sequenced_object.url}}">Assembled Plasmid</a></li>{% endif %}
+{% if object.sequencing_contig %}<li><a href="/{{object.sequencing_contig.url}}">Assembled Sequence File</a></li>{% endif %}
+{% if object.sequenced_object %}<li><a href="/{{object.sequenced_object.url}}">Assembled Plasmid</a></li>{% endif %}
 {% endif %}
 </div>
 
@@ -52,14 +52,14 @@
 <table>
 <th>Used as Template</th><th>Generated</th>
 <tr>
-	<td><ul>{% for mutagenesis in object.template.all %}<li><a href="{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
-	<td><ul>{% for mutagenesis in object.mutant.all %}<li><a href="{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
+	<td><ul>{% for mutagenesis in object.template.all %}<li><a href="/{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
+	<td><ul>{% for mutagenesis in object.mutant.all %}<li><a href="/{{mutagenesis.get_absolute_url}}" title="{{ mutagenesis }}">{{ mutagenesis }}</li>{% endfor%}</ul></td>
 </tr>
 </table>
 <h2>Cloning</h2>
 <ul>
 {% for cloning in object.cloning_set.all %}
-<li><a href="{{cloning.get_absolute_url}}" title="{{ cloning }}">{{ cloning }}</li>
+<li><a href="/{{cloning.get_absolute_url}}" title="{{ cloning }}">{{ cloning }}</li>
 {% endfor %}
 </ul>
 </div>
