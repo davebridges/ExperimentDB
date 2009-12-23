@@ -17,4 +17,14 @@ urlpatterns = patterns('',
 		'login_required':True ,
 		'post_save_redirect': '/primer/'
 		}),
+	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		'model': Primer, 
+		'template_name': 'primer_form.html',
+		'login_required':True 
+		,}),
+	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		'model': Primer, 
+		'login_required':True,
+		'post_delete_redirect': '/experimentdb/primer'
+		,}),
 )

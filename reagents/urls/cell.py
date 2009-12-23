@@ -16,4 +16,14 @@ urlpatterns = patterns('',
 		'template_name': 'cell_form.html', 
 		'login_required':True 
 		}),
+	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		'model': Cell, 
+		'template_name': 'cell_form.html',
+		'login_required':True 
+		,}),
+	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		'model': Cell, 
+		'login_required':True,
+		'post_delete_redirect': '/experimentdb/cell'
+		,}),
 )

@@ -16,4 +16,14 @@ urlpatterns = patterns('',
 		'template_name': 'antibody_form.html', 
 		'login_required':True 
 		}),
+	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		'model': Antibody, 
+		'template_name': 'antibody_form.html',
+		'login_required':True 
+		,}),
+	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		'model': Antibody, 
+		'login_required':True,
+		'post_delete_redirect': '/experimentdb/antibody'
+		,}),
 )
