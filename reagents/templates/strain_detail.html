@@ -9,7 +9,7 @@
  </thead>
  <tdata>
   <tr><th>Strain</th><td>{{ object|safe }}</td></tr>
-  <tr><th>Protein</th><td><ul>{% for protein in object.protein_set %}<li><a href="/experimentdb/protein/{{protein.id}}" title="{{protein}}">{{protein}}</a></li>{% endfor%}</ul></td>
+  <tr><th>Protein</th><td><ul>{% for protein in object.protein.all %}<li><a href="/{{protein.get_absolute_url}}" title="{{protein}}">{{protein}}</a></li>{% endfor%}</ul></td>
   <tr><th>Source</th><td>{{ object.source }}</td></tr>
   <tr><th>Location</th><td>{{ object.location }}</td></tr>
   <tr><th>Box</th><td>{{ object.box }}</td></tr>

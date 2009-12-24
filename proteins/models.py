@@ -16,7 +16,7 @@ class Protein(models.Model):
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "experimentdb/protein/%i/" % self.id
+		return "experimentdb/protein/%s/" % self.name
 	class Meta:
 		ordering = ['name']
 		verbose_name_plural = "Proteins"

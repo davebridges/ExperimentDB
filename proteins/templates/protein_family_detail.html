@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 
-{% block head_title %}Protein List{% endblock %}
-{% block title %}Protein List{% endblock %}
+{% block head_title %}Protein List - {{object}}{% endblock %}
+{% block title %}Protein List - {{object}}{% endblock %}
 {% block content %}
-{{ object }}
+<h1>{{ object }}</h1>
 <table>
  <thead>
-    <tr><th>Protein</th><th>Experiments</th><th>Constructs</th><th>Antibodies</th></tr>
+    <tr><th>Protein</th><th>Experiments</th><th>Constructs</th><th>Antibodies</th><th>Primers</th><th>Strains</th></tr>
  </thead>
  <tdata>
   {% for protein in object.protein_set.all %}
   <tr>
-   <td><a href="{{ protein.get_absolute.url }}" title="{{ protein }}"> {{ protein }}</td>
+   <td><a href="/{{ protein.get_absolute_url }}" title="{{ protein }}"> {{ protein }}</a></td>
    <td>{{ protein.experiment_set.count }}</td>
    <td>{{ protein.construct_set.count }}</td>
    <td>{{ protein.antibody_set.count }}</td>
+   <td>{{ protein.primer_set.count }}</td>
+   <td>{{ protein.strain_set.count }}</td>
   </tr>
   {% endfor %}
  </tdata>
