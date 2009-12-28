@@ -108,14 +108,14 @@ class Purified_Protein(ReagentInfo):
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/purfiedprotein/%s/" % self.name_slug
+		return "/experimentdb/purfiedprotein/%s/" % self.name_slug
 
 class Chemical(ReagentInfo):
 	contact = models.ManyToManyField(Contact, blank=True, related_name='chemical researcher')
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/project/%i/" % self.name
+		return "/experimentdb/chemical/%i/" % self.name
 	
 class Cell(ReagentInfo):
 	description = models.CharField(max_length=50, blank=True)
@@ -126,17 +126,19 @@ class Cell(ReagentInfo):
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/project/%i/" % self.name
+		return "/experimentdb/cell-line/%i/" % self.name
 
 class Primer(ReagentInfo):
 	date_ordered = models.DateField(blank=True)
 	primer_type = models.CharField(max_length=20, choices=PRIMER_TYPE)
 	protein = models.ForeignKey(Protein, blank=True)
 	sequence = models.CharField(max_length=100, blank=True)
+	class Meta:
+		ordering = ['primer_type']
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/primer/%i/" % self.id
+		return "/experimentdb/primer/%i/" % self.id
 		
 class Selection(models.Model):
 	'''model for selection of transformants'''

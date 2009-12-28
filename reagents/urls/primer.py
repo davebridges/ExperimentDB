@@ -15,7 +15,6 @@ urlpatterns = patterns('',
 		'model': Primer, 
 		'template_name': 'primer_form.html', 
 		'login_required':True ,
-		'post_save_redirect': '/primer/'
 		}),
 	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
 		'model': Primer, 

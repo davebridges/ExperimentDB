@@ -21,6 +21,11 @@ urlpatterns = patterns('',
 		'template_name': 'construct_form.html',
 		'login_required':True 
 		,}),
+	(r'^(?P<object_id>[\d]+)/update$', 'django.views.generic.create_update.update_object', {
+		'model': Construct, 
+		'template_name': 'construct_form.html',
+		'login_required':True 
+		,}),		
 	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
 		'model': Construct, 
 		'login_required':True,

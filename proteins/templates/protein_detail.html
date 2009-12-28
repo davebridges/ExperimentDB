@@ -108,11 +108,16 @@
 <div>
 <table>
  <thead>
+  <th>Primer</th>
+  <th>Type</th>
+  <th>Sequence</th>
  </thead>
  <tbody>
 {% for primer in primers %}
    <tr>
-   <td><a href="/experimentdb/primer/{{primer.id}}">{{ primer }}</a></td>
+   <td><a href="{{primer.get_absolute_url}}">{{ primer }}</a></td>
+   <td>{{ primer.primer_type }}
+   <td>{{ primer.sequence }}
    </tr>
   </tbody>
 {% endfor %}
