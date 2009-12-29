@@ -12,7 +12,7 @@ class Project(models.Model):
 	def __unicode__(self):
 		return u'%s ' % self.project
 	def get_absolute_url(self):
-		return "/project/%s" % self.project_slug
+		return "/experimentdb/project/%s" % self.project_slug
 
 class SubProject(models.Model):
 	project = models.ForeignKey(Project)
@@ -28,4 +28,4 @@ class SubProject(models.Model):
 	def __unicode__(self):
 		return u'%s ' % self.subproject
 	def get_absolute_url(self):
-		return "/subproject/%s/" % self.subproject_slug
+		return "/experimentdb/subproject/%s/" % self.project_slug

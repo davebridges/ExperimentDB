@@ -31,17 +31,7 @@ def experiment(request, experimentID):
 	The view will show the experiment, and all associated reagents, proteins, projects and results associated with this object.
 	"""
 	experiment = get_object_or_404(Experiment, pk=experimentID)
-	exp_ID = experiment.experimentID
-	exp_result=Result.objects.filter(experiment__experimentID=exp_ID)
-	exp_protocol=Protocol.objects.filter(experiment__experimentID=exp_ID)
-	exp_researcher=Contact.objects.filter(experiment__experimentID=exp_ID)
-	exp_chemical=Chemical.objects.filter(experiment__experimentID=exp_ID)
-	exp_antibody=Antibody.objects.filter(experiment__experimentID=exp_ID)
-	exp_cell=Cell.objects.filter(experiment__experimentID=exp_ID)
-	exp_protein=Protein.objects.filter(experiment__experimentID=exp_ID)
-	exp_project=Project.objects.filter(experiment__experimentID=exp_ID)
-	exp_subproject=SubProject.objects.filter(experiment__experimentID=exp_ID)
-	return render_to_response('experiment.html', {'experiment':experiment, 'exp_result':exp_result, 'exp_protocol':exp_protocol, 'exp_researcher':exp_researcher, 'exp_chemical':exp_chemical, 'exp_cell': exp_cell,  'exp_project': exp_project, 'exp_protein': exp_protein, 'exp_subproject':exp_subproject}, context_instance=RequestContext(request))
+	return render_to_response('experiment.html', {'experiment':experiment}, context_instance=RequestContext(request))
 
 @login_required
 def protocol_list(request):

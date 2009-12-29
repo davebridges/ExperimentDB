@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block head_title %}Experiment Summary{% endblock %}
-{% block title %}Experiment Summary{% endblock %}
+{% block head_title %}Experiment Summary - {{experiment}}{% endblock %}
+{% block title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block scripts %}
 <script type="text/javascript">
 	$(function() {
@@ -9,10 +9,8 @@
 		});
 	});
 	</script>
-
-
-
 {% endblock %}
+
 {% block content %}
 <div class id="accordion">
 	<h3><a href="#">General</a></h3>
@@ -31,88 +29,95 @@
 
 	<h3><a href="#">Projects</a></h3>
 	<div id="Projects">
-	{% if exp_project %}
 	<h3>Projects:</h3>
 	<ul>
-	{% for exp_project in exp_project %}
-	<li><a href="/experimentdb/project/{{exp_project.project_slug}}">{{exp_project.project}}</a></li>
+	{% for project in experiment.project.all %}
+	<li><a href="{{ project.get_absolute_url }}">{{project}}</a></li>
 	{% endfor %}
 	</ul>
-	{% endif %}
-	{% if exp_subproject %}
+	
+	
 	<ul>
 	<h3>Subprojects</h3>
-	{% for exp_subproject in exp_subproject %}
-	<li><a href="/experimentdb/subproject/{{exp_subproject.project_slug}}">{{exp_subproject.subproject}}</a></li>
+	<ul>
+	{% for subproject in experiment.subproject.all %}
+	<li><a href="{{ subproject.get_absolute_url }}">{{subproject}}</a></li>
 	{% endfor %}
 	</ul>
-	{% endif %}
 	</div>
-
+	
 	<h3><a href="#">Researchers</a></h3>	
 	<div id="Researchers">
-	{% if exp_researcher %}
 	<ul>
 	<h3>Researcher: </h3>
-	{% for exp_researcher in exp_researcher %}
-	<li>{{exp_researcher}}</li>
+	{% for researcher in experiment.researcher.all %}
+	<li>{{researcher}}</li>
 	{% endfor %}
 	</ul>
-	{% endif %}
 	</div>
-
-	{% if exp_protein %}
+	
 	<h3><a href="#">Proteins</a></h3>
 	<div id="Proteins">
-	<h3>Proteins:</h3> <ul>{% for exp_protein in exp_protein %}<li><a href="/experimentdb/protein/{{exp_protein.name}}">	{{exp_protein.name}}</a></li>{% endfor %}</ul>
+	<h3>Proteins:</h3> 
+	 <ul>{% for protein in experiment.protein.all %}<li><a href="/{{protein.get_absolute_url}}">{{protein}}</a></li>{% endfor %}</ul>
 	</div>
-	{% endif %}
 
 	<h3><a href="#">Results and Conclusions</a></h3>
 	<div id="conclusions">
-	{% for exp_result in exp_result %}
+	{% for result in experiment.result_set.all %}
 	<h4>Conclusions</h4>
-	<p>{{ exp_result.conclusions }}</p>
+	<p>{{ result.conclusions }}</p>
 	{% endfor %}
 	<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a></p>
 	<h4>Results</h4>
-	{% for exp_result in exp_result %}
-	{% if exp_result.result_figure1 %}<a href="{{exp_result.result_figure1.url}}"><img class="figure" src="{{exp_result.result_figure1.url}}" width=400 /></a>{% endif %}
-	{% if exp_result.result_figure2 %}<a href="{{exp_result.result_figure2.url}}"><img class="figure" src="{{exp_result.result_figure2.url}}" width=400 /></a>{% endif %}
+	{% for result in experiment.result_set.all %}
+	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}"><img class="figure" src="{{result.result_figure1.url}}" width=400 /></a>{% endif %}
+	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}"><img class="figure" src="{{result.result_figure2.url}}" width=400 /></a>{% endif %}
 	{% endfor %}
 	</div>
 
 	<h3><a href="#">Reagents</a></h3>
 	<div id="reagents">
-	{% if exp_chemicals %}
-	<h4>Chemicals:</h4> <ul>{% for exp_chemical in exp_chemical %}<li><a href="/experimentdb/chemical/{{exp_chemical.chemical}}">{{exp_chemical.chemical}}</a></li>{% endfor %}</ul>
-	{% endif %}
-	{% if exp_construct %}
+	<h4>Chemicals:</h4> 
+		<ul>{% for chemical in experiment.chemicals.all %}
+			<li><a href="/{{chemical.get_absolute_url}}">{{chemical}}</a></li>{% endfor %}
+		</ul>
+
+	<h4>Cell Lines:</h4> 
+		<ul>{% for cell in experiment.cellline.all %}
+			<li><a href="{{cell.get_absolute_url}}">{{cell}}</a></li>{% endfor %}
+		</ul>
+		
 	<h4>Constructs:</h4> 
-		<ul>{% for exp_construct in exp_construct %}
-			<li><a href="/experimentdb/construct/{{exp_construct.name}}">{{exp_construct.name}}</a></li>
-		{% endfor %}</ul>
-		{% endif %}
-	{% if exp_antibody %}
+		<ul>{% for construct in experiment.constructs.all %}
+			<li><a href="{{construct.get_absolute_url}}">{{construct}}</a></li>{% endfor %}
+		</ul>
+
 	<h4>Antibodies:</h4>
-		<ul>{% for exp_antibody in exp_antibody %}
-		<li><a href="/experimentdb/antibody/{{exp_antibody.name}}">{{exp_antibody.name}}</a></li>
-		{% endfor %}</ul>
-	{% endif %}
+		<ul>{% for antibody in experiment.antibodies.all %}
+		<li><a href="/{{antibody.get_absolute_url}}">{{antibody}}</a></li>{% endfor %}</ul>
+		
+	<h4>Primers:</h4>
+		<ul>{% for primer in experiment.siRNA.all %}
+		<li><a href="/{{primer.get_absolute_url}}">{{primer}}</a></li>{% endfor %}</ul>
+		
+	<h4>Strains:</h4>
+		<ul>{% for strain in experiment.strain.all %}
+		<li><a href="/{{strain.get_absolute_url}}">{{strain}}</a></li>{% endfor %}</ul>
 	</div>
 
 	<h3><a href="#">Raw Data Files</a></h3>
 	<div id="files">
-	{% for exp_result in exp_result %}
+	{% for result in experiment.result_set.all %}
 	<ul>
-	{% if exp_result.file1 %}<li><a href="{{exp_result.file1.url}}">{{exp_result.file1}}</a></li>{% endif %}
-	{% if exp_result.file2 %}<li><a href="{{exp_result.file2.url}}">{{exp_result.file2}}</a></li>{% endif %}
-	{% if exp_result.file3 %}<li><a href="{{exp_result.file3.url}}">{{exp_result.file3}}</a></li>{% endif %}
-	{% if exp_result.rawscan1 %}<li><a href="{{exp_result.rawscan1.url}}">{{exp_result.rawscan1}}</a></li>{% endif %}
-	{% if exp_result.rawscan2 %}<li><a href="{{exp_result.rawscan2.url}}">{{exp_result.rawscan2}}</a></li>{% endif %}
-	{% if exp_result.rawscan3 %}<li><a href="{{exp_result.rawscan3.url}}">{{exp_result.rawscan3}}</a></li>{% endif %}
-	{% if exp_result.rawscan4 %}<li><a href="{{exp_result.rawscan4.url}}">{{exp_result.rawscan4}}</a></li>{% endif %}
-	{% if exp_result.rawscan5 %}<li><a href="{{exp_result.rawscan5.url}}">{{exp_result.rawscan5}}</a></li>{% endif %}
+	{% if result.file1 %}<li><a href="{{result.file1.url}}">{{result.file1}}</a></li>{% endif %}
+	{% if result.file2 %}<li><a href="{{result.file2.url}}">{{result.file2}}</a></li>{% endif %}
+	{% if result.file3 %}<li><a href="{{result.file3.url}}">{{result.file3}}</a></li>{% endif %}
+	{% if result.rawscan1 %}<li><a href="{{result.rawscan1.url}}">{{result.rawscan1}}</a></li>{% endif %}
+	{% if result.rawscan2 %}<li><a href="{{result.rawscan2.url}}">{{result.rawscan2}}</a></li>{% endif %}
+	{% if result.rawscan3 %}<li><a href="{{result.rawscan3.url}}">{{result.rawscan3}}</a></li>{% endif %}
+	{% if result.rawscan4 %}<li><a href="{{result.rawscan4.url}}">{{result.rawscan4}}</a></li>{% endif %}
+	{% if result.rawscan5 %}<li><a href="{{result.rawscan5.url}}">{{result.rawscan5}}</a></li>{% endif %}
 	{% endfor %}
 	</ul>
 	</div>
