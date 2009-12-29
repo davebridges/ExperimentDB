@@ -29,13 +29,12 @@
 
 <div id = "identification" class = "grid_3">
         {% if user.is_authenticated %}
-                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }} <span property="foaf:surname">{{ user.last_name }}</span><br>
+                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }} </span><span property="foaf:surname">{{ user.last_name }}</span><br />
 		<a class="fg-button ui-state-default ui-corner-all" href="/experimentdb/accounts/login/">Change User</a></p>
         {% else %}
                 <p>Welcome, please <a class="fg-button ui-state-default ui-corner-all"  href="/experimentdb/accounts/login/">log in.</a></p>
         {% endif %}
 </div>
-<nav>
 <div id = "menu" class = "grid_9">
 	<ul>
 	<li><a href="/experimentdb/project" target="_self">Projects</a></li>
@@ -47,17 +46,13 @@
 	<li><a href="/experimentdb/search" target="_self">Search</a></li>
 	</ul>
 </div>
-</nav>
-<section>
 <div id ="main" class="grid_12">
 	<h1 property="dc:title">{% block title %}{% endblock %}</h1>
-	<p>{% block content %}{% endblock %}</p>
+	{% block content %}{% endblock %}
 </div>
-</section>
 
 <div class="clear">
 </div>
-<footer>
 <div id="footer_specific" class="grid_12">{% block footer %}{% endblock %}</div>
 <div id="footer_general" class="grid_8">
 	<p>The contents of this site are restricted and requires the written consent of the investigators.  <span about="doap:Project">Source code for <span property="doap:Name">ExperimentDB</span> is freely available under the <a rel="doap:license" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a> from <a rel="doap:homepage" title="ExperimentDB Homepage" href="http://code.google.com/p/experimentdb/">here</a>.  Please report any bugs or suggestions <a rel="doap:bug-database" href="http://code.google.com/p/experimentdb/issues/list" title="Issues Database">here</a>.  For instructions please see the <a rel="doap:wiki" href="http://code.google.com/p/experimentdb/w/list">project wiki</a>.</span></p>
@@ -72,7 +67,6 @@
 	</a>
 </div>
 </div>
-</footer>
 </body>
 
 </html>

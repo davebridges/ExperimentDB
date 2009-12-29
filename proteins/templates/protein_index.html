@@ -24,7 +24,7 @@
  <tbody>
    {% for protein in protein_list %}
 	<tr>
-		<td><a href="/{{ protein.get_absolute_url }}"> {{ protein }}</td>
+		<td><a href="/{{ protein.get_absolute_url }}"> {{ protein }}</a></td>
 		<td>{% for family in protein.protein_family.all %}<a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a> {% endfor %}</td>
 	</tr>
 {% endfor %}

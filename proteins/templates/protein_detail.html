@@ -32,11 +32,11 @@
  <tr>
   <td>{{ protein_detail }}</td>
   <td>{{ protein_detail.species }}</td>
-  <td><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=gene&Cmd=ShowDetailView&TermToSearch={{ protein_detail.geneID}}&ordinalpos=3&itool=EntrezSystem2.PEntrez.Gene.Gene_ResultsPanel.Gene_RVDocSum", title = "NCBI Gene Record for {{protein_detail.gene}}", target="_blank">{{ protein_detail.gene }}</a></td>
-  <td><a href="http://www.ncbi.nlm.nih.gov/protein/{{ protein_detail.RefSeqProtein_gi}}", title ="NCBI Protein Record for {{protein_detail.RefSeqProtein}}", target="_blank">{{ protein_detail.RefSeqProtein }}</a></td>
-  <td><a href="http://www.ncbi.nlm.nih.gov/nuccore/{{ protein_detail.RefSeqNucleotide_gi}}", title ="NCBI Nucleotide Record for {{protein_detail.RefSeqNucleotide}}", target="_blank">{{ protein_detail.RefSeqNucleotide }}</a></td>
-  {% ifequal protein_detail.species.scientific_name "Drosophila melanogaster" %}<td><a href="http://flybase.org/reports/{{ protein_detail.FlyBaseID }}.html", title="FlyBase Record for {{ protein_detail.FlyBaseID }}", target="_blank"><img src="http://www.fly-ted.org/images/fly_logo.png", height="25px"></a></td>{% endifequal %}
-  {% ifequal protein_detail.species.scientific_name "Caenorhabditis elegans" %}<td><a href="http://www.wormbase.org/db/gene/gene?class=CDS;name={{ protein_detail.WormBaseID }}.html", title="WormBase Record for {{ protein_detail.WormBaseID }}", target="_blank"><img src="http://www.its.caltech.edu/~wormbase/logo.jpg", height="25px"</a></td>{% endifequal %}
+  <td><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?Db=gene&Cmd=ShowDetailView&TermToSearch={{ protein_detail.geneID}}&ordinalpos=3&itool=EntrezSystem2.PEntrez.Gene.Gene_ResultsPanel.Gene_RVDocSum" title = "NCBI Gene Record for {{protein_detail.gene}}", target="_blank">{{ protein_detail.gene }}</a></td>
+  <td><a href="http://www.ncbi.nlm.nih.gov/protein/{{ protein_detail.RefSeqProtein_gi}}", title ="NCBI Protein Record for {{protein_detail.RefSeqProtein}}" target="_blank">{{ protein_detail.RefSeqProtein }}</a></td>
+  <td><a href="http://www.ncbi.nlm.nih.gov/nuccore/{{ protein_detail.RefSeqNucleotide_gi}}", title ="NCBI Nucleotide Record for {{protein_detail.RefSeqNucleotide}}" target="_blank">{{ protein_detail.RefSeqNucleotide }}</a></td>
+  {% ifequal protein_detail.species.scientific_name "Drosophila melanogaster" %}<td><a href="http://flybase.org/reports/{{ protein_detail.FlyBaseID }}.html" title="FlyBase Record for {{ protein_detail.FlyBaseID }}", target="_blank"><img src="http://www.fly-ted.org/images/fly_logo.png", height="25px"></a></td>{% endifequal %}
+  {% ifequal protein_detail.species.scientific_name "Caenorhabditis elegans" %}<td><a href="http://www.wormbase.org/db/gene/gene?class=CDS;name={{ protein_detail.WormBaseID }}.html" title="WormBase Record for {{ protein_detail.WormBaseID }}", target="_blank"><img src="http://www.its.caltech.edu/~wormbase/logo.jpg", height="25px"</a></td>{% endifequal %}
   {% ifequal protein_detail.species.scientific_name "Saccharomyces cerevisiae" %}<td><a href="/experimentdb/sgd/{{protein_detail.gene}}">{{protein_detail.gene}}</a></td><td><a href="http://www.yeastgenome.org/cgi-bin/locus.fpl?locus={{ protein_detail.SGD_ID }}", title="SGD Record for {{ protein_detail.SGD_ID }}", target="_blank"><img src="http://www.pebc.cat/Bioinformatic/SGD_logo.png", height="25px"</a></td>{% endifequal %}
   </tr>
 {% endfor %}
@@ -145,6 +145,7 @@
 
 {% if experiment_protein %}
 <h3><a href="#">Experiments ({{ experiment_protein.count }})</a></h3>
+<div>
 <table>
  <thead>
  </thead>
@@ -158,16 +159,28 @@
   </table>
   </div>
 {% endif %}
-  </div>
 
-<div id="comments" class="grid_8">
-<h2>Comments</h2>
-{% load comments %}
-{% get_comment_list for protein as comment_list %}
-{% for comment in comment_list %}
-<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
-<p>Posted on: {{comment.submit_date}}</p>
-{% endfor %}
-{% render_comment_form for protein %}
+
+	<h3><a href="#">Comments</a></h3>
+	<div>
+	{% load comments %}
+	{% get_comment_list for protein as comment_list %}
+	<ul>
+	{% for comment in comment_list %}
+	<li><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}.  ({{comment.submit_date}}).</li>
+	{% endfor %}
+	</ul>
+{% get_comment_form for protein as form %}
+    <form action="{% comment_form_target %}" method="POST"> 
+{{ form.comment }} 
+{{ form.content_type }} 
+{{ form.object_pk }} 
+{{ form.timestamp }} 
+{{ form.security_hash }} 
+<br>
+<input type="hidden" name="next" value="{{protein.get_absolute_url" />
+<input type="submit" value="Add comment" id="id_submit" />
+</form> 
 </div>
+  </div>
 {% endblock %}
