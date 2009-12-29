@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block head_title %}Purified Protein{% endblock %}
-{% block title %}Purified Protein{% endblock %}
+{% block head_title %}{% if object %}Update Purified Protein {{object}}{% else %} New Purified Protein {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Purified Protein {{object}}{% else %} New Purified Protein {% endif %}{% endblock %}
 {% block content %}
 <form method="POST" action=".">
 <table>{{ form }}</table>

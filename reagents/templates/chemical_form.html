@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block head_title %}Chemical{% endblock %}
-{% block title %}Chemical{% endblock %}
+{% block head_title %}{% if object %}Update Chemical {{object}}{% else %} New Chemical {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Chemical {{object}}{% else %} New Chemical {% endif %}{% endblock %}
 {% block content %}
 <form enctype="multipart/form-data" method="POST" action="." >
 <table>{{ form }}</table>

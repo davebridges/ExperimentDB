@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block head_title %}Primer{% endblock %}
-{% block title %}Primer{% endblock %}
+{% block head_title %}{% if object %}Update Primer {{object}}{% else %} New Primer {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Primer {{object}}{% else %} New Primer {% endif %}{% endblock %}
 {% block content %}
 <form method="POST" action=".">
 <table>{{ form }}</table>

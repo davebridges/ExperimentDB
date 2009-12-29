@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block head_title %}Strain{% endblock %}
-{% block title %}Strain{% endblock %}
+{% block head_title %}{% if object %}Update Yeast Strain {{object}}{% else %} New Yeast Strain {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Yeast Strain {{object}}{% else %} New Yeast Strain {% endif %}{% endblock %}
 {% block content %}
 <form method="POST" action=".">
 <table>{{ form }}</table>
