@@ -160,27 +160,8 @@
   </div>
 {% endif %}
 
-
-	<h3><a href="#">Comments</a></h3>
-	<div>
-	{% load comments %}
-	{% get_comment_list for protein as comment_list %}
-	<ul>
-	{% for comment in comment_list %}
-	<li><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}.  ({{comment.submit_date}}).</li>
-	{% endfor %}
-	</ul>
-{% get_comment_form for protein as form %}
-    <form action="{% comment_form_target %}" method="POST"> 
-{{ form.comment }} 
-{{ form.content_type }} 
-{{ form.object_pk }} 
-{{ form.timestamp }} 
-{{ form.security_hash }} 
-<br>
-<input type="hidden" name="next" value="{{protein.get_absolute_url" />
-<input type="submit" value="Add comment" id="id_submit" />
-</form> 
-</div>
+{% with protein as object %}
+{% include "comment.html" %}
+{% endwith %}
   </div>
 {% endblock %}

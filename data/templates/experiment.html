@@ -117,29 +117,8 @@
 	</ul>
 	</div>
 
-	<h3><a href="#">Comments</a></h3>
-	<div id="comments">
-	{% load comments %}
-	{% get_comment_list for experiment as comment_list %}
-	<ul>
-	{% for comment in comment_list %}
-	<li><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}.  ({{comment.submit_date}}).</li>
-	{% endfor %}
-	</ul>
-
-<h4>Leave a comment</h4>
-{% get_comment_form for experiment as form %}
-    <form action="{% comment_form_target %}" method="POST"> 
-{{ form.comment }} 
-{{ form.content_type }} 
-{{ form.object_pk }} 
-{{ form.timestamp }} 
-{{ form.security_hash }} 
-<br>
-<input type="hidden" name="next" value="/experimentdb/experiment/{{experiment.experimentID}}" />
-<input type="submit" value="Add comment" id="id_submit" />
-</form> 
-
-</div>
+{% with experiment as object %}
+{% include "comment.html" %}
+{% endwith %}
 </div>
 {% endblock %}

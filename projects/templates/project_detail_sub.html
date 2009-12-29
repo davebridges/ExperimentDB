@@ -2,29 +2,16 @@
 {% block head_title %} {{ subproject }} Project Detail {% endblock %}
 {% block title %} SubProject Detail {% endblock %}
 {% block content %}
-<section>
 <div id="subproject" class="grid_12">
 <h1>{{ subproject.subproject }}</h1>
 <p>{{ subproject.comments }}</p>
 </div>
-</section>
-<section>
 <div id="experiments" class="grid_12">
 {% with subproject.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}
 {% endwith %}
 </div>
-</section>
-<section>
-<div id="comments" class="grid_8">
-<h2>Comments</h2>
-{% load comments %}
-{% get_comment_list for subproject as comment_list %}
-{% for comment in comment_list %}
-<p><strong>{{ comment.user.first_name }} {{comment.user.last_name }}</strong>: {{ comment.comment }}</p>
-<p>Posted on: {{comment.submit_date}}</p>
-{% endfor %}
-{% render_comment_form for subproject %}
-</div>
-</section>
+{% with subproject as object %}
+{% include "comment.html" %}
+{% endwith %}
 {% endblock %}
