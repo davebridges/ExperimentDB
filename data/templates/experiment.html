@@ -2,6 +2,8 @@
 {% block head_title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block scripts %}
+<link rel="stylesheet" href="/static/js/thickbox/thickbox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/js/thickbox/thickbox.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#accordion").accordion({
@@ -71,8 +73,8 @@
 	<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a></p>
 	<h4>Results</h4>
 	{% for result in experiment.result_set.all %}
-	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}"><img class="figure" src="{{result.result_figure1.url}}" width=400 /></a>{% endif %}
-	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}"><img class="figure" src="{{result.result_figure2.url}}" width=400 /></a>{% endif %}
+	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" class="thickbox"><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=400 /></a>{% endif %}
+	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" class="thickbox"><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=400 /></a>{% endif %}
 	{% endfor %}
 	</div>
 
