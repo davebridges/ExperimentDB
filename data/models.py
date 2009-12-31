@@ -1,7 +1,7 @@
 from django.db import models
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell, Purified_Protein, Primer
+from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell, Purified_Protein, Primer, Strain
 from experimentdb.external.models import Reference, Contact, Vendor
 
 class Protocol(models.Model):
@@ -43,6 +43,7 @@ class Experiment(models.Model):
 	chemicals = models.ManyToManyField(Chemical, blank=True)
 	constructs = models.ManyToManyField(Construct, blank=True)
 	siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
+	strain = models.ManyToManyField(Strain, blank=True, null=True)
 	comments = models.TextField(max_length=500, blank=True)
 	researcher = models.ManyToManyField(Contact, blank=True)
 	protein = models.ManyToManyField(Protein, blank=True)

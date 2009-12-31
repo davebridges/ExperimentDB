@@ -21,7 +21,7 @@ class ExperimentAdmin(admin.ModelAdmin):
 		}),
 		('Reagent Information', {
 			'classes' : ('collapse', ),
-			'fields': ('cellline', 'antibodies', 'chemicals', 'constructs', 'siRNA', 'purified_protein')
+			'fields': ('cellline', 'antibodies', 'chemicals', 'constructs', 'siRNA', 'purified_protein', 'strain')
 		}) )
 	inlines = [ResultInline, ]
 	date_hierarchy = 'experiment_date'
