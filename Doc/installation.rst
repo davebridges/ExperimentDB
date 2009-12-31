@@ -17,7 +17,7 @@ Downloading and/or unzipping will create a directory named ExperimentDB.  You ca
 2. **Python**.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from http://www.python.org/download/.
 3. **Django**.  Download from http://www.djangoproject.com/download/
 4. **Database software**.  Typically MySQL is used, but PostgreSQL, Oracle or SQLite can also be used.  You also need to install the python driver for this database (unless you are using SQLite, which is internal to Python 2.5+).  See http://docs.djangoproject.com/en/dev/topics/install/database-installation - Django Database Installation Documentation for more information.
-
+5. **Biopython Packages**.  Download and install according to http://biopython.org/DIST/docs/install/Installation.html
 
 Database Setup
 --------------
