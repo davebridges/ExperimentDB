@@ -15,11 +15,6 @@ a {
 	color: #ffffff;
 }
 
-a:hover {
-	background: #dddddd;
-	color: #000000;	
-}
-
 h1 { 
 	background: #888888 url(/static/css/vader/images/ui-bg_highlight-hard_15_888888_1x100.png) 50% 50% repeat-x;
 	border: 2px solid #404040;
