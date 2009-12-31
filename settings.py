@@ -100,5 +100,4 @@ INSTALLED_APPS = (
 	'experimentdb.datasets',
 	'experimentdb.sharing',
 	'django.contrib.admin',
-	'south',
 )
