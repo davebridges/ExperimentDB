@@ -105,7 +105,7 @@
 		
 	<h4>Strains:</h4>
 		<ul>{% for strain in experiment.strain.all %}
-		<li><a href="/{{strain.get_absolute_url}}">{{strain}}</a></li>{% endfor %}</ul>
+		<li><a href="{{strain.get_absolute_url}}">{{strain|safe}}</a></li>{% endfor %}</ul>
 	</div>
 
 	<h3><a href="#">Raw Data Files</a></h3>

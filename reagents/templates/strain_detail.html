@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block head_title %}Construct Detail - {{ object }}{% endblock %}
-{% block title %}Construct Detail - {{ object }}{% endblock %}
+{% block head_title %}Construct Detail - {{ object|safe }}{% endblock %}
+{% block title %}Construct Detail - {{ object|safe }}{% endblock %}
 {% block content %}
-<div id= "summary" class="grid_4">
+<div id= "summary" class="grid_6 alpha">
 <table>
  <thead>
  </thead>
@@ -22,10 +22,12 @@
  </table>
 <p>To update strain details click <a href="/experimentdb/strain/{{object.id}}/update"><img src="/static/img/icons/Clipboard.png" width=25 title ="Edit Strain" alt="here"></a></p>
  </div>
-<div = "experiments" class="grid_4">
+<div = "experiments" class="grid_6 omega">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}
 {% endwith %}
 </div>
+<div class="grid_12">
 {% include "comment.html" %}
+</div>
 {% endblock %}
