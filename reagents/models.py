@@ -73,7 +73,6 @@ class Construct(models.Model):
 	plasmid = models.CharField(max_length=30, blank=True)
 	protein = models.ManyToManyField(Protein)
 	source = models.CharField(max_length=20, blank=True)
-	resistance = models.CharField(max_length=20, default="Ampicillin")
 	selection = models.ForeignKey('Selection')
 	notes = models.TextField(max_length=250, blank=True)
 	public = models.BooleanField()
@@ -142,10 +141,12 @@ class Primer(ReagentInfo):
 		
 class Selection(models.Model):
 	'''model for selection of transformants'''
-	selection = models.CharField(max_length=20)
+	selection = models.CharField(max_length=50)
 	notes = models.TextField(max_length=250)
 	def __unicode__(self):
 		return u'%s' % self.selection
+	class Meta:
+	    ordering = ['selection']
 		
 	
 class Strain(ReagentInfo):

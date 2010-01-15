@@ -7,9 +7,10 @@ urlpatterns = patterns('',
 		'form_class': ExperimentForm, 
 		'template_name': 'experiment_form.html', 
 		'login_required':True ,
-		'post_save_redirect':"/experimentdb/experiments"
+		'post_save_redirect': 'object.get_absolute_url()'
 		}),
 	(r'^(?P<experimentID>[-\w]+)/$', 'experimentdb.data.views.experiment'),
 	(r'^(?P<experimentID>[-\w]+)/result/new/$', 'experimentdb.data.views.result_new'),
+	(r'^(?P<experimentID>[-\w]+)/edit/$', 'experimentdb.data.views.experiment_edit'),
 	(r'^$', 'experimentdb.data.views.index'),
 )

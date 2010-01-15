@@ -5,12 +5,12 @@ This module will generate index and detail views for experiments and protocols a
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from experimentdb.data.models import Experiment, Result, Protocol
-from experimentdb.data.forms import ResultForm
+from experimentdb.data.forms import ResultForm, ResultFormSet, ExperimentForm
 from experimentdb.proteins.models import Protein
 from experimentdb.reagents.models import Chemical, Antibody, Cell
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.external.models import Reference, Contact
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
@@ -66,7 +66,27 @@ def result_new(request, experimentID):
 			result.experiment_id = experiment.experimentID
 			result.save()
 			form.save()
-			return HttpResponseRedirect("/experimentdb/experiments/")
+			return HttpResponseRedirect( experiment.get_absolute_url() )
 	else:
 		form = ResultForm()
 	return render_to_response('result_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
+	
+@permission_required('data.change_experiment')
+def experiment_edit(request, experimentID):
+    """Renders a form to edit an experiment and associated formsets for experimental results.
+	
+    Takes a request in the form of experiment/(experimentID)/edit and returns the experiment_result_form.html form."""
+    experiment = get_object_or_404(Experiment, pk=experimentID)
+    if request.method == "POST":
+        form = ExperimentForm(request.POST)
+        if form.is_valid():
+            experiment = form.save(commit=False)
+            formset = ResultFormSet(request.POST, instance=experiment)
+            if result_formset.is_valid():
+                experiment.save()
+                result_formset.save()                
+            return HttpResponseRedirect( experiment.get_absolute_url() )
+    else:
+        form = ExperimentForm()
+        formset = ResultFormSet(instance=Experiment())
+    return render_to_response("experiment_result_form.html", {"form": form,"formset": formset,}, context_instance=RequestContext(request))

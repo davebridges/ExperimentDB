@@ -8,6 +8,7 @@ from django import forms
 from experimentdb.data.models import Experiment, Result
 
 from django.contrib.admin import widgets
+from django.forms.models import inlineformset_factory
 
 
 class ExperimentForm(forms.ModelForm):
@@ -20,6 +21,9 @@ class ResultForm(forms.ModelForm):
 	class Meta:
 		model = Result
 		exclude = ['experiment']
+		
+ResultFormSet = inlineformset_factory(Experiment, Result, can_delete=True, extra=5)
+
 
 
 
