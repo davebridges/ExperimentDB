@@ -125,7 +125,7 @@ class Cell(ReagentInfo):
 	def __unicode__(self):
 		return u'%s' % self.name
 	def get_absolute_url(self):
-		return "/experimentdb/cell-line/%i/" % self.name
+		return "/experimentdb/cell-line/%i/" % self.id
 
 class Primer(ReagentInfo):
 	date_ordered = models.DateField(blank=True)
