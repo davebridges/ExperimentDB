@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head_title %}Shipment List{% endblock %}
+{% block title %}Shipment List{% endblock %}
+{% block content %}
+<table>
+<thead>
+	<tr>
+	<th>Recipient Lab</th>
+	<th>Institution</th>
+	<th>Shipped</th>
+	<th>Recieved</th>
+	<th>Items</th>
+	</tr>
+</thead>
+{% for shipment in object_list %}
+<tbody>
+<tr>
+	<td><a href="{{ shipment}} ">{{ shipment }}</a></td>
+	<td>{{ shipment.recipient.lab.institution }}</td>
+	<td>{{ shipment.ship_date }}</td>
+	<td>{{ shipment.recieved_date }}</td>
+	<td><ul>{% for construct in shipment.constructs.all %}<li><a href="{{ construct.get_absolute_url }}">{{ construct }}</a></li>{% endfor %}</ul></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Click <a href="/experimentdb/shipment/new">here</a> for a new shipment</p>
+{% endblock %}

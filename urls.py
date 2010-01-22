@@ -52,6 +52,13 @@ urlpatterns = patterns('',
 	
 	(r'^clones?/', include('experimentdb.cloning.urls')),
 	(r'^clonings?/', include('experimentdb.cloning.urls')),
+	
+	(r'^shipments?/', include('experimentdb.sharing.urls')),
+	(r'^sharings?/', include('experimentdb.sharing.urls')),
+	(r'^sent_items?/', include('experimentdb.sharing.urls')),
+	(r'^shipped_items?/', include('experimentdb.sharing.urls')),
+	(r'^shipped?/', include('experimentdb.sharing.urls')),
+	
 
 	(r'^pi35p2bp/$', 'django.views.generic.list_detail.object_list', {
 		"queryset": PI35P2_Binding_Screen_SP.objects.all(),

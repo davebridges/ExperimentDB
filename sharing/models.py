@@ -43,6 +43,8 @@ class ConstructShipment(models.Model):
 	notes = models.TextField(max_length=500)
 	def __unicode__(self):
 		return u'%s lab (%s)' % (self.recipient.lab, self.recipient.last_name)
+	def get_absolute_url(self):
+		return 'experimentdb/shipment/%i' % self.id
 
 	
 
