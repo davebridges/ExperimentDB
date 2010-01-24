@@ -3,6 +3,7 @@
 {% block head_title %}Antibody List{% endblock %}
 {% block title %}Antibody List{% endblock %}
 {% block content %}
+{% if perms.reagents.add_antibody %}<p>Click <a href="{% url antibody-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new antibody</p>{% endif %}
 <table>
 <thead>
 	<tr>
@@ -17,12 +18,21 @@
 {% for antibody in object_list %}
 <tbody>
 <tr>
-	<td><a href="/experimentdb/antibody/{{ antibody.id }}">{{ antibody }}</a></td>
+	<td><a href="{% url antibody-detail antibody.id %}">{{ antibody }}</a></td>
 	<td>{%for protein in antibody.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
 	<td>{{antibody.protein_size}}</td>
 	<td>{{antibody.source_species}}</td>
 	<td>{{antibody.source}}</td>
 	<td>{{antibody.catalog}}</td>
+	<td>
+<a href="{% url antibody-detail antibody.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+{% if perms.reagents.change_antibody %}
+<a href="{% url antibody-edit antibody.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+{% endif %}
+{% if perms.reagents.delete_antibody %}
+<a href="{% url antibody-delete antibody.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+{% endif %}
+</td>
 </tr>
 {% endfor %}
 </tbody>

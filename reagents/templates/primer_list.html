@@ -15,6 +15,7 @@
 {% block head_title %}Primer List{% endblock %}
 {% block title %}Primer List{% endblock %}
 {% block content %}
+{% if perms.reagents.add_primer %}<p>Click <a href="{% url primer-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new primer</p>{% endif %}
 <table class="sortable">
 <thead>
 <tr>
@@ -29,12 +30,20 @@
 <tbody>
 {% for primer in object_list %}
 <tr>
-	<td><a href="/experimentdb/primer/{{ primer.id }}">{{ primer }}</a></td>
+	<td><a href="{% url primer-detail primer.id %}">{{ primer }}</a></td>
 	<td>{{primer.primer_type}}</td>
 	<td>{{primer.date_ordered}}</td>
 	<td><a href="/experimentdb/protein/{{primer.protein}}">{{primer.protein}}</a></td>
 	<td>{{primer.vendor}}</td>
 	<td>{{primer.sequence}}</td>
+	<td>
+<a href="{% url primer-detail primer.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+{% if perms.reagents.change_primer %}
+<a href="{% url primer-edit primer.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+{% endif %}
+{% if perms.reagents.delete_primer %}
+<a href="{% url primer-delete primer.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+{% endif %}
 </tr>
 {% endfor %}
 </tbody>

@@ -3,6 +3,7 @@
 {% block head_title %}Cell Line List{% endblock %}
 {% block title %}Cell Line List{% endblock %}
 {% block content %}
+{% if perms.reagents.add_cell %}<p>Click <a href="{% url cell-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new cell line</p>{% endif %}
 <table>
 <thead>
 	<tr>
@@ -14,9 +15,18 @@
 {% for cell in object_list %}
 <tbody>
 <tr>
-	<td><a href="/experimentdb/cell/{{ cell.id }}">{{ cell }}</a></td>
+	<td><a href="{% url cell-detail construct.id %}">{{ cell }}</a></td>
 	<td>{{cell.source}}</td>
 	<td>{{cell.notes}}</td>
+	<td>
+<a href="{% url cell-detail construct.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+{% if perms.reagents.change_cell %}
+<a href="{% url cell-edit construct.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+{% endif %}
+{% if perms.reagents.delete_cell %}
+<a href="{% url cell-delete construct.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+{% endif %}
+</td>
 </tr>
 {% endfor %}
 </tbody>
