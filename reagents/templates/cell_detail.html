@@ -13,12 +13,13 @@
 </thead>
 <tbody>
 <tr>
-	<td><a href="/experimentdb/cell/{{ cell.id }}">{{ object }}</a></td>
+	<td>{{ object }}</td>
 	<td>{{object.source}}</td>
 	<td>{{object.notes}}</td>
 </tr>
 </tbody>
 </table>
+{% if perms.reagents.change_cell %}<p>To update cell line details click <a href="{% url cell-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="here"></a></p>{% endif %}
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}

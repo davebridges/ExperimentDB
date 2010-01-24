@@ -14,11 +14,13 @@
 </thead>
 <tbody>
 <tr>
-	<td><a href="/experimentdb/chemical/{{ object.name }}">{{ object }}</a></td>
+	<td>{{ object }}/td>
 	<td>{{object.source}}</td>
 	<td>{{object.vendor}}</td>
 	<td>{{object.notes}}</td>
 </tr>
+</table>
+{% if perms.reagents.change_chemical %}<p>To update chemical details click <a href="{% url chemical-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="here"></a></p>{% endif %}
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}

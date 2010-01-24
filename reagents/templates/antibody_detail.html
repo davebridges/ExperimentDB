@@ -19,6 +19,7 @@
   {% if object.notes %}<tr><th>Notes</th><td>{{ object.notes }}</td></tr>{% endif %}
   </tdata>
   </table>
+{% if perms.reagents.change_antibody %}<p>To update antibody details click <a href="{% url antibody-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
   </div>
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}

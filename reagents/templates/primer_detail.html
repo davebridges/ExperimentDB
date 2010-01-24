@@ -3,7 +3,18 @@
 {% block head_title %}Primer Detail - {{ object }}{% endblock %}
 {% block title %}Primer Detail - {{ object }}{% endblock %}
 {% block content %}
-{{ object }}
+<table>
+<tr><th>Name</th><td>{{ object }}</td></tr>
+<tr><th>Type</th><td>{{ object.primer_type }}</td></tr>
+<tr><th>Location</th><td>{{ object.location }}</td></tr>
+<tr><th>Box</th><td>{{ object.box }}</td></tr>
+<tr><th>Vendor</th><td>{{ object.vendor }}</td></tr>
+<tr><th>Ordered</th><td>{{ object.date_ordered }}</td></tr>
+<tr><th>Sequence</th><td>{{ object.sequence }}</td></tr>
+<tr><th>Notes</th><td>{{ object.notes }}</td></tr>
+</tr>
+</table>
+{% if perms.reagents.change_primer %}<p>To update primer details click <a href="{% url primer-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}

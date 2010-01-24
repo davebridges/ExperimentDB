@@ -14,13 +14,14 @@
 </thead>
 <tbody>
 <tr>
-	<td><a href="/experimentdb/purified/{{ object.name }}">{{ object.name }}</a></td>
+	<td>>{{ object.name }}</td>
 	<td>{%for protein in object.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
 	<td>{{purified.tag}}</td>
 	<td><a href="/experimentdb/construct/{{object.construct.id}}">{{ object.construct}}</td>
 </tr>
 </tbody>
 </table>
+{% if perms.reagents.change_purified_protein %}<p>To update purified protein details click <a href="{% url purified-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
 <p>Purification: <a href="/experimentdb/experiment/{{ object.purification.experimentID }}">{{ object.purification }}</a></p>
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
