@@ -3,11 +3,49 @@
 {% block head_title %}Reagent List{{ object }}{% endblock %}
 {% block title %}Reagent List{% endblock %}
 {% block content %}
-<p><a href="/experimentdb/constructs/">Constructs</a></p>
-<p><a href="/experimentdb/antibody/">Antibodies</a></p>
-<p><a href="/experimentdb/purified/">Purified Protein</a></p>
-<p><a href="/experimentdb/cell/">Cell Lines</a></p>
-<p><a href="/experimentdb/chemical/">Chemicals</a></p>
-<p><a href="/experimentdb/primer/">Primers</a></p>
-<p><a href="/experimentdb/strains/">Yeast Strains</a></p>
+<table>
+<tr><th>Reagent</th><th>Number</th></tr>
+<tr>
+ <th><a href="{% url construct-list %}">Constructs</a></th>
+ <td>{{ constructs.count }}</td>
+ <td><a href="{% url construct-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url construct-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th><a href="{% url antibody-list %}">Antibodies</a></th
+ <td>{{ antibodies.count }}</td>
+ <td><a href="{% url antibody-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url antibody-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th<a href="{% url purified-list %}">Purified Proteins</a></th>
+ <td>{{ proteins.count }}</td>
+ <td><a href="{% url purified-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url purified-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th><a href="{% url cell-list %}">Cell Lines</a></th>
+ <td>{{ cells.count }}</td>
+ <td><a href="{% url cell-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url cell-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th<a href="(% url chemical-list %}">Chemicals</a></th
+ <td>{{ chemicals.count }}</td>
+ <td><a href="{% url chemical-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url chemical-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th><a href="{% url primer-list %}">Primers</a></th>
+ <td>{{ primers.count }}</td>
+ <td><a href="{% url primer-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url primer-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+<tr>
+ <th<a href="{% url strain-list %}">Yeast Strains</a></th>
+ <td>{{ strains.count }}</td>
+ <td><a href="{% url strain-new %}"><img src="/static/img/icons/Add.png" width=25 alt="new"></td>
+ <td><a href="{% url strain-list %}"><img src="/static/img/icons/Zoom.png" width=25 alt="view"></td>
+</tr>
+</table>
 {% endblock %}
