@@ -1,29 +1,52 @@
 from django.conf.urls.defaults import *
+from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.create_update import create_object, update_object, delete_object
+from django.contrib.auth.decorators import login_required, permission_required
 
 from experimentdb.reagents.models import Purified_Protein
 
+@login_required
+def purified_list(*args, **kwargs):
+	return object_list(*args, **kwargs)
+
+@login_required
+def purified_detail(*args, **kwargs):
+	return object_detail(*args, **kwargs)
+
+@permission_required('reagents.add_purified_protein')
+def create_purified(*args, **kwargs):
+	return create_object(*args, **kwargs)
+
+@permission_required('reagents.change_purified_protein')
+def change_purified(*args, **kwargs):
+	return update_object(*args, **kwargs)
+
+@permission_required('reagents.delete_purified_protein')
+def delete_purified(*args, **kwargs):
+	return delete_object(*args, **kwargs)
+
 urlpatterns = patterns('',
-	(r'^$', 'django.views.generic.list_detail.object_list', {
+	(r'^$', purified_list, {
 		"queryset": Purified_Protein.objects.all(), 
 		'template_name': 'purified_list.html',
-		}),
-	(r'^(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		}, name="purified-list"),
+	(r'^(?P<object_id>[\d]+)/$', purified_detail, {
 		"queryset": Purified_Protein.objects.all(), 
 		'template_name': 'purified_detail.html'
-		,}),
-	(r'^new/$', 'django.views.generic.create_update.create_object', {
+		,}, name="purified-detail"),
+	(r'^new/$', create_purified, {
 		'model': Purified_Protein, 
 		'template_name': 'purified_form.html', 
 		'login_required':True 
-		}),
-	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		}, name="purified-new"),
+	(r'^(?P<object_id>[\d]+)/edit$', change_purified, {
 		'model': Purified_Protein, 
 		'template_name': 'purified_form.html',
 		'login_required':True 
-		,}),
-	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		,}, name="purified-new"),
+	(r'^(?P<object_id>[\d]+)/delete$', delete_purified, {
 		'model': Purified_Protein, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/purified'
-		,}),
+		,}, name="purified-delete"),
 )

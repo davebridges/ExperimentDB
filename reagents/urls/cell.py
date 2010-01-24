@@ -1,29 +1,52 @@
 from django.conf.urls.defaults import *
+from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.create_update import create_object, update_object, delete_object
+from django.contrib.auth.decorators import login_required, permission_required
 
 from experimentdb.reagents.models import Cell
 
+@login_required
+def cell_list(*args, **kwargs):
+	return object_list(*args, **kwargs)
+
+@login_required
+def cell_detail(*args, **kwargs):
+	return object_detail(*args, **kwargs)
+
+@permission_required('reagents.add_cell')
+def create_cell(*args, **kwargs):
+	return create_object(*args, **kwargs)
+
+@permission_required('reagents.change_cell')
+def change_cell(*args, **kwargs):
+	return update_object(*args, **kwargs)
+
+@permission_required('reagents.delete_cell')
+def delete_cell(*args, **kwargs):
+	return delete_object(*args, **kwargs)
+
 urlpatterns = patterns('',
-	(r'^$', 'django.views.generic.list_detail.object_list', {
+	(r'^$', cell_list, {
 		"queryset": Cell.objects.all(), 
 		'template_name': 'cell_list.html',
-		}),
-	(r'^(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		}, name="cell-list"),
+	(r'^(?P<object_id>[\d]+)/$', cell_detail, {
 		"queryset": Cell.objects.all(), 
 		'template_name': 'cell_detail.html'
-		,}),
-	(r'^new/$', 'django.views.generic.create_update.create_object', {
+		,}, name="cell-detail"),
+	(r'^new/$', create_cell, {
 		'model': Cell, 
 		'template_name': 'cell_form.html', 
 		'login_required':True 
-		}),
-	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		}, name="cell-new"),
+	(r'^(?P<object_id>[\d]+)/edit$', change_cell, {
 		'model': Cell, 
 		'template_name': 'cell_form.html',
 		'login_required':True 
-		,}),
-	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		,}, name="cell-edit"),
+	(r'^(?P<object_id>[\d]+)/delete$', delete_cell, {
 		'model': Cell, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/cell'
-		,}),
+		,}, name="cell-delete"),
 )
