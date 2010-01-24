@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Construct {{object}}{% else %} New Construct {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Construct {{object}}{% else %} New Construct {% endif %}{% endblock %}
 {% block content %}
-<form method="post" action=".">
+<form method="post" {% if object %} action="/experimentdb/construct/{{object.id}}/update"{% else %} action="{% url construct-new %}"{% endif%}>
 <table>{{ form }}</table>
 <input type="submit" value="Submit"/>
 </form>

@@ -14,13 +14,16 @@
 {% block head_title %}Construct List{% endblock %}
 {% block title %}Construct List{% endblock %}
 {% block content %}
+{% if perms.reagents.add_construct %}<p>Click <a href="{% url construct-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new construct</p>{% endif %}
 <table class="sortable">
 	<thead>
 		<tr>
 			<th>Construct</th>
 			<th>Protein</th>
 			<th>Plasmid</th>
-			<th>Resistance</th>
+			<th>Selection</th>
+			<th>Location</th>
+			<th>Box</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -29,10 +32,20 @@
 			<td><a href="/experimentdb/construct/{{ construct.id }}">{{ construct }}</a></td>
 			<td>{% for protein in construct.protein.all %}<a href="/experimentdb/protein/{{protein}}">{{protein}}</a> {% endfor %}</td>
 			<td>{{construct.plasmid}}</td>
-			<td>{{construct.resistance}}</td>
+			<td>{{construct.selection}}</td>
+			<td>{{construct.location}}</td>
+			<td>{{construct.box}}</td>
+			<td>
+<a href="{% url construct-detail construct.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+{% if perms.reagents.change_construct %}
+<a href="{% url construct-edit construct.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+{% endif %}
+{% if perms.reagents.delete_construct %}
+<a href="{% url construct-delete construct.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+{% endif %}
+			</td>
 		</tr>
 {% endfor %}
 	</tbody>
 </table>
-<p>Click <a href="/experimentdb/construct/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new construct</p>
 {% endblock %}

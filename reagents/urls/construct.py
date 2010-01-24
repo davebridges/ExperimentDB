@@ -1,34 +1,57 @@
 from django.conf.urls.defaults import *
+from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.create_update import create_object, update_object, delete_object
+from django.contrib.auth.decorators import login_required, permission_required
 
 from experimentdb.reagents.models import Construct
 
+@login_required
+def construct_list(*args, **kwargs):
+	return object_list(*args, **kwargs)
+
+@login_required
+def construct_detail(*args, **kwargs):
+	return object_detail(*args, **kwargs)
+
+@permission_required('reagents.add_construct')
+def create_construct(*args, **kwargs):
+	return create_object(*args, **kwargs)
+
+@permission_required('reagents.change_construct')
+def change_construct(*args, **kwargs):
+	return update_object(*args, **kwargs)
+
+@permission_required('reagents.delete_construct')
+def delete_construct(*args, **kwargs):
+	return delete_object(*args, **kwargs)
+
 urlpatterns = patterns('',
-	(r'^$', 'django.views.generic.list_detail.object_list', {
+	url(r'^$', construct_list, {
 		"queryset": Construct.objects.all(), 
 		'template_name': 'construct_list.html',
-		}),
-	(r'^(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		}, name="construct-list"),
+	url(r'^(?P<object_id>[\d]+)/$', construct_detail, {
 		"queryset": Construct.objects.all(), 
 		'template_name': 'construct_detail.html'
-		,}),
-	(r'^new/$', 'django.views.generic.create_update.create_object', {
+		,}, name="construct-detail"),
+	url(r'^new/$', create_construct, {
 		'model': Construct, 
 		'template_name': 'construct_form.html', 
 		'login_required':True 
-		}),
-	(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		}, name="construct-new"),
+	url(r'^(?P<object_id>[\d]+)/edit$', change_construct, {
 		'model': Construct, 
 		'template_name': 'construct_form.html',
 		'login_required':True 
-		,}),
-	(r'^(?P<object_id>[\d]+)/update$', 'django.views.generic.create_update.update_object', {
+		,}, name="construct-edit"),
+	url(r'^(?P<object_id>[\d]+)/update$', change_construct, {
 		'model': Construct, 
 		'template_name': 'construct_form.html',
 		'login_required':True 
 		,}),		
-	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_construct, {
 		'model': Construct, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/construct'
-		,}),
+		,}, name="construct-delete"),
 )
