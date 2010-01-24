@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Chemical {{object}}{% else %} New Chemical {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Chemical {{object}}{% else %} New Chemical {% endif %}{% endblock %}
 {% block content %}
-<form enctype="multipart/form-data" method="POST" action="." >
+<form method="post" {% if object %} action="{% url chemical-edit object.id %}"{% else %} action="{% url chemical-new %}"{% endif%}>
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>
