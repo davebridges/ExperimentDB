@@ -26,25 +26,25 @@ def delete_cell(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', cell_list, {
+	url(r'^$', cell_list, {
 		"queryset": Cell.objects.all(), 
 		'template_name': 'cell_list.html',
 		}, name="cell-list"),
-	(r'^(?P<object_id>[\d]+)/$', cell_detail, {
+	url(r'^(?P<object_id>[\d]+)/$', cell_detail, {
 		"queryset": Cell.objects.all(), 
 		'template_name': 'cell_detail.html'
 		,}, name="cell-detail"),
-	(r'^new/$', create_cell, {
+	url(r'^new/$', create_cell, {
 		'model': Cell, 
 		'template_name': 'cell_form.html', 
 		'login_required':True 
 		}, name="cell-new"),
-	(r'^(?P<object_id>[\d]+)/edit$', change_cell, {
+	url(r'^(?P<object_id>[\d]+)/edit$', change_cell, {
 		'model': Cell, 
 		'template_name': 'cell_form.html',
 		'login_required':True 
 		,}, name="cell-edit"),
-	(r'^(?P<object_id>[\d]+)/delete$', delete_cell, {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_cell, {
 		'model': Cell, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/cell'

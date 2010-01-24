@@ -26,25 +26,25 @@ def delete_purified(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', purified_list, {
+	url(r'^$', purified_list, {
 		"queryset": Purified_Protein.objects.all(), 
 		'template_name': 'purified_list.html',
 		}, name="purified-list"),
-	(r'^(?P<object_id>[\d]+)/$', purified_detail, {
+	url(r'^(?P<object_id>[\d]+)/$', purified_detail, {
 		"queryset": Purified_Protein.objects.all(), 
 		'template_name': 'purified_detail.html'
 		,}, name="purified-detail"),
-	(r'^new/$', create_purified, {
+	url(r'^new/$', create_purified, {
 		'model': Purified_Protein, 
 		'template_name': 'purified_form.html', 
 		'login_required':True 
 		}, name="purified-new"),
-	(r'^(?P<object_id>[\d]+)/edit$', change_purified, {
+	url(r'^(?P<object_id>[\d]+)/edit$', change_purified, {
 		'model': Purified_Protein, 
 		'template_name': 'purified_form.html',
 		'login_required':True 
 		,}, name="purified-new"),
-	(r'^(?P<object_id>[\d]+)/delete$', delete_purified, {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_purified, {
 		'model': Purified_Protein, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/purified'

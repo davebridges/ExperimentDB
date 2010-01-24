@@ -26,27 +26,27 @@ def delete_chemical(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', 'django.views.generic.list_detail.object_list', {
+	url(r'^$', chemical_list, {
 		"queryset": Chemical.objects.all(), 
 		'template_name': 'chemical_list.html',
-		}),
-	(r'^(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
+		}, name="chemical-list"),
+	url(r'^(?P<object_id>[\d]+)/$', chemical_detail, {
 		"queryset": Chemical.objects.all(), 
 		'template_name': 'chemical_detail.html'
-		,}),
-	(r'^new/$', 'django.views.generic.create_update.create_object', {
+		,}, name="chemical-detail"),
+	url(r'^new/$', create_chemical, {
 		'model': Chemical, 
 		'template_name': 'chemical_form.html', 
 		'login_required':True 
-		}),	
-		(r'^(?P<object_id>[\d]+)/edit$', 'django.views.generic.create_update.update_object', {
+		}, name="chemical-new"),	
+	url(r'^(?P<object_id>[\d]+)/edit$', change_chemical, {
 		'model': Chemical, 
 		'template_name': 'chemical_form.html',
 		'login_required':True 
-		,}),
-	(r'^(?P<object_id>[\d]+)/delete$', 'django.views.generic.create_update.delete_object', {
+		,}, name="chemical-edit"),
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_chemical, {
 		'model': Chemical, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/chemical'
-		,}),
+		,}, name="chemical-delete"),
 )

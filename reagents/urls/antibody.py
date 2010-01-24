@@ -26,25 +26,25 @@ def delete_antibody(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', antibody_list, {
+	url(r'^$', antibody_list, {
 		"queryset": Antibody.objects.all(), 
 		'template_name': 'antibody_list.html',
 		}, name="antibody-list"),
-	(r'^(?P<object_id>[\d]+)/$', antibody_detail, {
+	url(r'^(?P<object_id>[\d]+)/$', antibody_detail, {
 		"queryset": Antibody.objects.all(), 
 		'template_name': 'antibody_detail.html'
 		,}, name="antibody-detail"),
-	(r'^new/$', create_antibody, {
+	url(r'^new/$', create_antibody, {
 		'model': Antibody, 
 		'template_name': 'antibody_form.html', 
 		'login_required':True 
 		}, name="antibody-new"),
-	(r'^(?P<object_id>[\d]+)/edit$', change_antibody, {
+	url(r'^(?P<object_id>[\d]+)/edit$', change_antibody, {
 		'model': Antibody, 
 		'template_name': 'antibody_form.html',
 		'login_required':True 
 		,}, name="antibody-edit"),
-	(r'^(?P<object_id>[\d]+)/delete$', delete_antibody, {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_antibody, {
 		'model': Antibody, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/antibody'

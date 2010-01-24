@@ -26,25 +26,25 @@ def delete_primer(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', primer_list, {
+	url(r'^$', primer_list, {
 		"queryset": Primer.objects.all(), 
 		'template_name': 'primer_list.html',
 		}, name="primer-list"),
-	(r'^(?P<object_id>[\d]+)/$', primer_detail, {
+	url(r'^(?P<object_id>[\d]+)/$', primer_detail, {
 		"queryset": Primer.objects.all(), 
 		'template_name': 'primer_detail.html'
 		,}, name="primer-detail"),
-	(r'^new/$', create_primer, {
+	url(r'^new/$', create_primer, {
 		'model': Primer, 
 		'template_name': 'primer_form.html', 
 		'login_required':True ,
 		}, name="primer-new"),
-	(r'^(?P<object_id>[\d]+)/edit$', change_primer, {
+	url(r'^(?P<object_id>[\d]+)/edit$', change_primer, {
 		'model': Primer, 
 		'template_name': 'primer_form.html',
 		'login_required':True 
 		,}, name="primer-new"),
-	(r'^(?P<object_id>[\d]+)/delete$', delete_primer, {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_primer, {
 		'model': Primer, 
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/primer'

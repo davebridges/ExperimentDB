@@ -15,7 +15,7 @@
 {% for chemical in object_list %}
 <tbody>
 <tr>
-	<td><a href="{% url chemical-detail chemical-id %}">{{ chemical }}</a></td>
+	<td><a href="{% url chemical-detail chemical.id %}">{{ chemical }}</a></td>
 	<td>{{chemical.source}}</td>
 	<td>{{chemical.vendor}}</td>
 	<td>

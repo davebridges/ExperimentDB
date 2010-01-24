@@ -26,30 +26,30 @@ def delete_strain(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
-	(r'^$', strain_list, {
+	url(r'^$', strain_list, {
 		"queryset": Strain.objects.all(), 
 		'template_name': 'strain_list.html',
 		}, name="strain-list"),
-	(r'^(?P<object_id>[\d]+)/$', strain_detail, {
+	url(r'^(?P<object_id>[\d]+)/$', strain_detail, {
 		"queryset": Strain.objects.all(), 
 		'template_name': 'strain_detail.html'
 		,}, name="strain-detail"),
-	(r'^new/$', create_strain, {
+	url(r'^new/$', create_strain, {
 		'model': Strain, 
 		'template_name': 'strain_form.html', 
 		'login_required':True 
 		}, name="strain-new"),
-	(r'^(?P<object_id>[\d]+)/edit$', change_strain, {
+	url(r'^(?P<object_id>[\d]+)/edit$', change_strain, {
 		'model': Strain,
 		'template_name': 'strain_form.html',
 		'login_required':True 
 		,}, name="strain-edit"),
-	(r'^(?P<object_id>[\d]+)/update$', change_strain, {
+	url(r'^(?P<object_id>[\d]+)/update$', change_strain, {
 		'model': Strain,
 		'template_name': 'strain_form.html',
 		'login_required':True 
 		,}),
-	(r'^(?P<object_id>[\d]+)/delete$', delete_strain, {
+	url(r'^(?P<object_id>[\d]+)/delete$', delete_strain, {
 		'model': Strain,
 		'template_name': 'strain_form.html',
 		'login_required':True ,

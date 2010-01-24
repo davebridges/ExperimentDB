@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
 	(r'^proteins?/', include('experimentdb.proteins.urls')),
 
-	(r'^reagents?/$', 'experimentdb.reagents.views.index'),
+	url(r'^reagents?/$', 'experimentdb.reagents.views.index', name="reagent-list"),
 
 	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
 	(r'^protocol?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),
@@ -28,27 +28,27 @@ urlpatterns = patterns('',
 	url(r'^plasmids?/', include('experimentdb.reagents.urls.construct')),
 	url(r'^recombinant-?dna/', include('experimentdb.reagents.urls.construct')),
 
-	(r'^antibodys?/', include('experimentdb.reagents.urls.antibody')),
-	(r'^antibodies?/', include('experimentdb.reagents.urls.antibody')),
+	url(r'^antibodys?/', include('experimentdb.reagents.urls.antibody')),
+	url(r'^antibodies?/', include('experimentdb.reagents.urls.antibody')),
 
-	(r'^primers?/', include('experimentdb.reagents.urls.primer')),
+	url(r'^primers?/', include('experimentdb.reagents.urls.primer')),
 
-	(r'^cells?/', include('experimentdb.reagents.urls.cell')),
-	(r'^cell-?lines?/', include('experimentdb.reagents.urls.cell')),
-	(r'^cultured-cell-?lines?/', include('experimentdb.reagents.urls.cell')),
+	url(r'^cells?/', include('experimentdb.reagents.urls.cell')),
+	url(r'^cell-?lines?/', include('experimentdb.reagents.urls.cell')),
+	url(r'^cultured-cell-?lines?/', include('experimentdb.reagents.urls.cell')),
 
-	(r'^purifieds?/', include('experimentdb.reagents.urls.purified')),
-	(r'^purified-?proteins?/', include('experimentdb.reagents.urls.purified')),
-	(r'^recombinant-?proteins?/', include('experimentdb.reagents.urls.purified')),
+	url(r'^purifieds?/', include('experimentdb.reagents.urls.purified')),
+	url(r'^purified-?proteins?/', include('experimentdb.reagents.urls.purified')),
+	url(r'^recombinant-?proteins?/', include('experimentdb.reagents.urls.purified')),
 
-	(r'^chemicals?/', include('experimentdb.reagents.urls.purified')),
-	(r'^drugs?/', include('experimentdb.reagents.urls.purified')),
-	(r'^pharmaceuticals?/', include('experimentdb.reagents.urls.purified')),
-	(r'^biopharmaceuticals?/', include('experimentdb.reagents.urls.purified')),
+	url(r'^chemicals?/', include('experimentdb.reagents.urls.chemical')),
+	url(r'^drugs?/', include('experimentdb.reagents.urls.chemical')),
+	url(r'^pharmaceuticals?/', include('experimentdb.reagents.urls.chemical')),
+	url(r'^biopharmaceuticals?/', include('experimentdb.reagents.urls.chemical')),
 	
-	(r'^strains?/', include('experimentdb.reagents.urls.strain')),
-	(r'^yeast_?strains?/', include('experimentdb.reagents.urls.strain')),
-	(r'^yeasts?/', include('experimentdb.reagents.urls.strain')),
+	url(r'^strains?/', include('experimentdb.reagents.urls.strain')),
+	url(r'^yeast_?strains?/', include('experimentdb.reagents.urls.strain')),
+	url(r'^yeasts?/', include('experimentdb.reagents.urls.strain')),
 	
 	(r'^clones?/', include('experimentdb.cloning.urls')),
 	(r'^clonings?/', include('experimentdb.cloning.urls')),
