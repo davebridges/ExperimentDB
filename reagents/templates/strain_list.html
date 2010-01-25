@@ -15,12 +15,12 @@
 {% block title %}Strain List{% endblock %}
 {% block content %}
 {% if perms.reagents.add_strain %}<p>Click <a href="{% url strain-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new strain</p>{% endif %}
+<div class="grid_12">
 <table class="sortable">
 <thead>
 	<tr>
 	<th>Strain</th>
 	<th>Background</th>
-	<th>Genotype</th>
 	<th>Plasmids</th>
 	<th>Selection</th>
 	</tr>
@@ -30,7 +30,6 @@
 <tr>
 	<td><a href="{% url strain-detail strain.id %}">{{ strain|safe }}</a></td>
 	<td>{{strain.background|safe}}</td>
-	<td>{{strain.genotype|safe}}</td>
 	<td><ul>{% for construct in strain.plasmids_set %}<li><a href="/experimentdb/construct/{{construct.id}}" title="{{construct}}">{{construct}}</a></li>{% endfor %}</ul></td>
 	<td>{{strain.selection}}</td>
 	<td>
@@ -46,5 +45,5 @@
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="/experimentdb/strain/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new strain</p>
+</div>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Construct {{object}}{% else %} New Construct {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Construct {{object}}{% else %} New Construct {% endif %}{% endblock %}
 {% block content %}
-<form method="post" {% if object %} action="{% url construct-edit object.id %}"{% else %} action="{% url construct-new %}"{% endif%}>
+<form enctype="multipart/form-data"  method="post" {% if object %} action="{% url construct-edit object.id %}"{% else %} action="{% url construct-new %}"{% endif%}>
 <table>{{ form }}</table>
 <input type="submit" value="Submit"/>
 </form>

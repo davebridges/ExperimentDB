@@ -19,10 +19,7 @@
 	<thead>
 		<tr>
 			<th>Construct</th>
-			<th>Protein</th>
 			<th>Plasmid</th>
-			<th>Selection</th>
-			<th>Location</th>
 			<th>Box</th>
 		</tr>
 	</thead>
@@ -30,18 +27,10 @@
 {% for construct in object_list %}
 		<tr>
 			<td><a href="{% url construct-detail construct.id %}">{{ construct }}</a></td>
-			<td>{% for protein in construct.protein.all %}<a href="/experimentdb/protein/{{protein}}">{{protein}}</a> {% endfor %}</td>
-			<td>{{construct.plasmid}}</td>
-			<td>{{construct.selection}}</td>
-			<td>{{construct.location}}</td>
-			<td>{{construct.box}}</td>
+			<td>{{ construct.plasmid }}</td>
+			<td>{{ construct.box }}</td>
 			<td>
-<a href="{% url construct-detail construct.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
-{% if perms.reagents.change_construct %}
-<a href="{% url construct-edit construct.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
-{% endif %}
-{% if perms.reagents.delete_construct %}
-<a href="{% url construct-delete construct.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+<a href="{% url construct-detail construct.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>{% if perms.reagents.change_construct %}<a href="{% url construct-edit construct.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>{% endif %}{% if perms.reagents.delete_construct %}<a href="{% url construct-delete construct.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
 {% endif %}
 			</td>
 		</tr>
