@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    '#',
         VERSION:     '0.1',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
@@ -18,6 +19,7 @@
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="ExperimentDB v0.1 documentation" href="index.html" />
     <link rel="prev" title="ExperimentDB Installation" href="installation.html" /> 
@@ -199,6 +201,11 @@ and not use this method.</p>
 <dl class="attribute">
 <dt id="data.models.Experiment.siRNA">
 <tt class="descclassname">Experiment.</tt><tt class="descname">siRNA</tt><a class="headerlink" href="#data.models.Experiment.siRNA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="data.models.Experiment.strain">
+<tt class="descclassname">Experiment.</tt><tt class="descname">strain</tt><a class="headerlink" href="#data.models.Experiment.strain" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -784,6 +791,13 @@ This module will generate index and detail views for experiments and protocols a
 <tt class="descclassname">data.views.</tt><tt class="descname">experiment</tt><a class="headerlink" href="#data.views.experiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>This renders a detailed page of an experiment.</p>
 <p>The view will show the experiment, and all associated reagents, proteins, projects and results associated with this object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="data.views.experiment_edit">
+<tt class="descclassname">data.views.</tt><tt class="descname">experiment_edit</tt><a class="headerlink" href="#data.views.experiment_edit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a form to edit an experiment and associated formsets for experimental results.</p>
+<p>Takes a request in the form of experiment/(experimentID)/edit and returns the experiment_result_form.html form.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1943,9 +1957,9 @@ and not use this method.</p>
 </div>
 <div class="section" id="module-reagents.views">
 <h3>Views<a class="headerlink" href="#module-reagents.views" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<dl class="attribute">
 <dt id="reagents.views.index">
-<tt class="descclassname">reagents.views.</tt><tt class="descname">index</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#reagents.views.index" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">reagents.views.</tt><tt class="descname">index</tt><a class="headerlink" href="#reagents.views.index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -2033,9 +2047,9 @@ and not use this method.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="">Package Details</a><ul>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference external" href="#">Package Details</a><ul>
 <li><a class="reference external" href="#module-data">Data Package</a><ul>
 <li><a class="reference external" href="#module-data.models">Models</a></li>
 <li><a class="reference external" href="#module-data.forms">Forms</a></li>
@@ -2082,27 +2096,27 @@ and not use this method.</p>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="installation.html"
-                                  title="previous chapter">ExperimentDB Installation</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/api.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">ExperimentDB Installation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
