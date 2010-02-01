@@ -1,35 +1,43 @@
 {% extends "base.html" %}
-
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
+{% endblock scripts %}
 {% block head_title %}Cell Line List{% endblock %}
 {% block title %}Cell Line List{% endblock %}
 {% block content %}
-{% if perms.reagents.add_cell %}<p>Click <a href="{% url cell-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new cell line</p>{% endif %}
-<table>
+{% if perms.reagents.add_cell %}<p>Click <a href="{% url cell-new %}"><img src="/static/img/icons/Add.png" width="25" alt="here"/></a> for a new cell line</p>{% endif %}
+<table class="sortable">
 <thead>
 	<tr>
 	<th>Name</th>
 	<th>Source</th>
-	<th>Notes</th>
+	<th>Location</th>
+	<th>Box</th>
 	</tr>
 </thead>
-{% for cell in object_list %}
 <tbody>
+{% for cell in object_list %}
 <tr>
-	<td><a href="{% url cell-detail construct.id %}">{{ cell }}</a></td>
+	<td><a href="{% url cell-detail cell.id %}">{{ cell }}</a></td>
 	<td>{{cell.source}}</td>
-	<td>{{cell.notes}}</td>
+	<td>{{cell.location}}</td>
+	<td>{{cell.box}}</td>
 	<td>
-<a href="{% url cell-detail construct.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
-{% if perms.reagents.change_cell %}
-<a href="{% url cell-edit construct.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
-{% endif %}
-{% if perms.reagents.delete_cell %}
-<a href="{% url cell-delete construct.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
-{% endif %}
+<a href="{% url cell-detail cell.id %}"><img src="/static/img/icons/Zoom.png" width="25" alt="Detail"/></a>
+{% if perms.reagents.change_cell %}<a href="{% url cell-edit cell.id %}"><img src="/static/img/icons/Document Write.png" width="25" alt="Edit"/></a>{% endif %}
+{% if perms.reagents.delete_cell %}<a href="{% url cell-delete cell.id %}"><img src="/static/img/icons/Close.png" width="25" alt="delete"/></a>{% endif %}
 </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="/experimentdb/cell/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new cell line</p>
+<p>Click <a href="/experimentdb/cell/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a> for a new cell line</p>
 {% endblock %}
