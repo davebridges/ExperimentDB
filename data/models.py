@@ -27,7 +27,9 @@ class Protocol(models.Model):
     def __unicode__(self):
         return u'%s ' % self.protocol
     def get_absolute_url(self):
-        return "/protocol/%s/" % self.protocol_slug 
+        return "/experimentdb/protocol/%i/" % self.id
+	class Meta:
+		ordering = ['-protocol']
 
 
 class Experiment(models.Model):
