@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% block head_title %}Protocol: {{ protocol }}{% endblock %}
-{% block title %}{{ protocol }}{% endblock %}
+{% block head_title %}Protocol: {{ object }}{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 
 
 {% block content %}
 <h2>View Protocol</h2>
-{% if protocol.wiki_page %}<ul><li>Wiki - <a href="/wiki/{{protocol.wiki_page}}">{{ protocol }}</a></li></ul>{% endif %}
-{% if protocol.protocol_file %}<ul><li>File - <a href="{{protocol.protocol_file.url}}">{{ protocol }}</a></li></ul>{% endif %}
+{% if object.wiki_page %}<ul><li>Wiki - <a href="/wiki/{{object.wiki_page}}">{{ object }}</a></li></ul>{% endif %}
+{% if object.protocol_file %}<ul><li>File - <a href="{{object.protocol_file.url}}">{{ object }}</a></li></ul>{% endif %}
 <h2>Experiments</h2>
 <ul>
-{% for experiment in protocol_experiments %}
+{% for experiment in object.experiment_set.all %}
 <li><a href="/experimentdb{{ experiment.get_absolute_url }}">{{ experiment }}</a></li>
 {% endfor %}
 </ul>

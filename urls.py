@@ -19,9 +19,10 @@ urlpatterns = patterns('',
 
 	url(r'^reagents?/$', 'experimentdb.reagents.views.index', name="reagent-list"),
 
-	(r'^protocol?/$', 'experimentdb.data.views.protocol_list'),
-	(r'^protocol?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),
-	(r'^sgd/(?P<gene>[-\w\d]+)/$', 'experimentdb.datasets.views.sgd_gene_detail'),
+	url(r'^protocols?/', include('experimentdb.data.urls.protocol')),
+	url(r'^protocols?/$', 'experimentdb.data.views.protocol_list'),
+	url(r'^protocols?/(?P<protocol_slug>[-\w\d]+)/$', 'experimentdb.data.views.protocol_detail'),
+	url(r'^sgd/(?P<gene>[-\w\d]+)/$', 'experimentdb.datasets.views.sgd_gene_detail', name="sgd-gene-detail"),
 
 	url(r'^constructs?/', include('experimentdb.reagents.urls.construct')),
 	url(r'^vectors?/', include('experimentdb.reagents.urls.construct')),

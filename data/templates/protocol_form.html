@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if object %}Update Protocol {{object}}{% else %} New Protocol {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Protocol {{object}}{% else %} New Protocol {% endif %}{% endblock %}
+{% block content %}
+<form enctype="multipart/form-data"  method="post" {% if object %} action="{% url protocol-edit object.id %}"{% else %} action="{% url protocol-new %}"{% endif%}>
+<table>{{ form }}</table>
+<input type="submit" value="Submit"/>
+</form>
+{% endblock %}

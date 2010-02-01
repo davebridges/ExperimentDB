@@ -54,7 +54,7 @@ class Experiment(models.Model):
 	def __unicode__(self):
 		return u'%s on %s; %s' % (self.experiment, self.assay, self.experiment_date)
 	def get_absolute_url(self):
-		return "experimentdb/experiment/%s/" % self.experimentID
+		return "/experimentdb/experiment/%s/" % self.experimentID
 	class Meta:
 		ordering = ['-experiment_date']
 

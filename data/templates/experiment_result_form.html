@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block head_title %}New Experiment{% endblock %}
+{% block title %}New Experiment{% endblock %}
+{% block scripts %}
+	<script type="text/javascript">
+	 $(document).ready(function() {	
+		$('#id_experiment_date').datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	</script>
+{% endblock %}
+{% block content %}
+<form method="POST" action=".">
+<table>
+{{form.as_table}}
+<p>{{ formset }}</p>
+   <tr>
+        <th></th>
+        <td><input type="submit" name="submit" value="Submit" class="button"></td>
+      </tr>
+    </table>
+  </form>
+
+ </form>
+ 
+ 
+{% endblock %}

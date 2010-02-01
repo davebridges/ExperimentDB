@@ -1,13 +1,44 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script type="text/javascript" src="/javascript/jquery-1.3.2.js"></script> 
+	<script type="text/javascript" src="/javascript/dataTables-1.4/media/js/jquery.dataTables.js"</script>
+	<script type="text/javascript">
+	$(document).ready(function() { 
+		$(".sortable").dataTable( {
+			"bPaginate": false,
+			});
+		});
+    	</script>
+{% endblock scripts %}
 {% block head_title %}Protocols{% endblock %}
 {% block title %}Protocols{% endblock %}
-
-
 {% block content %}
-<ul>
-{% for protocol in protocol_list %}
-<li><a href="{{ protocol.protocol_slug }}">{{ protocol }}</a></li>
+{% if perms.data.add_protocol %}<p>Click <a href="{% url protocol-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new protocol</p>{% endif %}
+<h2>Protocols ({{object_list.count}})</h2>
+<table class="sortable">
+<thead>
+<tr>
+	<th>Protocol</th>
+	<th>Wiki Page</th>
+</tr>
+</thead>
+<tbody>
+{% for protocol in object_list %}
+<tr>
+	<td><a href="{% url protocol-detail protocol.id %}">{{ protocol }}</a></td>
+	<td>{% if protocol.wiki_page %}<a href="/wiki/{{protocol.wiki_page}}">ProtocolWiki</a>{% else %}no{% endif %}</td>
+	<td>
+<a href="{% url protocol-detail protocol.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+{% if perms.data.change_protocol %}
+<a href="{% url protocol-edit protocol.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+{% endif %}
+{% if perms.data.delete_protocol %}
+<a href="{% url protocol-delete protocol.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+{% endif %}
+	</td>
+</tr>
 {% endfor %}
-</ul>
+</tbody>
+</table>
 
 {% endblock content %}
