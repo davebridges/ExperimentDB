@@ -1,5 +1,7 @@
-from experimentdb.proteins.models import ProteinFamily, Protein, Species, ProteinDetail
 from django.contrib import admin
+
+from experimentdb.proteins.models import ProteinFamily, Protein, Species, ProteinDetail
+
 
 class ProteinFamilyAdmin(admin.ModelAdmin):
 	pass
