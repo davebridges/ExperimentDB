@@ -10,7 +10,7 @@
 <h2>Experiments</h2>
 <ul>
 {% for experiment in object.experiment_set.all %}
-<li><a href="/experimentdb{{ experiment.get_absolute_url }}">{{ experiment }}</a></li>
+<li><a href="{{ experiment.get_absolute_url }}">{{ experiment }}</a></li>
 {% endfor %}
 </ul>
 {% endblock content %}
