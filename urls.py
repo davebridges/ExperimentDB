@@ -12,8 +12,8 @@ urlpatterns = patterns('',
 	(r'^experiments?/', include('experimentdb.data.urls.experiment')),
 	(r'^exps?/', include('experimentdb.data.urls.experiment')),
 
-	(r'^projects?/', include('experimentdb.projects.urls.project')),
-	(r'^subprojects?/', include('experimentdb.projects.urls.subproject')),
+	url(r'^projects?/', include('experimentdb.projects.urls.project')),
+	url(r'^subprojects?/', include('experimentdb.projects.urls.subproject')),
 
 	(r'^proteins?/', include('experimentdb.proteins.urls')),
 

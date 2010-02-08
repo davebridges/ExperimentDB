@@ -3,8 +3,22 @@
 {% block head_title %}Project List{% endblock %}
 {% block title %}Project List{% endblock %}
 {% block content %}
+<table>
+<thead>
+<tr>
+ <th>Project</th>
+ <th>Summary</th>
+ <th>Experiments</th>
+</tr>
+</thead>
+<tbody>
 {% for project in project_list %}
-<h2><a href="/experimentdb/project/{{ project.project_slug }}"> {{ project.project }}.</a></h2>
-<p>{{ project.comments }}</p>
+<tr>
+ <th><a href="{% url project-detail project.project_slug %}">{{ project }}</a></th>
+ <td>{{ project.comments }}</td>
+ <td>{{ project.experiment_set.count }}</td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% endblock %}

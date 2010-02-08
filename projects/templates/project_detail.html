@@ -3,11 +3,11 @@
 {% block title %} Project Detail {% endblock %}
 {% block content %}
 <div id="project" class="grid_5">
-<h1>{{ project.project }}</h1>
+<h1>{{ project }}</h1>
 <p>{{ project.comments }}</p>
 </div>
 <div id="subprojects" class="grid_5">
-{% for subproject in proj_subproject %}
+{% for subproject in project.subproject_set.all %}
 <h3>SubProject: <a href="{{ subproject.get_absolute_url }}">{{ subproject.subproject }}</a></h3>
 <p>{{ subproject.comments }}</p>
 {% endfor %}
