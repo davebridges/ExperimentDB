@@ -42,9 +42,11 @@ class ConstructShipment(models.Model):
 	recipient = models.ForeignKey(Recipient)
 	notes = models.TextField(max_length=500)
 	def __unicode__(self):
-		return u'%s lab (%s)' % (self.recipient.lab, self.recipient.last_name)
+		return u'%s lab (%s)' % (self.recipient.lab, self.ship_date)
 	def get_absolute_url(self):
-		return 'experimentdb/shipment/%i' % self.id
+		return '/experimentdb/shipment/%i' % self.id
+	class Meta:
+		ordering = ['-ship_date']
 
 	
 

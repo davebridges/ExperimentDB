@@ -8,16 +8,11 @@
  <thead>
  </thead>
  <tdata>
-  <tr><th>Antibody</th><td>{{object.antibody}}</td></tr>
-  <tr><th>Protein</th><td>{% for protein in object.protein_set.all %}{{ protein.count }} {% endfor %}</td></tr>
-  <tr><th>Size</th><td>{{object.protein_size}}</td></tr>
-  <tr><th>Source Species</th><td>{{object.source_species}}</td></tr> 
-  <tr><th>Location</th><td>{{object.location}}</td></tr>
-  {% if object.vendor %}<tr><th>Vendor</th><td>{{ object.vendor }}</td></tr>{% endif %}
-  {% if object.catalog %}<tr><th>Catalog Number</th><td>{{ object.catalog }}</td></tr>{% endif %}
-  {% if object.source %}<tr><th>Source</th><td>{{ object.source }}</td></tr>{% endif %}
-  {% if object.notes %}<tr><th>Notes</th><td>{{ object.notes }}</td></tr>{% endif %}
-  </tdata>
+  <tr><th>Lab</th><td>{{object.recipient.lab}}</td></tr>
+  <tr><th>Constructs</th><td><ul>{% for construct in object.constructs.all %}<li><a href="{{construct.get_absolute_url}}">{{ construct }}</a></li>{% endfor %}</ul></td></tr>
+  <tr><th>Location</th><td>{{object.recipient.lab.institution}}, {{object.recipient.lab.institution.city}}, {{object.recipient.lab.institution.country}}</td></tr>
+  <tr><th>Notes</th><td>{{object.notes}}</td></tr>
+ </tdata>
   </table>
   </div>
 {% include "comment.html" %}

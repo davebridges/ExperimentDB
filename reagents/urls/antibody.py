@@ -49,4 +49,5 @@ urlpatterns = patterns('',
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/antibody'
 		,}, name="antibody-delete"),
+	url(r'^lookup/$', 'experimentdb.reagents.views.antibody_lookup', name="antibody-lookup")
 )
