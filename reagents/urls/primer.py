@@ -43,7 +43,7 @@ urlpatterns = patterns('',
 		'model': Primer, 
 		'template_name': 'primer_form.html',
 		'login_required':True 
-		,}, name="primer-new"),
+		,}, name="primer-edit"),
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_primer, {
 		'model': Primer, 
 		'login_required':True,
