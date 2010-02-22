@@ -66,7 +66,7 @@ class Antibody(models.Model):
 	def __unicode__(self):
 		return u'%s' % self.antibody
 	def get_absolute_url(self):
-		return "/antibody/%i/" % self.antibody_slug
+		return "/antibody/%i/" % self.antibody.id
 
 class Construct(models.Model):
 	construct = models.CharField(max_length=30)
@@ -128,7 +128,11 @@ class Cell(ReagentInfo):
 		return "/experimentdb/cell-line/%i/" % self.id
 
 class Primer(ReagentInfo):
-	date_ordered = models.DateField(blank=True)
+	"""Model describing primer objects.
+	
+	These objects can be of any short nucleotide type including primers, siRNA oligos or morpholinos.  The required fields are the name and the type.  The nonrequired fields include the sequence, the protein, the ordering date and all generic reagent info fields.
+	This is a subclass of the ReagentInfo abstract base class."""
+	date_ordered = models.DateField(blank=True, null=True)
 	primer_type = models.CharField(max_length=20, choices=PRIMER_TYPE)
 	protein = models.ForeignKey(Protein, blank=True)
 	sequence = models.CharField(max_length=100, blank=True)
