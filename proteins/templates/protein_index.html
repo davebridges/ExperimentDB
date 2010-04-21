@@ -13,6 +13,7 @@
 {% block head_title %}Protein List{% endblock %}
 {% block title %}Protein List{% endblock %}
 {% block content %}
+<p>To add a new protein click <a href="{% url protein-new %}" title="Add New Protein"><img src="/static/img/icons/Add.png" width=25 alt="here"></a></p>
 <table class="sortable">
  <thead>
 	<tr>
@@ -24,10 +25,9 @@
    {% for protein in protein_list %}
 	<tr>
 		<td><a href="/{{ protein.get_absolute_url }}"> {{ protein }}</a></td>
-		<td>{% for family in protein.protein_family.all %}<a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a> {% endfor %}</td>
+		<td>{% for family in protein.protein_family.all %}<a href="{% url protein-family-detail family.id %}">{{family}}</a> {% endfor %}</td>
 	</tr>
 {% endfor %}
  </tbody>
  </table>
-<p>To add a new protein click <a href="/experimentdb/protein/new" title="Add New Protein">here</a></p>
 {% endblock %}
