@@ -2,7 +2,7 @@
 {% block head_title %}New Result for {{ experiment }}{% endblock %}
 {% block title %}New Result {{experiment}}{% endblock %}
 {% block content %}
-<form enctype="multipart/form-data" method="POST" action="/experimentdb/experiment/{{experiment.experimentID}}/result/new/">
+<form enctype="multipart/form-data" method="POST" action="/experimentdb/experiment/{{experiment.experimentID}}/result/new/">{% csrf_token %}
 <table>
 {{form}}
 </table>

@@ -2,7 +2,7 @@
 {% block head_title %}New Protein Family{% endblock %}
 {% block title %}New Protein Family{% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/protein/family/new/">
+<form method="POST" action="/experimentdb/protein/family/new/">{% csrf_token %}
 <table class="sortable">
 {{form}}
  </table>

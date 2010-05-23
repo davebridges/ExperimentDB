@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Yeast Strain {{object}}{% else %} New Yeast Strain {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Yeast Strain {{object}}{% else %} New Yeast Strain {% endif %}{% endblock %}
 {% block content %}
-<form method="post" {% if object %} action="{% url strain-edit object.id %}"{% else %} action="{% url strain-new %}"{% endif%}>
+<form method="post" {% if object %} action="{% url strain-edit object.id %}"{% else %} action="{% url strain-new %}"{% endif%}>{% csrf_token %}
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>

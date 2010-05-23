@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Cell Line {{object}}{% else %} New Cell Line {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Cell Line {{object}}{% else %} New Cell Line {% endif %}{% endblock %}
 {% block content %}
-<form method="post" {% if object %} action="{% url cell-edit object.id %}"{% else %} action="{% url cell-new %}"{% endif%}>
+<form method="post" {% if object %} action="{% url cell-edit object.id %}"{% else %} action="{% url cell-new %}"{% endif%}>{% csrf_token %}
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>

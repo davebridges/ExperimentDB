@@ -9,7 +9,7 @@
 	</script>
 {% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/experiment/new/">
+<form method="POST" action="/experimentdb/experiment/new/">{% csrf_token %}
 <table class="sortable">
 {{form}}
  </table>

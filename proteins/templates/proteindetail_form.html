@@ -2,7 +2,7 @@
 {% block head_title %}New Protein Detail{% endblock %}
 {% block title %}New Protein Detail{% endblock %}
 {% block content %}
-<form method="POST" action="/experimentdb/protein_isoform/new/">
+<form method="POST" action="/experimentdb/protein_isoform/new/">{% csrf_token %}
 <table class="sortable">
 {{form}}
  </table>

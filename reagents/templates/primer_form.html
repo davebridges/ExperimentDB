@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Primer {{object}}{% else %} New Primer {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Primer {{object}}{% else %} New Primer {% endif %}{% endblock %}
 {% block content %}
-<form method="post" {% if object %} action="{% url primer-edit object.id %}"{% else %} action="{% url primer-new %}"{% endif%}>
+<form method="post" {% if object %} action="{% url primer-edit object.id %}"{% else %} action="{% url primer-new %}"{% endif%}>{% csrf_token %}
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>
