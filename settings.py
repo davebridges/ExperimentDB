@@ -66,7 +66,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-	'django.middleware.csrf.CsrfViewMiddleware'
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS  = (
+	'django.contrib.auth.context_processors.auth',
+	'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = 'experimentdb.urls'
@@ -86,12 +92,14 @@ os.path.join(PROJECT_DIR, "data/sharing"),
 os.path.join(PROJECT_DIR, "templates"),
 )
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.comments',
+	'django.contrib.messages',
 	'experimentdb.data',
 	'experimentdb.projects',
 	'experimentdb.proteins',

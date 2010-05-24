@@ -3,7 +3,7 @@
 {% block head_title %}{% if object %}Update Antibody {{object}}{% else %} New Antibody {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Antibody {{object}}{% else %} New Antibody {% endif %}{% endblock %}
 {% block content %}
-<form method="post" {% if object %} action="{% url antibody-edit object.id %}"{% else %} action="{% url antibody-new %}"{% endif%}>
+<form method="post" {% if object %} action="{% url antibody-edit object.id %}"{% else %} action="{% url antibody-new %}"{% endif%}>{% csrf_token %}
 <table>{{ form }}</table>
 <input type="submit" value="Submit" />
 </form>

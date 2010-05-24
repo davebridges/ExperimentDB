@@ -14,7 +14,7 @@
   <tr><th>Location</th><td>{{ object.location }}</td></tr>
   <tr><th>Box</th><td>{{ object.box }}</td></tr>
   <tr><th>Researcher</th><td>{% for researcer in object.researcher_set %}{{ researcher }}{% endfor %}</td>
-  <tr><th>Background</th><td>{{ object.background }}</td>
+  <tr><th>Background</th><td>{{ object.background|safe }}</td>
   <tr><th>Selection</th><td>{{ object.selection }}</td>
   <tr><th>Genotype</th><td>{{ object.genotype|safe }}</td>
   <tr><th>Notes</th><td>{{ object.notes }}</td></tr>

@@ -79,3 +79,43 @@ div#identification {
 img.figure {
 	background: white;
 }
+
+.debug {
+	text-align: center;
+	list-style-type: none;
+	background: #fef1ec;
+	color: #2A70E8;
+	border: 2px solid #2A70E8;
+}
+
+.info {
+	text-align: center;
+	list-style-type: none;
+	background: #888888;
+	color: #ffffff;
+	border: 2px solid #ffffff;
+}
+
+.success {
+	text-align: center;
+	list-style-type: none;
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	border: 2px solid #4F8A10;
+}
+
+.warning {
+	text-align: center;
+	list-style-type: none;
+	background: #fef1ec;
+	color: #FAB905;
+	border: 2px solid #FAB905;
+}
+
+.error {
+	text-align: center;
+	list-style-type: none;
+	background: #fef1ec;
+	color: #cd0a0a;
+	border: 2px solid #cd0a0a;
+}
