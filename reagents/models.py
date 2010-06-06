@@ -66,7 +66,7 @@ class Antibody(models.Model):
 	def __unicode__(self):
 		return u'%s' % self.antibody
 	def get_absolute_url(self):
-		return "/antibody/%i/" % self.antibody.id
+		return "/experimentdb/antibody/%i/" % self.id
 
 class Construct(models.Model):
 	construct = models.CharField(max_length=30)
