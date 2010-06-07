@@ -47,6 +47,7 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_primer, {
 		'model': Primer, 
 		'login_required':True,
-		'post_delete_redirect': '/experimentdb/primer'
-		,}, name="primer-delete"),
+		'template_name': 'confirm_delete.html',
+		'post_delete_redirect': '/experimentdb/primer',
+		}, name="primer-delete"),
 )
