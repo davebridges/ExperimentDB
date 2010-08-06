@@ -45,14 +45,13 @@
  <p>Add new protein isoform <a href="/experimentdb/protein_isoform/new">here</a></p>
 
 <div id ="accordion">
-{% if antibodies %}
-<h3><a href="#">Antibodies ({{ antibodies.count }})</a></h3>
+<h3><a href="#">Antibodies ({{ protein.antibody_set.count }})</a></h3>
 <div>
 <table>
  <thead>
  </thead>
  <tbody>
-{% for antibody in antibodies %}
+{% for antibody in protein.antibody_set.all %}
    <tr>
    <td><a href="/experimentdb/antibody/{{antibody.id}}">{{ antibody }}</a></td>
    </tr>
@@ -60,19 +59,17 @@
 {% endfor %}
   </table>
   </div>
- {% endif %}
 
 
 
 
-{% if constructs %}
-<h3><a href="#">Constructs ({{ constructs.count }})</a></h3>
+<h3><a href="#">Constructs ({{ protein.construct_set.count }})</a></h3>
 <div>
 <table>
  <thead>
  </thead>
  <tbody>
-{% for construct in constructs %}
+{% for construct in protein.construct_set.all %}
    <tr>
    <td><a href="/experimentdb/construct/{{construct.id}}">{{ construct }}</a></td>
    </tr>
@@ -80,31 +77,8 @@
 {% endfor %}
   </table>
   </div>
-  {% endif %}
 
-
-
-
-{% if purified_proteins %}
-<h3><a href="#">Purified Proteins ({{ purified_proteins.count }})</a></h3>
-<div>
-<table>
- <thead>
- </thead>
- <tbody>
-{% for protein in purified_proteins %}
-   <tr>
-   <td><a href="/experimentdb/purified_proteins/{{protein.id}}">{{ protein }}</a></td>
-   </tr>
-  </tbody>
-{% endfor %}
-  </table>
-  </div>
-{% endif %}
-
-
-{% if primers %}
-<h3><a href="#">Primers ({{primers.count}})</a></h3>
+<h3><a href="#">Primers ({{protein.primer_set.count}})</a></h3>
 <div>
 <table>
  <thead>
@@ -113,7 +87,7 @@
   <th>Sequence</th>
  </thead>
  <tbody>
-{% for primer in primers %}
+{% for primer in protein.primer_set.all %}
    <tr>
    <td><a href="{{primer.get_absolute_url}}">{{ primer }}</a></td>
    <td>{{ primer.primer_type }}
@@ -123,10 +97,8 @@
 {% endfor %}
   </table>
   </div>
-{% endif %}
 
 
-{% if protein.strain_set %}
 <h3><a href="#">Strains ({{protein.strain_set.count}})</a></h3>
 <div>
 <table>
@@ -141,16 +113,14 @@
 {% endfor %}
   </table>
   </div>
-{% endif %}
 
-{% if experiment_protein %}
-<h3><a href="#">Experiments ({{ experiment_protein.count }})</a></h3>
+<h3><a href="#">Experiments ({{ protein.experiment_set.count }})</a></h3>
 <div>
 <table>
  <thead>
  </thead>
  <tbody>
-{% for experiment in experiment_protein %}
+{% for experiment in protein.experiment_set.all %}
    <tr>
    <td><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a></td>
    </tr>
@@ -158,7 +128,6 @@
 {% endfor %}
   </table>
   </div>
-{% endif %}
 
 {% with protein as object %}
 {% include "comment.html" %}

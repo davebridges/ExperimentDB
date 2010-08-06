@@ -1,7 +1,7 @@
 from django.db import models
 from experimentdb.proteins.models import Protein
 from experimentdb.external.models import Contact, Reference, Vendor
-
+from experimentdb.data.models import Experiment, Protocol, Result
 
 SPECIES = (
 	('rabbit', 'rabbit'),
@@ -93,11 +93,11 @@ class Construct(models.Model):
 
 class Purified_Protein(ReagentInfo):
 	protein = models.ManyToManyField(Protein)
-	purification = models.ForeignKey("data.Experiment", related_name='protein purification', blank=True, null=True)
-	result = models.ForeignKey("data.Result", blank=True, null=True)
+	purification = models.ForeignKey("Experiment", blank=True, null=True)
+	result = models.ForeignKey("Result", blank=True, null=True)
 	induction = models.CharField(max_length=50, blank=True, null=True)
 	cells = models.CharField(max_length=20, blank=True, null=True)
-	protocol = models.ForeignKey("data.Protocol", blank=True, null=True)
+	protocol = models.ForeignKey("Protocol", blank=True, null=True)
 	purification_date = models.DateField(max_length=20, blank=True, null=True)
 	construct = models.ForeignKey(Construct, blank=True, null=True)
 	class Meta:

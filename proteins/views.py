@@ -16,12 +16,7 @@ def index(request):
 @login_required
 def detail(request, protein):
 	protein = get_object_or_404(Protein, name=protein)
-	antibodies = Antibody.objects.filter(protein = protein)
-	constructs = Construct.objects.filter(protein = protein)
-	purified_proteins = Purified_Protein.objects.filter(protein = protein)
-	primers = Primer.objects.filter(protein = protein)
-	experiment_protein = Experiment.objects.filter(protein=protein)
-	return render_to_response('protein_detail.html', {'protein': protein, 'experiment_protein':experiment_protein, 'antibodies':antibodies, 'constructs':constructs, 'purified_proteins':purified_proteins, 'primers':primers},context_instance=RequestContext(request))
+	return render_to_response('protein_detail.html', {'protein': protein, },context_instance=RequestContext(request))
 
 @login_required
 def protein_isoform_detail(request, protein_id):

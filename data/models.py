@@ -1,4 +1,5 @@
 from django.db import models
+
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.proteins.models import Protein
 from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell, Purified_Protein, Primer, Strain
@@ -33,23 +34,23 @@ class Protocol(models.Model):
 
 
 class Experiment(models.Model):
-	project = models.ManyToManyField(Project, blank=True)
-	subproject = models.ManyToManyField(SubProject, blank=True)
+	project = models.ManyToManyField(Project, blank=True, null=True)
+	subproject = models.ManyToManyField(SubProject, blank=True, null=True)
 	experimentID = models.SlugField(max_length=50, help_text="ie DB-2008-11-11-A", primary_key=True)
 	experiment = models.CharField(max_length=100)
-	protocol = models.ManyToManyField(Protocol, blank=True)
-	assay = models.CharField(max_length=100, blank=True)
-	experiment_date = models.DateField('Date Performed')
-	cellline = models.ManyToManyField(Cell, blank=True)
-	antibodies = models.ManyToManyField(Antibody, blank=True)
-	chemicals = models.ManyToManyField(Chemical, blank=True)
-	constructs = models.ManyToManyField(Construct, blank=True)
+	protocol = models.ManyToManyField(Protocol, blank=True, null=True)
+	assay = models.CharField(max_length=100, blank=True, null=True)
+	experiment_date = models.DateField(help_text="Date Performed")
+	cellline = models.ManyToManyField(Cell, blank=True, null=True)
+	antibodies = models.ManyToManyField(Antibody, blank=True, null=True)
+	chemicals = models.ManyToManyField(Chemical, blank=True, null=True)
+	constructs = models.ManyToManyField(Construct, blank=True, null=True)
 	siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
 	strain = models.ManyToManyField(Strain, blank=True, null=True)
-	comments = models.TextField(max_length=500, blank=True)
-	researcher = models.ManyToManyField(Contact, blank=True)
-	protein = models.ManyToManyField(Protein, blank=True)
-	purified_protein = models.ManyToManyField(Purified_Protein, blank=True)
+	comments = models.TextField(max_length=500, blank=True, null=True)
+	researcher = models.ManyToManyField(Contact, blank=True, null=True)
+	protein = models.ManyToManyField(Protein, blank=True, null=True)
+	purified_protein = models.ManyToManyField('Purified_Protein', blank=True, null=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
 	sample_storage = models.CharField(max_length=100, blank=True)

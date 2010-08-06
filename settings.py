@@ -100,7 +100,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.comments',
 	'django.contrib.messages',
-	'experimentdb.data',
 	'experimentdb.projects',
 	'experimentdb.proteins',
 	'experimentdb.reagents',
@@ -108,6 +107,7 @@ INSTALLED_APPS = (
 	'experimentdb.cloning',
 	'experimentdb.datasets',
 	'experimentdb.sharing',
+	'experimentdb.data',
 	'django.contrib.admin',
 	'ajax_select',
 	'south'
