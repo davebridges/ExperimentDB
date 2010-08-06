@@ -9,17 +9,17 @@
 	<tr>
 	<th>Preparation</th>
 	<th>Protein</th>
-	<th>Tag</th>
+	<th>Date</th>
 	<th>Construct</th>
 	</tr>
 </thead>
 {% for purified in object_list %}
 <tbody>
 <tr>
-	<td><a href="{% url purified-new purified.id %}">{{ purified }}</a></td>
+	<td><a href="{% url purified-detail purified.id %}">{{ purified }}</a></td>
 	<td>{%for protein in purified.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
-	<td>{{purified.tag}}</td>
-	<td><a href="/experimentdb/construct/{{purified.construct.id}}">{{ purified.construct}}</td>
+	<td>{{ purified.purification_date }}</td>
+	<td><a href="{% url construct-detail purified.construct.id %}">{{ purified.construct}}</td></a>
 	<td>
 <a href="{% url purified-detail purified.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_purified_protein %}
@@ -33,5 +33,5 @@
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="/experimentdb/purified/new"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new purified protein</p>
+<p>Click <a href="{% url purified-new %}"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new purified protein</p>
 {% endblock %}

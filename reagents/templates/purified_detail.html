@@ -8,16 +8,14 @@
 	<tr>
 	<th>Preparation</th>
 	<th>Protein</th>
-	<th>Tag</th>
 	<th>Construct</th>
 	</tr>
 </thead>
 <tbody>
 <tr>
-	<td>>{{ object.name }}</td>
-	<td>{%for protein in object.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
-	<td>{{purified.tag}}</td>
-	<td><a href="/experimentdb/construct/{{object.construct.id}}">{{ object.construct}}</td>
+	<td>{{ object.name }}</td>
+	<td>{% for protein in object.protein.all %}<a href="{% url protein-detail protein %}">{{protein}} </a>{% endfor %}</td>
+	<td><a href="{% url construct-detail object.construct.id %}">{{ object.construct}}</td>
 </tr>
 </tbody>
 </table>

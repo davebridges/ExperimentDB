@@ -25,9 +25,8 @@ class ConstructAdmin(admin.ModelAdmin):
 admin.site.register(Construct, ConstructAdmin)
 
 class Purified_ProteinAdmin(admin.ModelAdmin):
-	prepopulated_fields = {"name_slug" : ("name",)}
-	list_display = ('name', 'tag', 'construct')
-	list_filter = ('tag', 'protein', 'construct')
+	list_display = ('name', 'purification_date', 'construct')
+	list_filter = ('purification_date', 'protein', 'construct')
 admin.site.register(Purified_Protein, Purified_ProteinAdmin)
 
 class PrimerAdmin(admin.ModelAdmin):

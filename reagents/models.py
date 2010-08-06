@@ -19,6 +19,7 @@ PRIMER_TYPE = (
 	('sequencing', 'sequencing'),
 	('RT-PCR', 'RT-PCR'),
 	('siRNA', 'siRNA'),
+	('genotyping', 'Genotyping'),
 	('dsRNA', 'dsRNA Amplification'),
 	('mutagenesis', 'mutagenesis'),
 	('morpholino', 'morpholino'),
@@ -91,24 +92,25 @@ class Construct(models.Model):
 		return "/experimentdb/construct/%i/" % self.id
 
 class Purified_Protein(ReagentInfo):
-	protein = models.CharField(max_length=20, primary_key=True, help_text="ie GST-2xFYVE 2008-11-17")
-	name_slug = models.SlugField(max_length=20)
 	protein = models.ManyToManyField(Protein)
 	purification = models.ForeignKey("data.Experiment", related_name='protein purification', blank=True, null=True)
 	result = models.ForeignKey("data.Result", blank=True, null=True)
-	source_old = models.CharField(max_length=20, blank=True)
-	induction = models.CharField(max_length=50, blank=True)
-	cells = models.CharField(max_length=20, blank=True)
-	protocol = models.ForeignKey("data.Protocol", blank=True)
-	tag = models.CharField(max_length=20, blank=True)
-	construct = models.ForeignKey(Construct, blank=True)
+	induction = models.CharField(max_length=50, blank=True, null=True)
+	cells = models.CharField(max_length=20, blank=True, null=True)
+	protocol = models.ForeignKey("data.Protocol", blank=True, null=True)
+	purification_date = models.DateField(max_length=20, blank=True, null=True)
+	construct = models.ForeignKey(Construct, blank=True, null=True)
 	class Meta:
 		verbose_name_plural = "Purified Proteins"
 	def __unicode__(self):
 		return u'%s' % self.name
+	@models.permalink
 	def get_absolute_url(self):
-		return "/experimentdb/purfiedprotein/%s/" % self.name_slug
-
+		return ('purified-detail', [str(self.id)])
+	class Meta:
+		ordering = ['purified_protein', 'purification_date']
+		#verbose_name = "Purified Protein"
+		
 class Chemical(ReagentInfo):
 	contact = models.ManyToManyField(Contact, blank=True, related_name='chemical researcher')
 	def __unicode__(self):

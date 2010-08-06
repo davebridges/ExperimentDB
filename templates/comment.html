@@ -10,7 +10,7 @@
 
 <h4>Leave a comment</h4>
 {% get_comment_form for object as form %}
-<form action="{% comment_form_target %}" method="POST"> 
+<form action="{% comment_form_target %}" method="POST"> {% csrf_token %}
 {{ form.comment }} 
 {{ form.content_type }} 
 {{ form.object_pk }} 

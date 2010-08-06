@@ -1,5 +1,11 @@
 {% extends "base.html" %}
-
+{% block scripts %}
+	<script type="text/javascript">
+	 $(document).ready(function() {	
+		$('#id_purification_date').datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	</script>
+{% endblock %}
 {% block head_title %}{% if object %}Update Purified Protein {{object}}{% else %} New Purified Protein {% endif %}{% endblock %}
 {% block title %}{% if object %}Update Purified Protein {{object}}{% else %} New Purified Protein {% endif %}{% endblock %}
 {% block content %}

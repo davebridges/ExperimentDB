@@ -109,4 +109,11 @@ INSTALLED_APPS = (
 	'experimentdb.datasets',
 	'experimentdb.sharing',
 	'django.contrib.admin',
+	'ajax_select',
+	'south'
 )
+
+
+AJAX_LOOKUP_CHANNELS = {
+	'strain' : dict(model='experimentdb.reagents.strain',search_field='name')
+	}

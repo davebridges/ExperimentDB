@@ -43,7 +43,7 @@ urlpatterns = patterns('',
 		'model': Purified_Protein, 
 		'template_name': 'purified_form.html',
 		'login_required':True 
-		,}, name="purified-new"),
+		,}, name="purified-edit"),
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_purified, {
 		'model': Purified_Protein, 
 		'login_required':True,
