@@ -1,7 +1,9 @@
 from django.db import models
+
 from experimentdb.proteins.models import Protein
 from experimentdb.external.models import Contact, Reference, Vendor
 from experimentdb.data.models import Experiment, Protocol, Result
+
 
 SPECIES = (
 	('rabbit', 'rabbit'),
