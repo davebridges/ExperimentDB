@@ -50,7 +50,7 @@ class Experiment(models.Model):
 	comments = models.TextField(max_length=500, blank=True, null=True)
 	researcher = models.ManyToManyField(Contact, blank=True, null=True)
 	protein = models.ManyToManyField(Protein, blank=True, null=True)
-	purified_protein = models.ManyToManyField(Purified_Protein, related_name="recombinant_protein", blank=True, null=True)
+	#purified = models.ManyToManyField(Purified_Protein, related_name="recombinant_protein", blank=True, null=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
 	sample_storage = models.CharField(max_length=100, blank=True)
