@@ -34,24 +34,21 @@ Database Setup
 
 Web Server Setup
 ----------------
-You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod\_python.  The following is a httpd.conf example where the code is placed in /usr/src/ExperimentDB::
+You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod\_wsgi.  The following is a httpd.conf example where the code is placed in /usr/src/django/experimentdb::
 
-  Alias /static /usr/src/experimentdb/media
-  Alias /media /usr/src/experimentdb/media
-  <Directory /usr/experimentdb/media>
-     Order allow,deny
-     Allow from all
-  </Directory>
-  <Location "/experimentdb/">
-     SetHandler python-program
-     PythonHandler django.core.handlers.modpython
-     SetEnv DJANGO_SETTINGS_MODULE experimentdb.settings
-     SetEnv PYTHON_EGG_CACHE /var/www/eggs
-     PythonOption django.root /experimentdb
-     PythonDebug On
-     PythonPath "['/usr/src'] + sys.path"
-     PythonInterpreter experimentdb
-  </Location>
+Alias /static /usr/src/django/experimentdb/media
+Alias /media /usr/src/django/experimentdb/media
+<Directory /usr/src/django/experimentdb/media>
+  Order allow,deny
+  Allow from all
+</Directory>
+
+WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
+
+<Directory /usr/src/django/experimentdb/apache>
+Order deny,allow
+Allow from all
+</Directory>
 
 If you want to restrict access to these files, change the Allow from all directive to specific domains or ip addresses (for example Allow from 192.168.0.0/99 would allow from 192.168.0.0 to 192.168.0.99)
 
