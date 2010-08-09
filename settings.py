@@ -99,18 +99,18 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.comments',
-	'django.contrib.messages',
-	'experimentdb.projects',
-	'experimentdb.proteins',
-	'experimentdb.reagents',
-	'experimentdb.external',
-	'experimentdb.cloning',
-	'experimentdb.datasets',
-	'experimentdb.sharing',
-	'experimentdb.data',
-	'django.contrib.admin',
-	'ajax_select',
-	'south'
+    'django.contrib.messages',
+    'experimentdb.projects',
+    'experimentdb.proteins',
+    'experimentdb.reagents',
+    'experimentdb.external',
+    'experimentdb.cloning',
+    'experimentdb.datasets',
+    'experimentdb.sharing',
+    'experimentdb.data',
+    'django.contrib.admin',
+    'ajax_select',
+    'south'
 )
 
 

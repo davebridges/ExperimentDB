@@ -2,8 +2,7 @@ from django.db import models
 
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.proteins.models import Protein
-from experimentdb.reagents import models as reagents_models
-from experimentdb.external.models import Reference, Contact, Vendor
+from experimentdb.reagents.models import Construct, Antibody, Cell, Purified_Protein, Primer, Chemical, Strain
 
 class Protocol(models.Model):
     """Describes the protocol or protocols used to perform each experiment.  
@@ -17,7 +16,7 @@ class Protocol(models.Model):
        
     protocol = models.CharField(max_length=50)
     protocol_slug = models.SlugField(max_length=25)
-    reference = models.ManyToManyField(Reference, blank=True)
+    #reference = models.ManyToManyField(Reference, blank=True)
     protocol_file = models.FileField(upload_to='protocol', blank=True)
     protocol_revision = models.IntegerField(blank=True, null=True, help_text="ProtocolWiki page revision number")
     wiki_page = models.CharField(max_length=75, blank=True, help_text="ProtocolWiki page (via MediaWiki)")
@@ -41,16 +40,16 @@ class Experiment(models.Model):
 	protocol = models.ManyToManyField('Protocol', blank=True, null=True)
 	assay = models.CharField(max_length=100, blank=True, null=True)
 	experiment_date = models.DateField(help_text="Date Performed")
-	cellline = models.ManyToManyField(reagents_models.Cell, blank=True, null=True)
-	antibodies = models.ManyToManyField(reagents_models.Antibody, blank=True, null=True)
-	chemicals = models.ManyToManyField(reagents_models.Chemical, blank=True, null=True)
-	constructs = models.ManyToManyField(reagents_models.Construct, blank=True, null=True)
-	siRNA = models.ManyToManyField(reagents_models.Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
-	strain = models.ManyToManyField(reagents_models.Strain, blank=True, null=True)
+	cellline = models.ManyToManyField(Cell, blank=True, null=True)
+	antibodies = models.ManyToManyField(Antibody, blank=True, null=True)
+	chemicals = models.ManyToManyField(Chemical, blank=True, null=True)
+	constructs = models.ManyToManyField(Construct, blank=True, null=True)
+	siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
+	strain = models.ManyToManyField(Strain, blank=True, null=True)
 	comments = models.TextField(max_length=500, blank=True, null=True)
 	researcher = models.ManyToManyField('Contact', blank=True, null=True)
 	protein = models.ManyToManyField('Protein', blank=True, null=True)
-	purified_protein = models.ManyToManyField(reagents_models.Purified_Protein, blank=True, null=True)
+	purified_protein = models.ManyToManyField(Purified_Protein, blank=True, null=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
 	sample_storage = models.CharField(max_length=100, blank=True)

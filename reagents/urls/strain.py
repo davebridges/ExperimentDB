@@ -51,7 +51,7 @@ urlpatterns = patterns('',
 		,}),
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_strain, {
 		'model': Strain,
-		'template_name': 'confirm_delete.html',
+		'template_name': 'strain_form.html',
 		'login_required':True ,
 		'post_delete_redirect': "/experimentdb/strain"
 		,}, name="strain-delete"),
