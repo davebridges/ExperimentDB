@@ -21,5 +21,5 @@
 {% endfor %}
 </tbody>
 </table>
-{% if perms.reagents.add_antibody %}<p>Click <a href="{% url project-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new project.</p>{% endif %}
+{% if perms.projects.add_project %}<p>Click <a href="{% url project-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new project.</p>{% endif %}
 {% endblock %}
