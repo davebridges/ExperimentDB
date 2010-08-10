@@ -30,24 +30,29 @@ urlpatterns = patterns('',
 	url(r'^$', subproject_list, {
 		"queryset": SubProject.objects.all(), 
 		'template_name': 'subproject_list.html',
+		'template_object_name': 'subproject',
 		}, name="subproject-list"),
-	url(r'^(?P<object_id>[\d]+)/$', subproject_detail, {
+	url(r'^(?P<slug>[\w-]+)/$', subproject_detail, {
 		"queryset": SubProject.objects.all(), 
-		'template_name': 'subproject_detail.html'
+		'template_name': 'subproject_detail.html',
+		'template_object_name': 'subproject',	
+		'slug_field' : 'project_slug'
 		,}, name="subproject-detail"),
 	url(r'^new/$', create_subproject, {
 		'model': SubProject, 
 		'template_name': 'subproject_form.html', 
 		'login_required':True 
 		}, name="subproject-new"),
-	url(r'^(?P<object_id>[\d]+)/edit$', change_subproject, {
+	url(r'^(?P<slug>[\w-]+)/edit$', change_subproject, {
 		'model': SubProject, 
 		'template_name': 'subproject_form.html',
-		'login_required':True 
+		'login_required':True,
+		'slug_field' : 'project_slug'		
 		,}, name="subproject-edit"),
-	url(r'^(?P<object_id>[\d]+)/delete$', delete_subproject, {
+	url(r'^(?P<slug>[\w-]+)/delete$', delete_subproject, {
 		'model': SubProject, 
 		'login_required':True,
+		'slug_field' : 'project_slug',
 		'post_delete_redirect': '/experimentdb/subproject'
 		,}, name="subproject-delete"),
 )

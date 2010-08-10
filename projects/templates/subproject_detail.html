@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head_title %} {{ subproject }} Project Detail {% endblock %}
+{% block title %} SubProject Detail {% endblock %}
+{% block content %}
+<div id="subproject" class="grid_12">
+<h1>{{ subproject.subproject }}</h1>
+<p>{{ subproject.comments }}</p>
+</div>
+<div id="experiments" class="grid_12">
+{% with subproject.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
+{% with subproject as object %}
+{% include "comment.html" %}
+{% endwith %}
+{% endblock %}
