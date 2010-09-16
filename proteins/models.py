@@ -5,6 +5,9 @@ class ProteinFamily(models.Model):
 	notes = models.TextField(max_length=500, blank=True)
 	def __unicode__(self):
 		return '%s' % self.name
+	@models.permalink
+	def get_absolute_url(self):
+		return ('protein-family-detail', [int(self.id)])		
 	class Meta:
 		ordering = ['name']
 		verbose_name = "Protein Family"
@@ -15,8 +18,9 @@ class Protein(models.Model):
 	name = models.CharField(max_length=25)
 	def __unicode__(self):
 		return u'%s' % self.name
+	@models.permalink
 	def get_absolute_url(self):
-		return "experimentdb/protein/%s/" % self.name
+		return ('protein-detail', [int(self.id)])
 	class Meta:
 		ordering = ['name']
 		verbose_name_plural = "Proteins"
