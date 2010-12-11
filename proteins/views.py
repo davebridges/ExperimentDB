@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from experimentdb.proteins.models import Protein
 from experimentdb.data.models import Experiment
-from experimentdb.reagents.models import Antibody, Construct, Primer, Purified_Protein
+from experimentdb.reagents.models import Antibody, Construct, Primer
 from django.contrib.auth.decorators import login_required
 from Bio import Entrez
 from Bio import SeqIO
