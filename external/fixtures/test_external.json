@@ -18,6 +18,7 @@
         "pk": 1, 
         "model": "external.reference", 
         "fields": {
+            "title": "Fixture Reference",
             "researchers": [], 
             "current_lab": false, 
             "public": false, 
