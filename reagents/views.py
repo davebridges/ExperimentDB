@@ -14,7 +14,7 @@ def index(request):
 	cells = Cell.objects.all()
 	primers = Primer.objects.all()
 	strains = Strain.objects.all()
-	return render_to_response('reagent_list.html', {'constructs':constructs, 'antibodies':antibodies, 'proteins':proteins, 'chemicals': chemicals, 'cells':cells, 'primers':primers, 'strains':strains },context_instance=RequestContext(request)) 
+	return render_to_response('reagent_list.html', {'constructs':constructs, 'antibodies':antibodies, 'chemicals': chemicals, 'cells':cells, 'primers':primers, 'strains':strains },context_instance=RequestContext(request)) 
 
 	
 def antibody_lookup(request):

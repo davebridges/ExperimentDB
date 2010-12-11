@@ -1,0 +1,13 @@
+[
+    {
+        "pk": 1, 
+        "model": "sharing.institution", 
+        "fields": {
+            "city": "", 
+            "state": "", 
+            "country": "US", 
+            "institution": "Fixture Institution", 
+            "institution_type": null
+        }
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "pk": 1, 
+        "model": "sharing.recipient", 
+        "fields": {
+            "first_name": "Fixture", 
+            "last_name": "Recipient", 
+            "lab": 1, 
+            "initials": ""
+        }
+    }
+]

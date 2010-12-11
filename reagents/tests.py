@@ -3,8 +3,6 @@
 These tests include model and view tests for Strain, Primer, Cell, Antibody, Construct, Chemical, Species and Selection objects.
 """
 
-import datetime
-
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User

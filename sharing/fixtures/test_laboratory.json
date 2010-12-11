@@ -1,0 +1,16 @@
+[
+    {
+        "pk": 1, 
+        "model": "sharing.laboratory", 
+        "fields": {
+            "principal_investigator": "Fixture", 
+            "address_line_3": "", 
+            "contact": null, 
+            "postal_code": "", 
+            "department": "", 
+            "address_line_2": "", 
+            "institution": 1, 
+            "address_line_1": ""
+        }
+    }
+]
