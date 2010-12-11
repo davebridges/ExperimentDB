@@ -55,6 +55,12 @@ urlpatterns = patterns('',
 	(r'^sent_items?/', include('experimentdb.sharing.urls')),
 	(r'^shipped_items?/', include('experimentdb.sharing.urls')),
 	(r'^shipped?/', include('experimentdb.sharing.urls')),
+
+        (r'^vendors?/', include('experimentdb.external.urls.vendor')),
+        (r'^company/', include('experimentdb.external.urls.vendor')),
+        (r'^companies/', include('experimentdb.external.urls.vendor')),
+        (r'^contacts?/', include('experimentdb.external.urls.contact')),
+        (r'^references?/', include('experimentdb.external.urls.reference')),
 	
 
 	(r'^pi35p2bp/$', 'django.views.generic.list_detail.object_list', {
