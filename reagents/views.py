@@ -4,13 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils import simplejson
 from django.http import HttpResponse
 
-from experimentdb.reagents.models import Construct, Antibody, Purified_Protein, Chemical, Cell, Primer, Strain
+from experimentdb.reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain
 
 @login_required
 def index(request):
 	constructs = Construct.objects.all()
 	antibodies = Antibody.objects.all()
-	proteins = Purified_Protein.objects.all()
 	chemicals = Chemical.objects.all()
 	cells = Cell.objects.all()
 	primers = Primer.objects.all()

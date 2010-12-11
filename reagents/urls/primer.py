@@ -33,7 +33,7 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/$', primer_detail, {
 		"queryset": Primer.objects.all(), 
 		'template_name': 'primer_detail.html'
-		,}, name="primer-detail"),
+		,}, name='primer-detail'),
 	url(r'^new/$', create_primer, {
 		'model': Primer, 
 		'template_name': 'primer_form.html', 
