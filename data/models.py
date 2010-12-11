@@ -2,7 +2,7 @@ from django.db import models
 
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Construct, Antibody, Cell, Purified_Protein, Primer, Chemical, Strain
+from experimentdb.reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain
 from experimentdb.external.models import Contact, Reference
 
 class Protocol(models.Model):
@@ -50,7 +50,6 @@ class Experiment(models.Model):
 	comments = models.TextField(max_length=500, blank=True, null=True)
 	researcher = models.ManyToManyField(Contact, blank=True, null=True)
 	protein = models.ManyToManyField(Protein, blank=True, null=True)
-	#purified = models.ManyToManyField(Purified_Protein, related_name="recombinant_protein", blank=True, null=True)
 	public = models.BooleanField()
 	published = models.BooleanField()
 	sample_storage = models.CharField(max_length=100, blank=True)
