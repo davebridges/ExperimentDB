@@ -18,11 +18,14 @@ class Project(models.Model):
     published = models.BooleanField()
     collaborators = models.ManyToManyField(Contact, blank=True, null=True)
     papers = models.ManyToManyField(Reference, blank=True, null=True)
+
     def __unicode__(self):
         return u'%s ' % self.project
+
     @models.permalink
     def get_absolute_url(self):
-	return ('project-detail', [str(self.project_slug)])
+        return ('project-detail', [str(self.project_slug)])
+
     def save(self):
         """The save is over-ridden to slugify the project field into a slugfield."""
         self.project_slug = slugify( self.project )
@@ -42,14 +45,18 @@ class SubProject(models.Model):
     published = models.BooleanField()
     collaborators = models.ManyToManyField(Contact, blank=True, null=True)
     papers = models.ManyToManyField(Reference, blank=True, null=True)
+
     class Meta:
         verbose_name_plural = "Sub-Projects"
         verbose_name = "Sub-Project"
+
     def __unicode__(self):
         return u'%s ' % self.subproject
+
     @models.permalink
     def get_absolute_url(self):
-	return ('subproject-detail', [str(self.project_slug)])
+        return ('subproject-detail', [str(self.project_slug)])
+
     def save(self):
         """The save is over-ridden to slugify the subproject field into a slugfield."""
         self.subproject_slug = slugify( self.project )
