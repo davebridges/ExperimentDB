@@ -38,10 +38,6 @@ urlpatterns = patterns('',
 	url(r'^cell-?lines?/', include('experimentdb.reagents.urls.cell')),
 	url(r'^cultured-cell-?lines?/', include('experimentdb.reagents.urls.cell')),
 
-	url(r'^purifieds?/', include('experimentdb.reagents.urls.purified')),
-	url(r'^purified-?proteins?/', include('experimentdb.reagents.urls.purified')),
-	url(r'^recombinant-?proteins?/', include('experimentdb.reagents.urls.purified')),
-
 	url(r'^chemicals?/', include('experimentdb.reagents.urls.chemical')),
 	url(r'^drugs?/', include('experimentdb.reagents.urls.chemical')),
 	url(r'^pharmaceuticals?/', include('experimentdb.reagents.urls.chemical')),
