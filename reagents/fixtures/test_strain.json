@@ -1,0 +1,26 @@
+[
+    {
+        "pk": 1, 
+        "model": "reagents.strain", 
+        "fields": {
+            "box": null, 
+            "strain_species": null, 
+            "selection": null, 
+            "vendor": null, 
+            "name": "Fixture Strain", 
+            "reference": [], 
+            "researcher": [], 
+            "notes": null, 
+            "plasmids": [], 
+            "public": false, 
+            "source": null, 
+            "location": "-20", 
+            "background": null, 
+            "published": false, 
+            "species": "brewers yeast", 
+            "protein": [], 
+            "slug": "fixture-strain", 
+            "genotype": ""
+        }
+    }
+]

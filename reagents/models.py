@@ -65,6 +65,7 @@ class ReagentInfo(models.Model):
     source = models.CharField(max_length=25, blank=True, null=True)
     researcher = models.ManyToManyField(Contact, blank=True, null=True, related_name="%(class)s_researcher")
     vendor = models.ForeignKey(Vendor, blank=True, null=True, related_name="%(class)s_vendor")
+    protein = models.ManyToManyField(Protein, null=True, blank=True)
     notes = models.TextField(max_length=250, blank=True, null=True)
     reference = models.ManyToManyField(Reference, blank=True, null=True)
     public = models.BooleanField()
@@ -77,13 +78,12 @@ class ReagentInfo(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
 
-class Antibody(models.Model):
+class Antibody(ReagentInfo):
     """This model describes antibodies.
 
     The required fields are name and source_species.
     This model is a subclass of ReagentInfo.
     """
-    protein = models.ManyToManyField(Protein, null=True, blank=True)
     protein_size = models.CharField(max_length=30, blank=True, null=True)
     source_species = models.CharField(max_length=25, choices=SPECIES, help_text="The species in which the antibody was raised in, i.e. which secondary antibody to use")
     species = models.ForeignKey('Species', blank=True, null=True, help_text="The species in which the antibody was raised in, i.e. which secondary antibody to use")
@@ -101,7 +101,7 @@ class Antibody(models.Model):
         self.slug = slugify( self.name )
         super( Antibody, self ).save()
 
-class Construct(models.Model):
+class Construct(ReagentInfo):
     """This model describes recombinant DNA objects.
 
     The only required field is name.
@@ -193,30 +193,39 @@ class Primer(ReagentInfo):
 class Selection(models.Model):
     '''Model for selection conditions of transformants.
 
-    This object has one required field, being the selection name.  An optional comments field is also available.
+    This object has one required field, being **selection**.  An optional comments field is also available.
 
     Initial data upon installation includes resistance to ampicillin or kanamycin.  Other selective markers should be added at /experimentdb/selection/new
     '''
     selection = models.CharField(max_length=50)
+    selection_slug = models.SlugField(max_length=50)
     notes = models.TextField(max_length=250, blank=True, null=True)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('selection-detail', [str(self.slug)])
+        return ('selection-detail', [str(self.id)])
 
     class Meta:
         ordering = ['selection']
+
+    def __unicode__(self):
+        return '%s' % self.selection
+
+    def save(self):
+        """The save is over-ridden to slugify the selection field into a slugfield."""
+        self.slug = slugify( self.selection )
+        super( Selection, self ).save()
 		
 	
 class Strain(ReagentInfo):
     '''Model describing biological strains.
 
     This was devised to organize yeast strains, but can be used for bacteria or other organisms as well.
-    The only required field is name.
+    The only required field is **name**.
     This is a subclass of ReagentInfo abstract class
     '''
     background = models.ForeignKey('Strain', blank=True, null=True)
-    plasmids = models.ManyToManyField(Construct, blank=True, null=True)
+    plasmids = models.ManyToManyField('Construct', blank=True, null=True)
     selection = models.ForeignKey('Selection', blank=True, null=True)
     species = models.CharField(max_length=50, choices=SPECIES, blank=True, null=True, default='brewers yeast')
     strain_species = models.ForeignKey('Species', blank=True, null=True)
@@ -234,17 +243,23 @@ class Strain(ReagentInfo):
 class Species(models.Model):
     '''Model for indicating specific species.  
        
-    The only required field is generic name.
+    The only required field is common_name.
     This is used with Strain, Cell and Antibody objects.
     Currently the species field, with the old choices=SPECIES is present until data can be migrated.  
     Upon installation, initial data is provided for rabbit, mouse, human, yeast and goat species.  
     More species can be added at /experimentdb/species/new.
     '''
-    common_name = models.CharField(max_length=20, help_text="Generic name of the species")
+    common_name = models.CharField(max_length=50, help_text="Generic name of the species")
+    species_slug = models.SlugField(max_length=50, help_text="Will be automatically generated upon saving.")
     taxonomy_id = models.IntegerField(blank=True, null=True, help_text="NCBI taxonomy id, find at http://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/")
 
     def __unicode__(self):
         return u'%s' %self.common_name
+
+    def save(self):
+        """The save is over-ridden to slugify the common_name field into a slugfield."""
+        self.species_slug = slugify( self.common_name )
+        super( Species, self ).save()
 
     @models.permalink
     def get_absolute_url(self):

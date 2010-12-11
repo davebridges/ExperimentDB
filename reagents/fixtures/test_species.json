@@ -1,0 +1,11 @@
+[
+    {
+        "pk": 1, 
+        "model": "reagents.species", 
+        "fields": {
+            "common_name": "Fixture Species", 
+            "species_slug": "fixture-species",
+            "taxonomy_id": null
+        }
+    }
+]

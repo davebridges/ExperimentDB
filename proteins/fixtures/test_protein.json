@@ -1,0 +1,10 @@
+[
+    {
+        "pk": 1, 
+        "model": "proteins.protein", 
+        "fields": {
+            "name": "Fixture Protein", 
+            "protein_family": []
+        }
+    }
+]
