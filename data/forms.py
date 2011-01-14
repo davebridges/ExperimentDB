@@ -14,6 +14,13 @@ from experimentdb.data.models import Experiment, Result
 class ExperimentForm(forms.ModelForm):
     """This is a modelform for the creation and editing of experimental data."""
     antibodies = AutoCompleteSelectMultipleField('antibody', required=False)
+    constructs = AutoCompleteSelectMultipleField('construct', required=False)	
+    cellline = AutoCompleteSelectMultipleField('cell', required=False)
+    chemicals = AutoCompleteSelectMultipleField('chemical', required=False)
+    siRNA = AutoCompleteSelectMultipleField('siRNA', required=False)	
+    strain = AutoCompleteSelectMultipleField('strain', required=False)	
+    protein = AutoCompleteSelectMultipleField('protein', required=False)		
+    protocol = AutoCompleteSelectMultipleField('protocol', required=False)	
     class Meta:
         model = Experiment
     class Media:

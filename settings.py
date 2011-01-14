@@ -116,4 +116,11 @@ INSTALLED_APPS = (
 
 AJAX_LOOKUP_CHANNELS = {
 	'antibody' : ('experimentdb.reagents.lookups', 'AntibodyLookup'),
+	'construct' : ('experimentdb.reagents.lookups', 'ConstructLookup'),
+	'chemical' : ('experimentdb.reagents.lookups', 'ChemicalLookup'),
+	'siRNA' : ('experimentdb.reagents.lookups', 'SiRNALookup'),
+	'strain' : ('experimentdb.reagents.lookups', 'StrainLookup'),
+	'cell' : ('experimentdb.reagents.lookups', 'CellLineLookup'),	
+	'protein' : ('experimentdb.proteins.lookups', 'ProteinLookup'),		
+	'protocol' : ('experimentdb.data.lookups', 'ProtocolLookup'),		
 	}
