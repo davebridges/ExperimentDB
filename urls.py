@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
 	(r'^comments?/', include('django.contrib.comments.urls')),
 	(r'^search/$', 'experimentdb.views.search'),
+	(r'^ajax_select/', include('ajax_select.urls')),
 
 	(r'^experiments?/', include('experimentdb.data.urls.experiment')),
 	(r'^exps?/', include('experimentdb.data.urls.experiment')),

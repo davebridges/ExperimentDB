@@ -115,5 +115,5 @@ INSTALLED_APPS = (
 
 
 AJAX_LOOKUP_CHANNELS = {
-	'strain' : dict(model='experimentdb.reagents.Strain',search_field='name')
+	'antibody' : ('experimentdb.reagents.lookups', 'AntibodyLookup'),
 	}
