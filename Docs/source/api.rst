@@ -19,6 +19,11 @@ Views
 
 .. automodule:: experimentdb.data.views
 
+Lookups
+.......
+
+.. automodule:: experimentdb.data.lookups
+
 URLconfs
 ........
 
@@ -159,6 +164,11 @@ Views
 .....
 
 .. automodule:: experimentdb.proteins.views
+
+Lookups
+.......
+
+.. automodule:: experimentdb.proteins.lookups
    
 
 URLconfs
@@ -195,6 +205,11 @@ Views
 .....
 
 .. automodule:: experimentdb.reagents.views
+
+Lookups
+.......
+
+.. automodule:: experimentdb.reagents.lookups
    
 
 URLconfs
