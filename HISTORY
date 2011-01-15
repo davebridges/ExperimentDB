@@ -2,7 +2,18 @@ History Log Starts After Release 0.2.0
 
 Release 0.2.dev
 ===============
-* change release number in Docs/source/conf.py
+
+Todo
+----
+
+* Audit model and view tests
+* Write docstrings for __init__.py
+* Audit model and view docstrings
+
+Before uploading
+----------------
+
+* change release number in setup.py and Docs/source/conf.py
 * upload new release with::
     
 	python setup.py sdist bdist_dumb bdist_msi register upload
