@@ -2,3 +2,13 @@ History Log Starts After Release 0.2.0
 
 Release 0.2.dev
 ===============
+* change release number in Docs/source/conf.py
+* upload new release with::
+    
+	python setup.py sdist bdist_dumb bdist_msi register upload
+	
+* tag new release with::
+    
+	svn copy https://experimentdb.googlecode.com/svn/trunk/ \ 
+	  https://experimentdb.googlecode.com/svn/tags/release-0.2/ \
+      -m "Tagging the 0.2 release."

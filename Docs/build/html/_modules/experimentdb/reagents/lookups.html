@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.reagents.lookups &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.reagents.lookups</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;This is a configuration file for the ajax lookups for the reagents app.</span>
+
+<span class="sd">See http://code.google.com/p/django-ajax-selects/ for information about configuring the ajax lookups.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">experimentdb.reagents.models</span> <span class="kn">import</span> <span class="n">Antibody</span><span class="p">,</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">Chemical</span><span class="p">,</span> <span class="n">Strain</span><span class="p">,</span> <span class="n">Primer</span><span class="p">,</span> <span class="n">Cell</span>
+
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+
+<div class="viewcode-block" id="AntibodyLookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.AntibodyLookup">[docs]</a><span class="k">class</span> <span class="nc">AntibodyLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for antibodies.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all antibody requests and directs to the &#39;antibody&#39; channel.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AntibodyLookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.AntibodyLookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the antibody.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Antibody</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AntibodyLookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.AntibodyLookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">antibody</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the antibody, as well as the vendor and the source species.&quot;&quot;&quot;</span>
+        <span class="c">#return unicode(antibody)</span>
+        <span class="k">return</span> <span class="s">u&quot;</span><span class="si">%s</span><span class="s"> &lt;strong&gt;from:&lt;/strong&gt; </span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">antibody</span><span class="p">,</span> <span class="n">antibody</span><span class="o">.</span><span class="n">vendor</span><span class="p">,</span> <span class="n">antibody</span><span class="o">.</span><span class="n">source_species</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="AntibodyLookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.AntibodyLookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">antibody</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s">u&quot;</span><span class="si">%s</span><span class="s"> &lt;strong&gt;from:&lt;/strong&gt; </span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">antibody</span><span class="p">,</span> <span class="n">antibody</span><span class="o">.</span><span class="n">vendor</span><span class="p">,</span> <span class="n">antibody</span><span class="o">.</span><span class="n">source_species</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AntibodyLookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.AntibodyLookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Antibody</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>
+	</div></div>
+<div class="viewcode-block" id="ConstructLookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ConstructLookup">[docs]</a><span class="k">class</span> <span class="nc">ConstructLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for constructs.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all construct requests and directs to the &#39;construct&#39; channel.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ConstructLookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ConstructLookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the construct.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Construct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ConstructLookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ConstructLookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">construct</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the construct.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">construct</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="ConstructLookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ConstructLookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">construct</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">construct</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ConstructLookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ConstructLookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Construct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>
+		</div></div>
+<div class="viewcode-block" id="ChemicalLookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ChemicalLookup">[docs]</a><span class="k">class</span> <span class="nc">ChemicalLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for chemicals.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all chemical requests and directs to the &#39;chemical&#39; channel.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ChemicalLookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ChemicalLookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the chemical.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Chemical</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ChemicalLookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ChemicalLookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chemical</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the chemical.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">chemical</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="ChemicalLookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ChemicalLookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chemical</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">chemical</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ChemicalLookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.ChemicalLookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Chemical</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>	
+		</div></div>
+<div class="viewcode-block" id="StrainLookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.StrainLookup">[docs]</a><span class="k">class</span> <span class="nc">StrainLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for strains.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all strain requests and directs to the &#39;strain&#39; channel.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="StrainLookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.StrainLookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the strain.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Strain</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="StrainLookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.StrainLookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strain</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the strain.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="StrainLookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.StrainLookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strain</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="StrainLookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.StrainLookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Strain</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>	
+</div></div>
+<div class="viewcode-block" id="CellLineLookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.CellLineLookup">[docs]</a><span class="k">class</span> <span class="nc">CellLineLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for strains.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all cell line requests and directs to the &#39;cell&#39; channel.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CellLineLookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.CellLineLookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the cell.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Cell</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CellLineLookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.CellLineLookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cell</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the cell line.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="CellLineLookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.CellLineLookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cell</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CellLineLookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.CellLineLookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Cell</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>		
+</div></div>
+<div class="viewcode-block" id="SiRNALookup"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.SiRNALookup">[docs]</a><span class="k">class</span> <span class="nc">SiRNALookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the generic lookup for siRNA.</span>
+<span class="sd">	</span>
+<span class="sd">	It is to be used for all siRNA requests and directs to the &#39;siRNA&#39; channel</span>
+<span class="sd">	This channel will **not** search for all Primer objects, only the ones with primer_type=&quot;siRNA&quot;.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SiRNALookup.get_query"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.SiRNALookup.get_query">[docs]</a>    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This sets up the query for the lookup.</span>
+<span class="sd">		</span>
+<span class="sd">		The lookup searches the name of the siRNA.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Primer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name__icontains</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">primer_type</span><span class="o">=</span><span class="s">&quot;siRNA&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SiRNALookup.format_result"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.SiRNALookup.format_result">[docs]</a>    <span class="k">def</span> <span class="nf">format_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">siRNA</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; This controls the display of the dropdown menu.</span>
+<span class="sd">		</span>
+<span class="sd">		This is set to show the unicode name of the siRNA line.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">siRNA</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="SiRNALookup.format_item"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.SiRNALookup.format_item">[docs]</a>    <span class="k">def</span> <span class="nf">format_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">siRNA</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the display of a currently selected object in the area below the search box. html is OK &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">siRNA</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SiRNALookup.get_objects"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.lookups.SiRNALookup.get_objects">[docs]</a>    <span class="k">def</span> <span class="nf">get_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ids</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; given a list of ids, return the objects ordered as you would like them on the admin page.</span>
+<span class="sd">            this is for displaying the currently selected items (in the case of a ManyToMany field)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Primer</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">pk__in</span><span class="o">=</span><span class="n">ids</span><span class="p">)</span>			
+		
+		
+		</div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

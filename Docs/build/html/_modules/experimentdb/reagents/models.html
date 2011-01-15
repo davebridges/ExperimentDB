@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.reagents.models &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.reagents.models</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;This package describes the models in the reagents app.</span>
+
+<span class="sd">The models are ReagentInfo, which is an abstract superclass of:</span>
+<span class="sd">- Primer</span>
+<span class="sd">- Cell</span>
+<span class="sd">- Antibody</span>
+<span class="sd">- Strain</span>
+<span class="sd">- Chemical</span>
+<span class="sd">- Construct</span>
+
+<span class="sd">The ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.</span>
+<span class="sd">This package also contains a Selection model, to be used for antibiotic selections, and a specied model, to be used to indicate various species.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.template.defaultfilters</span> <span class="kn">import</span> <span class="n">slugify</span>
+
+<span class="kn">from</span> <span class="nn">experimentdb.proteins.models</span> <span class="kn">import</span> <span class="n">Protein</span>
+<span class="kn">from</span> <span class="nn">experimentdb.external.models</span> <span class="kn">import</span> <span class="n">Contact</span><span class="p">,</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">Vendor</span>
+
+
+
+
+<span class="n">SPECIES</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">(</span><span class="s">&#39;rabbit&#39;</span><span class="p">,</span> <span class="s">&#39;rabbit&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;mouse&#39;</span><span class="p">,</span> <span class="s">&#39;mouse&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;human&#39;</span><span class="p">,</span> <span class="s">&#39;human&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;monkey&#39;</span><span class="p">,</span> <span class="s">&#39;monkey&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;goat&#39;</span><span class="p">,</span> <span class="s">&#39;goat&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;sheep&#39;</span><span class="p">,</span> <span class="s">&#39;sheep&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;rat&#39;</span><span class="p">,</span> <span class="s">&#39;rat&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;fly&#39;</span><span class="p">,</span> <span class="s">&#39;fly&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;brewers yeast&#39;</span><span class="p">,</span> <span class="s">&#39;brewers yeast&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">PRIMER_TYPE</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">(</span><span class="s">&#39;cloning&#39;</span><span class="p">,</span> <span class="s">&#39;cloning&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;sequencing&#39;</span><span class="p">,</span> <span class="s">&#39;sequencing&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;RT-PCR&#39;</span><span class="p">,</span> <span class="s">&#39;RT-PCR&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;siRNA&#39;</span><span class="p">,</span> <span class="s">&#39;siRNA&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;genotyping&#39;</span><span class="p">,</span> <span class="s">&#39;Genotyping&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;dsRNA&#39;</span><span class="p">,</span> <span class="s">&#39;dsRNA Amplification&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;mutagenesis&#39;</span><span class="p">,</span> <span class="s">&#39;mutagenesis&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;morpholino&#39;</span><span class="p">,</span> <span class="s">&#39;morpholino&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">LOCATIONS</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">(</span><span class="s">&#39;-20&#39;</span><span class="p">,</span> <span class="s">&#39;-20 Freezer&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;Small Fridge&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;-80&#39;</span><span class="p">,</span> <span class="s">&#39;-80 Freezer&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;liquid nitrogen&#39;</span><span class="p">,</span> <span class="s">&#39;Liquid Nitrogen Tank&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="ReagentInfo"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.ReagentInfo">[docs]</a><span class="k">class</span> <span class="nc">ReagentInfo</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Abstract base model for all reagents, will not be used in isolation, only as part of other models.</span>
+
+<span class="sd">    This superclass provides several generic fields, available to all reagents.  The only required field of all reagents is name.</span>
+<span class="sd">    It orders all reagents by name, although this may be over-ridden in the model.  </span>
+<span class="sd">    It also sets sets their __unicode__ representation to be &quot;name&quot;.&#39;&#39;&#39;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">slug</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">SlugField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">LOCATIONS</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&quot;-20&quot;</span><span class="p">)</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">researcher</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Contact</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%(class)s</span><span class="s">_researcher&quot;</span><span class="p">)</span>
+    <span class="n">vendor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Vendor</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;</span><span class="si">%(class)s</span><span class="s">_vendor&quot;</span><span class="p">)</span>
+    <span class="n">protein</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Protein</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Reference</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">public</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
+    <span class="n">published</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ReagentInfo.Meta"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.ReagentInfo.Meta">[docs]</a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+</div>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+</div>
+<div class="viewcode-block" id="Antibody"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Antibody">[docs]</a><span class="k">class</span> <span class="nc">Antibody</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This model describes antibodies.</span>
+
+<span class="sd">    The required fields are name and source_species.</span>
+<span class="sd">    This model is a subclass of ReagentInfo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">protein_size</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">source_species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SPECIES</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The species in which the antibody was raised in, i.e. which secondary antibody to use&quot;</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Species&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The species in which the antibody was raised in, i.e. which secondary antibody to use&quot;</span><span class="p">)</span>
+    <span class="n">catalog</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">blank</span> <span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;Antibodies&quot;</span>
+
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Antibody.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Antibody.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;antibody-detail&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</div>
+<div class="viewcode-block" id="Antibody.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Antibody.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Antibody</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div></div>
+<div class="viewcode-block" id="Construct"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Construct">[docs]</a><span class="k">class</span> <span class="nc">Construct</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This model describes recombinant DNA objects.</span>
+
+<span class="sd">    The only required field is name.</span>
+<span class="sd">    It is a subclass of ReagentInfo.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plasmid</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Selection&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">sequencing_contig</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;contig/%Y/%m/</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;LaserGene Assembled Sequencing Runs&quot;</span><span class="p">)</span>
+    <span class="n">sequenced_object</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s">&#39;sequenced_object/%Y/%m/</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;LaserGene Assembled Sequence&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Construct.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Construct.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Construct</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Construct.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Construct.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;construct-detail&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+	
+</div></div>
+<div class="viewcode-block" id="Chemical"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Chemical">[docs]</a><span class="k">class</span> <span class="nc">Chemical</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This model describes objects of the class Chemical.</span>
+
+<span class="sd">    It is intended to describe chemicals used in experiments.</span>
+<span class="sd">    The only required field is name.</span>
+<span class="sd">    This model is a subclass of ReagentInfo.&quot;&quot;&quot;</span>
+    <span class="n">cas</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Chemical Abstract Services Number&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Chemical.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Chemical.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Chemical</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Chemical.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Chemical.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;chemical-detail&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+
+	</div></div>
+<div class="viewcode-block" id="Cell"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Cell">[docs]</a><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This model describes objects of the class Cell.</span>
+
+<span class="sd">    This model is intended to be used to store information about mammalian cell lines.</span>
+<span class="sd">    The only required field is name.</span>
+<span class="sd">    This model is a subclass of ReagentInfo.&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SPECIES</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">cell_line_species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Species&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="s">&quot;Cell Line&quot;</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;Cell Lines&quot;</span>
+
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Cell.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Cell.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;cell-detail&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</div>
+<div class="viewcode-block" id="Cell.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Cell.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Cell</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+</div></div>
+<div class="viewcode-block" id="Primer"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Primer">[docs]</a><span class="k">class</span> <span class="nc">Primer</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model describing primer objects.</span>
+<span class="sd">	</span>
+<span class="sd">    These objects can be of any short nucleotide type including primers, siRNA oligos or morpholinos.  </span>
+<span class="sd">    The required fields are the name and the type.  </span>
+<span class="sd">    The nonrequired fields include the sequence, the protein, the ordering date and all generic reagent info fields.</span>
+<span class="sd">    This is a subclass of the ReagentInfo abstract base class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">date_ordered</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">primer_type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">PRIMER_TYPE</span><span class="p">)</span>
+    <span class="n">sequence</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;primer_type&#39;</span><span class="p">]</span>
+
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Primer.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Primer.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;primer-detail&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</div>
+<div class="viewcode-block" id="Primer.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Primer.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Primer</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+		</div></div>
+<div class="viewcode-block" id="Selection"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Selection">[docs]</a><span class="k">class</span> <span class="nc">Selection</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model for selection conditions of transformants.</span>
+
+<span class="sd">    This object has one required field, being **selection**.  An optional comments field is also available.</span>
+
+<span class="sd">    Initial data upon installation includes resistance to ampicillin or kanamycin.  Other selective markers should be added at /experimentdb/selection/new</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">selection_slug</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">SlugField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">notes</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Selection.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Selection.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;selection-detail&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</div>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;selection&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span>
+
+<div class="viewcode-block" id="Selection.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Selection.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the selection field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Selection</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+		
+	</div></div>
+<div class="viewcode-block" id="Strain"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Strain">[docs]</a><span class="k">class</span> <span class="nc">Strain</span><span class="p">(</span><span class="n">ReagentInfo</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model describing biological strains.</span>
+
+<span class="sd">    This was devised to organize yeast strains, but can be used for bacteria or other organisms as well.</span>
+<span class="sd">    The only required field is **name**.</span>
+<span class="sd">    This is a subclass of ReagentInfo abstract class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">background</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Strain&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">plasmids</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="s">&#39;Construct&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">selection</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Selection&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SPECIES</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;brewers yeast&#39;</span><span class="p">)</span>
+    <span class="n">strain_species</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;Species&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">genotype</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;BY4742 is MATa his3&amp;Delta;1 leu2&amp;Delta;0 lys2&amp;Delta;0 ura3&amp;Delta;0&quot;</span><span class="p">)</span>
+    
+<div class="viewcode-block" id="Strain.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Strain.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Strain</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Strain.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Strain.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;strain-detail&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</div></div>
+<div class="viewcode-block" id="Species"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Species">[docs]</a><span class="k">class</span> <span class="nc">Species</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Model for indicating specific species.  </span>
+<span class="sd">       </span>
+<span class="sd">    The only required field is common_name.</span>
+<span class="sd">    This is used with Strain, Cell and Antibody objects.</span>
+<span class="sd">    Currently the species field, with the old choices=SPECIES is present until data can be migrated.  </span>
+<span class="sd">    Upon installation, initial data is provided for rabbit, mouse, human, yeast and goat species.  </span>
+<span class="sd">    More species can be added at /experimentdb/species/new.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">common_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Generic name of the species&quot;</span><span class="p">)</span>
+    <span class="n">species_slug</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">SlugField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Will be automatically generated upon saving.&quot;</span><span class="p">)</span>
+    <span class="n">taxonomy_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;NCBI taxonomy id, find at http://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html/&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">common_name</span>
+
+<div class="viewcode-block" id="Species.save"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Species.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The save is over-ridden to slugify the common_name field into a slugfield.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">species_slug</span> <span class="o">=</span> <span class="n">slugify</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">common_name</span> <span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span> <span class="n">Species</span><span class="p">,</span> <span class="bp">self</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</div>
+    <span class="nd">@models.permalink</span>
+<div class="viewcode-block" id="Species.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.models.Species.get_absolute_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;species-detail&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)])</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

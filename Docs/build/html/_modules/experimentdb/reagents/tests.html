@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.reagents.tests &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.reagents.tests</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;This file contains tests for the reagents application.</span>
+
+<span class="sd">These tests include model and view tests for Strain, Primer, Cell, Antibody, Construct, Chemical, Species and Selection objects.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.test.client</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="kn">from</span> <span class="nn">experimentdb.reagents.models</span> <span class="kn">import</span> <span class="n">Primer</span><span class="p">,</span> <span class="n">Cell</span><span class="p">,</span> <span class="n">Antibody</span><span class="p">,</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">Chemical</span><span class="p">,</span> <span class="n">Strain</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="n">Selection</span>
+<span class="kn">from</span> <span class="nn">experimentdb.external.models</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">Contact</span><span class="p">,</span> <span class="n">Vendor</span>
+<span class="kn">from</span> <span class="nn">experimentdb.proteins.models</span> <span class="kn">import</span> <span class="n">Protein</span>
+
+
+<span class="n">MODELS</span> <span class="o">=</span> <span class="p">[</span><span class="n">Primer</span><span class="p">,</span> <span class="n">Cell</span><span class="p">,</span> <span class="n">Antibody</span><span class="p">,</span> <span class="n">Construct</span><span class="p">,</span> <span class="n">Chemical</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="n">Selection</span><span class="p">]</span>
+
+<div class="viewcode-block" id="PrimerModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests">[docs]</a><span class="k">class</span> <span class="nc">PrimerModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Primer objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span><span class="s">&#39;test_protein&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="PrimerModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="PrimerModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="PrimerModelTests.test_create_primer_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests.test_create_primer_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_primer_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new primer object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_primer</span> <span class="o">=</span> <span class="n">Primer</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test primer&quot;</span><span class="p">,</span> <span class="n">primer_type</span><span class="o">=</span><span class="s">&quot;cloning&quot;</span><span class="p">)</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_primer</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test primer&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="PrimerModelTests.test_primer_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests.test_primer_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_primer_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the primer name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_primer</span> <span class="o">=</span> <span class="n">Primer</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test primer&quot;</span><span class="p">,</span> <span class="n">primer_type</span><span class="o">=</span><span class="s">&quot;cloning&quot;</span><span class="p">)</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_primer</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-primer&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="PrimerModelTests.test_create_primer_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.PrimerModelTests.test_create_primer_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_primer_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new primer object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_primer</span> <span class="o">=</span> <span class="n">Primer</span><span class="p">(</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test primer&quot;</span><span class="p">,</span> 
+             <span class="n">primer_type</span><span class="o">=</span><span class="s">&quot;cloning&quot;</span><span class="p">,</span>
+             <span class="n">date_ordered</span> <span class="o">=</span> <span class="s">&quot;2010-01-01&quot;</span><span class="p">,</span>
+             <span class="n">sequence</span> <span class="o">=</span> <span class="s">&quot;ATGGCTTCTT&quot;</span><span class="p">,</span>
+             <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+             <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+             <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+             <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+             <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+             <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_primer</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_primer</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test primer&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="AntibodyModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests">[docs]</a><span class="k">class</span> <span class="nc">AntibodyModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Antibody objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span> <span class="s">&#39;test_species&#39;</span><span class="p">,</span> <span class="s">&#39;test_protein&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="AntibodyModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="AntibodyModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="AntibodyModelTests.test_create_antibody_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests.test_create_antibody_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_antibody_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new antibody object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_antibody</span> <span class="o">=</span> <span class="n">Antibody</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test antibody&quot;</span><span class="p">,</span> <span class="n">source_species</span> <span class="o">=</span> <span class="s">&quot;rabbit&quot;</span><span class="p">)</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_antibody</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test antibody&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AntibodyModelTests.test_antibody_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests.test_antibody_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_antibody_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the antibody name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_antibody</span> <span class="o">=</span> <span class="n">Antibody</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test antibody&quot;</span><span class="p">,</span> <span class="n">source_species</span> <span class="o">=</span> <span class="s">&quot;rabbit&quot;</span><span class="p">)</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_antibody</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-antibody&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AntibodyModelTests.test_create_antibody_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.AntibodyModelTests.test_create_antibody_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_antibody_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new antibody object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_antibody</span> <span class="o">=</span> <span class="n">Antibody</span><span class="p">(</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test antibody&quot;</span><span class="p">,</span> 
+             <span class="n">protein_size</span> <span class="o">=</span> <span class="s">&quot;120 kDa&quot;</span><span class="p">,</span>
+             <span class="n">source_species</span> <span class="o">=</span> <span class="s">&quot;rabbit&quot;</span><span class="p">,</span>
+             <span class="n">species</span> <span class="o">=</span> <span class="n">Species</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">catalog</span> <span class="o">=</span> <span class="s">&quot;abc1234&quot;</span><span class="p">,</span>
+             <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+             <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+             <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+             <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+             <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+             <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_antibody</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_antibody</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test antibody&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="ConstructModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests">[docs]</a><span class="k">class</span> <span class="nc">ConstructModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Construct objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span><span class="s">&#39;test_protein&#39;</span><span class="p">,</span> <span class="s">&#39;test_selection&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="ConstructModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ConstructModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ConstructModelTests.test_create_cell_line_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests.test_create_cell_line_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_cell_line_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new construct object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_construct</span> <span class="o">=</span> <span class="n">Construct</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test construct&quot;</span><span class="p">)</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_construct</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test construct&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ConstructModelTests.test_construct_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests.test_construct_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_construct_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the construct name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_construct</span> <span class="o">=</span> <span class="n">Construct</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test construct&quot;</span><span class="p">)</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_construct</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-construct&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ConstructModelTests.test_create_construct_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ConstructModelTests.test_create_construct_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_construct_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new construct object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_construct</span> <span class="o">=</span> <span class="n">Construct</span><span class="p">(</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test construct&quot;</span><span class="p">,</span> 
+             <span class="n">plasmid</span> <span class="o">=</span> <span class="s">&quot;test plasmid&quot;</span><span class="p">,</span>
+             <span class="n">selection</span> <span class="o">=</span> <span class="n">Selection</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+             <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+             <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+             <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+             <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+             <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_construct</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_construct</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test construct&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="CellModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests">[docs]</a><span class="k">class</span> <span class="nc">CellModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Cell objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span><span class="s">&#39;test_protein&#39;</span><span class="p">,</span> <span class="s">&#39;test_species&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="CellModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="CellModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="CellModelTests.test_create_cell_line_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests.test_create_cell_line_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_cell_line_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new cell line object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_cell_line</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test cell line&quot;</span><span class="p">)</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_cell_line</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test cell line&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CellModelTests.test_cell_line_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests.test_cell_line_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_cell_line_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the cell line name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_cell_line</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test cell line&quot;</span><span class="p">)</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_cell_line</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-cell-line&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="CellModelTests.test_create_cell_line_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.CellModelTests.test_create_cell_line_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_cell_line_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new cell_line object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_cell_line</span> <span class="o">=</span> <span class="n">Cell</span><span class="p">(</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test cell_line&quot;</span><span class="p">,</span> 
+             <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;test cell line description&quot;</span><span class="p">,</span>
+             <span class="n">species</span> <span class="o">=</span> <span class="s">&quot;rabbit&quot;</span><span class="p">,</span>
+             <span class="n">cell_line_species</span> <span class="o">=</span> <span class="n">Species</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+             <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+             <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+             <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+             <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+             <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_cell_line</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_cell_line</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test cell_line&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="ChemicalModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests">[docs]</a><span class="k">class</span> <span class="nc">ChemicalModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Chemical objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span><span class="s">&#39;test_protein&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="ChemicalModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ChemicalModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="ChemicalModelTests.test_create_chemical_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests.test_create_chemical_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_chemical_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new chemical object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_chemical</span> <span class="o">=</span> <span class="n">Chemical</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test chemical&quot;</span><span class="p">)</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_chemical</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test chemical&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ChemicalModelTests.test_chemical_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests.test_chemical_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_chemical_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the cell line name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_chemical</span> <span class="o">=</span> <span class="n">Chemical</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test chemical&quot;</span><span class="p">)</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_chemical</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-chemical&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="ChemicalModelTests.test_create_chemical_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.ChemicalModelTests.test_create_chemical_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_chemical_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new chemical object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_chemical</span> <span class="o">=</span> <span class="n">Chemical</span><span class="p">(</span>
+             <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test chemical&quot;</span><span class="p">,</span> 
+             <span class="n">cas</span> <span class="o">=</span> <span class="s">&quot;53123-88-9&quot;</span><span class="p">,</span>
+             <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+             <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+             <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+             <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+             <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+             <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+             <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_chemical</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_chemical</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test chemical&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="StrainModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests">[docs]</a><span class="k">class</span> <span class="nc">StrainModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Strain objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test_external&#39;</span><span class="p">,</span><span class="s">&#39;test_protein&#39;</span><span class="p">,</span> <span class="s">&#39;test_selection&#39;</span><span class="p">,</span> <span class="s">&#39;test_strain&#39;</span><span class="p">,</span> <span class="s">&#39;test_construct&#39;</span><span class="p">,</span> <span class="s">&#39;test_species&#39;</span><span class="p">]</span>
+    
+<div class="viewcode-block" id="StrainModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="StrainModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="StrainModelTests.test_create_strain_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests.test_create_strain_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_strain_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new strain object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_strain</span> <span class="o">=</span> <span class="n">Strain</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test strain&quot;</span><span class="p">)</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_strain</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test strain&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="StrainModelTests.test_strain_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests.test_strain_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_strain_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the cell line name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_strain</span> <span class="o">=</span> <span class="n">Strain</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test strain&quot;</span><span class="p">)</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_strain</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-strain&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="StrainModelTests.test_create_strain_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.StrainModelTests.test_create_strain_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_strain_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new strain object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_strain</span> <span class="o">=</span> <span class="n">Strain</span><span class="p">(</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;test strain&quot;</span><span class="p">,</span> 
+            <span class="n">background</span> <span class="o">=</span> <span class="n">Strain</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">Selection</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">species</span> <span class="o">=</span> <span class="s">&quot;rabbit&quot;</span><span class="p">,</span>
+            <span class="n">strain_species</span> <span class="o">=</span> <span class="n">Species</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">genotype</span> <span class="o">=</span> <span class="s">&quot;MATa his3&amp;Delta;1 leu2&amp;Delta;0 lys2&amp;Delta;0 ura3&amp;Delta;0&quot;</span><span class="p">,</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;-20&quot;</span><span class="p">,</span>
+            <span class="n">box</span> <span class="o">=</span> <span class="s">&quot;sample box&quot;</span><span class="p">,</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="s">&quot;that guy&quot;</span><span class="p">,</span>
+            <span class="n">vendor</span> <span class="o">=</span> <span class="n">Vendor</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;some notes on the object&quot;</span><span class="p">,</span>
+            <span class="n">public</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="n">published</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">researcher</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">plasmids</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Construct</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">protein</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">test_strain</span><span class="o">.</span><span class="n">reference</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Reference</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_strain</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test strain&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="SpeciesModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests">[docs]</a><span class="k">class</span> <span class="nc">SpeciesModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Species objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[]</span>
+    
+<div class="viewcode-block" id="SpeciesModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="SpeciesModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="SpeciesModelTests.test_create_species_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests.test_create_species_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_species_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new species object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_species</span> <span class="o">=</span> <span class="n">Species</span><span class="p">(</span><span class="n">common_name</span> <span class="o">=</span> <span class="s">&quot;test species&quot;</span><span class="p">)</span>
+        <span class="n">test_species</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_species</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test species&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SpeciesModelTests.test_species_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests.test_species_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_species_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the cell line name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_species</span> <span class="o">=</span> <span class="n">Species</span><span class="p">(</span><span class="n">common_name</span> <span class="o">=</span> <span class="s">&quot;test species&quot;</span><span class="p">)</span>
+        <span class="n">test_species</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_species</span><span class="o">.</span><span class="n">species_slug</span><span class="p">,</span> <span class="s">&quot;test-species&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SpeciesModelTests.test_create_species_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SpeciesModelTests.test_create_species_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_species_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new species object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_species</span> <span class="o">=</span> <span class="n">Species</span><span class="p">(</span>
+            <span class="n">common_name</span> <span class="o">=</span> <span class="s">&quot;test species&quot;</span><span class="p">,</span> 
+            <span class="n">taxonomy_id</span> <span class="o">=</span> <span class="s">&quot;4932&quot;</span><span class="p">)</span>
+        <span class="n">test_species</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_species</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test species&quot;</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="SelectionModelTests"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests">[docs]</a><span class="k">class</span> <span class="nc">SelectionModelTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests the model attributes of Selection objects contained in the reagents app.&quot;&quot;&quot;</span>
+
+    <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[]</span>
+    
+<div class="viewcode-block" id="SelectionModelTests.setUp"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests.setUp">[docs]</a>    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiate the test client.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="SelectionModelTests.tearDown"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests.tearDown">[docs]</a>    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Depopulate created model instances from test database.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">MODELS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">obj</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="SelectionModelTests.test_create_selection_minimal"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests.test_create_selection_minimal">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_selection_minimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new selection object, with only the minimum fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_selection</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span><span class="n">selection</span> <span class="o">=</span> <span class="s">&quot;test selection&quot;</span><span class="p">)</span>
+        <span class="n">test_selection</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_selection</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test selection&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SelectionModelTests.test_selection_slugify"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests.test_selection_slugify">[docs]</a>    <span class="k">def</span> <span class="nf">test_selection_slugify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for the cell line name being correctly slugified&quot;&quot;&quot;</span>
+        <span class="n">test_selection</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span><span class="n">selection</span> <span class="o">=</span> <span class="s">&quot;test selection&quot;</span><span class="p">)</span>
+        <span class="n">test_selection</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_selection</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span> <span class="s">&quot;test-selection&quot;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SelectionModelTests.test_create_selection_all_fields"><a class="viewcode-back" href="../../../api.html#experimentdb.reagents.tests.SelectionModelTests.test_create_selection_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">test_create_selection_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is a test for creating a new selection object, with only the all fields being entered&quot;&quot;&quot;</span>
+        <span class="n">test_selection</span> <span class="o">=</span> <span class="n">Selection</span><span class="p">(</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="s">&quot;test selection&quot;</span><span class="p">,</span> 
+            <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;4932&quot;</span><span class="p">)</span>
+        <span class="n">test_selection</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">test_selection</span><span class="o">.</span><span class="n">__unicode__</span><span class="p">(),</span> <span class="s">&quot;test selection&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.data.views &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.data.views</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;This module provides the views for working with the data package.</span>
+<span class="sd">This module will generate index and detail views for experiments and protocols as well as for the form to enter new results through an experiment.  Several other generic views are found in data.urls.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render_to_response</span><span class="p">,</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">experimentdb.data.models</span> <span class="kn">import</span> <span class="n">Experiment</span><span class="p">,</span> <span class="n">Result</span><span class="p">,</span> <span class="n">Protocol</span>
+<span class="kn">from</span> <span class="nn">experimentdb.data.forms</span> <span class="kn">import</span> <span class="n">ResultForm</span><span class="p">,</span> <span class="n">ResultFormSet</span><span class="p">,</span> <span class="n">ExperimentForm</span>
+<span class="kn">from</span> <span class="nn">experimentdb.proteins.models</span> <span class="kn">import</span> <span class="n">Protein</span>
+<span class="kn">from</span> <span class="nn">experimentdb.reagents.models</span> <span class="kn">import</span> <span class="n">Chemical</span><span class="p">,</span> <span class="n">Antibody</span><span class="p">,</span> <span class="n">Cell</span>
+<span class="kn">from</span> <span class="nn">experimentdb.projects.models</span> <span class="kn">import</span> <span class="n">Project</span><span class="p">,</span> <span class="n">SubProject</span>
+<span class="kn">from</span> <span class="nn">experimentdb.external.models</span> <span class="kn">import</span> <span class="n">Reference</span><span class="p">,</span> <span class="n">Contact</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">permission_required</span>
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="kn">import</span> <span class="n">RequestContext</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
+
+
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="index"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.index">[docs]</a><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;This view shows a list of all experiments.</span>
+
+<span class="sd">	This list is ordered by the experiment date in descending order.  This view could potentially be rendered by a generic view.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">experiment_list</span> <span class="o">=</span> <span class="n">Experiment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s">&#39;-experiment_date&#39;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;experiment_list.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;experiment_list&#39;</span><span class="p">:</span> <span class="n">experiment_list</span><span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="experiment"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.experiment">[docs]</a><span class="k">def</span> <span class="nf">experiment</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">experimentID</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;This renders a detailed page of an experiment.</span>
+
+<span class="sd">	The view will show the experiment, and all associated reagents, proteins, projects and results associated with this object.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">experiment</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Experiment</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">experimentID</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;experiment.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;experiment&#39;</span><span class="p">:</span><span class="n">experiment</span><span class="p">},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="protocol_list"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.protocol_list">[docs]</a><span class="k">def</span> <span class="nf">protocol_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;This renders a view in which all protocols are displayed.</span>
+
+<span class="sd">	In the case of deprecated protocols (i.e. protocols not marked as active), these are not shown.  This view could also be rendered as a generic view.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">protocol_list</span> <span class="o">=</span> <span class="n">Protocol</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+	<span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;protocol_list.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;protocol_list&#39;</span><span class="p">:</span><span class="n">protocol_list</span><span class="p">,</span> <span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="protocol_detail"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.protocol_detail">[docs]</a><span class="k">def</span> <span class="nf">protocol_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">protocol_slug</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;This renders a view in which a protocol detail page is shown.</span>
+
+<span class="sd">	This view should be deprecated in favor of a redirection directly to the wiki page for this protocol</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">protocol</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Protocol</span><span class="p">,</span> <span class="n">protocol_slug</span><span class="o">=</span><span class="n">protocol_slug</span><span class="p">)</span>
+	<span class="n">protocol_experiments</span> <span class="o">=</span> <span class="n">Experiment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">protocol</span><span class="o">=</span><span class="n">protocol</span><span class="p">)</span>	
+	<span class="k">return</span> <span class="n">render_to_response</span> <span class="p">(</span><span class="s">&#39;protocol_detail.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;protocol&#39;</span><span class="p">:</span> <span class="n">protocol</span><span class="p">,</span> <span class="s">&#39;protocol_experiments&#39;</span><span class="p">:</span><span class="n">protocol_experiments</span><span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+</div>
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="result_new"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.result_new">[docs]</a><span class="k">def</span> <span class="nf">result_new</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">experimentID</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;This renders a form to add a new result.</span>
+
+<span class="sd">	This view will be sent from a particular experiment and will attach the result to that particular experiment.	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">experiment</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Experiment</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">experimentID</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&quot;POST&quot;</span><span class="p">:</span>
+		<span class="n">form</span> <span class="o">=</span> <span class="n">ResultForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+			<span class="n">result</span><span class="o">.</span><span class="n">experiment_id</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">experimentID</span>
+			<span class="n">result</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+			<span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span> <span class="n">experiment</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">()</span> <span class="p">)</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="n">form</span> <span class="o">=</span> <span class="n">ResultForm</span><span class="p">()</span>
+	<span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&#39;result_form.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">,</span> <span class="s">&#39;experiment&#39;</span><span class="p">:</span><span class="n">experiment</span><span class="p">},</span><span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span>
+	</div>
+<span class="nd">@permission_required</span><span class="p">(</span><span class="s">&#39;data.change_experiment&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="experiment_edit"><a class="viewcode-back" href="../../../api.html#experimentdb.data.views.experiment_edit">[docs]</a><span class="k">def</span> <span class="nf">experiment_edit</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">experimentID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renders a form to edit an experiment and associated formsets for experimental results.</span>
+<span class="sd">	</span>
+<span class="sd">    Takes a request in the form of experiment/(experimentID)/edit and returns the experiment_result_form.html form.&quot;&quot;&quot;</span>
+    <span class="n">experiment</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Experiment</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">experimentID</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">ExperimentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">experiment</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">formset</span> <span class="o">=</span> <span class="n">ResultFormSet</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">experiment</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result_formset</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="n">experiment</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">result_formset</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>                
+            <span class="k">return</span> <span class="n">HttpResponseRedirect</span><span class="p">(</span> <span class="n">experiment</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">()</span> <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">ExperimentForm</span><span class="p">()</span>
+        <span class="n">formset</span> <span class="o">=</span> <span class="n">ResultFormSet</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">Experiment</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">render_to_response</span><span class="p">(</span><span class="s">&quot;experiment_result_form.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;form&quot;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span><span class="s">&quot;formset&quot;</span><span class="p">:</span> <span class="n">formset</span><span class="p">,},</span> <span class="n">context_instance</span><span class="o">=</span><span class="n">RequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

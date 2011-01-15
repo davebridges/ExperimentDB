@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ExperimentDB Installation &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="index.html" />
+    <link rel="next" title="Package Details" href="api.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="concepts.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Package Details"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="&lt;no title&gt;"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">ExperimentDB v0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="experimentdb-installation">
+<h1>ExperimentDB Installation<a class="headerlink" href="#experimentdb-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>ExperimentDB requires both a database and a webserver to be set up.  Ideally, the database should be hosted separately from the webserver and ExperimentDB installation, but this is not necessary, as both can be used from the same server.  If you are using a remote server for the database, it is best to set up a user for this database that can only be accessed from the webserver.  If you want to set up several installations (ie for different users or different laboratories), you need separate databases and ExperimentDB installations for each.  You will also need to set up the webserver with different addresses for each installation.</p>
+</div>
+<div class="section" id="software-dependencies">
+<h2>Software Dependencies<a class="headerlink" href="#software-dependencies" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><strong>ExperimentDB source code</strong>.  Download from one of the following:</li>
+</ol>
+<blockquote>
+<ol class="loweralpha">
+<li><p class="first"><a class="reference external" href="http://github.com/davebridges/ExperimentDB/downloads">http://github.com/davebridges/ExperimentDB/downloads</a> for the current release</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://github.com/davebridges/ExperimentDB">http://github.com/davebridges/ExperimentDB</a> for the source code</p>
+</li>
+<li><p class="first">from pypi by entering:</p>
+<div class="highlight-python"><pre>pip install experimentdb</pre>
+</div>
+</li>
+</ol>
+</blockquote>
+<p>Downloading and/or unzipping will create a directory named ExperimentDB.  You can update to the newest revision at any time either using git or downloading and re-installing the newer version.  Changing or updating software versions will not alter any saved data, but you will have to update the localsettings.py file (described below).</p>
+<ol class="arabic simple" start="2">
+<li><strong>Python</strong>.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from <a class="reference external" href="http://www.python.org/download">Python</a>.</li>
+<li><strong>Django</strong>.  Download from <a class="reference external" href="http://www.djangoproject.com/download/">Django</a>.  This will be automatically installed if you installed experimentdb with pip.  This will be automatically installed if you installed experimentdb with pip.</li>
+<li><strong>Database software</strong>.  Typically MySQL is used, but PostgreSQL, Oracle or SQLite can also be used.  You also need to install the python driver for this database (unless you are using SQLite, which is internal to Python 2.5+).  For more information see <a class="reference external" href="http://docs.djangoproject.com/en/dev/topics/install/database-installation">Instructions</a>.</li>
+<li><strong>Biopython Packages</strong>.  Download and install from <a class="reference external" href="http://biopython.org">Biopython</a>. This will be automatically installed if you installed experimentdb with pip.</li>
+<li><strong>South</strong>.  Install using pip (<strong>pip install south</strong>).  This will be automatically installed if you installed experimentdb with pip.</li>
+<li><strong>Django Ajax Select</strong>.  Install using pip (<strong>pip install django-ajax-selects</strong>).  This will be automatically installed if you installed experimentdb with pip.</li>
+<li><strong>Python Imaging Library</strong>.  Install using pip (<strong>pip install pil</strong>).  Available at <a class="reference external" href="http://www.pythonware.com/products/pil/">PIL</a>.  This will be automatically installed if you installed experimentdb with pip.</li>
+</ol>
+</div>
+<div class="section" id="database-setup">
+<h2>Database Setup<a class="headerlink" href="#database-setup" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Create a new database.  You need to record the user, password, host and database name.  Refer to the database documentation for how to do this with a specific database engine.  If you are using SQLite3, you only need to set the engine and the database name.  It is recommended to use MySQL.</p>
+</li>
+<li><p class="first">Go to localsettings_empty.py and edit the settings:</p>
+<div class="highlight-python"><pre>ENGINE: 'mysql', 'postgresql_psycopg2' or 'sqlite3 depending on the database software used.
+NAME: database name
+USER: database user.  Unless using sqlite3
+PASSWORD: database password.  Unless using sqlite3
+HOST: database host.</pre>
+</div>
+</li>
+<li><p class="first">Save this file as localsettings.py in the main ExperimentDB directory.</p>
+</li>
+<li><p class="first">Run the test client by going into the experimentdb directory and running the following.  There should be no errors at this point:</p>
+<div class="highlight-python"><pre>python manage.py test</pre>
+</div>
+</li>
+<li><p class="first">Generate the initial database tables by entering:</p>
+<div class="highlight-python"><pre>python manage.py syncdb</pre>
+</div>
+</li>
+<li><p class="first">When asked generate an administrative superuser and set the email and password.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="web-server-setup">
+<h2>Web Server Setup<a class="headerlink" href="#web-server-setup" title="Permalink to this headline">¶</a></h2>
+<p>You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod_wsgi.  The following is a httpd.conf example where the code is placed in /usr/src/django/experimentdb:</p>
+<div class="highlight-python"><pre>Alias /static /usr/src/django/experimentdb/media
+Alias /media /usr/src/django/experimentdb/media
+
+    &lt;Directory /usr/src/django/experimentdb/media&gt;
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+
+WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
+
+&lt;Directory /usr/src/django/experimentdb/apache&gt;
+    Order deny,allow
+    Allow from all
+&lt;/Directory&gt;</pre>
+</div>
+<p>If you want to restrict access to these files, change the Allow from all directive to specific domains or ip addresses (for example Allow from 192.168.0.0/99 would allow from 192.168.0.0 to 192.168.0.99)</p>
+</div>
+<div class="section" id="final-configuration-and-user-setup">
+<h2>Final Configuration and User Setup<a class="headerlink" href="#final-configuration-and-user-setup" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ExperimentDB Installation</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#software-dependencies">Software Dependencies</a></li>
+<li><a class="reference internal" href="#database-setup">Database Setup</a></li>
+<li><a class="reference internal" href="#web-server-setup">Web Server Setup</a></li>
+<li><a class="reference internal" href="#final-configuration-and-user-setup">Final Configuration and User Setup</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="concepts.html"
+                        title="previous chapter">&lt;no title&gt;</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">Package Details</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Package Details"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="concepts.html" title="&lt;no title&gt;"
+             >previous</a> |</li>
+        <li><a href="index.html">ExperimentDB v0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.proteins.urls &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.proteins.urls</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">django.conf.urls.defaults</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.create_update</span> <span class="kn">import</span> <span class="n">create_object</span><span class="p">,</span> <span class="n">update_object</span><span class="p">,</span> <span class="n">delete_object</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">permission_required</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.list_detail</span> <span class="kn">import</span> <span class="n">object_list</span><span class="p">,</span> <span class="n">object_detail</span>
+
+<span class="kn">from</span> <span class="nn">experimentdb.proteins.forms</span> <span class="kn">import</span> <span class="n">ProteinForm</span>
+<span class="kn">from</span> <span class="nn">experimentdb.proteins.models</span> <span class="kn">import</span> <span class="n">ProteinFamily</span><span class="p">,</span> <span class="n">ProteinDetail</span><span class="p">,</span> <span class="n">Protein</span>
+
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="restricted_object_list"><a class="viewcode-back" href="../../../api.html#experimentdb.proteins.urls.restricted_object_list">[docs]</a><span class="k">def</span> <span class="nf">restricted_object_list</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">object_list</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<span class="nd">@login_required</span>
+<div class="viewcode-block" id="restricted_detail"><a class="viewcode-back" href="../../../api.html#experimentdb.proteins.urls.restricted_detail">[docs]</a><span class="k">def</span> <span class="nf">restricted_detail</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">object_detail</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<span class="nd">@permission_required</span><span class="p">(</span><span class="s">&#39;proteins.add_protein&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="restricted_create_protein"><a class="viewcode-back" href="../../../api.html#experimentdb.proteins.urls.restricted_create_protein">[docs]</a><span class="k">def</span> <span class="nf">restricted_create_protein</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">create_object</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<span class="nd">@permission_required</span><span class="p">(</span><span class="s">&#39;proteins.change_protein&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="restricted_change_protein"><a class="viewcode-back" href="../../../api.html#experimentdb.proteins.urls.restricted_change_protein">[docs]</a><span class="k">def</span> <span class="nf">restricted_change_protein</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">update_object</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<span class="nd">@permission_required</span><span class="p">(</span><span class="s">&#39;reagents.delete_protein&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="restricted_delete_protein"><a class="viewcode-back" href="../../../api.html#experimentdb.proteins.urls.restricted_delete_protein">[docs]</a><span class="k">def</span> <span class="nf">restricted_delete_protein</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">delete_object</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="n">restricted_object_list</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&quot;queryset&quot;</span><span class="p">:</span> <span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_list.html&#39;</span><span class="p">,</span>
+		<span class="s">&#39;template_object_name&#39;</span><span class="p">:</span><span class="s">&#39;protein&#39;</span><span class="p">,</span>
+		<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-list&#39;</span><span class="p">),</span>	
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;(?P&lt;object_id&gt;[\d]+)/$&#39;</span><span class="p">,</span> <span class="n">restricted_detail</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&quot;queryset&quot;</span><span class="p">:</span> <span class="n">Protein</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_detail.html&#39;</span>
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-detail&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^new/$&#39;</span><span class="p">,</span> <span class="n">restricted_create_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;form_class&#39;</span><span class="p">:</span> <span class="n">ProteinForm</span><span class="p">,</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_form.html&#39;</span><span class="p">,</span> 
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span> <span class="p">,</span>
+		<span class="s">&#39;post_save_redirect&#39;</span><span class="p">:</span><span class="s">&quot;/experimentdb/protein&quot;</span>
+		<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-new&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^(?P&lt;object_id&gt;[\d]+)/edit$&#39;</span><span class="p">,</span> <span class="n">restricted_change_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">Protein</span><span class="p">,</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_form.html&#39;</span><span class="p">,</span>
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span> 
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;protein-edit&quot;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^(?P&lt;object_id&gt;[\d]+)/delete$&#39;</span><span class="p">,</span> <span class="n">restricted_delete_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">Protein</span><span class="p">,</span> 
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span><span class="p">,</span>
+		<span class="s">&#39;post_delete_redirect&#39;</span><span class="p">:</span> <span class="s">&#39;/experimentdb/protein&#39;</span>
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;protein-delete&quot;</span><span class="p">),</span>		
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^family/$&#39;</span><span class="p">,</span> <span class="n">restricted_object_list</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&quot;queryset&quot;</span><span class="p">:</span> <span class="n">ProteinFamily</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_family_list.html&#39;</span><span class="p">,</span>
+		<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-family-list&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^family/(?P&lt;object_id&gt;[\d]+)/$&#39;</span><span class="p">,</span> <span class="n">restricted_detail</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&quot;queryset&quot;</span><span class="p">:</span> <span class="n">ProteinFamily</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_family_detail.html&#39;</span>
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-family-detail&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^family/new/$&#39;</span><span class="p">,</span> <span class="n">restricted_create_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">ProteinFamily</span><span class="p">,</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;protein_family_form.html&#39;</span><span class="p">,</span> 
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span> <span class="p">,</span>
+		<span class="s">&#39;post_save_redirect&#39;</span><span class="p">:</span> <span class="s">&quot;/experimentdb/protein/family&quot;</span>
+		<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-family-new&#39;</span><span class="p">),</span>	
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^detail/new/$&#39;</span><span class="p">,</span> <span class="n">restricted_create_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">ProteinDetail</span><span class="p">,</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;proteindetail_form.html&#39;</span><span class="p">,</span> 
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span>
+		<span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-detail-new&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^detail/(?P&lt;object_id&gt;[\d]+)/edit$&#39;</span><span class="p">,</span> <span class="n">restricted_change_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">ProteinDetail</span><span class="p">,</span> 
+		<span class="s">&#39;template_name&#39;</span><span class="p">:</span> <span class="s">&#39;proteindetail_form.html&#39;</span><span class="p">,</span>
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span> 
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;protein-detail-edit&quot;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^detail/(?P&lt;object_id&gt;[\d]+)/delete$&#39;</span><span class="p">,</span> <span class="n">restricted_delete_protein</span><span class="p">,</span> <span class="p">{</span>
+		<span class="s">&#39;model&#39;</span><span class="p">:</span> <span class="n">ProteinDetail</span><span class="p">,</span> 
+		<span class="s">&#39;login_required&#39;</span><span class="p">:</span><span class="bp">True</span><span class="p">,</span>
+		<span class="s">&#39;post_delete_redirect&#39;</span><span class="p">:</span> <span class="s">&#39;/experimentdb/protein&#39;</span>
+		<span class="p">,},</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;protein-detail-delete&quot;</span><span class="p">),</span>			
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^(?P&lt;protein_id&gt;[\d]+)/$&#39;</span><span class="p">,</span> <span class="s">&#39;experimentdb.proteins.views.protein_isoform_detail&#39;</span><span class="p">),</span>
+	<span class="n">url</span><span class="p">(</span><span class="s">r&#39;^(?P&lt;protein&gt;[-\w\d]+)/$&#39;</span><span class="p">,</span> <span class="s">&#39;experimentdb.proteins.views.detail&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;protein-name-slug&#39;</span><span class="p">),</span>	
+<span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>

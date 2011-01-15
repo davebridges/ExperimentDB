@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>experimentdb.datasets.models &mdash; ExperimentDB v0.2 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ExperimentDB v0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for experimentdb.datasets.models</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">STRENGTH_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;Strongest&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;Strong&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;Detectable&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">EFFECT_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+	<span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;Not Tested&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;2&#39;</span><span class="p">,</span> <span class="s">&#39;No Change&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;3&#39;</span><span class="p">,</span> <span class="s">&#39;Changes with KD/KO&#39;</span><span class="p">),</span>
+	<span class="p">(</span><span class="s">&#39;4&#39;</span><span class="p">,</span> <span class="s">&#39;No Change with KD/KO&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+	
+
+<div class="viewcode-block" id="SGD_GeneNames"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.SGD_GeneNames">[docs]</a><span class="k">class</span> <span class="nc">SGD_GeneNames</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="n">Locus_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Other_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+	<span class="n">Description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Gene_product</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Phenotype</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">ORF_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+	<span class="n">SGDID</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span> 
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;SGD Gene Names&quot;</span>
+	<span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">Locus_name</span>
+<div class="viewcode-block" id="SGD_GeneNames.get_absolute_url"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.SGD_GeneNames.get_absolute_url">[docs]</a>	<span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">&quot;/sgd/</span><span class="si">%s</span><span class="s">/&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">Locus_name</span>
+
+
+</div></div>
+<div class="viewcode-block" id="SGD_phenotypes"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.SGD_phenotypes">[docs]</a><span class="k">class</span> <span class="nc">SGD_phenotypes</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="c">#schema is described in http://wiki.yeastgenome.org/index.php/Specification_for_New_Interactions_and_Phenotype_FTP_files</span>
+<span class="c">#download updated phenotypes ftp://genome-ftp.stanford.edu/pub/yeast/literature_curation/phenotype_data.tab</span>
+	<span class="n">Feature_Name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The feature name of the gene&quot;</span><span class="p">)</span> 
+	<span class="n">Feature_Type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The feature type of the gene&quot;</span><span class="p">)</span>
+	<span class="n">Gene_Name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">SGD_GeneNames</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The standard name of the gene&quot;</span><span class="p">)</span>
+	<span class="n">SGDID</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The SGDID of the gene&quot;</span><span class="p">)</span>
+	<span class="n">Reference</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span> <span class="o">=</span><span class="s">&quot;PMID: #### SGD_REF: #### (separated by pipe)(one reference per row&quot;</span><span class="p">)</span>
+	<span class="n">Experiment_Type</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The method used to detect and analyze the phenotype&quot;</span><span class="p">)</span>
+	<span class="n">Mutant_Type</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Description of the impact of the mutation on activity of the gene product&quot;</span><span class="p">)</span>
+	<span class="n">Allele</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Allele name and description, if applicable&quot;</span><span class="p">)</span>
+	<span class="n">Strain_Background</span>   <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Genetic background in which the phenotype was analyzed&quot;</span><span class="p">)</span>
+	<span class="n">Phenotype</span>   <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The feature observed and the direction of change relative to wild type&quot;</span><span class="p">)</span>
+	<span class="n">Chemical</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Any chemicals relevant to the phenotype&quot;</span><span class="p">)</span>
+	<span class="n">Condition</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Condition under which the phenotype was observed&quot;</span><span class="p">)</span> 
+	<span class="n">Details</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Details about the phenotype&quot;</span><span class="p">)</span>
+	<span class="n">Reporter</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The protein(s) or RNA(s) used in an experiment to track a process&quot;</span><span class="p">)</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;SGD Phenotypes&quot;</span>
+	<span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s">, </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Gene_Name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Phenotype</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SGD_interactions"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.SGD_interactions">[docs]</a><span class="k">class</span> <span class="nc">SGD_interactions</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="n">Feature_Name_Bait</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The feature name of the gene used as the bait&quot;</span><span class="p">)</span>
+	<span class="n">Standard_Gene_Name_Bait</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">SGD_GeneNames</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The standard gene name of the gene used as the bait&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">related_name</span> <span class="o">=</span> <span class="s">&#39;Bait_GeneName&#39;</span><span class="p">)</span>
+	<span class="n">Feature_Name_Hit</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The feature name of the gene that interacts with the bait&quot;</span><span class="p">)</span>
+	<span class="n">Standard_Gene_Name_Hit</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">SGD_GeneNames</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;The standard gene name of the gene that interacts with the bait&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;Hit_GeneName&#39;</span><span class="p">)</span>
+	<span class="n">Experiment_Type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;A description of the experimental used to identify the interaction&quot;</span><span class="p">)</span>
+	<span class="n">Genetic_or_Physical_Interaction</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Indicates whether the experimental method is a genetic or physical interaction&quot;</span><span class="p">)</span>
+	<span class="n">Source</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Lists the database source for the interaction&quot;</span><span class="p">)</span>
+	<span class="n">Manually_Curated_or_High_Throughput</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Lists whether the interaction was manually curated from a publication or added as part of a high-throughput dataset&quot;</span><span class="p">)</span>
+	<span class="n">Notes</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Free text field that contains additional information about the interaction&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Phenotype</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Contains the phenotype of the interaction&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Reference</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">&quot;Lists the identifiers for the reference as an SGDID (SGD_REF:) or a PubMed ID (PMID:)&quot;</span><span class="p">)</span>
+	<span class="n">Citation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">help_text</span> <span class="o">=</span> <span class="s">&quot;Lists the citation for the reference&quot;</span><span class="p">)</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;SGD Interactions&quot;</span>
+	<span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s"> with </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Feature_Name_Bait</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Feature_Name_Hit</span><span class="p">)</span>
+
+		</div>
+<div class="viewcode-block" id="PI35P2_Binding_Screen_SP"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP">[docs]</a><span class="k">class</span> <span class="nc">PI35P2_Binding_Screen_SP</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="n">Gene_Name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">SGD_GeneNames</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&quot;PI3PBP_Gene_Name&quot;</span><span class="p">)</span>
+	<span class="n">Gain_of_Function</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">STRENGTH_CHOICES</span><span class="p">)</span>
+	<span class="n">Loss_of_Function</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">EFFECT_CHOICES</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Candidate</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="n">Comments</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+	<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+		<span class="n">verbose_name</span> <span class="o">=</span> <span class="s">&quot;In vivo PI(3,5)P2 Effector&quot;</span>
+		<span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">&quot;In vivo PI(3,5)P2 Effectors&quot;</span>
+		<span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Gene_Name&#39;</span><span class="p">,)</span>
+	<span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">u&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">Gene_Name</span>
+		</div>
+<div class="viewcode-block" id="IL10_TNFa_Microarray"><a class="viewcode-back" href="../../../api.html#experimentdb.datasets.models.IL10_TNFa_Microarray">[docs]</a><span class="k">class</span> <span class="nc">IL10_TNFa_Microarray</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+	<span class="n">ill_ID</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+	<span class="n">Control_1_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Control_2_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Control_1_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Control_2_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Control_3_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Control_4_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_1_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_2_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_1_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_2_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_3_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">TNFa_4_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_1_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_2_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_1_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_2_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_3_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">Both_4_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_1_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_2_2008</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_1_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_2_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_3_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">IL10_4_2009</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">19</span><span class="p">)</span>
+	<span class="n">GeneSymbol</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+	<span class="n">GeneID</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+	<span class="n">GeneName</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+	<span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="s">u&#39;</span><span class="si">%i</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ill_ID</span>
+
+	
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">ExperimentDB v0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dave Bridges.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
+    </div>
+  </body>
+</html>
