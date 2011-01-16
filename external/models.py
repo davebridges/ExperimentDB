@@ -1,9 +1,9 @@
 """This package contains the model information for the external app.
 
 It defines the structure and behavior of the following models:
-- Contact
-- Vendor
-- Reference
+* Contact
+* Vendor
+* Reference
 
 """
 from django.contrib.auth.models import User

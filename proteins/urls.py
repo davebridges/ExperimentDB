@@ -1,3 +1,22 @@
+"""
+This package defines url redirections for the proteins app.
+
+This app takes a url request in the form of /experimentdb/protein/something and redirects to the following views:
+* protein-list
+* protein-detail
+* protein-new
+* protein-edit
+* protein-delete
+* protein-family-list
+* protein-family-detail
+* protein-family-new
+* protein-detail-new
+* protein-detail-edit
+* protein-detail-delete
+* protein-isoform-detail
+* protein-name-slug
+"""
+
 from django.conf.urls.defaults import *
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
@@ -81,6 +100,6 @@ urlpatterns = patterns('',
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/protein'
 		,}, name="protein-detail-delete"),			
-	url(r'^(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail'),
+	url(r'^(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail', protein-isoform-detail),
 	url(r'^(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail', name='protein-name-slug'),	
 )

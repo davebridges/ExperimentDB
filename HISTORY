@@ -7,8 +7,9 @@ Todo
 ----
 
 * Audit model and view tests
-* Write docstrings for __init__.py
+* Write docstrings for all .py files
 * Audit model and view docstrings
+* Combine external.Reference model with the Mendeley API
 
 Before uploading
 ----------------
