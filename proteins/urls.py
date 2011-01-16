@@ -100,6 +100,6 @@ urlpatterns = patterns('',
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/protein'
 		,}, name="protein-detail-delete"),			
-	url(r'^(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail', protein-isoform-detail),
+	url(r'^(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail', name='protein-isoform-detail'),
 	url(r'^(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail', name='protein-name-slug'),	
 )
