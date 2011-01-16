@@ -50,10 +50,55 @@
   <div class="section" id="module-experimentdb">
 <span id="package-details"></span><h1>Package Details<a class="headerlink" href="#module-experimentdb" title="Permalink to this headline">¶</a></h1>
 <p>The experimentDB is a web-based application for the storage, organization and communication of experimental data with a focus on molecular biology and biochemical data. This application also stores data regarding reagents, including antibodies, constructs and other biomolecules as well as tracks the distribution of reagents. There is also some preliminary interfaces to other web resources.</p>
+<p>This project contains several sub-applications as described below:</p>
+<div class="section" id="projects">
+<h2>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>The intent of this app is to co-ordinate specific projects. Projects are intended to be large, grant-sized larger projects in the laboratory. Subprojects are intended to be smaller, potentially paper sized groups of experiments.  An experiment can be part of one, none or several projects or subprojects.</p>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<p>This package defines experiments and the related data associated with them. The Experiment model is the focus of this entire project. It contains details about protocols, notes, reagents and project details. Results are associated with Experiment objects allowing for an Experiment to contain several results.</p>
+</div>
+<div class="section" id="cloning">
+<h2>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h2>
+<p>The cloning app defines the parameters for the synthesis and maintenance of constructs generated as part of an experiment.  Constructs can be generated via either cloning or mutagenesis and will result in a Cloning or Mutagenesis object respectively.</p>
+</div>
+<div class="section" id="proteins">
+<h2>Proteins<a class="headerlink" href="#proteins" title="Permalink to this headline">¶</a></h2>
+<p>The proteins referenced by this application may be targets of an experiment or reagent.  This app also contains more detailed information about specific proteins, normally as accessed from public databases using either external databases or through Biopython tools.</p>
+</div>
+<div class="section" id="reagents">
+<h2>Reagents<a class="headerlink" href="#reagents" title="Permalink to this headline">¶</a></h2>
+<p>The reagents app stores information about all tools used in research, most of which are defined by a particular Experiment object.  These include Primer, Cell (cell lines), Antibody, Strain, Chemical and Construct objects.  These models are abstract base classes of a superclass ReagentInfo which defines most of the common relevant information.</p>
+</div>
+<div class="section" id="external">
+<h2>External<a class="headerlink" href="#external" title="Permalink to this headline">¶</a></h2>
+<p>The idea is to attribute particular models with references regarding external contacts or vendors or to link in specific references important to the experiments or projects.</p>
+</div>
+<div class="section" id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<p>The datasets app contains data and views for some external databases.  This may include external databases accessed directly or with a mirrored internal database.  This module is fairly research-interest specific and will likely be removed eventually.</p>
+</div>
 <div class="section" id="module-experimentdb.data">
 <span id="data-package"></span><h2>Data Package<a class="headerlink" href="#module-experimentdb.data" title="Permalink to this headline">¶</a></h2>
 <p>This package describes experimental data.</p>
-<p>There are three main models in this package.  These models cover experiments, results and protocols.  There are model specifications described in experimentdb.models and views described in either experimentdb.views or experimentdb.urls for either custom or generic views respectively</p>
+<p>This package defines experiments and the related data associated with them.  The Experiment model is the focus of this entire project.  It contains details about protocols, notes, reagents and project details.  Results are associated with Experiment objects allowing for an Experiment to contain several results.</p>
+<p>There are three models in this package:
+* Experiment
+* Result
+* Protocol
+* Sequencing</p>
+<p>These models are accessed via several views:
+* protocol-list
+* protocol-detail
+* protocol-new
+* protocol-edit
+* protocol-delete
+* experiment-new
+* result-new
+* experiment-edit
+* experiment-detail
+* experiment-list</p>
 <div class="section" id="module-experimentdb.data.models">
 <span id="models"></span><h3>Models<a class="headerlink" href="#module-experimentdb.data.models" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
@@ -328,6 +373,19 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 <div class="section" id="module-experimentdb.data.urls">
 <span id="urlconfs"></span><h3>URLconfs<a class="headerlink" href="#module-experimentdb.data.urls" title="Permalink to this headline">¶</a></h3>
 <p>This package stores views for the data package.</p>
+<p>The active views are:</p>
+<ul class="simple">
+<li>protocol-list</li>
+<li>protocol-detail</li>
+<li>protocol-new</li>
+<li>protocol-edit</li>
+<li>protocol-delete</li>
+<li>experiment-new</li>
+<li>result-new</li>
+<li>experiment-edit</li>
+<li>experiment-detail</li>
+<li>experiment-list</li>
+</ul>
 </div>
 <div class="section" id="tests">
 <h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
@@ -335,6 +393,8 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 </div>
 <div class="section" id="module-experimentdb.datasets">
 <span id="datasets-package"></span><h2>Datasets Package<a class="headerlink" href="#module-experimentdb.datasets" title="Permalink to this headline">¶</a></h2>
+<p>The datasets holds data about specified external datasets.</p>
+<p>The datasets app contains data and views for some external databases.  This may include external databases accessed directly or with a mirrored internal database.  This module is fairly research-interest specific and will likely be removed eventually.</p>
 <div class="section" id="id1">
 <h3>Models<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.datasets.models"></span><dl class="class">
@@ -490,6 +550,17 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 </div>
 <div class="section" id="module-experimentdb.cloning">
 <span id="cloning-package"></span><h2>Cloning Package<a class="headerlink" href="#module-experimentdb.cloning" title="Permalink to this headline">¶</a></h2>
+<p>The cloning app contains more detail about internally generated laboratory constructs.</p>
+<p>The cloning app defines the parameters for the synthesis and maintenance of constructs generated as part of an experiment.  Constructs can be generated via either cloning or mutagenesis and will result in a Cloning or Mutagenesis object respectively.</p>
+<p>The models in this app are:
+* Cloning
+* Mutagenesis</p>
+<p>The views in this app are:
+* cloning-new
+* mutagenesis-new
+* mutagenesis-detail
+* mutagenesis-edit
+* mutagenesis-list</p>
 <div class="section" id="id5">
 <h3>Models<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.cloning.models"></span><dl class="class">
@@ -620,20 +691,52 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 <span class="target" id="module-experimentdb.cloning.views"></span></div>
 <div class="section" id="id7">
 <h3>URLconfs<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-experimentdb.cloning.urls"></span></div>
+<span class="target" id="module-experimentdb.cloning.urls"></span><p>This package defines the url redirections for the cloning app.</p>
+<p>All views in this app start from a request of /experimentdb/cloning and direct to the following views:
+* cloning-new
+* mutagenesis-new
+* mutagenesis-detail
+* mutagenesis-edit
+* mutagenesis-list</p>
+</div>
 <div class="section" id="id8">
 <h3>Tests<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 <div class="section" id="module-experimentdb.external">
 <span id="external-package"></span><h2>External Package<a class="headerlink" href="#module-experimentdb.external" title="Permalink to this headline">¶</a></h2>
+<p>The external package holds data regarding experimental contributors external to our group.</p>
+<p>The idea is to attribute particular models with references regarding external contacts or vendors or to link in specific references important to the experiments or projects.</p>
+<p>The two models in this app are:
+* Contact
+* Vendor
+* Reference</p>
+<p>The views used by this application are:</p>
+<p>In contact.py
+* contact-list
+* contact-edit
+* contact-detail
+* contact-delete
+* contact-new</p>
+<p>In reference.py
+* reference-list
+* reference-edit
+* reference-detail
+* reference-delete
+* reference-new</p>
+<p>In vendor.py
+* vendor-list
+* vendor-edit
+* vendor-detail
+* vendor-delete
+* vendor-new</p>
 <div class="section" id="id9">
 <h3>Models<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.external.models"></span><p>This package contains the model information for the external app.</p>
 <p>It defines the structure and behavior of the following models:
-- Contact
-- Vendor
-- Reference</p>
+* Contact
+* Vendor
+* Reference</p>
 <dl class="class">
 <dt id="experimentdb.external.models.Contact">
 <em class="property">class </em><tt class="descclassname">experimentdb.external.models.</tt><tt class="descname">Contact</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/external/models.html#Contact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.external.models.Contact" title="Permalink to this definition">¶</a></dt>
@@ -868,6 +971,25 @@ The only required field is company.</p>
 <h3>URLconfs<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.external.urls"></span><p>This folder contains the urlconf redirections for the external app.</p>
 <p>There is separate files for vendor, contact and reference urls.</p>
+<p>The views used by this application are:</p>
+<p>In contact.py
+* contact-list
+* contact-edit
+* contact-detail
+* contact-delete
+* contact-new</p>
+<p>In reference.py
+* reference-list
+* reference-edit
+* reference-detail
+* reference-delete
+* reference-new</p>
+<p>In vendor.py
+* vendor-list
+* vendor-edit
+* vendor-detail
+* vendor-delete
+* vendor-new</p>
 </div>
 <div class="section" id="id12">
 <h3>Tests<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
@@ -973,6 +1095,27 @@ The only required field is company.</p>
 </div>
 <div class="section" id="module-experimentdb.proteins">
 <span id="proteins-package"></span><h2>Proteins Package<a class="headerlink" href="#module-experimentdb.proteins" title="Permalink to this headline">¶</a></h2>
+<p>The proteins app contains details regarding proteins.</p>
+<p>The proteins referenced by this application may be targets of an experiment or reagent.  This app also contains more detailed information about specific proteins, normally as accessed from public databases using either external databases or through Biopython tools.</p>
+<p>The models used in this app are:
+* Protein
+* ProteinFamily
+* ProteinDetail
+* Species</p>
+<p>These models are accessed by the following views:
+* protein-list
+* protein-detail
+* protein-new
+* protein-edit
+* protein-delete
+* protein-family-list
+* protein-family-detail
+* protein-family-new
+* protein-detail-new
+* protein-detail-edit
+* protein-detail-delete
+* protein-isoform-detail
+* protein-name-slug</p>
 <div class="section" id="id13">
 <h3>Models<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.proteins.models"></span><dl class="class">
@@ -1175,31 +1318,6 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 </div>
 <div class="section" id="id16">
 <h3>URLconfs<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-experimentdb.proteins.urls"></span><dl class="function">
-<dt id="experimentdb.proteins.urls.restricted_change_protein">
-<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_change_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_change_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_change_protein" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="experimentdb.proteins.urls.restricted_create_protein">
-<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_create_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_create_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_create_protein" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="experimentdb.proteins.urls.restricted_delete_protein">
-<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_delete_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_delete_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_delete_protein" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="experimentdb.proteins.urls.restricted_detail">
-<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_detail</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_detail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_detail" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="experimentdb.proteins.urls.restricted_object_list">
-<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_object_list</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_object_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_object_list" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="id17">
 <h3>Tests<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
@@ -1207,6 +1325,16 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 </div>
 <div class="section" id="module-experimentdb.reagents">
 <span id="reagents-package"></span><h2>Reagents Package<a class="headerlink" href="#module-experimentdb.reagents" title="Permalink to this headline">¶</a></h2>
+<p>The reagents application stores information about specific tools used in research.</p>
+<p>The reagents app stores information about all tools used in research, most of which are defined by a particular Experiment object.  These include Primer, Cell (cell lines), Antibody, Strain, Chemical and Construct objects.  These models are abstract base classes of a superclass ReagentInfo which defines most of the common relevant information.</p>
+<p>The models are ReagentInfo, which is an abstract superclass of:
+* Primer
+* Cell
+* Antibody
+* Strain
+* Chemical
+* Construct</p>
+<p>There are many views in this app, generally consisting of the names model-list, model-detail, model-new, model-edit and model-delete, with the model name in lowercase.</p>
 <div class="section" id="id18">
 <h3>Models<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.reagents.models"></span><p>This package describes the models in the reagents app.</p>
@@ -2053,6 +2181,13 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 <h3>URLconfs<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-experimentdb.reagents.urls"></span><p>URLconfs for reagent models.</p>
 <p>In general these urls have the names model-list, model-detail, model-new, model-edit and model-delete.</p>
+<p>These urlconfs are subclassed into specific subpackages:
+* chemical.py
+* strain.py
+* construct.py
+* primer.py
+* cell.py
+* antibody.py</p>
 </div>
 <div class="section" id="id22">
 <h3>Tests<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h3>
@@ -2671,6 +2806,13 @@ The required fields for this model are <strong>first_name</strong>, <strong>last
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Package Details</a><ul>
+<li><a class="reference internal" href="#projects">Projects</a></li>
+<li><a class="reference internal" href="#data">Data</a></li>
+<li><a class="reference internal" href="#cloning">Cloning</a></li>
+<li><a class="reference internal" href="#proteins">Proteins</a></li>
+<li><a class="reference internal" href="#reagents">Reagents</a></li>
+<li><a class="reference internal" href="#external">External</a></li>
+<li><a class="reference internal" href="#datasets">Datasets</a></li>
 <li><a class="reference internal" href="#module-experimentdb.data">Data Package</a><ul>
 <li><a class="reference internal" href="#module-experimentdb.data.models">Models</a></li>
 <li><a class="reference internal" href="#module-experimentdb.data.views">Views</a></li>

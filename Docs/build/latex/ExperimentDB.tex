@@ -244,12 +244,67 @@ Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full
 \label{api:module-experimentdb}\label{api:package-details}\label{api::doc}\index{experimentdb (module)}
 The experimentDB is a web-based application for the storage, organization and communication of experimental data with a focus on molecular biology and biochemical data. This application also stores data regarding reagents, including antibodies, constructs and other biomolecules as well as tracks the distribution of reagents. There is also some preliminary interfaces to other web resources.
 
+This project contains several sub-applications as described below:
+
+
+\section{Projects}
+\label{api:projects}
+The intent of this app is to co-ordinate specific projects. Projects are intended to be large, grant-sized larger projects in the laboratory. Subprojects are intended to be smaller, potentially paper sized groups of experiments.  An experiment can be part of one, none or several projects or subprojects.
+
+
+\section{Data}
+\label{api:data}
+This package defines experiments and the related data associated with them. The Experiment model is the focus of this entire project. It contains details about protocols, notes, reagents and project details. Results are associated with Experiment objects allowing for an Experiment to contain several results.
+
+
+\section{Cloning}
+\label{api:cloning}
+The cloning app defines the parameters for the synthesis and maintenance of constructs generated as part of an experiment.  Constructs can be generated via either cloning or mutagenesis and will result in a Cloning or Mutagenesis object respectively.
+
+
+\section{Proteins}
+\label{api:proteins}
+The proteins referenced by this application may be targets of an experiment or reagent.  This app also contains more detailed information about specific proteins, normally as accessed from public databases using either external databases or through Biopython tools.
+
+
+\section{Reagents}
+\label{api:reagents}
+The reagents app stores information about all tools used in research, most of which are defined by a particular Experiment object.  These include Primer, Cell (cell lines), Antibody, Strain, Chemical and Construct objects.  These models are abstract base classes of a superclass ReagentInfo which defines most of the common relevant information.
+
+
+\section{External}
+\label{api:external}
+The idea is to attribute particular models with references regarding external contacts or vendors or to link in specific references important to the experiments or projects.
+
+
+\section{Datasets}
+\label{api:datasets}
+The datasets app contains data and views for some external databases.  This may include external databases accessed directly or with a mirrored internal database.  This module is fairly research-interest specific and will likely be removed eventually.
+
 
 \section{Data Package}
 \label{api:module-experimentdb.data}\label{api:data-package}\index{experimentdb.data (module)}
 This package describes experimental data.
 
-There are three main models in this package.  These models cover experiments, results and protocols.  There are model specifications described in experimentdb.models and views described in either experimentdb.views or experimentdb.urls for either custom or generic views respectively
+This package defines experiments and the related data associated with them.  The Experiment model is the focus of this entire project.  It contains details about protocols, notes, reagents and project details.  Results are associated with Experiment objects allowing for an Experiment to contain several results.
+
+There are three models in this package:
+* Experiment
+* Result
+* Protocol
+* Sequencing
+
+These models are accessed via several views:
+* protocol-list
+* protocol-detail
+* protocol-new
+* protocol-edit
+* protocol-delete
+* experiment-new
+* result-new
+* experiment-edit
+* experiment-detail
+* experiment-list
 
 
 \subsection{Models}
@@ -603,12 +658,50 @@ The lookup searches the name of the protocol.
 \label{api:urlconfs}\label{api:module-experimentdb.data.urls}\index{experimentdb.data.urls (module)}
 This package stores views for the data package.
 
+The active views are:
+\begin{itemize}
+\item {} 
+protocol-list
+
+\item {} 
+protocol-detail
+
+\item {} 
+protocol-new
+
+\item {} 
+protocol-edit
+
+\item {} 
+protocol-delete
+
+\item {} 
+experiment-new
+
+\item {} 
+result-new
+
+\item {} 
+experiment-edit
+
+\item {} 
+experiment-detail
+
+\item {} 
+experiment-list
+
+\end{itemize}
+
 
 \subsection{Tests}
 \label{api:tests}
 
 \section{Datasets Package}
 \label{api:datasets-package}\label{api:module-experimentdb.datasets}\index{experimentdb.datasets (module)}
+The datasets holds data about specified external datasets.
+
+The datasets app contains data and views for some external databases.  This may include external databases accessed directly or with a mirrored internal database.  This module is fairly research-interest specific and will likely be removed eventually.
+
 
 \subsection{Models}
 \label{api:id1}\phantomsection\label{api:module-experimentdb.datasets.models}\index{experimentdb.datasets.models (module)}\index{IL10\_TNFa\_Microarray (class in experimentdb.datasets.models)}
@@ -796,6 +889,21 @@ SGD\_phenotypes(id, Feature\_Name, Feature\_Type, Gene\_Name\_id, SGDID, Referen
 
 \section{Cloning Package}
 \label{api:module-experimentdb.cloning}\label{api:cloning-package}\index{experimentdb.cloning (module)}
+The cloning app contains more detail about internally generated laboratory constructs.
+
+The cloning app defines the parameters for the synthesis and maintenance of constructs generated as part of an experiment.  Constructs can be generated via either cloning or mutagenesis and will result in a Cloning or Mutagenesis object respectively.
+
+The models in this app are:
+* Cloning
+* Mutagenesis
+
+The views in this app are:
+* cloning-new
+* mutagenesis-new
+* mutagenesis-detail
+* mutagenesis-edit
+* mutagenesis-list
+
 
 \subsection{Models}
 \label{api:id5}\phantomsection\label{api:module-experimentdb.cloning.models}\index{experimentdb.cloning.models (module)}\index{Cloning (class in experimentdb.cloning.models)}
@@ -953,21 +1061,62 @@ This model contains data describing the generation of muationns in clones
 
 \subsection{URLconfs}
 \label{api:id7}\phantomsection\label{api:module-experimentdb.cloning.urls}\index{experimentdb.cloning.urls (module)}
+This package defines the url redirections for the cloning app.
+
+All views in this app start from a request of /experimentdb/cloning and direct to the following views:
+* cloning-new
+* mutagenesis-new
+* mutagenesis-detail
+* mutagenesis-edit
+* mutagenesis-list
+
 
 \subsection{Tests}
 \label{api:id8}
 
 \section{External Package}
 \label{api:module-experimentdb.external}\label{api:external-package}\index{experimentdb.external (module)}
+The external package holds data regarding experimental contributors external to our group.
+
+The idea is to attribute particular models with references regarding external contacts or vendors or to link in specific references important to the experiments or projects.
+
+The two models in this app are:
+* Contact
+* Vendor
+* Reference
+
+The views used by this application are:
+
+In contact.py
+* contact-list
+* contact-edit
+* contact-detail
+* contact-delete
+* contact-new
+
+In reference.py
+* reference-list
+* reference-edit
+* reference-detail
+* reference-delete
+* reference-new
+
+In vendor.py
+* vendor-list
+* vendor-edit
+* vendor-detail
+* vendor-delete
+* vendor-new
+
 
 \subsection{Models}
 \label{api:id9}\phantomsection\label{api:module-experimentdb.external.models}\index{experimentdb.external.models (module)}
 This package contains the model information for the external app.
 
 It defines the structure and behavior of the following models:
-- Contact
-- Vendor
-- Reference
+* Contact
+* Vendor
+* Reference
 \index{Contact (class in experimentdb.external.models)}
 
 \begin{fulllineitems}
@@ -1257,6 +1406,29 @@ This folder contains the urlconf redirections for the external app.
 
 There is separate files for vendor, contact and reference urls.
 
+The views used by this application are:
+
+In contact.py
+* contact-list
+* contact-edit
+* contact-detail
+* contact-delete
+* contact-new
+
+In reference.py
+* reference-list
+* reference-edit
+* reference-detail
+* reference-delete
+* reference-new
+
+In vendor.py
+* vendor-list
+* vendor-edit
+* vendor-detail
+* vendor-delete
+* vendor-new
+
 
 \subsection{Tests}
 \label{api:id12}\phantomsection\label{api:module-experimentdb.external.tests}\index{experimentdb.external.tests (module)}
@@ -1392,6 +1564,31 @@ This is a test for creating a new primer object, with only the minimum fields be
 
 \section{Proteins Package}
 \label{api:module-experimentdb.proteins}\label{api:proteins-package}\index{experimentdb.proteins (module)}
+The proteins app contains details regarding proteins.
+
+The proteins referenced by this application may be targets of an experiment or reagent.  This app also contains more detailed information about specific proteins, normally as accessed from public databases using either external databases or through Biopython tools.
+
+The models used in this app are:
+* Protein
+* ProteinFamily
+* ProteinDetail
+* Species
+
+These models are accessed by the following views:
+* protein-list
+* protein-detail
+* protein-new
+* protein-edit
+* protein-delete
+* protein-family-list
+* protein-family-detail
+* protein-family-new
+* protein-detail-new
+* protein-detail-edit
+* protein-detail-delete
+* protein-isoform-detail
+* protein-name-slug
+
 
 \subsection{Models}
 \label{api:id13}\phantomsection\label{api:module-experimentdb.proteins.models}\index{experimentdb.proteins.models (module)}\index{Protein (class in experimentdb.proteins.models)}
@@ -1644,43 +1841,27 @@ The lookup searches the name of the protein.
 
 
 \subsection{URLconfs}
-\label{api:id16}\phantomsection\label{api:module-experimentdb.proteins.urls}\index{experimentdb.proteins.urls (module)}\index{restricted\_change\_protein() (in module experimentdb.proteins.urls)}
-
-\begin{fulllineitems}
-\phantomsection\label{api:experimentdb.proteins.urls.restricted_change_protein}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_change\_protein}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
-\end{fulllineitems}
-
-\index{restricted\_create\_protein() (in module experimentdb.proteins.urls)}
-
-\begin{fulllineitems}
-\phantomsection\label{api:experimentdb.proteins.urls.restricted_create_protein}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_create\_protein}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
-\end{fulllineitems}
-
-\index{restricted\_delete\_protein() (in module experimentdb.proteins.urls)}
-
-\begin{fulllineitems}
-\phantomsection\label{api:experimentdb.proteins.urls.restricted_delete_protein}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_delete\_protein}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
-\end{fulllineitems}
-
-\index{restricted\_detail() (in module experimentdb.proteins.urls)}
-
-\begin{fulllineitems}
-\phantomsection\label{api:experimentdb.proteins.urls.restricted_detail}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_detail}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
-\end{fulllineitems}
-
-\index{restricted\_object\_list() (in module experimentdb.proteins.urls)}
-
-\begin{fulllineitems}
-\phantomsection\label{api:experimentdb.proteins.urls.restricted_object_list}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_object\_list}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
-\end{fulllineitems}
-
-
+\label{api:id16}
 
 \subsection{Tests}
 \label{api:id17}
 
 \section{Reagents Package}
 \label{api:module-experimentdb.reagents}\label{api:reagents-package}\index{experimentdb.reagents (module)}
+The reagents application stores information about specific tools used in research.
+
+The reagents app stores information about all tools used in research, most of which are defined by a particular Experiment object.  These include Primer, Cell (cell lines), Antibody, Strain, Chemical and Construct objects.  These models are abstract base classes of a superclass ReagentInfo which defines most of the common relevant information.
+
+The models are ReagentInfo, which is an abstract superclass of:
+* Primer
+* Cell
+* Antibody
+* Strain
+* Chemical
+* Construct
+
+There are many views in this app, generally consisting of the names model-list, model-detail, model-new, model-edit and model-delete, with the model name in lowercase.
+
 
 \subsection{Models}
 \label{api:id18}\phantomsection\label{api:module-experimentdb.reagents.models}\index{experimentdb.reagents.models (module)}
@@ -2756,6 +2937,14 @@ URLconfs for reagent models.
 
 In general these urls have the names model-list, model-detail, model-new, model-edit and model-delete.
 
+These urlconfs are subclassed into specific subpackages:
+* chemical.py
+* strain.py
+* construct.py
+* primer.py
+* cell.py
+* antibody.py
+
 
 \subsection{Tests}
 \label{api:id22}\phantomsection\label{api:module-experimentdb.reagents.tests}\index{experimentdb.reagents.tests (module)}
@@ -3583,7 +3772,6 @@ This is a test for creating a new recipient, with only the minimum fields being 
 \item {\texttt{experimentdb.proteins}}, \pageref{api:module-experimentdb.proteins}
 \item {\texttt{experimentdb.proteins.lookups}}, \pageref{api:module-experimentdb.proteins.lookups}
 \item {\texttt{experimentdb.proteins.models}}, \pageref{api:module-experimentdb.proteins.models}
-\item {\texttt{experimentdb.proteins.urls}}, \pageref{api:module-experimentdb.proteins.urls}
 \item {\texttt{experimentdb.proteins.views}}, \pageref{api:module-experimentdb.proteins.views}
 \item {\texttt{experimentdb.reagents}}, \pageref{api:module-experimentdb.reagents}
 \item {\texttt{experimentdb.reagents.lookups}}, \pageref{api:module-experimentdb.reagents.lookups}
