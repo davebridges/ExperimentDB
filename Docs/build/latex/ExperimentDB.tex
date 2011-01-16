@@ -12,8 +12,8 @@
 
 
 \title{ExperimentDB Documentation}
-\date{January 14, 2011}
-\release{0.2}
+\date{January 16, 2011}
+\release{0.2.dev}
 \author{Dave Bridges}
 \newcommand{\sphinxlogo}{}
 \renewcommand{\releasename}{Release}
@@ -96,10 +96,6 @@
 \def\PYGZob{\char`\{}
 \def\PYGZcb{\char`\}}
 \def\PYGZca{\char`\^}
-\def\PYGZsh{\char`\#}
-\def\PYGZpc{\char`\%}
-\def\PYGZdl{\char`\$}
-\def\PYGZti{\char`\~}
 % for compatibility with earlier versions
 \def\PYGZat{@}
 \def\PYGZlb{[}
@@ -116,7 +112,6 @@
 Contents:
 
 
-
 \chapter{ExperimentDB Installation}
 \label{installation:experimentdb-installation}\label{installation::doc}\label{installation:welcome-to-experimentdb-s-documentation}
 
@@ -125,26 +120,21 @@ Contents:
 ExperimentDB requires both a database and a webserver to be set up.  Ideally, the database should be hosted separately from the webserver and ExperimentDB installation, but this is not necessary, as both can be used from the same server.  If you are using a remote server for the database, it is best to set up a user for this database that can only be accessed from the webserver.  If you want to set up several installations (ie for different users or different laboratories), you need separate databases and ExperimentDB installations for each.  You will also need to set up the webserver with different addresses for each installation.
 
 
-
 \section{Software Dependencies}
 \label{installation:software-dependencies}\begin{enumerate}
 \item {} 
 \textbf{ExperimentDB source code}.  Download from one of the following:
-
 
 \end{enumerate}
 \begin{enumerate}
 \item {} 
 \href{http://github.com/davebridges/ExperimentDB/downloads}{http://github.com/davebridges/ExperimentDB/downloads} for the current release
 
-
 \item {} 
 \href{http://github.com/davebridges/ExperimentDB}{http://github.com/davebridges/ExperimentDB} for the source code
 
-
 \item {} 
 from pypi by entering:
-
 
 \begin{Verbatim}[commandchars=@\[\]]
 pip install experimentdb
@@ -153,36 +143,28 @@ pip install experimentdb
 \end{enumerate}
 
 Downloading and/or unzipping will create a directory named ExperimentDB.  You can update to the newest revision at any time either using git or downloading and re-installing the newer version.  Changing or updating software versions will not alter any saved data, but you will have to update the localsettings.py file (described below).
-
 \begin{enumerate}
 \setcounter{enumi}{1}
 \item {} 
 \textbf{Python}.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from \href{http://www.python.org/download}{Python}.
 
-
 \item {} 
 \textbf{Django}.  Download from \href{http://www.djangoproject.com/download/}{Django}.  This will be automatically installed if you installed experimentdb with pip.  This will be automatically installed if you installed experimentdb with pip.
-
 
 \item {} 
 \textbf{Database software}.  Typically MySQL is used, but PostgreSQL, Oracle or SQLite can also be used.  You also need to install the python driver for this database (unless you are using SQLite, which is internal to Python 2.5+).  For more information see \href{http://docs.djangoproject.com/en/dev/topics/install/database-installation}{Instructions}.
 
-
 \item {} 
 \textbf{Biopython Packages}.  Download and install from \href{http://biopython.org}{Biopython}. This will be automatically installed if you installed experimentdb with pip.
-
 
 \item {} 
 \textbf{South}.  Install using pip (\textbf{pip install south}).  This will be automatically installed if you installed experimentdb with pip.
 
-
 \item {} 
 \textbf{Django Ajax Select}.  Install using pip (\textbf{pip install django-ajax-selects}).  This will be automatically installed if you installed experimentdb with pip.
 
-
 \item {} 
 \textbf{Python Imaging Library}.  Install using pip (\textbf{pip install pil}).  Available at \href{http://www.pythonware.com/products/pil/}{PIL}.  This will be automatically installed if you installed experimentdb with pip.
-
 
 \end{enumerate}
 
@@ -192,10 +174,8 @@ Downloading and/or unzipping will create a directory named ExperimentDB.  You ca
 \item {} 
 Create a new database.  You need to record the user, password, host and database name.  Refer to the database documentation for how to do this with a specific database engine.  If you are using SQLite3, you only need to set the engine and the database name.  It is recommended to use MySQL.
 
-
 \item {} 
 Go to localsettings\_empty.py and edit the settings:
-
 
 \begin{Verbatim}[commandchars=@\[\]]
 ENGINE: 'mysql', 'postgresql@_psycopg2' or 'sqlite3 depending on the database software used.
@@ -208,10 +188,8 @@ HOST: database host.
 \item {} 
 Save this file as localsettings.py in the main ExperimentDB directory.
 
-
 \item {} 
 Run the test client by going into the experimentdb directory and running the following.  There should be no errors at this point:
-
 
 \begin{Verbatim}[commandchars=@\[\]]
 python manage.py test
@@ -220,7 +198,6 @@ python manage.py test
 \item {} 
 Generate the initial database tables by entering:
 
-
 \begin{Verbatim}[commandchars=@\[\]]
 python manage.py syncdb
 \end{Verbatim}
@@ -228,14 +205,12 @@ python manage.py syncdb
 \item {} 
 When asked generate an administrative superuser and set the email and password.
 
-
 \end{enumerate}
 
 
 \section{Web Server Setup}
 \label{installation:web-server-setup}
 You need to set up a server to serve both the django installation and saved files.  For the saved files.  I recommend using apache for both.  The preferred setup is to use Apache2 with mod\_wsgi.  The following is a httpd.conf example where the code is placed in /usr/src/django/experimentdb:
-
 
 \begin{Verbatim}[commandchars=@\[\]]
 Alias /static /usr/src/django/experimentdb/media
@@ -257,12 +232,10 @@ WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
 If you want to restrict access to these files, change the Allow from all directive to specific domains or ip addresses (for example Allow from 192.168.0.0/99 would allow from 192.168.0.0 to 192.168.0.99)
 
 
-
 \section{Final Configuration and User Setup}
 \label{installation:final-configuration-and-user-setup}\begin{enumerate}
 \item {} 
 Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.
-
 
 \end{enumerate}
 
@@ -272,14 +245,11 @@ Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full
 The experimentDB is a web-based application for the storage, organization and communication of experimental data with a focus on molecular biology and biochemical data. This application also stores data regarding reagents, including antibodies, constructs and other biomolecules as well as tracks the distribution of reagents. There is also some preliminary interfaces to other web resources.
 
 
-
 \section{Data Package}
 \label{api:module-experimentdb.data}\label{api:data-package}\index{experimentdb.data (module)}
 This package describes experimental data.
 
-
 There are three main models in this package.  These models cover experiments, results and protocols.  There are model specifications described in experimentdb.models and views described in either experimentdb.views or experimentdb.urls for either custom or generic views respectively
-
 
 
 \subsection{Models}
@@ -288,7 +258,6 @@ There are three main models in this package.  These models cover experiments, re
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.models.Experiment}\pysiglinewithargsret{\strong{class }\code{experimentdb.data.models.}\bfcode{Experiment}}{\emph{*args}, \emph{**kwargs}}{}
 Experiment(experimentID, experiment, assay, experiment\_date, comments, public, published, sample\_storage)
-
 \index{Experiment.DoesNotExist}
 
 \begin{fulllineitems}
@@ -400,15 +369,11 @@ Experiment(experimentID, experiment, assay, experiment\_date, comments, public, 
 \phantomsection\label{api:experimentdb.data.models.Protocol}\pysiglinewithargsret{\strong{class }\code{experimentdb.data.models.}\bfcode{Protocol}}{\emph{*args}, \emph{**kwargs}}{}
 Describes the protocol or protocols used to perform each experiment.
 
-
 This model stores information about the protocol used for an experiment.
-
 
 An experiment may have several protocols attached to it.  For example, one could culture and transfect cells, then generate lysates then do some western blots.
 
-
 Since migrating to a mediawiki based protocol storage system, the wiki\_page attribute indicates the protocol wiki page.  In this model, the \textbf{protocol\_revision} attribute indicates the particular revision of the protocol used for that particular experiment.  In this way a permalink can be generated to the specific protocol used for a particular experiment.  To find the protocol revision number, mouse over the permanent link on the protocol and record the number at the end of the url.
-
 \index{Protocol.DoesNotExist}
 
 \begin{fulllineitems}
@@ -441,7 +406,6 @@ Since migrating to a mediawiki based protocol storage system, the wiki\_page att
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.models.Result}\pysiglinewithargsret{\strong{class }\code{experimentdb.data.models.}\bfcode{Result}}{\emph{*args}, \emph{**kwargs}}{}
 Result(id, experiment\_id, conclusions, file1, file2, file3, rawscan1, rawscan2, rawscan3, rawscan4, rawscan5, result\_figure1, result\_figure2, public, published)
-
 \index{Result.DoesNotExist}
 
 \begin{fulllineitems}
@@ -474,7 +438,6 @@ Result(id, experiment\_id, conclusions, file1, file2, file3, rawscan1, rawscan2,
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.models.Sequencing}\pysiglinewithargsret{\strong{class }\code{experimentdb.data.models.}\bfcode{Sequencing}}{\emph{*args}, \emph{**kwargs}}{}
 Sequencing(id, clone\_name, construct\_id, primer\_id, file, sequence, correct, notes, date, sample\_number, gel\_number, lane\_number)
-
 \index{Sequencing.DoesNotExist}
 
 \begin{fulllineitems}
@@ -520,16 +483,13 @@ Sequencing(id, clone\_name, construct\_id, primer\_id, file, sequence, correct, 
 \label{api:module-experimentdb.data.views}\label{api:views}\index{experimentdb.data.views (module)}
 This module provides the views for working with the data package.
 This module will generate index and detail views for experiments and protocols as well as for the form to enter new results through an experiment.  Several other generic views are found in data.urls.
-
 \index{experiment() (in module experimentdb.data.views)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.views.experiment}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{experiment}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 This renders a detailed page of an experiment.
 
-
 The view will show the experiment, and all associated reagents, proteins, projects and results associated with this object.
-
 
 \end{fulllineitems}
 
@@ -539,9 +499,7 @@ The view will show the experiment, and all associated reagents, proteins, projec
 \phantomsection\label{api:experimentdb.data.views.experiment_edit}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{experiment\_edit}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 Renders a form to edit an experiment and associated formsets for experimental results.
 
-
 Takes a request in the form of experiment/(experimentID)/edit and returns the experiment\_result\_form.html form.
-
 
 \end{fulllineitems}
 
@@ -551,9 +509,7 @@ Takes a request in the form of experiment/(experimentID)/edit and returns the ex
 \phantomsection\label{api:experimentdb.data.views.index}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{index}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 This view shows a list of all experiments.
 
-
 This list is ordered by the experiment date in descending order.  This view could potentially be rendered by a generic view.
-
 
 \end{fulllineitems}
 
@@ -563,9 +519,7 @@ This list is ordered by the experiment date in descending order.  This view coul
 \phantomsection\label{api:experimentdb.data.views.protocol_detail}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{protocol\_detail}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 This renders a view in which a protocol detail page is shown.
 
-
 This view should be deprecated in favor of a redirection directly to the wiki page for this protocol
-
 
 \end{fulllineitems}
 
@@ -575,9 +529,7 @@ This view should be deprecated in favor of a redirection directly to the wiki pa
 \phantomsection\label{api:experimentdb.data.views.protocol_list}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{protocol\_list}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 This renders a view in which all protocols are displayed.
 
-
 In the case of deprecated protocols (i.e. protocols not marked as active), these are not shown.  This view could also be rendered as a generic view.
-
 
 \end{fulllineitems}
 
@@ -587,9 +539,7 @@ In the case of deprecated protocols (i.e. protocols not marked as active), these
 \phantomsection\label{api:experimentdb.data.views.result_new}\pysiglinewithargsret{\code{experimentdb.data.views.}\bfcode{result\_new}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 This renders a form to add a new result.
 
-
 This view will be sent from a particular experiment and will attach the result to that particular experiment.
-
 
 \end{fulllineitems}
 
@@ -599,24 +549,19 @@ This view will be sent from a particular experiment and will attach the result t
 \label{api:lookups}\label{api:module-experimentdb.data.lookups}\index{experimentdb.data.lookups (module)}
 This is a configuration file for the ajax lookups for the data app.
 
-
 See \href{http://code.google.com/p/django-ajax-selects/}{http://code.google.com/p/django-ajax-selects/} for information about configuring the ajax lookups.
-
 \index{ProtocolLookup (class in experimentdb.data.lookups)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.lookups.ProtocolLookup}\pysigline{\strong{class }\code{experimentdb.data.lookups.}\bfcode{ProtocolLookup}}{}
 This is the generic lookup for protocols.
 
-
 It is to be used for all protocol requests and directs to the `protocol' channel.
-
 \index{format\_item() (experimentdb.data.lookups.ProtocolLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.data.lookups.ProtocolLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{protocol}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -626,9 +571,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.data.lookups.ProtocolLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{protocol}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the protocol.
-
 
 \end{fulllineitems}
 
@@ -639,7 +582,6 @@ This is set to show the unicode name of the protocol.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.data.lookups.ProtocolLookup method)}
@@ -648,9 +590,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.data.lookups.ProtocolLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the protocol.
-
 
 \end{fulllineitems}
 
@@ -664,12 +604,8 @@ The lookup searches the name of the protocol.
 This package stores views for the data package.
 
 
-
 \subsection{Tests}
 \label{api:tests}
-
-\subsection{Fixtures}
-\label{api:fixtures}
 
 \section{Datasets Package}
 \label{api:datasets-package}\label{api:module-experimentdb.datasets}\index{experimentdb.datasets (module)}
@@ -680,7 +616,6 @@ This package stores views for the data package.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.datasets.models.IL10_TNFa_Microarray}\pysiglinewithargsret{\strong{class }\code{experimentdb.datasets.models.}\bfcode{IL10\_TNFa\_Microarray}}{\emph{*args}, \emph{**kwargs}}{}
 IL10\_TNFa\_Microarray(id, ill\_ID, Control\_1\_2008, Control\_2\_2008, Control\_1\_2009, Control\_2\_2009, Control\_3\_2009, Control\_4\_2009, TNFa\_1\_2008, TNFa\_2\_2008, TNFa\_1\_2009, TNFa\_2\_2009, TNFa\_3\_2009, TNFa\_4\_2009, Both\_1\_2008, Both\_2\_2008, Both\_1\_2009, Both\_2\_2009, Both\_3\_2009, Both\_4\_2009, IL10\_1\_2008, IL10\_2\_2008, IL10\_1\_2009, IL10\_2\_2009, IL10\_3\_2009, IL10\_4\_2009, GeneSymbol, GeneID, GeneName)
-
 \index{IL10\_TNFa\_Microarray.DoesNotExist}
 
 \begin{fulllineitems}
@@ -701,7 +636,6 @@ IL10\_TNFa\_Microarray(id, ill\_ID, Control\_1\_2008, Control\_2\_2008, Control\
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.datasets.models.PI35P2_Binding_Screen_SP}\pysiglinewithargsret{\strong{class }\code{experimentdb.datasets.models.}\bfcode{PI35P2\_Binding\_Screen\_SP}}{\emph{*args}, \emph{**kwargs}}{}
 PI35P2\_Binding\_Screen\_SP(id, Gene\_Name\_id, Gain\_of\_Function, Loss\_of\_Function, Candidate, Comments)
-
 \index{PI35P2\_Binding\_Screen\_SP.DoesNotExist}
 
 \begin{fulllineitems}
@@ -740,7 +674,6 @@ PI35P2\_Binding\_Screen\_SP(id, Gene\_Name\_id, Gain\_of\_Function, Loss\_of\_Fu
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.datasets.models.SGD_GeneNames}\pysiglinewithargsret{\strong{class }\code{experimentdb.datasets.models.}\bfcode{SGD\_GeneNames}}{\emph{*args}, \emph{**kwargs}}{}
 SGD\_GeneNames(Locus\_name, Other\_name, Description, Gene\_product, Phenotype, ORF\_name, SGDID)
-
 \index{Bait\_GeneName (experimentdb.datasets.models.SGD\_GeneNames attribute)}
 
 \begin{fulllineitems}
@@ -791,7 +724,6 @@ SGD\_GeneNames(Locus\_name, Other\_name, Description, Gene\_product, Phenotype, 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.datasets.models.SGD_interactions}\pysiglinewithargsret{\strong{class }\code{experimentdb.datasets.models.}\bfcode{SGD\_interactions}}{\emph{*args}, \emph{**kwargs}}{}
 SGD\_interactions(id, Feature\_Name\_Bait, Standard\_Gene\_Name\_Bait\_id, Feature\_Name\_Hit, Standard\_Gene\_Name\_Hit\_id, Experiment\_Type, Genetic\_or\_Physical\_Interaction, Source, Manually\_Curated\_or\_High\_Throughput, Notes, Phenotype, Reference, Citation)
-
 \index{SGD\_interactions.DoesNotExist}
 
 \begin{fulllineitems}
@@ -824,7 +756,6 @@ SGD\_interactions(id, Feature\_Name\_Bait, Standard\_Gene\_Name\_Bait\_id, Featu
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.datasets.models.SGD_phenotypes}\pysiglinewithargsret{\strong{class }\code{experimentdb.datasets.models.}\bfcode{SGD\_phenotypes}}{\emph{*args}, \emph{**kwargs}}{}
 SGD\_phenotypes(id, Feature\_Name, Feature\_Type, Gene\_Name\_id, SGDID, Reference, Experiment\_Type, Mutant\_Type, Allele, Strain\_Background, Phenotype, Chemical, Condition, Details, Reporter)
-
 \index{SGD\_phenotypes.DoesNotExist}
 
 \begin{fulllineitems}
@@ -863,19 +794,15 @@ SGD\_phenotypes(id, Feature\_Name, Feature\_Type, Gene\_Name\_id, SGDID, Referen
 \subsection{Tests}
 \label{api:id4}
 
-\subsection{Fixtures}
-\label{api:id5}
-
 \section{Cloning Package}
 \label{api:module-experimentdb.cloning}\label{api:cloning-package}\index{experimentdb.cloning (module)}
 
 \subsection{Models}
-\label{api:id6}\phantomsection\label{api:module-experimentdb.cloning.models}\index{experimentdb.cloning.models (module)}\index{Cloning (class in experimentdb.cloning.models)}
+\label{api:id5}\phantomsection\label{api:module-experimentdb.cloning.models}\index{experimentdb.cloning.models (module)}\index{Cloning (class in experimentdb.cloning.models)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.cloning.models.Cloning}\pysiglinewithargsret{\strong{class }\code{experimentdb.cloning.models.}\bfcode{Cloning}}{\emph{*args}, \emph{**kwargs}}{}
 This model stores details about the generation of new recombinant DNA molecules.
-
 \index{Cloning.DoesNotExist}
 
 \begin{fulllineitems}
@@ -944,7 +871,6 @@ This model stores details about the generation of new recombinant DNA molecules.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.cloning.models.Mutagenesis}\pysiglinewithargsret{\strong{class }\code{experimentdb.cloning.models.}\bfcode{Mutagenesis}}{\emph{*args}, \emph{**kwargs}}{}
 This model contains data describing the generation of muationns in clones
-
 \index{Mutagenesis.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1023,40 +949,33 @@ This model contains data describing the generation of muationns in clones
 
 
 \subsection{Views}
-\label{api:id7}\phantomsection\label{api:module-experimentdb.cloning.views}\index{experimentdb.cloning.views (module)}
+\label{api:id6}\phantomsection\label{api:module-experimentdb.cloning.views}\index{experimentdb.cloning.views (module)}
 
 \subsection{URLconfs}
-\label{api:id8}\phantomsection\label{api:module-experimentdb.cloning.urls}\index{experimentdb.cloning.urls (module)}
+\label{api:id7}\phantomsection\label{api:module-experimentdb.cloning.urls}\index{experimentdb.cloning.urls (module)}
 
 \subsection{Tests}
-\label{api:id9}
-
-\subsection{Fixtures}
-\label{api:id10}
+\label{api:id8}
 
 \section{External Package}
 \label{api:module-experimentdb.external}\label{api:external-package}\index{experimentdb.external (module)}
 
 \subsection{Models}
-\label{api:id11}\phantomsection\label{api:module-experimentdb.external.models}\index{experimentdb.external.models (module)}
+\label{api:id9}\phantomsection\label{api:module-experimentdb.external.models}\index{experimentdb.external.models (module)}
 This package contains the model information for the external app.
-
 
 It defines the structure and behavior of the following models:
 - Contact
 - Vendor
 - Reference
-
 \index{Contact (class in experimentdb.external.models)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.models.Contact}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.models.}\bfcode{Contact}}{\emph{*args}, \emph{**kwargs}}{}
 This model defines a contact.
 
-
 This is intended to be a person who is involved in the research program, and may be but it not necessarily a database user.
 The required fields are first\_name and last\_name.
-
 \index{Contact.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1147,7 +1066,6 @@ The required fields are first\_name and last\_name.
 \phantomsection\label{api:experimentdb.external.models.Contact.save}\pysiglinewithargsret{\code{Contact.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the contact field into a slugfield named contactID.
 
-
 \end{fulllineitems}
 
 \index{strain\_researcher (experimentdb.external.models.Contact attribute)}
@@ -1177,12 +1095,9 @@ The save is over-ridden to slugify the contact field into a slugfield named cont
 \phantomsection\label{api:experimentdb.external.models.Reference}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.models.}\bfcode{Reference}}{\emph{*args}, \emph{**kwargs}}{}
 This model contains objects of the class reference.
 
-
 It is intended to keep track of specific papers that pertain to protocols, experiments or projects.
 
-
 The only required field for this model is a title.
-
 \index{Reference.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1264,10 +1179,8 @@ The only required field for this model is a title.
 \phantomsection\label{api:experimentdb.external.models.Vendor}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.models.}\bfcode{Vendor}}{\emph{*args}, \emph{**kwargs}}{}
 This model contains objects of the class vendor.
 
-
 It is intended to be used to indicate companies from which reagents are obtained.
 The only required field is company.
-
 \index{Vendor.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1322,7 +1235,6 @@ The only required field is company.
 \phantomsection\label{api:experimentdb.external.models.Vendor.save}\pysiglinewithargsret{\code{Vendor.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the contact field into a slugfield named contactID.
 
-
 \end{fulllineitems}
 
 \index{strain\_vendor (experimentdb.external.models.Vendor attribute)}
@@ -1337,42 +1249,35 @@ The save is over-ridden to slugify the contact field into a slugfield named cont
 
 
 \subsection{Views}
-\label{api:id12}\phantomsection\label{api:module-experimentdb.external.views}\index{experimentdb.external.views (module)}
+\label{api:id10}\phantomsection\label{api:module-experimentdb.external.views}\index{experimentdb.external.views (module)}
 
 \subsection{URLconfs}
-\label{api:id13}\phantomsection\label{api:module-experimentdb.external.urls}\index{experimentdb.external.urls (module)}
+\label{api:id11}\phantomsection\label{api:module-experimentdb.external.urls}\index{experimentdb.external.urls (module)}
 This folder contains the urlconf redirections for the external app.
-
 
 There is separate files for vendor, contact and reference urls.
 
 
-
 \subsection{Tests}
-\label{api:id14}\phantomsection\label{api:module-experimentdb.external.tests}\index{experimentdb.external.tests (module)}
+\label{api:id12}\phantomsection\label{api:module-experimentdb.external.tests}\index{experimentdb.external.tests (module)}
 This package defines the tests for the external app.
-
 
 It contains model tests for the models:
 - Vendor
 - Reference
 - Contact
 
-
 There are currently no views associated with these models.
-
 \index{ContactModelTests (class in experimentdb.external.tests)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ContactModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.tests.}\bfcode{ContactModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Contact objects contained in the reagents app.
-
 \index{setUp() (experimentdb.external.tests.ContactModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ContactModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -1381,7 +1286,6 @@ Instantiate the test client.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ContactModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
-
 
 \end{fulllineitems}
 
@@ -1403,7 +1307,6 @@ Depopulate created model instances from test database.
 \phantomsection\label{api:experimentdb.external.tests.ContactModelTests.test_create_contact_minimal}\pysiglinewithargsret{\bfcode{test\_create\_contact\_minimal}}{}{}
 This is a test for creating a new primer object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 
@@ -1414,13 +1317,11 @@ This is a test for creating a new primer object, with only the minimum fields be
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ReferenceModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.tests.}\bfcode{ReferenceModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Reference objects contained in the reagents app.
-
 \index{setUp() (experimentdb.external.tests.ReferenceModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ReferenceModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -1430,7 +1331,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.external.tests.ReferenceModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_reference\_minimal() (experimentdb.external.tests.ReferenceModelTests method)}
@@ -1438,7 +1338,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.ReferenceModelTests.test_create_reference_minimal}\pysiglinewithargsret{\bfcode{test\_create\_reference\_minimal}}{}{}
 This is a test for creating a new primer object, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -1456,13 +1355,11 @@ This is a test for creating a new primer object, with only the minimum fields be
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.VendorModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.external.tests.}\bfcode{VendorModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Vendor objects contained in the reagents app.
-
 \index{setUp() (experimentdb.external.tests.VendorModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.VendorModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -1472,7 +1369,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.external.tests.VendorModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_vendor\_minimal() (experimentdb.external.tests.VendorModelTests method)}
@@ -1480,7 +1376,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.external.tests.VendorModelTests.test_create_vendor_minimal}\pysiglinewithargsret{\bfcode{test\_create\_vendor\_minimal}}{}{}
 This is a test for creating a new primer object, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -1495,31 +1390,15 @@ This is a test for creating a new primer object, with only the minimum fields be
 
 
 
-\subsection{Fixtures}
-\label{api:id15}\phantomsection\label{api:module-experimentdb.external.fixtures}\index{experimentdb.external.fixtures (module)}
-This folder contains test fixtures for the external app.
-
-
-Currently there is one file with a sample object for each of:
-- Vendor
-- Contact
-- Reference
-
-
-in the file test\_external.json
-
-
-
 \section{Proteins Package}
 \label{api:module-experimentdb.proteins}\label{api:proteins-package}\index{experimentdb.proteins (module)}
 
 \subsection{Models}
-\label{api:id16}\phantomsection\label{api:module-experimentdb.proteins.models}\index{experimentdb.proteins.models (module)}\index{Protein (class in experimentdb.proteins.models)}
+\label{api:id13}\phantomsection\label{api:module-experimentdb.proteins.models}\index{experimentdb.proteins.models (module)}\index{Protein (class in experimentdb.proteins.models)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.models.Protein}\pysiglinewithargsret{\strong{class }\code{experimentdb.proteins.models.}\bfcode{Protein}}{\emph{*args}, \emph{**kwargs}}{}
 Protein(id, name)
-
 \index{Protein.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1600,7 +1479,6 @@ Protein(id, name)
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.models.ProteinDetail}\pysiglinewithargsret{\strong{class }\code{experimentdb.proteins.models.}\bfcode{ProteinDetail}}{\emph{*args}, \emph{**kwargs}}{}
 ProteinDetail(id, name, protein\_id, gene, species\_id, geneID, RefSeqProtein, RefSeqProtein\_gi, RefSeqNucleotide, RefSeqNucleotide\_gi, WormBaseID, FlyBaseID, SGD\_ID, public, published)
-
 \index{ProteinDetail.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1633,7 +1511,6 @@ ProteinDetail(id, name, protein\_id, gene, species\_id, geneID, RefSeqProtein, R
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.models.ProteinFamily}\pysiglinewithargsret{\strong{class }\code{experimentdb.proteins.models.}\bfcode{ProteinFamily}}{\emph{*args}, \emph{**kwargs}}{}
 ProteinFamily(id, name, notes)
-
 \index{ProteinFamily.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1666,7 +1543,6 @@ ProteinFamily(id, name, notes)
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.models.Species}\pysiglinewithargsret{\strong{class }\code{experimentdb.proteins.models.}\bfcode{Species}}{\emph{*args}, \emph{**kwargs}}{}
 Species(id, common\_name, scientific\_name, taxonomy\_id)
-
 \index{Species.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1691,7 +1567,7 @@ Species(id, common\_name, scientific\_name, taxonomy\_id)
 
 
 \subsection{Views}
-\label{api:id17}\phantomsection\label{api:module-experimentdb.proteins.views}\index{experimentdb.proteins.views (module)}\index{detail() (in module experimentdb.proteins.views)}
+\label{api:id14}\phantomsection\label{api:module-experimentdb.proteins.views}\index{experimentdb.proteins.views (module)}\index{detail() (in module experimentdb.proteins.views)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.views.detail}\pysiglinewithargsret{\code{experimentdb.proteins.views.}\bfcode{detail}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
@@ -1709,33 +1585,27 @@ Species(id, common\_name, scientific\_name, taxonomy\_id)
 \phantomsection\label{api:experimentdb.proteins.views.protein_isoform_detail}\pysiglinewithargsret{\code{experimentdb.proteins.views.}\bfcode{protein\_isoform\_detail}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
 fetch and parse a genbank protein record
 
-
 \end{fulllineitems}
 
 
 
 \subsection{Lookups}
-\label{api:id18}\phantomsection\label{api:module-experimentdb.proteins.lookups}\index{experimentdb.proteins.lookups (module)}
+\label{api:id15}\phantomsection\label{api:module-experimentdb.proteins.lookups}\index{experimentdb.proteins.lookups (module)}
 This is a configuration file for the ajax lookups for the proteins app.
 
-
 See \href{http://code.google.com/p/django-ajax-selects/}{http://code.google.com/p/django-ajax-selects/} for information about configuring the ajax lookups.
-
 \index{ProteinLookup (class in experimentdb.proteins.lookups)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.lookups.ProteinLookup}\pysigline{\strong{class }\code{experimentdb.proteins.lookups.}\bfcode{ProteinLookup}}{}
 This is the generic lookup for antibodies.
 
-
 It is to be used for all protein requests and directs to the `protein' channel.
-
 \index{format\_item() (experimentdb.proteins.lookups.ProteinLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.lookups.ProteinLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{protein}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -1745,9 +1615,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.proteins.lookups.ProteinLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{protein}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the protein.
-
 
 \end{fulllineitems}
 
@@ -1758,7 +1626,6 @@ This is set to show the unicode name of the protein.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.proteins.lookups.ProteinLookup method)}
@@ -1767,9 +1634,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.proteins.lookups.ProteinLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the protein.
-
 
 \end{fulllineitems}
 
@@ -1779,7 +1644,7 @@ The lookup searches the name of the protein.
 
 
 \subsection{URLconfs}
-\label{api:id19}\phantomsection\label{api:module-experimentdb.proteins.urls}\index{experimentdb.proteins.urls (module)}\index{restricted\_change\_protein() (in module experimentdb.proteins.urls)}
+\label{api:id16}\phantomsection\label{api:module-experimentdb.proteins.urls}\index{experimentdb.proteins.urls (module)}\index{restricted\_change\_protein() (in module experimentdb.proteins.urls)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.proteins.urls.restricted_change_protein}\pysiglinewithargsret{\code{experimentdb.proteins.urls.}\bfcode{restricted\_change\_protein}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
@@ -1812,24 +1677,14 @@ The lookup searches the name of the protein.
 
 
 \subsection{Tests}
-\label{api:id20}
-
-\subsection{Fixtures}
-\label{api:id21}\phantomsection\label{api:module-experimentdb.proteins.fixtures}\index{experimentdb.proteins.fixtures (module)}
-This folder contains data fixtures for the proteins app.
-
-
-Currently there is one text fixture for Protein objects named test\_protein.json.
-
-
+\label{api:id17}
 
 \section{Reagents Package}
 \label{api:module-experimentdb.reagents}\label{api:reagents-package}\index{experimentdb.reagents (module)}
 
 \subsection{Models}
-\label{api:id22}\phantomsection\label{api:module-experimentdb.reagents.models}\index{experimentdb.reagents.models (module)}
+\label{api:id18}\phantomsection\label{api:module-experimentdb.reagents.models}\index{experimentdb.reagents.models (module)}
 This package describes the models in the reagents app.
-
 
 The models are ReagentInfo, which is an abstract superclass of:
 - Primer
@@ -1839,20 +1694,16 @@ The models are ReagentInfo, which is an abstract superclass of:
 - Chemical
 - Construct
 
-
 The ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.
 This package also contains a Selection model, to be used for antibiotic selections, and a specied model, to be used to indicate various species.
-
 \index{Antibody (class in experimentdb.reagents.models)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.models.Antibody}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Antibody}}{\emph{*args}, \emph{**kwargs}}{}
 This model describes antibodies.
 
-
 The required fields are name and source\_species.
 This model is a subclass of ReagentInfo.
-
 \index{Antibody.DoesNotExist}
 
 \begin{fulllineitems}
@@ -1913,7 +1764,6 @@ This model is a subclass of ReagentInfo.
 \phantomsection\label{api:experimentdb.reagents.models.Antibody.save}\pysiglinewithargsret{\code{Antibody.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{species (experimentdb.reagents.models.Antibody attribute)}
@@ -1937,11 +1787,9 @@ The save is over-ridden to slugify the name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Cell}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Cell}}{\emph{*args}, \emph{**kwargs}}{}
 This model describes objects of the class Cell.
 
-
 This model is intended to be used to store information about mammalian cell lines.
 The only required field is name.
 This model is a subclass of ReagentInfo.
-
 \index{Cell.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2008,7 +1856,6 @@ This model is a subclass of ReagentInfo.
 \phantomsection\label{api:experimentdb.reagents.models.Cell.save}\pysiglinewithargsret{\code{Cell.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{vendor (experimentdb.reagents.models.Cell attribute)}
@@ -2026,11 +1873,9 @@ The save is over-ridden to slugify the name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Chemical}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Chemical}}{\emph{*args}, \emph{**kwargs}}{}
 This model describes objects of the class Chemical.
 
-
 It is intended to describe chemicals used in experiments.
 The only required field is name.
 This model is a subclass of ReagentInfo.
-
 \index{Chemical.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2085,7 +1930,6 @@ This model is a subclass of ReagentInfo.
 \phantomsection\label{api:experimentdb.reagents.models.Chemical.save}\pysiglinewithargsret{\code{Chemical.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{vendor (experimentdb.reagents.models.Chemical attribute)}
@@ -2103,10 +1947,8 @@ The save is over-ridden to slugify the name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Construct}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Construct}}{\emph{*args}, \emph{**kwargs}}{}
 This model describes recombinant DNA objects.
 
-
 The only required field is name.
 It is a subclass of ReagentInfo.
-
 \index{Construct.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2185,7 +2027,6 @@ It is a subclass of ReagentInfo.
 \phantomsection\label{api:experimentdb.reagents.models.Construct.save}\pysiglinewithargsret{\code{Construct.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{selection (experimentdb.reagents.models.Construct attribute)}
@@ -2227,12 +2068,10 @@ The save is over-ridden to slugify the name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Primer}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Primer}}{\emph{*args}, \emph{**kwargs}}{}
 Model describing primer objects.
 
-
 These objects can be of any short nucleotide type including primers, siRNA oligos or morpholinos.  
 The required fields are the name and the type.  
 The nonrequired fields include the sequence, the protein, the ordering date and all generic reagent info fields.
 This is a subclass of the ReagentInfo abstract base class.
-
 \index{3\_Primer (experimentdb.reagents.models.Primer attribute)}
 
 \begin{fulllineitems}
@@ -2311,7 +2150,6 @@ This is a subclass of the ReagentInfo abstract base class.
 \phantomsection\label{api:experimentdb.reagents.models.Primer.save}\pysiglinewithargsret{\code{Primer.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{sense\_primer (experimentdb.reagents.models.Primer attribute)}
@@ -2341,11 +2179,9 @@ The save is over-ridden to slugify the name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.ReagentInfo}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{ReagentInfo}}{\emph{*args}, \emph{**kwargs}}{}
 Abstract base model for all reagents, will not be used in isolation, only as part of other models.
 
-
 This superclass provides several generic fields, available to all reagents.  The only required field of all reagents is name.
 It orders all reagents by name, although this may be over-ridden in the model.  
 It also sets sets their \_\_unicode\_\_ representation to be ``name''.
-
 \index{ReagentInfo.Meta (class in experimentdb.reagents.models)}
 
 \begin{fulllineitems}
@@ -2391,12 +2227,9 @@ It also sets sets their \_\_unicode\_\_ representation to be ``name''.
 \phantomsection\label{api:experimentdb.reagents.models.Selection}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Selection}}{\emph{*args}, \emph{**kwargs}}{}
 Model for selection conditions of transformants.
 
-
 This object has one required field, being \textbf{selection}.  An optional comments field is also available.
 
-
 Initial data upon installation includes resistance to ampicillin or kanamycin.  Other selective markers should be added at /experimentdb/selection/new
-
 \index{Selection.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2427,7 +2260,6 @@ Initial data upon installation includes resistance to ampicillin or kanamycin.  
 \phantomsection\label{api:experimentdb.reagents.models.Selection.save}\pysiglinewithargsret{\code{Selection.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the selection field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{strain\_set (experimentdb.reagents.models.Selection attribute)}
@@ -2445,13 +2277,11 @@ The save is over-ridden to slugify the selection field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Species}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Species}}{\emph{*args}, \emph{**kwargs}}{}
 Model for indicating specific species.
 
-
 The only required field is common\_name.
 This is used with Strain, Cell and Antibody objects.
 Currently the species field, with the old choices=SPECIES is present until data can be migrated.  
 Upon installation, initial data is provided for rabbit, mouse, human, yeast and goat species.  
 More species can be added at /experimentdb/species/new.
-
 \index{Species.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2488,7 +2318,6 @@ More species can be added at /experimentdb/species/new.
 \phantomsection\label{api:experimentdb.reagents.models.Species.save}\pysiglinewithargsret{\code{Species.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the common\_name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{strain\_set (experimentdb.reagents.models.Species attribute)}
@@ -2506,11 +2335,9 @@ The save is over-ridden to slugify the common\_name field into a slugfield.
 \phantomsection\label{api:experimentdb.reagents.models.Strain}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.models.}\bfcode{Strain}}{\emph{*args}, \emph{**kwargs}}{}
 Model describing biological strains.
 
-
 This was devised to organize yeast strains, but can be used for bacteria or other organisms as well.
 The only required field is \textbf{name}.
 This is a subclass of ReagentInfo abstract class
-
 \index{Strain.DoesNotExist}
 
 \begin{fulllineitems}
@@ -2583,7 +2410,6 @@ This is a subclass of ReagentInfo abstract class
 \phantomsection\label{api:experimentdb.reagents.models.Strain.save}\pysiglinewithargsret{\code{Strain.}\bfcode{save}}{}{}
 The save is over-ridden to slugify the name field into a slugfield.
 
-
 \end{fulllineitems}
 
 \index{selection (experimentdb.reagents.models.Strain attribute)}
@@ -2616,15 +2442,13 @@ The save is over-ridden to slugify the name field into a slugfield.
 
 
 \subsection{Views}
-\label{api:id23}\phantomsection\label{api:module-experimentdb.reagents.views}\index{experimentdb.reagents.views (module)}\index{antibody\_lookup() (in module experimentdb.reagents.views)}
+\label{api:id19}\phantomsection\label{api:module-experimentdb.reagents.views}\index{experimentdb.reagents.views (module)}\index{antibody\_lookup() (in module experimentdb.reagents.views)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.views.antibody_lookup}\pysiglinewithargsret{\code{experimentdb.reagents.views.}\bfcode{antibody\_lookup}}{\emph{request}}{}
 A json lookup view for antibodies.
 
-
 This view takes a get query item and returns a json dictionary of antibody objects matching that name
-
 
 \end{fulllineitems}
 
@@ -2637,27 +2461,22 @@ This view takes a get query item and returns a json dictionary of antibody objec
 
 
 \subsection{Lookups}
-\label{api:id24}\phantomsection\label{api:module-experimentdb.reagents.lookups}\index{experimentdb.reagents.lookups (module)}
+\label{api:id20}\phantomsection\label{api:module-experimentdb.reagents.lookups}\index{experimentdb.reagents.lookups (module)}
 This is a configuration file for the ajax lookups for the reagents app.
 
-
 See \href{http://code.google.com/p/django-ajax-selects/}{http://code.google.com/p/django-ajax-selects/} for information about configuring the ajax lookups.
-
 \index{AntibodyLookup (class in experimentdb.reagents.lookups)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.AntibodyLookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{AntibodyLookup}}{}
 This is the generic lookup for antibodies.
 
-
 It is to be used for all antibody requests and directs to the `antibody' channel.
-
 \index{format\_item() (experimentdb.reagents.lookups.AntibodyLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.AntibodyLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{antibody}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2667,9 +2486,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.AntibodyLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{antibody}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the antibody, as well as the vendor and the source species.
-
 
 \end{fulllineitems}
 
@@ -2680,7 +2497,6 @@ This is set to show the unicode name of the antibody, as well as the vendor and 
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.AntibodyLookup method)}
@@ -2689,9 +2505,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.AntibodyLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the antibody.
-
 
 \end{fulllineitems}
 
@@ -2704,15 +2518,12 @@ The lookup searches the name of the antibody.
 \phantomsection\label{api:experimentdb.reagents.lookups.CellLineLookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{CellLineLookup}}{}
 This is the generic lookup for strains.
 
-
 It is to be used for all cell line requests and directs to the `cell' channel.
-
 \index{format\_item() (experimentdb.reagents.lookups.CellLineLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.CellLineLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{cell}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2722,9 +2533,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.CellLineLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{cell}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the cell line.
-
 
 \end{fulllineitems}
 
@@ -2735,7 +2544,6 @@ This is set to show the unicode name of the cell line.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.CellLineLookup method)}
@@ -2744,9 +2552,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.CellLineLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the cell.
-
 
 \end{fulllineitems}
 
@@ -2759,15 +2565,12 @@ The lookup searches the name of the cell.
 \phantomsection\label{api:experimentdb.reagents.lookups.ChemicalLookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{ChemicalLookup}}{}
 This is the generic lookup for chemicals.
 
-
 It is to be used for all chemical requests and directs to the `chemical' channel.
-
 \index{format\_item() (experimentdb.reagents.lookups.ChemicalLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.ChemicalLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{chemical}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2777,9 +2580,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.ChemicalLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{chemical}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the chemical.
-
 
 \end{fulllineitems}
 
@@ -2790,7 +2591,6 @@ This is set to show the unicode name of the chemical.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.ChemicalLookup method)}
@@ -2799,9 +2599,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.ChemicalLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the chemical.
-
 
 \end{fulllineitems}
 
@@ -2814,15 +2612,12 @@ The lookup searches the name of the chemical.
 \phantomsection\label{api:experimentdb.reagents.lookups.ConstructLookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{ConstructLookup}}{}
 This is the generic lookup for constructs.
 
-
 It is to be used for all construct requests and directs to the `construct' channel.
-
 \index{format\_item() (experimentdb.reagents.lookups.ConstructLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.ConstructLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{construct}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2832,9 +2627,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.ConstructLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{construct}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the construct.
-
 
 \end{fulllineitems}
 
@@ -2845,7 +2638,6 @@ This is set to show the unicode name of the construct.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.ConstructLookup method)}
@@ -2854,9 +2646,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.ConstructLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the construct.
-
 
 \end{fulllineitems}
 
@@ -2869,16 +2659,13 @@ The lookup searches the name of the construct.
 \phantomsection\label{api:experimentdb.reagents.lookups.SiRNALookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{SiRNALookup}}{}
 This is the generic lookup for siRNA.
 
-
 It is to be used for all siRNA requests and directs to the `siRNA' channel
 This channel will \textbf{not} search for all Primer objects, only the ones with primer\_type=''siRNA''.
-
 \index{format\_item() (experimentdb.reagents.lookups.SiRNALookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.SiRNALookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{siRNA}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2888,9 +2675,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.SiRNALookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{siRNA}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the siRNA line.
-
 
 \end{fulllineitems}
 
@@ -2901,7 +2686,6 @@ This is set to show the unicode name of the siRNA line.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.SiRNALookup method)}
@@ -2910,9 +2694,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.SiRNALookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the siRNA.
-
 
 \end{fulllineitems}
 
@@ -2925,15 +2707,12 @@ The lookup searches the name of the siRNA.
 \phantomsection\label{api:experimentdb.reagents.lookups.StrainLookup}\pysigline{\strong{class }\code{experimentdb.reagents.lookups.}\bfcode{StrainLookup}}{}
 This is the generic lookup for strains.
 
-
 It is to be used for all strain requests and directs to the `strain' channel.
-
 \index{format\_item() (experimentdb.reagents.lookups.StrainLookup method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.lookups.StrainLookup.format_item}\pysiglinewithargsret{\bfcode{format\_item}}{\emph{strain}}{}
 the display of a currently selected object in the area below the search box. html is OK
-
 
 \end{fulllineitems}
 
@@ -2943,9 +2722,7 @@ the display of a currently selected object in the area below the search box. htm
 \phantomsection\label{api:experimentdb.reagents.lookups.StrainLookup.format_result}\pysiglinewithargsret{\bfcode{format\_result}}{\emph{strain}}{}
 This controls the display of the dropdown menu.
 
-
 This is set to show the unicode name of the strain.
-
 
 \end{fulllineitems}
 
@@ -2956,7 +2733,6 @@ This is set to show the unicode name of the strain.
 given a list of ids, return the objects ordered as you would like them on the admin page.
 this is for displaying the currently selected items (in the case of a ManyToMany field)
 
-
 \end{fulllineitems}
 
 \index{get\_query() (experimentdb.reagents.lookups.StrainLookup method)}
@@ -2965,9 +2741,7 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 \phantomsection\label{api:experimentdb.reagents.lookups.StrainLookup.get_query}\pysiglinewithargsret{\bfcode{get\_query}}{\emph{q}, \emph{request}}{}
 This sets up the query for the lookup.
 
-
 The lookup searches the name of the strain.
-
 
 \end{fulllineitems}
 
@@ -2977,33 +2751,27 @@ The lookup searches the name of the strain.
 
 
 \subsection{URLconfs}
-\label{api:id25}\phantomsection\label{api:module-experimentdb.reagents.urls}\index{experimentdb.reagents.urls (module)}
+\label{api:id21}\phantomsection\label{api:module-experimentdb.reagents.urls}\index{experimentdb.reagents.urls (module)}
 URLconfs for reagent models.
-
 
 In general these urls have the names model-list, model-detail, model-new, model-edit and model-delete.
 
 
-
 \subsection{Tests}
-\label{api:id26}\phantomsection\label{api:module-experimentdb.reagents.tests}\index{experimentdb.reagents.tests (module)}
+\label{api:id22}\phantomsection\label{api:module-experimentdb.reagents.tests}\index{experimentdb.reagents.tests (module)}
 This file contains tests for the reagents application.
 
-
 These tests include model and view tests for Strain, Primer, Cell, Antibody, Construct, Chemical, Species and Selection objects.
-
 \index{AntibodyModelTests (class in experimentdb.reagents.tests)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{AntibodyModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Antibody objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.AntibodyModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3013,7 +2781,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_antibody\_slugify() (experimentdb.reagents.tests.AntibodyModelTests method)}
@@ -3021,7 +2788,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests.test_antibody_slugify}\pysiglinewithargsret{\bfcode{test\_antibody\_slugify}}{}{}
 This is a test for the antibody name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3031,7 +2797,6 @@ This is a test for the antibody name being correctly slugified
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests.test_create_antibody_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_antibody\_all\_fields}}{}{}
 This is a test for creating a new antibody object, with only the all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_antibody\_minimal() (experimentdb.reagents.tests.AntibodyModelTests method)}
@@ -3039,7 +2804,6 @@ This is a test for creating a new antibody object, with only the all fields bein
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.AntibodyModelTests.test_create_antibody_minimal}\pysiglinewithargsret{\bfcode{test\_create\_antibody\_minimal}}{}{}
 This is a test for creating a new antibody object, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3051,13 +2815,11 @@ This is a test for creating a new antibody object, with only the minimum fields 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{CellModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Cell objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.CellModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3067,7 +2829,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_cell\_line\_slugify() (experimentdb.reagents.tests.CellModelTests method)}
@@ -3075,7 +2836,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests.test_cell_line_slugify}\pysiglinewithargsret{\bfcode{test\_cell\_line\_slugify}}{}{}
 This is a test for the cell line name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3085,7 +2845,6 @@ This is a test for the cell line name being correctly slugified
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests.test_create_cell_line_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_cell\_line\_all\_fields}}{}{}
 This is a test for creating a new cell\_line object, with only the all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_cell\_line\_minimal() (experimentdb.reagents.tests.CellModelTests method)}
@@ -3093,7 +2852,6 @@ This is a test for creating a new cell\_line object, with only the all fields be
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.CellModelTests.test_create_cell_line_minimal}\pysiglinewithargsret{\bfcode{test\_create\_cell\_line\_minimal}}{}{}
 This is a test for creating a new cell line object, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3105,13 +2863,11 @@ This is a test for creating a new cell line object, with only the minimum fields
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{ChemicalModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Chemical objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.ChemicalModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3121,7 +2877,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_chemical\_slugify() (experimentdb.reagents.tests.ChemicalModelTests method)}
@@ -3129,7 +2884,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests.test_chemical_slugify}\pysiglinewithargsret{\bfcode{test\_chemical\_slugify}}{}{}
 This is a test for the cell line name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3139,7 +2893,6 @@ This is a test for the cell line name being correctly slugified
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests.test_create_chemical_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_chemical\_all\_fields}}{}{}
 This is a test for creating a new chemical object, with only the all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_chemical\_minimal() (experimentdb.reagents.tests.ChemicalModelTests method)}
@@ -3147,7 +2900,6 @@ This is a test for creating a new chemical object, with only the all fields bein
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ChemicalModelTests.test_create_chemical_minimal}\pysiglinewithargsret{\bfcode{test\_create\_chemical\_minimal}}{}{}
 This is a test for creating a new chemical object, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3159,13 +2911,11 @@ This is a test for creating a new chemical object, with only the minimum fields 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{ConstructModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Construct objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.ConstructModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3175,7 +2925,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_construct\_slugify() (experimentdb.reagents.tests.ConstructModelTests method)}
@@ -3183,7 +2932,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests.test_construct_slugify}\pysiglinewithargsret{\bfcode{test\_construct\_slugify}}{}{}
 This is a test for the construct name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3193,7 +2941,6 @@ This is a test for the construct name being correctly slugified
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests.test_create_cell_line_minimal}\pysiglinewithargsret{\bfcode{test\_create\_cell\_line\_minimal}}{}{}
 This is a test for creating a new construct object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_construct\_all\_fields() (experimentdb.reagents.tests.ConstructModelTests method)}
@@ -3201,7 +2948,6 @@ This is a test for creating a new construct object, with only the minimum fields
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.ConstructModelTests.test_create_construct_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_construct\_all\_fields}}{}{}
 This is a test for creating a new construct object, with only the all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3213,13 +2959,11 @@ This is a test for creating a new construct object, with only the all fields bei
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{PrimerModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Primer objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.PrimerModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3229,7 +2973,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_primer\_all\_fields() (experimentdb.reagents.tests.PrimerModelTests method)}
@@ -3237,7 +2980,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests.test_create_primer_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_primer\_all\_fields}}{}{}
 This is a test for creating a new primer object, with only the all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3247,7 +2989,6 @@ This is a test for creating a new primer object, with only the all fields being 
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests.test_create_primer_minimal}\pysiglinewithargsret{\bfcode{test\_create\_primer\_minimal}}{}{}
 This is a test for creating a new primer object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_primer\_slugify() (experimentdb.reagents.tests.PrimerModelTests method)}
@@ -3255,7 +2996,6 @@ This is a test for creating a new primer object, with only the minimum fields be
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.PrimerModelTests.test_primer_slugify}\pysiglinewithargsret{\bfcode{test\_primer\_slugify}}{}{}
 This is a test for the primer name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3267,13 +3007,11 @@ This is a test for the primer name being correctly slugified
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{SelectionModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Selection objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.SelectionModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3283,7 +3021,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_selection\_all\_fields() (experimentdb.reagents.tests.SelectionModelTests method)}
@@ -3291,7 +3028,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests.test_create_selection_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_selection\_all\_fields}}{}{}
 This is a test for creating a new selection object, with only the all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3301,7 +3037,6 @@ This is a test for creating a new selection object, with only the all fields bei
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests.test_create_selection_minimal}\pysiglinewithargsret{\bfcode{test\_create\_selection\_minimal}}{}{}
 This is a test for creating a new selection object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_selection\_slugify() (experimentdb.reagents.tests.SelectionModelTests method)}
@@ -3309,7 +3044,6 @@ This is a test for creating a new selection object, with only the minimum fields
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SelectionModelTests.test_selection_slugify}\pysiglinewithargsret{\bfcode{test\_selection\_slugify}}{}{}
 This is a test for the cell line name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3321,13 +3055,11 @@ This is a test for the cell line name being correctly slugified
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{SpeciesModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Species objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.SpeciesModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3337,7 +3069,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_species\_all\_fields() (experimentdb.reagents.tests.SpeciesModelTests method)}
@@ -3345,7 +3076,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests.test_create_species_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_species\_all\_fields}}{}{}
 This is a test for creating a new species object, with only the all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3355,7 +3085,6 @@ This is a test for creating a new species object, with only the all fields being
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests.test_create_species_minimal}\pysiglinewithargsret{\bfcode{test\_create\_species\_minimal}}{}{}
 This is a test for creating a new species object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_species\_slugify() (experimentdb.reagents.tests.SpeciesModelTests method)}
@@ -3363,7 +3092,6 @@ This is a test for creating a new species object, with only the minimum fields b
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.SpeciesModelTests.test_species_slugify}\pysiglinewithargsret{\bfcode{test\_species\_slugify}}{}{}
 This is a test for the cell line name being correctly slugified
-
 
 \end{fulllineitems}
 
@@ -3375,13 +3103,11 @@ This is a test for the cell line name being correctly slugified
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.reagents.tests.}\bfcode{StrainModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Strain objects contained in the reagents app.
-
 \index{setUp() (experimentdb.reagents.tests.StrainModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3391,7 +3117,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_strain\_all\_fields() (experimentdb.reagents.tests.StrainModelTests method)}
@@ -3399,7 +3124,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests.test_create_strain_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_strain\_all\_fields}}{}{}
 This is a test for creating a new strain object, with only the all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3409,7 +3133,6 @@ This is a test for creating a new strain object, with only the all fields being 
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests.test_create_strain_minimal}\pysiglinewithargsret{\bfcode{test\_create\_strain\_minimal}}{}{}
 This is a test for creating a new strain object, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_strain\_slugify() (experimentdb.reagents.tests.StrainModelTests method)}
@@ -3418,24 +3141,10 @@ This is a test for creating a new strain object, with only the minimum fields be
 \phantomsection\label{api:experimentdb.reagents.tests.StrainModelTests.test_strain_slugify}\pysiglinewithargsret{\bfcode{test\_strain\_slugify}}{}{}
 This is a test for the cell line name being correctly slugified
 
-
 \end{fulllineitems}
 
 
 \end{fulllineitems}
-
-
-
-\subsection{Fixtures}
-\label{api:id27}\phantomsection\label{api:module-experimentdb.reagents.fixtures}\index{experimentdb.reagents.fixtures (module)}
-This folder contains fixtures for the reagents app.
-
-
-Currently there are the following text fixtures
-- Species model named test\_species.json
-- Selection model named test\_selection.json
-- Strain model named test\_strain.json
-- Construct model named test\_construct.json
 
 
 
@@ -3443,12 +3152,10 @@ Currently there are the following text fixtures
 \label{api:sharing-package}\label{api:module-experimentdb.sharing}\index{experimentdb.sharing (module)}
 
 \subsection{Models}
-\label{api:id28}\phantomsection\label{api:module-experimentdb.sharing.models}\index{experimentdb.sharing.models (module)}
+\label{api:id23}\phantomsection\label{api:module-experimentdb.sharing.models}\index{experimentdb.sharing.models (module)}
 This package defines the database models for for the sharing application.
 
-
 This application tracks shipments of constructs to other groups.
-
 
 These tests include the following models:
 - Institution
@@ -3456,18 +3163,14 @@ These tests include the following models:
 - Recipient
 - ConstructShipment
 
-
 In the terms of this application, \textbf{ConstructShipments} are sent to \textbf{Recipients}, who are in \textbf{Laboratories} at \textbf{Institutions}.
-
 \index{ConstructShipment (class in experimentdb.sharing.models)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.models.ConstructShipment}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.models.}\bfcode{ConstructShipment}}{\emph{*args}, \emph{**kwargs}}{}
 This class describes a shipment of constructs.
 
-
 The required fields are \textbf{constructs}, \textbf{ship\_date}, \textbf{recipient} (who is defined as part of a Laboratory and in turn an Institution).
-
 \index{ConstructShipment.DoesNotExist}
 
 \begin{fulllineitems}
@@ -3519,10 +3222,8 @@ The required fields are \textbf{constructs}, \textbf{ship\_date}, \textbf{recipi
 \phantomsection\label{api:experimentdb.sharing.models.Institution}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.models.}\bfcode{Institution}}{\emph{*args}, \emph{**kwargs}}{}
 This class defines Institution models.
 
-
 The only required is \textbf{institution}.
 The institution describes part of the address (city/state/country) the rest is defined under Laboratory.
-
 \index{Institution.DoesNotExist}
 
 \begin{fulllineitems}
@@ -3562,12 +3263,10 @@ The institution describes part of the address (city/state/country) the rest is d
 \phantomsection\label{api:experimentdb.sharing.models.Laboratory}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.models.}\bfcode{Laboratory}}{\emph{*args}, \emph{**kwargs}}{}
 This class describes groups or laboratories.
 
-
 This class has two required fields, \textbf{principal\_investigator} and \textbf{institution}.
 In this context, a laboratory could be a single person or a group of people at an institution.
 Typically the recipient of the shipment works at the laboratory.
 The laboratory may or may not also be a contact, as defined in the external app.
-
 \index{Laboratory.DoesNotExist}
 
 \begin{fulllineitems}
@@ -3607,10 +3306,8 @@ The laboratory may or may not also be a contact, as defined in the external app.
 \phantomsection\label{api:experimentdb.sharing.models.Recipient}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.models.}\bfcode{Recipient}}{\emph{*args}, \emph{**kwargs}}{}
 This class describes the recipient of a shipment.
 
-
 The recipient could be the principal investigator, or a member of their group.
 The required fields for this model are \textbf{first\_name}, \textbf{last\_name} and \textbf{lab}.
-
 \index{Recipient.DoesNotExist}
 
 \begin{fulllineitems}
@@ -3641,10 +3338,10 @@ The required fields for this model are \textbf{first\_name}, \textbf{last\_name}
 
 
 \subsection{Views}
-\label{api:id29}\phantomsection\label{api:module-experimentdb.sharing.views}\index{experimentdb.sharing.views (module)}
+\label{api:id24}\phantomsection\label{api:module-experimentdb.sharing.views}\index{experimentdb.sharing.views (module)}
 
 \subsection{URLconfs}
-\label{api:id30}\phantomsection\label{api:module-experimentdb.sharing.urls}\index{experimentdb.sharing.urls (module)}\index{change\_shipment() (in module experimentdb.sharing.urls)}
+\label{api:id25}\phantomsection\label{api:module-experimentdb.sharing.urls}\index{experimentdb.sharing.urls (module)}\index{change\_shipment() (in module experimentdb.sharing.urls)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.urls.change_shipment}\pysiglinewithargsret{\code{experimentdb.sharing.urls.}\bfcode{change\_shipment}}{\emph{request}, \emph{*args}, \emph{**kwargs}}{}
@@ -3677,28 +3374,24 @@ The required fields for this model are \textbf{first\_name}, \textbf{last\_name}
 
 
 \subsection{Tests}
-\label{api:id31}\phantomsection\label{api:module-experimentdb.sharing.tests}\index{experimentdb.sharing.tests (module)}
+\label{api:id26}\phantomsection\label{api:module-experimentdb.sharing.tests}\index{experimentdb.sharing.tests (module)}
 This file contains tests for the sharing application.
-
 
 These tests include model and view tests for the following models:
 - Institution
 - Laboratory
 - Recipient
 - ConstructShipment
-
 \index{ConstructShipmentModelTests (class in experimentdb.sharing.tests)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.ConstructShipmentModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.tests.}\bfcode{ConstructShipmentModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of ConstructShipment objects contained in the reagents app.
-
 \index{setUp() (experimentdb.sharing.tests.ConstructShipmentModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.ConstructShipmentModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3708,7 +3401,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.sharing.tests.ConstructShipmentModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_construct\_shipment\_all\_fields() (experimentdb.sharing.tests.ConstructShipmentModelTests method)}
@@ -3717,7 +3409,6 @@ Depopulate created model instances from test database.
 \phantomsection\label{api:experimentdb.sharing.tests.ConstructShipmentModelTests.test_create_construct_shipment_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_construct\_shipment\_all\_fields}}{}{}
 This is a test for creating a new construct shipment object, with all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_construct\_shipment\_minimal() (experimentdb.sharing.tests.ConstructShipmentModelTests method)}
@@ -3725,7 +3416,6 @@ This is a test for creating a new construct shipment object, with all fields bei
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.ConstructShipmentModelTests.test_create_construct_shipment_minimal}\pysiglinewithargsret{\bfcode{test\_create\_construct\_shipment\_minimal}}{}{}
 This is a test for creating a new construct shipment, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3737,13 +3427,11 @@ This is a test for creating a new construct shipment, with only the minimum fiel
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.InstitutionModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.tests.}\bfcode{InstitutionModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Laboratory objects contained in the reagents app.
-
 \index{setUp() (experimentdb.sharing.tests.InstitutionModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.InstitutionModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3753,7 +3441,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.sharing.tests.InstitutionModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_institution\_all\_fields() (experimentdb.sharing.tests.InstitutionModelTests method)}
@@ -3762,7 +3449,6 @@ Depopulate created model instances from test database.
 \phantomsection\label{api:experimentdb.sharing.tests.InstitutionModelTests.test_create_institution_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_institution\_all\_fields}}{}{}
 This is a test for creating a new institution object, with all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_institution\_minimal() (experimentdb.sharing.tests.InstitutionModelTests method)}
@@ -3770,7 +3456,6 @@ This is a test for creating a new institution object, with all fields being ente
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.InstitutionModelTests.test_create_institution_minimal}\pysiglinewithargsret{\bfcode{test\_create\_institution\_minimal}}{}{}
 This is a test for creating a new institution, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3782,13 +3467,11 @@ This is a test for creating a new institution, with only the minimum fields bein
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.LaboratoryModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.tests.}\bfcode{LaboratoryModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Laboratory objects contained in the reagents app.
-
 \index{setUp() (experimentdb.sharing.tests.LaboratoryModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.LaboratoryModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3798,7 +3481,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.sharing.tests.LaboratoryModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_laboratory\_all\_fields() (experimentdb.sharing.tests.LaboratoryModelTests method)}
@@ -3807,7 +3489,6 @@ Depopulate created model instances from test database.
 \phantomsection\label{api:experimentdb.sharing.tests.LaboratoryModelTests.test_create_laboratory_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_laboratory\_all\_fields}}{}{}
 This is a test for creating a new recipient object, with all fields being entered
 
-
 \end{fulllineitems}
 
 \index{test\_create\_laboratory\_minimal() (experimentdb.sharing.tests.LaboratoryModelTests method)}
@@ -3815,7 +3496,6 @@ This is a test for creating a new recipient object, with all fields being entere
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.LaboratoryModelTests.test_create_laboratory_minimal}\pysiglinewithargsret{\bfcode{test\_create\_laboratory\_minimal}}{}{}
 This is a test for creating a new laboratory, with only the minimum fields being entered
-
 
 \end{fulllineitems}
 
@@ -3827,13 +3507,11 @@ This is a test for creating a new laboratory, with only the minimum fields being
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.RecipientModelTests}\pysiglinewithargsret{\strong{class }\code{experimentdb.sharing.tests.}\bfcode{RecipientModelTests}}{\emph{methodName='runTest'}}{}
 Tests the model attributes of Recipient objects contained in the reagents app.
-
 \index{setUp() (experimentdb.sharing.tests.RecipientModelTests method)}
 
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.RecipientModelTests.setUp}\pysiglinewithargsret{\bfcode{setUp}}{}{}
 Instantiate the test client.
-
 
 \end{fulllineitems}
 
@@ -3843,7 +3521,6 @@ Instantiate the test client.
 \phantomsection\label{api:experimentdb.sharing.tests.RecipientModelTests.tearDown}\pysiglinewithargsret{\bfcode{tearDown}}{}{}
 Depopulate created model instances from test database.
 
-
 \end{fulllineitems}
 
 \index{test\_create\_recipient\_all\_fields() (experimentdb.sharing.tests.RecipientModelTests method)}
@@ -3851,7 +3528,6 @@ Depopulate created model instances from test database.
 \begin{fulllineitems}
 \phantomsection\label{api:experimentdb.sharing.tests.RecipientModelTests.test_create_recipient_all_fields}\pysiglinewithargsret{\bfcode{test\_create\_recipient\_all\_fields}}{}{}
 This is a test for creating a new recipient, with all fields being entered
-
 
 \end{fulllineitems}
 
@@ -3861,23 +3537,10 @@ This is a test for creating a new recipient, with all fields being entered
 \phantomsection\label{api:experimentdb.sharing.tests.RecipientModelTests.test_create_recipient_minimal}\pysiglinewithargsret{\bfcode{test\_create\_recipient\_minimal}}{}{}
 This is a test for creating a new recipient, with only the minimum fields being entered
 
-
 \end{fulllineitems}
 
 
 \end{fulllineitems}
-
-
-
-\subsection{Fixtures}
-\label{api:id32}\phantomsection\label{api:module-experimentdb.sharing.fixtures}\index{experimentdb.sharing.fixtures (module)}
-This folder contains data fixtures for the sharing app.
-
-
-Currently it contains the following test fixtures:
-- an Institution object as test\_institution.json
-- a Laboratory object as test\_laboratory.json
-- a Recipient object as test\_recipient.json
 
 
 
@@ -3886,14 +3549,11 @@ Currently it contains the following test fixtures:
 \item {} 
 \emph{genindex}
 
-
 \item {} 
 \emph{modindex}
 
-
 \item {} 
 \emph{search}
-
 
 \end{itemize}
 
@@ -3916,26 +3576,22 @@ Currently it contains the following test fixtures:
 \item {\texttt{experimentdb.datasets.models}}, \pageref{api:module-experimentdb.datasets.models}
 \item {\texttt{experimentdb.datasets.views}}, \pageref{api:module-experimentdb.datasets.views}
 \item {\texttt{experimentdb.external}}, \pageref{api:module-experimentdb.external}
-\item {\texttt{experimentdb.external.fixtures}}, \pageref{api:module-experimentdb.external.fixtures}
 \item {\texttt{experimentdb.external.models}}, \pageref{api:module-experimentdb.external.models}
 \item {\texttt{experimentdb.external.tests}}, \pageref{api:module-experimentdb.external.tests}
 \item {\texttt{experimentdb.external.urls}}, \pageref{api:module-experimentdb.external.urls}
 \item {\texttt{experimentdb.external.views}}, \pageref{api:module-experimentdb.external.views}
 \item {\texttt{experimentdb.proteins}}, \pageref{api:module-experimentdb.proteins}
-\item {\texttt{experimentdb.proteins.fixtures}}, \pageref{api:module-experimentdb.proteins.fixtures}
 \item {\texttt{experimentdb.proteins.lookups}}, \pageref{api:module-experimentdb.proteins.lookups}
 \item {\texttt{experimentdb.proteins.models}}, \pageref{api:module-experimentdb.proteins.models}
 \item {\texttt{experimentdb.proteins.urls}}, \pageref{api:module-experimentdb.proteins.urls}
 \item {\texttt{experimentdb.proteins.views}}, \pageref{api:module-experimentdb.proteins.views}
 \item {\texttt{experimentdb.reagents}}, \pageref{api:module-experimentdb.reagents}
-\item {\texttt{experimentdb.reagents.fixtures}}, \pageref{api:module-experimentdb.reagents.fixtures}
 \item {\texttt{experimentdb.reagents.lookups}}, \pageref{api:module-experimentdb.reagents.lookups}
 \item {\texttt{experimentdb.reagents.models}}, \pageref{api:module-experimentdb.reagents.models}
 \item {\texttt{experimentdb.reagents.tests}}, \pageref{api:module-experimentdb.reagents.tests}
 \item {\texttt{experimentdb.reagents.urls}}, \pageref{api:module-experimentdb.reagents.urls}
 \item {\texttt{experimentdb.reagents.views}}, \pageref{api:module-experimentdb.reagents.views}
 \item {\texttt{experimentdb.sharing}}, \pageref{api:module-experimentdb.sharing}
-\item {\texttt{experimentdb.sharing.fixtures}}, \pageref{api:module-experimentdb.sharing.fixtures}
 \item {\texttt{experimentdb.sharing.models}}, \pageref{api:module-experimentdb.sharing.models}
 \item {\texttt{experimentdb.sharing.tests}}, \pageref{api:module-experimentdb.sharing.tests}
 \item {\texttt{experimentdb.sharing.urls}}, \pageref{api:module-experimentdb.sharing.urls}

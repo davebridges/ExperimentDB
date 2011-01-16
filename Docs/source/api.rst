@@ -34,10 +34,7 @@ Tests
 
 .. automodule:: experimentdb.data.tests
 
-Fixtures
-........
 
-.. automodule:: experimentdb.data.fixtures
 
 
 Datasets Package
@@ -70,10 +67,6 @@ Tests
 .. automodule:: experimentdb.datasets.tests
    
 
-Fixtures
-........
-
-.. automodule:: experimentdb.datasets.fixtures
    
 
 Cloning Package
@@ -106,10 +99,6 @@ Tests
 .. automodule:: experimentdb.cloning.tests
    
 
-Fixtures
-........
-
-.. automodule:: experimentdb.cloning.fixtures
    
 
 External Package
@@ -142,10 +131,6 @@ Tests
 .. automodule:: experimentdb.external.tests
    
 
-Fixtures
-........
-
-.. automodule:: experimentdb.external.fixtures
    
 
 Proteins Package
@@ -183,10 +168,6 @@ Tests
 .. automodule:: experimentdb.proteins.tests
    
 
-Fixtures
-........
-
-.. automodule:: experimentdb.proteins.fixtures
    
 
 Reagents Package
@@ -224,10 +205,6 @@ Tests
 .. automodule:: experimentdb.reagents.tests
    
 
-Fixtures
-........
-
-.. automodule:: experimentdb.reagents.fixtures
    
 
 Sharing Package
@@ -260,9 +237,6 @@ Tests
 .. automodule:: experimentdb.sharing.tests
    
 
-Fixtures
-........
-.. automodule:: experimentdb.sharing.fixtures
    
 
 
