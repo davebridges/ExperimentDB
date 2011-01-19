@@ -14,7 +14,7 @@
 <h2>{{ protein }}</h2>
 <h3>Protein Families</h3>
 <ul>{% for family in protein.protein_family.all %}
- <li><a href="/experimentdb/protein/family/{{family.id}}">{{family}}</a></li>
+ <li><a href="{{family.get_absolute_url}}">{{family}}</a></li>
 {% endfor %}
  </ul>
 <table>
@@ -71,7 +71,7 @@
  <tbody>
 {% for construct in protein.construct_set.all %}
    <tr>
-   <td><a href="/experimentdb/construct/{{construct.id}}">{{ construct }}</a></td>
+   <td><a href="{{ construct.get_absolute_url }}">{{ construct }}</a></td>
    </tr>
   </tbody>
 {% endfor %}
@@ -122,7 +122,7 @@
  <tbody>
 {% for experiment in protein.experiment_set.all %}
    <tr>
-   <td><a href="/experimentdb/experiment/{{experiment.experimentID}}">{{ experiment }}</a></td>
+   <td><a href="{{experiment.get_absolute_url }}">{{ experiment }}</a></td>
    </tr>
   </tbody>
 {% endfor %}

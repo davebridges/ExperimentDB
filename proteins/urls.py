@@ -53,6 +53,7 @@ urlpatterns = patterns('',
 		}, name='protein-list'),	
 	url(r'(?P<object_id>[\d]+)/$', restricted_detail, {
 		"queryset": Protein.objects.all(), 
+		'template_object_name': 'protein',
 		'template_name': 'protein_detail.html'
 		,}, name='protein-detail'),
 	url(r'^new/$', restricted_create_protein, {
