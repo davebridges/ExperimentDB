@@ -21,8 +21,8 @@
 	<tr><th>Date</th><td>{{ experiment.experiment_date}}</td></tr>
 	<tr><th>Assay</th><td>{{ experiment.assay}}</td></tr>
 	<tr><th>Experiment</th><td>{{ experiment.experiment}}</td></tr>
-	{% for exp_protocol in exp_protocol %}
-	<tr><th>Protocol</th><td>{{exp_protocol.protocol}}</td></tr>
+	{% for protocol in experiment.protocol.all %}
+	<tr><th>Protocol</th><td><a href="{{protocol.get_absolute_url}}">{{protocol}}</td></tr>
 	{% endfor %}
 	</table>
 	<h3>Notes</h3>
