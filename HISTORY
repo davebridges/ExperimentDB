@@ -3,6 +3,7 @@ History Log Starts After Release 0.2.0
 Release 0.2.dev
 ===============
 * Updated documentation
+* Added hypotheses app.  This allows for the summary of experimental findings.  It links a manipulation to a change in a biological process or entity, and lists the context and evidence for and against such a hypothesis
 
 Todo
 ----

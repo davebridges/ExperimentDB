@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if object %}Update Entity {{object}}{% else %} New Entity {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Entity {{object}}{% else %} New Entity {% endif %}{% endblock %}
+{% block scripts %}
+{% endblock %}
+{% block content %}
+<form method="POST" action=".">
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}

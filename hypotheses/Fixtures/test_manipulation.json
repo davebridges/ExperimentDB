@@ -1,0 +1,14 @@
+[
+    {
+        "pk": 1, 
+        "model": "hypotheses.manipulation", 
+        "fields": {
+            "chemical": null, 
+            "protein_added": null, 
+            "time": null, 
+            "concentration": "", 
+            "type": "Overexpression", 
+            "protein": 1
+        }
+    }
+]

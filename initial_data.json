@@ -1,0 +1,5 @@
+[
+{"pk": 1, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.org/obo/owl/SBO#SBO_0000170", "effect": "positively regulates", "description": "Positive modulation of the execution of a process."}}, 
+{"pk": 2, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.org/obo/owl/SBO#SBO_0000169", "effect": "negatively regulates", "description": "Negative modulation of the execution of a process."}}, 
+{"pk": 3, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.bioontology.org/ontology/SNOMEDCT/397971000", "effect": "has no detectable effect on", "description": null}}
+]

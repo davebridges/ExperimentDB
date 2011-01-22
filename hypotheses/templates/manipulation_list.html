@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Manipulation List{% endblock %}
+{% block title %}Manipulation List{% endblock %}
+{% block content %}
+
+<tbody>
+	<th>Manipultion</th>
+{% for manipulation in object_list %}
+<tr>
+	<td><a href="{{manipulation.get_absolute_url}}">{{manipulation }}</a></td>
+	<td>
+		<a href="{% url manipulation-detail manipulation.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+	{% if perms.hypothesis.change_manipulation %}
+		<a href="{% url manipulation-edit manipulation.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+	{% endif %}
+	{% if perms.hypothesis.delete_manipulation %}
+		<a href="{% url manipulation-delete manipulation.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+	{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

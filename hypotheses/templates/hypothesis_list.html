@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Hypothesis List{% endblock %}
+{% block title %}Hypothesis List{% endblock %}
+{% block content %}
+
+<tbody>
+	<th>Hypothesis</th>
+{% for hypothesis in object_list %}
+<tr>
+	<td><a href="{{hypothesis.get_absolute_url}}">{{hypothesis }}</a></td>
+	<td>
+		<a href="{% url hypothesis-detail hypothesis.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+	{% if perms.hypothesis.change_hypothesis %}
+		<a href="{% url hypothesis-edit hypothesis.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+	{% endif %}
+	{% if perms.hypothesis.delete_hypothesis %}
+		<a href="{% url hypothesis-delete hypothesis.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+	{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

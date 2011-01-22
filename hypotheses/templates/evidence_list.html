@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Evidence List{% endblock %}
+{% block title %}Evidence List{% endblock %}
+{% block content %}
+
+<tbody>
+	<th>Evidence</th>
+{% for evidence in object_list %}
+<tr>
+	<td><a href="{{evidence.get_absolute_url}}">{{evidence }}</a></td>
+	<td>
+		<a href="{% url evidence-detail evidence.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+	{% if perms.hypothesis.change_evidence %}
+		<a href="{% url evidence-edit evidence.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+	{% endif %}
+	{% if perms.hypothesis.delete_evidence %}
+		<a href="{% url evidence-delete evidence.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+	{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

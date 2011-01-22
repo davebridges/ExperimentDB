@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Context List{% endblock %}
+{% block title %}Context List{% endblock %}
+{% block content %}
+
+<tbody>
+	<th>Context</th>
+{% for context in object_list %}
+<tr>
+	<td><a href="{{context.get_absolute_url}}">{{context }}</a></td>
+	<td>
+		<a href="{% url context-detail context.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+	{% if perms.hypothesis.change_context %}
+		<a href="{% url hypothesis-edit context.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+	{% endif %}
+	{% if perms.hypothesis.delete_context	%}
+		<a href="{% url hypothesis-delete context.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+	{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

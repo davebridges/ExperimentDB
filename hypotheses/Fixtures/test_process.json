@@ -1,0 +1,13 @@
+[
+    {
+        "pk": 1, 
+        "model": "hypotheses.process", 
+        "fields": {
+            "definition": "The directed movement of the hexose monosaccharide glucose into a cell or organelle. ", 
+            "gene_ontology_id": "GO:0046323", 
+            "assay": [], 
+            "name": "glucose import", 
+            "slug": "glucose-import"
+        }
+    }
+]

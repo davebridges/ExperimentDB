@@ -72,15 +72,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-os.path.join(PROJECT_DIR, "data/templates"),
-os.path.join(PROJECT_DIR, "data/projects"),
-os.path.join(PROJECT_DIR, "data/proteins"),
-os.path.join(PROJECT_DIR, "data/reagents"),
-os.path.join(PROJECT_DIR, "data/external"),
-os.path.join(PROJECT_DIR, "data/cloning"),
-os.path.join(PROJECT_DIR, "data/datasets"),
-os.path.join(PROJECT_DIR, "data/sharing"),
-os.path.join(PROJECT_DIR, "templates"),
+	os.path.join(PROJECT_DIR, "templates"),
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
@@ -91,7 +83,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.comments',
     'django.contrib.messages',
-	'django.contrib.sites',
+    'django.contrib.sites',
+    'django.contrib.admin',
     'experimentdb.projects',
     'experimentdb.proteins',
     'experimentdb.reagents',
@@ -100,7 +93,7 @@ INSTALLED_APPS = (
     'experimentdb.datasets',
     'experimentdb.sharing',
     'experimentdb.data',
-    'django.contrib.admin',
+    'experimentdb.hypotheses',
     'ajax_select',
     'south'
 )

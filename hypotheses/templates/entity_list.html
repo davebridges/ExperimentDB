@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Entity List{% endblock %}
+{% block title %}Entity List{% endblock %}
+{% block content %}
+
+<tbody>
+	<th>Entity</th>
+{% for entity in object_list %}
+<tr>
+	<td><a href="{{entity.get_absolute_url}}">{{entity }}</a></td>
+	<td>
+		<a href="{% url entity-detail entity.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+	{% if perms.hypothesis.change_entity %}
+		<a href="{% url entity-edit entity.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+	{% endif %}
+	{% if perms.hypothesis.delete_entity %}
+		<a href="{% url entity-delete entity.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+	{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
