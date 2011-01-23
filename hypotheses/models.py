@@ -220,7 +220,7 @@ class Context(models.Model):
 class Evidence(models.Model):
     """Evidence instances are supporting or dissenting experiments, papers or communications regarding a hypothesis.
 
-    The required fields for a piece of evidence are the general_type, the citation_type and whether it is public (which is set to False as a default).  There are optional fields for paper or contact.  The clean method is over-ridden to ensure that when a evidence_type is a reference, a paper is entered and when a evidence_type is a communication then a contact is entered."""
+    The required fields for a piece of evidence are the evidence_type, the citation_type and whether it is public (which is set to False as a default).  There are optional fields for paper or contact.  The clean method is over-ridden to ensure that when a evidence_type is a reference, a paper is entered and when a evidence_type is a communication then a contact is entered."""
 
     evidence_type = models.CharField(max_length=50, choices = EVIDENCE_TYPE, help_text="Type of evidence")
     citation_type = models.ForeignKey('CitationType')
