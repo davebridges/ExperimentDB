@@ -1,5 +1,125 @@
 [
 {"pk": 1, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.org/obo/owl/SBO#SBO_0000170", "effect": "positively regulates", "description": "Positive modulation of the execution of a process."}}, 
 {"pk": 2, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.org/obo/owl/SBO#SBO_0000169", "effect": "negatively regulates", "description": "Negative modulation of the execution of a process."}}, 
-{"pk": 3, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.bioontology.org/ontology/SNOMEDCT/397971000", "effect": "has no detectable effect on", "description": null}}
+{"pk": 3, "model": "hypotheses.effect", "fields": {"ontology": "http://purl.bioontology.org/ontology/SNOMEDCT/397971000", "effect": "has no detectable effect on", "description": null}},
+    {
+        "pk": 1, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work confirms facts, ideas or statements presented in the cited work.", 
+            "group": "Positive", 
+            "uri": "http://purl.org/net/cito/confirms", 
+            "label": "confirms"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work acknowledges contributions made by the cited work.", 
+            "group": "Positive", 
+            "uri": "http://purl.org/net/cito/credits", 
+            "label": "credits"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work extends facts, ideas or understandings presented in the cited work.", 
+            "group": "Positive", 
+            "uri": "http://purl.org/net/cito/extends", 
+            "label": "extends"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work provides intellectual or factual support for the cited work.", 
+            "group": "Positive", 
+            "uri": "http://purl.org/net/cito/supports", 
+            "label": "supports"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work updates facts, ideas or understandings presented in the cited work.", 
+            "group": "Positive", 
+            "uri": "http://purl.org/net/cito/updates", 
+            "label": "updates"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work corrects ideas or statements presented in the cited work.", 
+            "group": "Negative", 
+            "uri": "http://purl.org/net/cito/corrects", 
+            "label": "corrects"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work critiques facts, ideas or statements presented in the cited work.", 
+            "group": "Negative", 
+            "uri": "http://purl.org/net/cito/critiques", 
+            "label": "critiques"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work disagrees with ideas or statements presented in the cited work.", 
+            "group": "Negative", 
+            "uri": "http://purl.org/net/cito/disagreesWith", 
+            "label": "disagreesWith"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work qualifies or places conditions upon facts, ideas or statements presented in the cited work.", 
+            "group": "Negative", 
+            "uri": "http://purl.org/net/cito/qualifies", 
+            "label": "qualifies"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work refutes ideas or statements presented in the cited work.", 
+            "group": "Negative", 
+            "uri": "http://purl.org/net/cito/refutes", 
+            "label": "refutes"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work discusses facts, ideas or statements presented in the cited work.", 
+            "group": "Neutral", 
+            "uri": "http://purl.org/net/cito/discusses", 
+            "label": "discusses"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "hypotheses.citationtype", 
+        "fields": {
+            "comment": "The citing work reviews ideas or statements presented in the cited work.", 
+            "group": "Neutral", 
+            "uri": "http://purl.org/net/cito/reviews", 
+            "label": "reviews"
+        }
+    }
 ]
