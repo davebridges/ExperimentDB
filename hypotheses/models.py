@@ -90,6 +90,9 @@ class Hypothesis(models.Model):
         else:
             return "Unspecified Hypothesis"
 
+    class Meta:
+        verbose_name_plural = 'hypotheses'			
+
 	
 class Manipulation(models.Model):
     """This model defines particular manipulations of experimental systems.
@@ -162,7 +165,10 @@ class Process(models.Model):
 
     def __unicode__(self):
         """The unicode representation of a process is its name."""
-        return u'%s' % self.name		
+        return u'%s' % self.name	
+
+    class Meta:
+        verbose_name_plural = 'processes'			
 
 class Entity(models.Model):
     """Each hypothesis involves a potential manipulation of either a process or an entity.
@@ -183,7 +189,10 @@ class Entity(models.Model):
 
     def __unicode__(self):
         """The unicode representation of an entity is its name."""
-        return u'%s' % self.name		
+        return u'%s' % self.name
+		
+    class Meta:
+        verbose_name_plural = 'processes'			
 	
 class Context(models.Model):
     """A context specifies the model system under which the hypothesis is tested.
@@ -235,7 +244,10 @@ class Evidence(models.Model):
             raise ValidationError('Enter a contact for evidence from a communication')	
         """This validates that evidence with a communication has a contact."""
         if self.evidence_type == "Presentation" and self.contact == None:
-            raise ValidationError('Enter a contact for evidence from a presentation')	
+            raise ValidationError('Enter a contact for evidence from a presentation')
+			
+    class Meta:
+        verbose_name_plural = 'evidence'				
 
 		
 class CitationType(models.Model):
@@ -251,3 +263,6 @@ class CitationType(models.Model):
     def __unicode__(self):
         """The unicode representation of a CitationType is the label."""	
         return u'%s' % self.label	
+		
+    class Meta:
+        verbose_name_plural = 'citation types'			
