@@ -1,0 +1,15 @@
+[
+    {
+        "pk": 1, 
+        "model": "hypotheses.context", 
+        "fields": {
+            "name": "Fixture Context", 
+            "uri": null, 
+            "species": [], 
+            "strain": [], 
+            "cell_line": [], 
+            "type": "Species", 
+            "slug": "fixture-context"
+        }
+    }
+]
