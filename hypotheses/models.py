@@ -97,7 +97,7 @@ class Hypothesis(models.Model):
 class Manipulation(models.Model):
     """This model defines particular manipulations of experimental systems.
 	
-	This Manipulation or (treatment), could be several things.  It may refer to the manipulation of a protein.  This could be a knockout of a gene/knockdown with a siRNA, overexpression with a construct, or treatment with a chemical or another protein.  There are optional fields for manipulation time and concentration (if needed).  There are validators to validate each type.  The unicode representation of a manipulation is "something - type" depending on the type.
+	This Manipulation or (treatment), could be several things.  It may refer to the manipulation of a protein.  This could be a knockout of a gene/knockdown with a siRNA, overexpression with a construct, or treatment with a chemical or another protein.  The required fields are type plus the appropriate chemical, protein_added or protien.  There are optional fields for manipulation time and concentration (if needed).  There are validators to validate each type.  The unicode representation of a manipulation is "something - type" depending on the type.
     """
     type = models.CharField(max_length=25, choices=MANIPULATION_TYPE)
     time = models.TimeField(blank=True, null=True, help_text = "Enter if an incubation time is relevant.  Use format hour,min,sec with min and sec")
@@ -125,10 +125,10 @@ class Manipulation(models.Model):
         """The unicode representation depends on the type of manipulation."""	
         if self.type == "Treatment" and self.chemical and self.protein_added:
             return u'%s and %s %s' % (self.chemical, self.protein_added, self.type)
-        if self.type == "Treatment" and self.chemical:
+        elif self.type == "Treatment" and self.chemical:
             return u'%s %s' % (self.chemical, self.type)
-        if self.type == "Treatment" and self.protein_added:
-            return u'%s %s' % (self.protein_added.all, self.type)
+        elif self.type == "Treatment" and self.protein_added:
+            return u'%s %s' % (self.protein_added, self.type)
         else:
             return u'%s %s' % (self.protein, self.type)
 			
