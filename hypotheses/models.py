@@ -1,16 +1,17 @@
 """
-The this file controls the data models in the hypothesis app.
+The this file controls the data models in the hypotheses application.
 
 The purpose of this app is to organize results and observations or summaries of experimental hypotheses in a systematic way.  A hypothesis is something that is observed about a biological process or biological entity.  It is supported by evidence, which could be an external publication or an experiment contained in this database.  The goal is to be able to say "X causes Y in this context, with the following evidence" 
 
 The hypothesis app has 7 data models:
-* Hypothesis (Manipulation(m2m) - Affects - Process/Entity in Context(m2m) + Evidence(m2m))
-* Manipulation (Manipulation or Treatment, could be several things, could be with a chemical.  May refer to a protein.  This could be a knockout of a protein/knockout with a siRNA, overexpression with a construct, treatment with a chemical)
-* Effect (stimulates, has no effect or inhibits as instances (initial data fixture); needs ontologies specified and description)
-* Process (can be a biological entity or a process, could include sameas links to GO.  a process can be the same as the readout of an entity)
-* Entity (can be a protein, phosphorylation site, could be the same as a readout of a biological process, must be linked to a protein, an entity can be the same as an effect on a process)
-* Context (under what conditions, includes cell line or model system)
-* Evidence (paper or experiment, can disagree or agree, can be public or not, include createdate, edit date and user)
+* Hypothesis
+* Manipulation
+* Effect
+* Process
+* Entity
+* Context
+* Evidence 
+* CitationType
 """
 
 from django.db import models
@@ -18,9 +19,10 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from experimentdb.reagents.models import Primer, Construct, Chemical
+from experimentdb.reagents.models import Primer, Construct, Chemical, Species, Cell, Strain
 from experimentdb.proteins.models import Protein
-from experimentdb.data.models import Protocol
+from experimentdb.data.models import Protocol, Experiment
+from experimentdb.external.models import Contact, Reference
 
 
 MANIPULATION_TYPE = (
@@ -28,6 +30,28 @@ MANIPULATION_TYPE = (
 	('Overexpression', 'Overexpression'),
 	('Knockdown', 'Knockdown'),
 	('Knockout', 'Knockout'),
+)
+
+CONTEXT_TYPE = (
+	('Species', 'Species'),
+	('Tissues', 'Tissues'),
+	('Cells', 'Cells'),
+	('Sub-Cellular Location', 'Sub-Cellular Location'),
+	('Multi-Protein Complex', 'Multi-Protein Complex'),
+)
+
+EVIDENCE_TYPE = (
+	('Publication', 'Publication'),
+	('Experiment', 'Experiment'),
+	('Un-Published Communication', 'Un-Published Communication'),
+	('Presentation', 'Presentation'),
+)
+
+CITATION_GROUP = (
+    ('Positive', 'Positive'),
+    ('Negative', 'Negative'),
+    ('Neutral', 'Neutral'),
+    ('No Opinion', 'No Opinion')
 )
 
 class Hypothesis(models.Model):
@@ -38,9 +62,9 @@ class Hypothesis(models.Model):
 	
     manipulation = models.ForeignKey('Manipulation')
     effect = models.ForeignKey('Effect')
-    process = models.ForeignKey('Process', blank=True, null=True, help_text="A biological process such as glucose uptake or endocytosis")	
+    process = models.ForeignKey('Process', blank=True, null=True, help_text="A biological process such as glucose uptake or endocytosis.  Select either an entity or a process but not both")	
     entity = models.ForeignKey('Entity', blank=True, null=True, help_text="A particular biological entity such as a protein or phosphorylation site.  Select either an entity or a process but not both.")
-    context = models.ManyToManyField('Context', blank=True, null=True, help_text="Describes the model system and potential restrictions.  Select either an entity or a process but not both.")	
+    context = models.ForeignKey('Context', blank=True, null=True, help_text="Describes the model system and potential restrictions.  Since only one context might be selected, the context may need to be quite specific.")	
     evidence = models.ManyToManyField('Evidence', blank=True, null=True)
     identical_hypotheses = models.ManyToManyField("self", blank=True, null=True, help_text="Some processes or entities may generally correlate.  As an example, the process activation of mTORC1 generally correlates wth activation of pThr 389 phosphorylation.  In these cases, both hypotheses are symmetrically linked.")
     create_date = models.DateField(auto_now_add = True)
@@ -55,10 +79,16 @@ class Hypothesis(models.Model):
 	
     def __unicode__(self):
         """The unicode string for this model will show entity of entity is present and process if process is present.  The over-riding of clean should ensure that only one of the two is present."""
-        if self.process:
+        if self.process and self.context:
+            return u'%s %s %s in %s' % (self.manipulation, self.effect, self.process, self.context)
+        elif self.process:
             return u'%s %s %s' % (self.manipulation, self.effect, self.process)
-        if self.entity:
+        elif self.entity and self.context:
+            return u'%s %s %s in %s' % (self.manipulation, self.effect, self.entity, self.context)
+        elif self.entity:
             return u'%s %s %s' % (self.manipulation, self.effect, self.entity)
+        else:
+            return "Unspecified Hypothesis"
 
 	
 class Manipulation(models.Model):
@@ -156,7 +186,68 @@ class Entity(models.Model):
         return u'%s' % self.name		
 	
 class Context(models.Model):
-    pass	
+    """A context specifies the model system under which the hypothesis is tested.
+
+    The context has optional parameters for cell lines, yeast strain.  It is slugified upon save into a slug field.  The required fiels are name and type.  There are several optional fields."""	
+
+    name = models.CharField(max_length=100, help_text="A description of the specific context of the hypotheses.")
+    type = models.CharField(max_length=50, choices=CONTEXT_TYPE, help_text="A general category")
+    strain = models.ManyToManyField(Strain, blank=True, null=True, help_text="Strain specific context")
+    cell_line = models.ManyToManyField(Cell, blank=True, null=True, help_text="Cell line specific context")
+    species = models.ManyToManyField(Species, blank=True, null=True, help_text="Species specific context.")	
+    uri = models.URLField(blank=True, null=True, help_text="If a specific URI is known for this context enter it here.  Search BioOntology at http://clkb.ncibi.org/browse.php for possible URI's")
+    slug = models.SlugField(blank=True, null=True)
+	
+    def save(self):
+        """The save is over-ridden to slugify the name field into a slugfield."""
+        self.slug = slugify( self.name )
+        super( Context, self ).save()
+
+    def __unicode__(self):
+        """The unicode representation of a context is its name."""
+        return u'%s' % self.name	
+
 	
 class Evidence(models.Model):
-    pass	
+    """Evidence instances are supporting or dissenting experiments, papers or communications regarding a hypothesis.
+
+    The required fields for a piece of evidence are the general_type, the citation_type and whether it is public (which is set to False as a default).  There are optional fields for paper or contact.  The clean method is over-ridden to ensure that when a evidence_type is a reference, a paper is entered and when a evidence_type is a communication then a contact is entered."""
+
+    evidence_type = models.CharField(max_length=50, choices = EVIDENCE_TYPE, help_text="Type of evidence")
+    citation_type = models.ForeignKey('CitationType')
+    experiment = models.ForeignKey(Experiment, blank=True, null=True)	
+    paper = models.ForeignKey(Reference, blank=True, null=True)	
+    contact = models.ForeignKey(Contact, blank=True, null=True, help_text="Source of unpublished evidence.")	
+    notes = models.TextField(max_length=500, blank=True, null=True, help_text="Description of evidence")
+    public = models.BooleanField(help_text="Is the evidence to be made public?")
+    create_date = models.DateField(auto_now_add = True)
+    modified_date = models.DateField(auto_now = True)
+
+    def clean(self):
+        """This validates that evidence with a paper has a reference."""
+        if self.evidence_type == "Publication" and self.paper == None:
+            raise ValidationError('Enter a paper for evidence from a publication')	
+        """This validates that evidence with an experiment has a experiment."""
+        if self.evidence_type == "Experiment" and self.experiment == None:
+            raise ValidationError('Select an experiment for evidence from an experiment')	
+        """This validates that evidence with a communication has a contact."""
+        if self.evidence_type == "Un-Published Communication" and self.contact == None:
+            raise ValidationError('Enter a contact for evidence from a communication')	
+        """This validates that evidence with a communication has a contact."""
+        if self.evidence_type == "Presentation" and self.contact == None:
+            raise ValidationError('Enter a contact for evidence from a presentation')	
+
+		
+class CitationType(models.Model):
+    """The citation type is a series of classifiers to link evidence to its opinion of a hypothesis.
+	
+    This class is based on the cito ontology (see http://purl.org/net/cito/).  Some but not all instances of this ontology are loaded upon installation as initial data.  Other potential citation types may be added as well.  Although optional, it is recommended that alternate citation types have URI's included.  The class is not part of the cito schema, and is added to orient evidences as positive or negative."""
+
+    group = models.CharField(max_length=50, choices=CITATION_GROUP)	
+    label = models.CharField(max_length=50)
+    uri = models.URLField(blank=True, null=True)
+    comment = models.TextField(max_length=250, blank=True, null=True)	
+	
+    def __unicode__(self):
+        """The unicode representation of a CitationType is the label."""	
+        return u'%s' % self.label	
