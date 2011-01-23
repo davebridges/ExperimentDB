@@ -1,0 +1,21 @@
+[
+    {
+        "pk": 1, 
+        "model": "reagents.chemical", 
+        "fields": {
+            "box": null, 
+            "vendor": null, 
+            "name": "Test Chemical", 
+            "reference": [], 
+            "cas": null, 
+            "notes": null, 
+            "researcher": [], 
+            "public": false, 
+            "source": null, 
+            "location": "-20", 
+            "published": false, 
+            "protein": [], 
+            "slug": ""
+        }
+    }, 
+]
