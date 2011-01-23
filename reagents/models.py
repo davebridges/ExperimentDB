@@ -149,6 +149,7 @@ class Cell(ReagentInfo):
     description = models.CharField(max_length=50, blank=True, null=True)
     species = models.CharField(max_length=50, choices=SPECIES, blank=True, null=True)
     cell_line_species = models.ForeignKey('Species', blank=True, null=True)
+    uri = models.URLField(blank=True, null=True, help_text="A URI for a cell line.  Search http://bioportal.bioontology.org/search and find an instance of the Cell Line Ontology for a particular cell line")	
     
     class Meta:
         ordering = ['name']
