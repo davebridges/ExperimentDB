@@ -76,4 +76,26 @@ If you want to restrict access to these files, change the Allow from all directi
 
 Final Configuration and User Setup
 ----------------------------------
-1. Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.
+Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.
+
+South Installation for Database Migrations
+------------------------------------------
+ExperimentDB upgrades may involve schema changes.  We use south to control schema migrations.  To update database schema, first initial migrations must be run, shortly after installation.  If an upgrade (either via SVN or by a new download) involves a change in the database schema, errors may occur.  Look at HISTORY in the root folder to see if an upgrade invovles schema migrations.  To set up south, shortly after installation enter at the command line::
+
+    python manage.py schemamigration data --initial
+    python manage.py schemamigration datasets --initial
+    python manage.py schemamigration reagents --initial
+    python manage.py schemamigration cloning --initial	
+    python manage.py schemamigration sharing --initial
+    python manage.py schemamigration projects --initial
+    python manage.py schemamigration external --initial	
+    python manage.py schemamigration proteins --initial
+    python manage.py schemamigration hypotheses --initial	
+	python manage.py migrate --fake
+	
+This will install the initial migration settings.  If an app is migrated during an upgrade enter the following where "APP" is data, datasets, reagents, cloning, sharing, projects, external, proteins or hypotheses without the quotes and the "OPTIONAL DESCRIPTION" is something describing the changes, if desired::
+
+    python manage.py schemamigration "APP" "OPTIONAL DESCRIPTION" --auto
+    python manage.py migrate
+
+See the South documentation, or submit an issue if problems occur.	
