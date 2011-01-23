@@ -82,6 +82,7 @@
     <dd><dl>
       <dt><a href="api.html#experimentdb.reagents.models.Primer.antisense_primer">(experimentdb.reagents.models.Primer attribute)</a></dt>
   </dl></dd>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Process.assay">assay (experimentdb.hypotheses.models.Process attribute)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -101,6 +102,7 @@
     <dt><a href="api.html#experimentdb.reagents.models.Cell">Cell (class in experimentdb.reagents.models)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Cell.DoesNotExist">Cell.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Cell.MultipleObjectsReturned">Cell.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.cell_line">cell_line (experimentdb.hypotheses.models.Context attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Cell.cell_line_species">cell_line_species (experimentdb.reagents.models.Cell attribute)</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.cell_researcher">cell_researcher (experimentdb.external.models.Contact attribute)</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Reference.cell_set">cell_set (experimentdb.external.models.Reference attribute)</a></dt>
@@ -114,6 +116,7 @@
     <dt><a href="api.html#experimentdb.reagents.tests.CellModelTests">CellModelTests (class in experimentdb.reagents.tests)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.urls.change_shipment">change_shipment() (in module experimentdb.sharing.urls)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Chemical">Chemical (class in experimentdb.reagents.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.chemical">chemical (experimentdb.hypotheses.models.Manipulation attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Chemical.DoesNotExist">Chemical.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Chemical.MultipleObjectsReturned">Chemical.MultipleObjectsReturned</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.chemical_researcher">chemical_researcher (experimentdb.external.models.Contact attribute)</a></dt>
@@ -125,11 +128,21 @@
     <dt><a href="api.html#experimentdb.reagents.lookups.ChemicalLookup">ChemicalLookup (class in experimentdb.reagents.lookups)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.tests.ChemicalModelTests">ChemicalModelTests (class in experimentdb.reagents.tests)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.chemicals">chemicals (experimentdb.data.models.Experiment attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.citation_type">citation_type (experimentdb.hypotheses.models.Evidence attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.CitationType">CitationType (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.CitationType.DoesNotExist">CitationType.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.CitationType.MultipleObjectsReturned">CitationType.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.CitationTypeAdmin">CitationTypeAdmin (class in experimentdb.hypotheses.admin)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.clean">clean() (experimentdb.hypotheses.models.Evidence method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.clean">(experimentdb.hypotheses.models.Hypothesis method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.clean">(experimentdb.hypotheses.models.Manipulation method)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.cloning.models.Cloning">Cloning (class in experimentdb.cloning.models)</a></dt>
-    <dt><a href="api.html#experimentdb.cloning.models.Cloning.DoesNotExist">Cloning.DoesNotExist</a></dt>
-    <dt><a href="api.html#experimentdb.cloning.models.Cloning.MultipleObjectsReturned">Cloning.MultipleObjectsReturned</a></dt>
 </dl></td>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.cloning.models.Cloning.DoesNotExist">Cloning.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.cloning.models.Cloning.MultipleObjectsReturned">Cloning.MultipleObjectsReturned</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.cloning_set">cloning_set (experimentdb.external.models.Contact attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Construct">Construct (class in experimentdb.reagents.models)</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Cloning.construct">construct (experimentdb.cloning.models.Cloning attribute)</a></dt>
@@ -161,10 +174,22 @@
   </dl></dd>
     <dt><a href="api.html#experimentdb.sharing.tests.ConstructShipmentModelTests">ConstructShipmentModelTests (class in experimentdb.sharing.tests)</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact">Contact (class in experimentdb.external.models)</a></dt>
-    <dt><a href="api.html#experimentdb.sharing.models.Laboratory.contact">contact (experimentdb.sharing.models.Laboratory attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.contact">contact (experimentdb.hypotheses.models.Evidence attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.sharing.models.Laboratory.contact">(experimentdb.sharing.models.Laboratory attribute)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.external.models.Contact.DoesNotExist">Contact.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.MultipleObjectsReturned">Contact.MultipleObjectsReturned</a></dt>
     <dt><a href="api.html#experimentdb.external.tests.ContactModelTests">ContactModelTests (class in experimentdb.external.tests)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context">Context (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.context">context (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.DoesNotExist">Context.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.MultipleObjectsReturned">Context.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.reagents.models.Cell.context_set">context_set (experimentdb.reagents.models.Cell attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.reagents.models.Species.context_set">(experimentdb.reagents.models.Species attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.reagents.models.Strain.context_set">(experimentdb.reagents.models.Strain attribute)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.sharing.urls.create_shipment">create_shipment() (in module experimentdb.sharing.urls)</a></dt>
 </dl></td>
 </tr></table>
@@ -182,8 +207,32 @@
 <h2 id="E">E</h2>
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Effect">Effect (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.effect">effect (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Effect.DoesNotExist">Effect.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Effect.MultipleObjectsReturned">Effect.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.EffectAdmin">EffectAdmin (class in experimentdb.hypotheses.admin)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Entity">Entity (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.entity">entity (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Entity.DoesNotExist">Entity.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Entity.MultipleObjectsReturned">Entity.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.models.Protein.entity_set">entity_set (experimentdb.proteins.models.Protein attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.EntityAdmin">EntityAdmin (class in experimentdb.hypotheses.admin)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence">Evidence (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.evidence">evidence (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.DoesNotExist">Evidence.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.MultipleObjectsReturned">Evidence.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.external.models.Contact.evidence_set">evidence_set (experimentdb.external.models.Contact attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.external.models.Reference.evidence_set">(experimentdb.external.models.Reference attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.CitationType.evidence_set">(experimentdb.hypotheses.models.CitationType attribute)</a></dt>
+  </dl></dd>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.EvidenceAdmin">EvidenceAdmin (class in experimentdb.hypotheses.admin)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment">Experiment (class in experimentdb.data.models)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Result.experiment">experiment (experimentdb.data.models.Result attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.experiment">(experimentdb.hypotheses.models.Evidence attribute)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.data.views.experiment">experiment() (in module experimentdb.data.views)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.DoesNotExist">Experiment.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.MultipleObjectsReturned">Experiment.MultipleObjectsReturned</a></dt>
@@ -207,21 +256,28 @@
     <dt><a href="api.html#module-experimentdb.data">experimentdb.data (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.data.lookups">experimentdb.data.lookups (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.data.models">experimentdb.data.models (module)</a></dt>
+</dl></td>
+  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#module-experimentdb.data.urls">experimentdb.data.urls (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.data.views">experimentdb.data.views (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.datasets">experimentdb.datasets (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.datasets.models">experimentdb.datasets.models (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.datasets.views">experimentdb.datasets.views (module)</a></dt>
-</dl></td>
-  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#module-experimentdb.external">experimentdb.external (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.external.models">experimentdb.external.models (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.external.tests">experimentdb.external.tests (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.external.urls">experimentdb.external.urls (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.external.views">experimentdb.external.views (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses">experimentdb.hypotheses (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses.admin">experimentdb.hypotheses.admin (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses.models">experimentdb.hypotheses.models (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses.tests">experimentdb.hypotheses.tests (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses.urls">experimentdb.hypotheses.urls (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.hypotheses.views">experimentdb.hypotheses.views (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.proteins">experimentdb.proteins (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.proteins.lookups">experimentdb.proteins.lookups (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.proteins.models">experimentdb.proteins.models (module)</a></dt>
+    <dt><a href="api.html#module-experimentdb.proteins.urls">experimentdb.proteins.urls (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.proteins.views">experimentdb.proteins.views (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.reagents">experimentdb.reagents (module)</a></dt>
     <dt><a href="api.html#module-experimentdb.reagents.lookups">experimentdb.reagents.lookups (module)</a></dt>
@@ -297,7 +353,9 @@
   </dl></dd>
     <dt><a href="api.html#experimentdb.cloning.models.Cloning.get_cloning_type_display">get_cloning_type_display() (experimentdb.cloning.models.Cloning method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.models.Institution.get_country_display">get_country_display() (experimentdb.sharing.models.Institution method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.get_evidence_type_display">get_evidence_type_display() (experimentdb.hypotheses.models.Evidence method)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP.get_Gain_of_Function_display">get_Gain_of_Function_display() (experimentdb.datasets.models.PI35P2_Binding_Screen_SP method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.CitationType.get_group_display">get_group_display() (experimentdb.hypotheses.models.CitationType method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.models.Institution.get_institution_type_display">get_institution_type_display() (experimentdb.sharing.models.Institution method)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Antibody.get_location_display">get_location_display() (experimentdb.reagents.models.Antibody method)</a></dt>
     <dd><dl>
@@ -309,11 +367,19 @@
       <dt><a href="api.html#experimentdb.reagents.models.Strain.get_location_display">(experimentdb.reagents.models.Strain method)</a></dt>
   </dl></dd>
     <dt><a href="api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP.get_Loss_of_Function_display">get_Loss_of_Function_display() (experimentdb.datasets.models.PI35P2_Binding_Screen_SP method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.get_next_by_create_date">get_next_by_create_date() (experimentdb.hypotheses.models.Evidence method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.get_next_by_create_date">(experimentdb.hypotheses.models.Hypothesis method)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.data.models.Sequencing.get_next_by_date">get_next_by_date() (experimentdb.data.models.Sequencing method)</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Mutagenesis.get_next_by_date_completed">get_next_by_date_completed() (experimentdb.cloning.models.Mutagenesis method)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.get_next_by_experiment_date">get_next_by_experiment_date() (experimentdb.data.models.Experiment method)</a></dt>
 </dl></td>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.get_next_by_modified_date">get_next_by_modified_date() (experimentdb.hypotheses.models.Evidence method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.get_next_by_modified_date">(experimentdb.hypotheses.models.Hypothesis method)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.sharing.models.ConstructShipment.get_next_by_ship_date">get_next_by_ship_date() (experimentdb.sharing.models.ConstructShipment method)</a></dt>
     <dt><a href="api.html#experimentdb.data.lookups.ProtocolLookup.get_objects">get_objects() (experimentdb.data.lookups.ProtocolLookup method)</a></dt>
     <dd><dl>
@@ -325,9 +391,17 @@
       <dt><a href="api.html#experimentdb.reagents.lookups.SiRNALookup.get_objects">(experimentdb.reagents.lookups.SiRNALookup method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.lookups.StrainLookup.get_objects">(experimentdb.reagents.lookups.StrainLookup method)</a></dt>
   </dl></dd>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.get_previous_by_create_date">get_previous_by_create_date() (experimentdb.hypotheses.models.Evidence method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.get_previous_by_create_date">(experimentdb.hypotheses.models.Hypothesis method)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.data.models.Sequencing.get_previous_by_date">get_previous_by_date() (experimentdb.data.models.Sequencing method)</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Mutagenesis.get_previous_by_date_completed">get_previous_by_date_completed() (experimentdb.cloning.models.Mutagenesis method)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.get_previous_by_experiment_date">get_previous_by_experiment_date() (experimentdb.data.models.Experiment method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.get_previous_by_modified_date">get_previous_by_modified_date() (experimentdb.hypotheses.models.Evidence method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.get_previous_by_modified_date">(experimentdb.hypotheses.models.Hypothesis method)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.sharing.models.ConstructShipment.get_previous_by_ship_date">get_previous_by_ship_date() (experimentdb.sharing.models.ConstructShipment method)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Primer.get_primer_type_display">get_primer_type_display() (experimentdb.reagents.models.Primer method)</a></dt>
     <dt><a href="api.html#experimentdb.data.lookups.ProtocolLookup.get_query">get_query() (experimentdb.data.lookups.ProtocolLookup method)</a></dt>
@@ -345,6 +419,10 @@
     <dd><dl>
       <dt><a href="api.html#experimentdb.reagents.models.Strain.get_species_display">(experimentdb.reagents.models.Strain method)</a></dt>
   </dl></dd>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.get_type_display">get_type_display() (experimentdb.hypotheses.models.Context method)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.get_type_display">(experimentdb.hypotheses.models.Manipulation method)</a></dt>
+  </dl></dd>
 </dl></td>
 </tr></table>
 
@@ -352,12 +430,28 @@
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.datasets.models.SGD_GeneNames.Hit_GeneName">Hit_GeneName (experimentdb.datasets.models.SGD_GeneNames attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis">Hypothesis (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.DoesNotExist">Hypothesis.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.MultipleObjectsReturned">Hypothesis.MultipleObjectsReturned</a></dt>
+</dl></td>
+  <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.hypothesis_set">hypothesis_set (experimentdb.hypotheses.models.Context attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Effect.hypothesis_set">(experimentdb.hypotheses.models.Effect attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Entity.hypothesis_set">(experimentdb.hypotheses.models.Entity attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.hypothesis_set">(experimentdb.hypotheses.models.Evidence attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.hypothesis_set">(experimentdb.hypotheses.models.Manipulation attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Process.hypothesis_set">(experimentdb.hypotheses.models.Process attribute)</a></dt>
+  </dl></dd>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.HypothesisAdmin">HypothesisAdmin (class in experimentdb.hypotheses.admin)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.HypothesisModelTests">HypothesisModelTests (class in experimentdb.hypotheses.tests)</a></dt>
 </dl></td>
 </tr></table>
 
 <h2 id="I">I</h2>
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.identical_hypotheses">identical_hypotheses (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.IL10_TNFa_Microarray">IL10_TNFa_Microarray (class in experimentdb.datasets.models)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.IL10_TNFa_Microarray.DoesNotExist">IL10_TNFa_Microarray.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.IL10_TNFa_Microarray.MultipleObjectsReturned">IL10_TNFa_Microarray.MultipleObjectsReturned</a></dt>
@@ -366,9 +460,9 @@
       <dt><a href="api.html#experimentdb.proteins.views.index">(in module experimentdb.proteins.views)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.views.index">(in module experimentdb.reagents.views)</a></dt>
   </dl></dd>
-    <dt><a href="api.html#experimentdb.sharing.models.Institution">Institution (class in experimentdb.sharing.models)</a></dt>
 </dl></td>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.sharing.models.Institution">Institution (class in experimentdb.sharing.models)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.models.Laboratory.institution">institution (experimentdb.sharing.models.Laboratory attribute)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.models.Institution.DoesNotExist">Institution.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.sharing.models.Institution.MultipleObjectsReturned">Institution.MultipleObjectsReturned</a></dt>
@@ -396,11 +490,27 @@
 <h2 id="M">M</h2>
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation">Manipulation (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.manipulation">manipulation (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.DoesNotExist">Manipulation.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.MultipleObjectsReturned">Manipulation.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.reagents.models.Chemical.manipulation_set">manipulation_set (experimentdb.reagents.models.Chemical attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.ManipulationAdmin">ManipulationAdmin (class in experimentdb.hypotheses.admin)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests">ManipulationModelTests (class in experimentdb.hypotheses.tests)</a></dt>
+</dl></td>
+  <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.CitationTypeAdmin.media">media (experimentdb.hypotheses.admin.CitationTypeAdmin attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.EffectAdmin.media">(experimentdb.hypotheses.admin.EffectAdmin attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.EntityAdmin.media">(experimentdb.hypotheses.admin.EntityAdmin attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.EvidenceAdmin.media">(experimentdb.hypotheses.admin.EvidenceAdmin attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.HypothesisAdmin.media">(experimentdb.hypotheses.admin.HypothesisAdmin attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.ManipulationAdmin.media">(experimentdb.hypotheses.admin.ManipulationAdmin attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.admin.ProcessAdmin.media">(experimentdb.hypotheses.admin.ProcessAdmin attribute)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.cloning.models.Mutagenesis">Mutagenesis (class in experimentdb.cloning.models)</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Mutagenesis.DoesNotExist">Mutagenesis.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Mutagenesis.MultipleObjectsReturned">Mutagenesis.MultipleObjectsReturned</a></dt>
-</dl></td>
-  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.external.models.Contact.mutagenesis_set">mutagenesis_set (experimentdb.external.models.Contact attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Construct.mutant">mutant (experimentdb.reagents.models.Construct attribute)</a></dt>
 </dl></td>
@@ -409,6 +519,7 @@
 <h2 id="P">P</h2>
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Evidence.paper">paper (experimentdb.hypotheses.models.Evidence attribute)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP">PI35P2_Binding_Screen_SP (class in experimentdb.datasets.models)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP.DoesNotExist">PI35P2_Binding_Screen_SP.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.PI35P2_Binding_Screen_SP.MultipleObjectsReturned">PI35P2_Binding_Screen_SP.MultipleObjectsReturned</a></dt>
@@ -427,14 +538,23 @@
   </dl></dd>
     <dt><a href="api.html#experimentdb.external.models.Vendor.primer_vendor">primer_vendor (experimentdb.external.models.Vendor attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.tests.PrimerModelTests">PrimerModelTests (class in experimentdb.reagents.tests)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Process">Process (class in experimentdb.hypotheses.models)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Hypothesis.process">process (experimentdb.hypotheses.models.Hypothesis attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Process.DoesNotExist">Process.DoesNotExist</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Process.MultipleObjectsReturned">Process.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.admin.ProcessAdmin">ProcessAdmin (class in experimentdb.hypotheses.admin)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.project">project (experimentdb.data.models.Experiment attribute)</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.project_set">project_set (experimentdb.external.models.Contact attribute)</a></dt>
     <dd><dl>
       <dt><a href="api.html#experimentdb.external.models.Reference.project_set">(experimentdb.external.models.Reference attribute)</a></dt>
   </dl></dd>
+</dl></td>
+  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.proteins.models.Protein">Protein (class in experimentdb.proteins.models)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.protein">protein (experimentdb.data.models.Experiment attribute)</a></dt>
     <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Entity.protein">(experimentdb.hypotheses.models.Entity attribute)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.protein">(experimentdb.hypotheses.models.Manipulation attribute)</a></dt>
       <dt><a href="api.html#experimentdb.proteins.models.ProteinDetail.protein">(experimentdb.proteins.models.ProteinDetail attribute)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Antibody.protein">(experimentdb.reagents.models.Antibody attribute)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Cell.protein">(experimentdb.reagents.models.Cell attribute)</a></dt>
@@ -445,9 +565,8 @@
       <dt><a href="api.html#experimentdb.reagents.models.Strain.protein">(experimentdb.reagents.models.Strain attribute)</a></dt>
   </dl></dd>
     <dt><a href="api.html#experimentdb.proteins.models.Protein.DoesNotExist">Protein.DoesNotExist</a></dt>
-</dl></td>
-  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.proteins.models.Protein.MultipleObjectsReturned">Protein.MultipleObjectsReturned</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Manipulation.protein_added">protein_added (experimentdb.hypotheses.models.Manipulation attribute)</a></dt>
     <dt><a href="api.html#experimentdb.proteins.models.Protein.protein_family">protein_family (experimentdb.proteins.models.Protein attribute)</a></dt>
     <dt><a href="api.html#experimentdb.proteins.views.protein_isoform_detail">protein_isoform_detail() (in module experimentdb.proteins.views)</a></dt>
     <dt><a href="api.html#experimentdb.proteins.models.ProteinFamily.protein_set">protein_set (experimentdb.proteins.models.ProteinFamily attribute)</a></dt>
@@ -497,11 +616,11 @@
       <dt><a href="api.html#experimentdb.reagents.models.ReagentInfo.reference">(experimentdb.reagents.models.ReagentInfo attribute)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Strain.reference">(experimentdb.reagents.models.Strain attribute)</a></dt>
   </dl></dd>
-</dl></td>
-  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.external.models.Reference.DoesNotExist">Reference.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Reference.MultipleObjectsReturned">Reference.MultipleObjectsReturned</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.reference_set">reference_set (experimentdb.external.models.Contact attribute)</a></dt>
+</dl></td>
+  <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.external.tests.ReferenceModelTests">ReferenceModelTests (class in experimentdb.external.tests)</a></dt>
     <dt><a href="api.html#experimentdb.cloning.models.Cloning.researcher">researcher (experimentdb.cloning.models.Cloning attribute)</a></dt>
     <dd><dl>
@@ -516,6 +635,11 @@
       <dt><a href="api.html#experimentdb.reagents.models.Strain.researcher">(experimentdb.reagents.models.Strain attribute)</a></dt>
   </dl></dd>
     <dt><a href="api.html#experimentdb.external.models.Reference.researchers">researchers (experimentdb.external.models.Reference attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.urls.restricted_change_protein">restricted_change_protein() (in module experimentdb.proteins.urls)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.urls.restricted_create_protein">restricted_create_protein() (in module experimentdb.proteins.urls)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.urls.restricted_delete_protein">restricted_delete_protein() (in module experimentdb.proteins.urls)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.urls.restricted_detail">restricted_detail() (in module experimentdb.proteins.urls)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.urls.restricted_object_list">restricted_object_list() (in module experimentdb.proteins.urls)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Result">Result (class in experimentdb.data.models)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Result.DoesNotExist">Result.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Result.MultipleObjectsReturned">Result.MultipleObjectsReturned</a></dt>
@@ -530,6 +654,9 @@
     <dt><a href="api.html#experimentdb.external.models.Contact.save">save() (experimentdb.external.models.Contact method)</a></dt>
     <dd><dl>
       <dt><a href="api.html#experimentdb.external.models.Vendor.save">(experimentdb.external.models.Vendor method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Context.save">(experimentdb.hypotheses.models.Context method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Entity.save">(experimentdb.hypotheses.models.Entity method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Process.save">(experimentdb.hypotheses.models.Process method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Antibody.save">(experimentdb.reagents.models.Antibody method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Cell.save">(experimentdb.reagents.models.Cell method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Chemical.save">(experimentdb.reagents.models.Chemical method)</a></dt>
@@ -566,6 +693,8 @@
     <dd><dl>
       <dt><a href="api.html#experimentdb.external.tests.ReferenceModelTests.setUp">(experimentdb.external.tests.ReferenceModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.external.tests.VendorModelTests.setUp">(experimentdb.external.tests.VendorModelTests method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.tests.HypothesisModelTests.setUp">(experimentdb.hypotheses.tests.HypothesisModelTests method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.setUp">(experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.AntibodyModelTests.setUp">(experimentdb.reagents.tests.AntibodyModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.CellModelTests.setUp">(experimentdb.reagents.tests.CellModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.ChemicalModelTests.setUp">(experimentdb.reagents.tests.ChemicalModelTests method)</a></dt>
@@ -600,8 +729,9 @@
     <dd><dl>
       <dt><a href="api.html#experimentdb.reagents.models.Species">(class in experimentdb.reagents.models)</a></dt>
   </dl></dd>
-    <dt><a href="api.html#experimentdb.proteins.models.ProteinDetail.species">species (experimentdb.proteins.models.ProteinDetail attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.models.Context.species">species (experimentdb.hypotheses.models.Context attribute)</a></dt>
     <dd><dl>
+      <dt><a href="api.html#experimentdb.proteins.models.ProteinDetail.species">(experimentdb.proteins.models.ProteinDetail attribute)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.models.Antibody.species">(experimentdb.reagents.models.Antibody attribute)</a></dt>
   </dl></dd>
     <dt><a href="api.html#experimentdb.proteins.models.Species.DoesNotExist">Species.DoesNotExist</a>, <a href="api.html#experimentdb.reagents.models.Species.DoesNotExist">[1]</a></dt>
@@ -609,8 +739,12 @@
     <dt><a href="api.html#experimentdb.reagents.tests.SpeciesModelTests">SpeciesModelTests (class in experimentdb.reagents.tests)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.SGD_interactions.Standard_Gene_Name_Bait">Standard_Gene_Name_Bait (experimentdb.datasets.models.SGD_interactions attribute)</a></dt>
     <dt><a href="api.html#experimentdb.datasets.models.SGD_interactions.Standard_Gene_Name_Hit">Standard_Gene_Name_Hit (experimentdb.datasets.models.SGD_interactions attribute)</a></dt>
+    <dt><a href="api.html#experimentdb.proteins.models.Protein.stimulating_protein">stimulating_protein (experimentdb.proteins.models.Protein attribute)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Strain">Strain (class in experimentdb.reagents.models)</a></dt>
     <dt><a href="api.html#experimentdb.data.models.Experiment.strain">strain (experimentdb.data.models.Experiment attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="api.html#experimentdb.hypotheses.models.Context.strain">(experimentdb.hypotheses.models.Context attribute)</a></dt>
+  </dl></dd>
     <dt><a href="api.html#experimentdb.reagents.models.Strain.DoesNotExist">Strain.DoesNotExist</a></dt>
     <dt><a href="api.html#experimentdb.reagents.models.Strain.MultipleObjectsReturned">Strain.MultipleObjectsReturned</a></dt>
     <dt><a href="api.html#experimentdb.external.models.Contact.strain_researcher">strain_researcher (experimentdb.external.models.Contact attribute)</a></dt>
@@ -637,10 +771,13 @@
 <h2 id="T">T</h2>
 <table width="100%" class="indextable genindextable"><tr>
   <td width="33%" valign="top"><dl>
+    <dt><a href="api.html#experimentdb.proteins.models.Protein.target_protein">target_protein (experimentdb.proteins.models.Protein attribute)</a></dt>
     <dt><a href="api.html#experimentdb.external.tests.ContactModelTests.tearDown">tearDown() (experimentdb.external.tests.ContactModelTests method)</a></dt>
     <dd><dl>
       <dt><a href="api.html#experimentdb.external.tests.ReferenceModelTests.tearDown">(experimentdb.external.tests.ReferenceModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.external.tests.VendorModelTests.tearDown">(experimentdb.external.tests.VendorModelTests method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.tests.HypothesisModelTests.tearDown">(experimentdb.hypotheses.tests.HypothesisModelTests method)</a></dt>
+      <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.tearDown">(experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.AntibodyModelTests.tearDown">(experimentdb.reagents.tests.AntibodyModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.CellModelTests.tearDown">(experimentdb.reagents.tests.CellModelTests method)</a></dt>
       <dt><a href="api.html#experimentdb.reagents.tests.ChemicalModelTests.tearDown">(experimentdb.reagents.tests.ChemicalModelTests method)</a></dt>
@@ -677,12 +814,21 @@
     <dt><a href="api.html#experimentdb.sharing.tests.ConstructShipmentModelTests.test_create_construct_shipment_all_fields">test_create_construct_shipment_all_fields() (experimentdb.sharing.tests.ConstructShipmentModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.tests.ConstructShipmentModelTests.test_create_construct_shipment_minimal">test_create_construct_shipment_minimal() (experimentdb.sharing.tests.ConstructShipmentModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.external.tests.ContactModelTests.test_create_contact_minimal">test_create_contact_minimal() (experimentdb.external.tests.ContactModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.test_create_hypothesis_all_fields_entity">test_create_hypothesis_all_fields_entity() (in module experimentdb.hypotheses.tests)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_all_fields_process">test_create_hypothesis_all_fields_process() (experimentdb.hypotheses.tests.HypothesisModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.test_create_hypothesis_create_date">test_create_hypothesis_create_date() (in module experimentdb.hypotheses.tests)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_minimal">test_create_hypothesis_minimal() (experimentdb.hypotheses.tests.HypothesisModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.tests.InstitutionModelTests.test_create_institution_all_fields">test_create_institution_all_fields() (experimentdb.sharing.tests.InstitutionModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.tests.InstitutionModelTests.test_create_institution_minimal">test_create_institution_minimal() (experimentdb.sharing.tests.InstitutionModelTests method)</a></dt>
 </dl></td>
   <td width="33%" valign="top"><dl>
     <dt><a href="api.html#experimentdb.sharing.tests.LaboratoryModelTests.test_create_laboratory_all_fields">test_create_laboratory_all_fields() (experimentdb.sharing.tests.LaboratoryModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.tests.LaboratoryModelTests.test_create_laboratory_minimal">test_create_laboratory_minimal() (experimentdb.sharing.tests.LaboratoryModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockdown">test_create_manipulation_minimal_knockdown() (experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockout">test_create_manipulation_minimal_knockout() (experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_overexpression">test_create_manipulation_minimal_overexpression() (experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_chemical">test_create_manipulation_minimal_treatment_chemical() (experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
+    <dt><a href="api.html#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_protein_added">test_create_manipulation_minimal_treatment_protein_added() (experimentdb.hypotheses.tests.ManipulationModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.tests.PrimerModelTests.test_create_primer_all_fields">test_create_primer_all_fields() (experimentdb.reagents.tests.PrimerModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.reagents.tests.PrimerModelTests.test_create_primer_minimal">test_create_primer_minimal() (experimentdb.reagents.tests.PrimerModelTests method)</a></dt>
     <dt><a href="api.html#experimentdb.sharing.tests.RecipientModelTests.test_create_recipient_all_fields">test_create_recipient_all_fields() (experimentdb.sharing.tests.RecipientModelTests method)</a></dt>
@@ -774,7 +920,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010-2011, Dave Bridges.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
     </div>
   </body>
 </html>

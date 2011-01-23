@@ -779,6 +779,11 @@ The required fields are first_name and last_name.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="experimentdb.external.models.Contact.evidence_set">
+<tt class="descclassname">Contact.</tt><tt class="descname">evidence_set</tt><a class="headerlink" href="#experimentdb.external.models.Contact.evidence_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="experimentdb.external.models.Contact.experiment_set">
 <tt class="descclassname">Contact.</tt><tt class="descname">experiment_set</tt><a class="headerlink" href="#experimentdb.external.models.Contact.experiment_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -870,6 +875,11 @@ The required fields are first_name and last_name.</p>
 <dl class="attribute">
 <dt id="experimentdb.external.models.Reference.construct_set">
 <tt class="descclassname">Reference.</tt><tt class="descname">construct_set</tt><a class="headerlink" href="#experimentdb.external.models.Reference.construct_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.external.models.Reference.evidence_set">
+<tt class="descclassname">Reference.</tt><tt class="descname">evidence_set</tt><a class="headerlink" href="#experimentdb.external.models.Reference.evidence_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -1153,6 +1163,11 @@ The only required field is company.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="experimentdb.proteins.models.Protein.entity_set">
+<tt class="descclassname">Protein.</tt><tt class="descname">entity_set</tt><a class="headerlink" href="#experimentdb.proteins.models.Protein.entity_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="experimentdb.proteins.models.Protein.experiment_set">
 <tt class="descclassname">Protein.</tt><tt class="descname">experiment_set</tt><a class="headerlink" href="#experimentdb.proteins.models.Protein.experiment_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1178,8 +1193,18 @@ The only required field is company.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="experimentdb.proteins.models.Protein.stimulating_protein">
+<tt class="descclassname">Protein.</tt><tt class="descname">stimulating_protein</tt><a class="headerlink" href="#experimentdb.proteins.models.Protein.stimulating_protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="experimentdb.proteins.models.Protein.strain_set">
 <tt class="descclassname">Protein.</tt><tt class="descname">strain_set</tt><a class="headerlink" href="#experimentdb.proteins.models.Protein.strain_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.proteins.models.Protein.target_protein">
+<tt class="descclassname">Protein.</tt><tt class="descname">target_protein</tt><a class="headerlink" href="#experimentdb.proteins.models.Protein.target_protein" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1318,6 +1343,46 @@ this is for displaying the currently selected items (in the case of a ManyToMany
 </div>
 <div class="section" id="id16">
 <h3>URLconfs<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-experimentdb.proteins.urls"></span><p>This package defines url redirections for the proteins app.</p>
+<p>This app takes a url request in the form of /experimentdb/protein/something and redirects to the following views:
+* protein-list
+* protein-detail
+* protein-new
+* protein-edit
+* protein-delete
+* protein-family-list
+* protein-family-detail
+* protein-family-new
+* protein-detail-new
+* protein-detail-edit
+* protein-detail-delete
+* protein-isoform-detail
+* protein-name-slug</p>
+<dl class="function">
+<dt id="experimentdb.proteins.urls.restricted_change_protein">
+<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_change_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_change_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_change_protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.proteins.urls.restricted_create_protein">
+<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_create_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_create_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_create_protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.proteins.urls.restricted_delete_protein">
+<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_delete_protein</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_delete_protein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_delete_protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.proteins.urls.restricted_detail">
+<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_detail</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_detail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.proteins.urls.restricted_object_list">
+<tt class="descclassname">experimentdb.proteins.urls.</tt><tt class="descname">restricted_object_list</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/proteins/urls.html#restricted_object_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.proteins.urls.restricted_object_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 <div class="section" id="id17">
 <h3>Tests<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
@@ -1439,6 +1504,11 @@ This model is a subclass of ReagentInfo.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="experimentdb.reagents.models.Cell.context_set">
+<tt class="descclassname">Cell.</tt><tt class="descname">context_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Cell.context_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="experimentdb.reagents.models.Cell.experiment_set">
 <tt class="descclassname">Cell.</tt><tt class="descname">experiment_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Cell.experiment_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1516,6 +1586,11 @@ This model is a subclass of ReagentInfo.</p>
 <dl class="method">
 <dt id="experimentdb.reagents.models.Chemical.get_location_display">
 <tt class="descclassname">Chemical.</tt><tt class="descname">get_location_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.reagents.models.Chemical.get_location_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.reagents.models.Chemical.manipulation_set">
+<tt class="descclassname">Chemical.</tt><tt class="descname">manipulation_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Chemical.manipulation_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -1843,6 +1918,11 @@ More species can be added at /experimentdb/species/new.</p>
 <tt class="descclassname">Species.</tt><tt class="descname">cell_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Species.cell_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="experimentdb.reagents.models.Species.context_set">
+<tt class="descclassname">Species.</tt><tt class="descname">context_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Species.context_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="experimentdb.reagents.models.Species.get_absolute_url">
 <tt class="descclassname">Species.</tt><tt class="descname">get_absolute_url</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/reagents/models.html#Species.get_absolute_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.reagents.models.Species.get_absolute_url" title="Permalink to this definition">¶</a></dt>
@@ -1881,6 +1961,11 @@ This is a subclass of ReagentInfo abstract class</p>
 <dl class="attribute">
 <dt id="experimentdb.reagents.models.Strain.background">
 <tt class="descclassname">Strain.</tt><tt class="descname">background</tt><a class="headerlink" href="#experimentdb.reagents.models.Strain.background" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.reagents.models.Strain.context_set">
+<tt class="descclassname">Strain.</tt><tt class="descname">context_set</tt><a class="headerlink" href="#experimentdb.reagents.models.Strain.context_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -2795,6 +2880,620 @@ The required fields for this model are <strong>first_name</strong>, <strong>last
 
 </div>
 </div>
+<div class="section" id="module-experimentdb.hypotheses">
+<span id="hypotheses-package"></span><h2>Hypotheses Package<a class="headerlink" href="#module-experimentdb.hypotheses" title="Permalink to this headline">¶</a></h2>
+<p>The hypothesis app contains more detail about specific testable hypotheses.</p>
+<p>The purpose of this app is to organize results and observations or summaries of experimental hypotheses in a systematic way.  A hypothesis is something that is observed about a biological process or biological entity.  It is supported by evidence, which could be an external publication or an experiment contained in this database.  The goal is to be able to say &#8220;X causes Y in this context, with the following evidence&#8221;</p>
+<p>The models in this app are:
+* Hypothesis
+* Manipulation
+* Affects
+* Process
+* Entity
+* Context
+* Evidence
+* CitationType</p>
+<p>The views in this app are in hypothesis.py, manipulation.py, process.py, entity.py, context.py and evidence.py.  There are no views for affects, but these can be set at the admin site.</p>
+<p>In hypothesis.py:
+* hypothesis-new
+* hypothesis-detail
+* hypothesis-edit
+* hypothesis-list
+* hypothesis-delete</p>
+<p>In manipulation.py:
+* manipulation-new
+* manipulation-detail
+* manipulation-edit
+* manipulation-list
+* manipulation-delete</p>
+<p>In process.py:
+* process-new
+* process-detail
+* process-edit
+* process-list
+* process-delete</p>
+<p>In entity.py:
+* entity-new
+* entity-detail
+* entity-edit
+* entity-list
+* entity-delete</p>
+<p>In context.py:
+* context-new
+* context-detail
+* context-edit
+* context-list
+* context-delete</p>
+<p>In evidence.py:
+* evidence-new
+* evidence-detail
+* evidence-edit
+* evidence-list
+* evidence-delete</p>
+<div class="section" id="id27">
+<h3>Models<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-experimentdb.hypotheses.models"></span><p>The this file controls the data models in the hypotheses application.</p>
+<p>The purpose of this app is to organize results and observations or summaries of experimental hypotheses in a systematic way.  A hypothesis is something that is observed about a biological process or biological entity.  It is supported by evidence, which could be an external publication or an experiment contained in this database.  The goal is to be able to say &#8220;X causes Y in this context, with the following evidence&#8221;</p>
+<p>The hypothesis app has 7 data models:
+* Hypothesis
+* Manipulation
+* Effect
+* Process
+* Entity
+* Context
+* Evidence 
+* CitationType</p>
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.CitationType">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">CitationType</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#CitationType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.CitationType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The citation type is a series of classifiers to link evidence to its opinion of a hypothesis.</p>
+<p>This class is based on the cito ontology (see <a class="reference external" href="http://purl.org/net/cito/">http://purl.org/net/cito/</a>).  Some but not all instances of this ontology are loaded upon installation as initial data.  Other potential citation types may be added as well.  Although optional, it is recommended that alternate citation types have URI&#8217;s included.  The class is not part of the cito schema, and is added to orient evidences as positive or negative.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.CitationType.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.CitationType.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.CitationType.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">CitationType.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.CitationType.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.CitationType.evidence_set">
+<tt class="descclassname">CitationType.</tt><tt class="descname">evidence_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.CitationType.evidence_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.CitationType.get_group_display">
+<tt class="descclassname">CitationType.</tt><tt class="descname">get_group_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.CitationType.get_group_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Context">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Context</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Context" title="Permalink to this definition">¶</a></dt>
+<dd><p>A context specifies the model system under which the hypothesis is tested.</p>
+<p>The context has optional parameters for cell lines, yeast strain.  It is slugified upon save into a slug field.  The required fiels are name and type.  There are several optional fields.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Context.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Context.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Context.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Context.cell_line">
+<tt class="descclassname">Context.</tt><tt class="descname">cell_line</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.cell_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Context.get_type_display">
+<tt class="descclassname">Context.</tt><tt class="descname">get_type_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Context.get_type_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Context.hypothesis_set">
+<tt class="descclassname">Context.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Context.save">
+<tt class="descclassname">Context.</tt><tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Context.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Context.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>The save is over-ridden to slugify the name field into a slugfield.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Context.species">
+<tt class="descclassname">Context.</tt><tt class="descname">species</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.species" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Context.strain">
+<tt class="descclassname">Context.</tt><tt class="descname">strain</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Context.strain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Effect">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Effect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Effect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Effect" title="Permalink to this definition">¶</a></dt>
+<dd><p>The effect is a linker between a manipulation and a process.</p>
+<p>Typically a manipulation stimulates, has no effect or inhibits a process or entity.  This model is populated as an initial data fixutre, but other modifiers can be added through the admin interface.  The effects have specified ontology representations.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Effect.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Effect.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Effect.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Effect.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Effect.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Effect.hypothesis_set">
+<tt class="descclassname">Effect.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Effect.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Entity">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Entity</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each hypothesis involves a potential manipulation of either a process or an entity.</p>
+<blockquote>
+An entity, generally a biological thing, but is usually a specific protein or part of a protein.  It could be a whole protein, or a phosphorylation site.  It has to be something which can be regulated positively, negatively or unaffected by the Manipulation as part of a Hypothesis.  A Hypothesis should test either a process or an identity but not both.  With that said, a particular entity could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the Hypothesis level.</blockquote>
+<p>This model has two required fields, name and protein.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Entity.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Entity.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Entity.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Entity.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Entity.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Entity.hypothesis_set">
+<tt class="descclassname">Entity.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Entity.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Entity.protein">
+<tt class="descclassname">Entity.</tt><tt class="descname">protein</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Entity.protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Entity.save">
+<tt class="descclassname">Entity.</tt><tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Entity.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Entity.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>The save is over-ridden to slugify the name field into a slugfield.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Evidence">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Evidence</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Evidence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evidence instances are supporting or dissenting experiments, papers or communications regarding a hypothesis.</p>
+<p>The required fields for a piece of evidence are the evidence_type, the citation_type and whether it is public (which is set to False as a default).  There are optional fields for paper or contact.  The clean method is over-ridden to ensure that when a evidence_type is a reference, a paper is entered and when a evidence_type is a communication then a contact is entered.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Evidence.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Evidence.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Evidence.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Evidence.citation_type">
+<tt class="descclassname">Evidence.</tt><tt class="descname">citation_type</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.citation_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.clean">
+<tt class="descclassname">Evidence.</tt><tt class="descname">clean</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Evidence.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>This validates that evidence with a paper has a reference.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Evidence.contact">
+<tt class="descclassname">Evidence.</tt><tt class="descname">contact</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.contact" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Evidence.experiment">
+<tt class="descclassname">Evidence.</tt><tt class="descname">experiment</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.experiment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.get_evidence_type_display">
+<tt class="descclassname">Evidence.</tt><tt class="descname">get_evidence_type_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.get_evidence_type_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.get_next_by_create_date">
+<tt class="descclassname">Evidence.</tt><tt class="descname">get_next_by_create_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.get_next_by_create_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.get_next_by_modified_date">
+<tt class="descclassname">Evidence.</tt><tt class="descname">get_next_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.get_next_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.get_previous_by_create_date">
+<tt class="descclassname">Evidence.</tt><tt class="descname">get_previous_by_create_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.get_previous_by_create_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Evidence.get_previous_by_modified_date">
+<tt class="descclassname">Evidence.</tt><tt class="descname">get_previous_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.get_previous_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Evidence.hypothesis_set">
+<tt class="descclassname">Evidence.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Evidence.paper">
+<tt class="descclassname">Evidence.</tt><tt class="descname">paper</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Evidence.paper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Hypothesis">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Hypothesis</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Hypothesis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis" title="Permalink to this definition">¶</a></dt>
+<dd><p>This model is the main model for this app, defining the particular hypothesis under consideration.</p>
+<p>This app has many to many field links to Manipulation, Context and Evidence and a ForeignKey link to an Effect and either a Process or Entity.  The required fields are manipulation, effect and either a process or entity.  The unicode representation of this model is going to be &#8220;(manipulation) (effects)/(process or entity in which there could be several).  The absolute url for an instance is /experimentdb/hypothesis/# where # is the primary key.  Tests are generated to test model formation with required and all fields, as well as to test the clean and absolute_url.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Hypothesis.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Hypothesis.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Hypothesis.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Hypothesis.clean">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">clean</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Hypothesis.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>This validates that either a process or an entity (but not both) are selected.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.context">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">context</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.effect">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">effect</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.effect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.entity">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">entity</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.entity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.evidence">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">evidence</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.evidence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Hypothesis.get_next_by_create_date">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">get_next_by_create_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.get_next_by_create_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Hypothesis.get_next_by_modified_date">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">get_next_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.get_next_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Hypothesis.get_previous_by_create_date">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">get_previous_by_create_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.get_previous_by_create_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Hypothesis.get_previous_by_modified_date">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">get_previous_by_modified_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.get_previous_by_modified_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.identical_hypotheses">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">identical_hypotheses</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.identical_hypotheses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.manipulation">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">manipulation</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.manipulation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Hypothesis.process">
+<tt class="descclassname">Hypothesis.</tt><tt class="descname">process</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Hypothesis.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Manipulation">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Manipulation</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Manipulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This model defines particular manipulations of experimental systems.</p>
+<p>This Manipulation or (treatment), could be several things.  It may refer to the manipulation of a protein.  This could be a knockout of a gene/knockdown with a siRNA, overexpression with a construct, or treatment with a chemical or another protein.  The required fields are type plus the appropriate chemical, protein_added or protien.  There are optional fields for manipulation time and concentration (if needed).  There are validators to validate each type.  The unicode representation of a manipulation is &#8220;something - type&#8221; depending on the type.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Manipulation.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Manipulation.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Manipulation.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Manipulation.chemical">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">chemical</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.chemical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Manipulation.clean">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">clean</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Manipulation.clean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>This validates that a treatment has a chemical or a protein_added.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Manipulation.get_type_display">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">get_type_display</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.get_type_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Manipulation.hypothesis_set">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Manipulation.protein">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">protein</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.protein" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Manipulation.protein_added">
+<tt class="descclassname">Manipulation.</tt><tt class="descname">protein_added</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Manipulation.protein_added" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.models.Process">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.models.</tt><tt class="descname">Process</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Each hypothesis involves a potential manipulation of either a process or an entity.</p>
+<blockquote>
+A process is typically a biological process such as endocytosis.  A particular process could be readout by a particular biological entity.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the Hypothesis levelIt is defined by the Gene Ontology as &#8220;Any process specifically pertinent to the functioning of integrated living units: cells, tissues, organs, and organisms. A process is a collection of molecular events with a defined beginning and end.&#8221; See <a class="reference external" href="GO:0008150">GO:0008150</a> for the accurate record.</blockquote>
+<p>This data model has a name, gene_ontology_id and definition, each of which should match the Gene Ontology definitions.  It also has an optional asssay field which references a Protocol instance from the data application.  The unicode representation of a process is the name and the slug field is automatically generated from the name field.</p>
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Process.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Process.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="exception">
+<dt id="experimentdb.hypotheses.models.Process.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Process.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Process.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Process.assay">
+<tt class="descclassname">Process.</tt><tt class="descname">assay</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Process.assay" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="experimentdb.hypotheses.models.Process.hypothesis_set">
+<tt class="descclassname">Process.</tt><tt class="descname">hypothesis_set</tt><a class="headerlink" href="#experimentdb.hypotheses.models.Process.hypothesis_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.models.Process.save">
+<tt class="descclassname">Process.</tt><tt class="descname">save</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/models.html#Process.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.models.Process.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>The save is over-ridden to slugify the name field into a slugfield.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id28">
+<h3>Views<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-experimentdb.hypotheses.views"></span></div>
+<div class="section" id="id29">
+<h3>URLconfs<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-experimentdb.hypotheses.urls"></span></div>
+<div class="section" id="id30">
+<h3>Tests<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-experimentdb.hypotheses.tests"></span><p>This file contains tests for the hypotheses application.</p>
+<p>These tests include model tests for Hypothesis objects.</p>
+<dl class="class">
+<dt id="experimentdb.hypotheses.tests.HypothesisModelTests">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.tests.</tt><tt class="descname">HypothesisModelTests</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#HypothesisModelTests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.HypothesisModelTests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the model attributes of Hypothesis objects contained in the hypotheses app.</p>
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.HypothesisModelTests.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#HypothesisModelTests.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.HypothesisModelTests.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiate the test client.  Creates a test user.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.HypothesisModelTests.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#HypothesisModelTests.tearDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.HypothesisModelTests.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depopulate created model instances from test database.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_all_fields_process">
+<tt class="descname">test_create_hypothesis_all_fields_process</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#HypothesisModelTests.test_create_hypothesis_all_fields_process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_all_fields_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Hypothesis object, with all fields being entered.  There is one test for process and one for entity (since both cannot be entered simultaneously).  It also tests the unicode representation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_minimal">
+<tt class="descname">test_create_hypothesis_minimal</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#HypothesisModelTests.test_create_hypothesis_minimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.HypothesisModelTests.test_create_hypothesis_minimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Hypothesis object, with only the minimum fields being entered.  It also tests the unicode representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.tests.</tt><tt class="descname">ManipulationModelTests</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the model attributes of Manipulation objects contained in the hypotheses app.</p>
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.setUp">
+<tt class="descname">setUp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.setUp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiate the test client.  Creates a test user.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.tearDown">
+<tt class="descname">tearDown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.tearDown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depopulate created model instances from test database.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockdown">
+<tt class="descname">test_create_manipulation_minimal_knockdown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.test_create_manipulation_minimal_knockdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Manipulation object, with only the minimum fields being entered.  It also tests the unicode representation.  This tests for protein knockdown.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockout">
+<tt class="descname">test_create_manipulation_minimal_knockout</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.test_create_manipulation_minimal_knockout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_knockout" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Manipulation object, with only the minimum fields being entered.  It also tests the unicode representation.  This tests for knockout.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_overexpression">
+<tt class="descname">test_create_manipulation_minimal_overexpression</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.test_create_manipulation_minimal_overexpression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_overexpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Manipulation object, with only the minimum fields being entered.  It also tests the unicode representation.  This tests for protein overexpression.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_chemical">
+<tt class="descname">test_create_manipulation_minimal_treatment_chemical</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.test_create_manipulation_minimal_treatment_chemical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_chemical" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Manipulation object, with only the minimum fields being entered.  It also tests the unicode representation.  This tests for chemcial treatment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_protein_added">
+<tt class="descname">test_create_manipulation_minimal_treatment_protein_added</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#ManipulationModelTests.test_create_manipulation_minimal_treatment_protein_added"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.ManipulationModelTests.test_create_manipulation_minimal_treatment_protein_added" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Manipulation object, with only the minimum fields being entered.  It also tests the unicode representation.  This tests for adding a protein.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.hypotheses.tests.test_create_hypothesis_all_fields_entity">
+<tt class="descclassname">experimentdb.hypotheses.tests.</tt><tt class="descname">test_create_hypothesis_all_fields_entity</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#test_create_hypothesis_all_fields_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.test_create_hypothesis_all_fields_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for creating a new Hypothesis object, with all fields being entered.  There is one test for process and one for entity (since both cannot be entered simultaneously).  It also tests the unicode representation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentdb.hypotheses.tests.test_create_hypothesis_create_date">
+<tt class="descclassname">experimentdb.hypotheses.tests.</tt><tt class="descname">test_create_hypothesis_create_date</tt><big>(</big><em>self</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/tests.html#test_create_hypothesis_create_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.tests.test_create_hypothesis_create_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a test for checking that the create and modified date are being set correctly.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentdb.hypotheses.admin">
+<span id="admin"></span><h3>Admin<a class="headerlink" href="#module-experimentdb.hypotheses.admin" title="Permalink to this headline">¶</a></h3>
+<p>This module defines the admin interface for the hypotheses application.</p>
+<p>Currently each of the following models has the default admin interface:</p>
+<ul class="simple">
+<li>Hypothesis</li>
+<li>Manipulation</li>
+<li>Effect</li>
+<li>Process</li>
+<li>Entity</li>
+</ul>
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.CitationTypeAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">CitationTypeAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#CitationTypeAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.CitationTypeAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.CitationTypeAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.CitationTypeAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.EffectAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">EffectAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#EffectAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.EffectAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.EffectAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.EffectAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.EntityAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">EntityAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#EntityAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.EntityAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.EntityAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.EntityAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.EvidenceAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">EvidenceAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#EvidenceAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.EvidenceAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.EvidenceAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.EvidenceAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.HypothesisAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">HypothesisAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#HypothesisAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.HypothesisAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.HypothesisAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.HypothesisAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.ManipulationAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">ManipulationAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#ManipulationAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.ManipulationAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.ManipulationAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.ManipulationAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentdb.hypotheses.admin.ProcessAdmin">
+<em class="property">class </em><tt class="descclassname">experimentdb.hypotheses.admin.</tt><tt class="descname">ProcessAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/experimentdb/hypotheses/admin.html#ProcessAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#experimentdb.hypotheses.admin.ProcessAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="experimentdb.hypotheses.admin.ProcessAdmin.media">
+<tt class="descname">media</tt><a class="headerlink" href="#experimentdb.hypotheses.admin.ProcessAdmin.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 </div>
 
 
@@ -2865,6 +3564,14 @@ The required fields for this model are <strong>first_name</strong>, <strong>last
 <li><a class="reference internal" href="#id26">Tests</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-experimentdb.hypotheses">Hypotheses Package</a><ul>
+<li><a class="reference internal" href="#id27">Models</a></li>
+<li><a class="reference internal" href="#id28">Views</a></li>
+<li><a class="reference internal" href="#id29">URLconfs</a></li>
+<li><a class="reference internal" href="#id30">Tests</a></li>
+<li><a class="reference internal" href="#module-experimentdb.hypotheses.admin">Admin</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -2911,7 +3618,7 @@ The required fields for this model are <strong>first_name</strong>, <strong>last
     </div>
     <div class="footer">
         &copy; Copyright 2010-2011, Dave Bridges.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
     </div>
   </body>
 </html>

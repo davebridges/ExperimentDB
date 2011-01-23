@@ -236,6 +236,40 @@ Tests
 
 .. automodule:: experimentdb.sharing.tests
    
+   
+Hypotheses Package
+------------------
+
+.. automodule:: experimentdb.hypotheses
+   
+
+Models
+......
+
+.. automodule:: experimentdb.hypotheses.models
+   
+
+Views
+.....
+
+.. automodule:: experimentdb.hypotheses.views
+   
+
+URLconfs
+........
+
+.. automodule:: experimentdb.hypotheses.urls
+   
+
+Tests
+.....
+
+.. automodule:: experimentdb.hypotheses.tests   
+
+Admin
+.....
+
+.. automodule:: experimentdb.hypotheses.admin
 
    
 

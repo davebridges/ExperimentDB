@@ -128,114 +128,114 @@
 </div>
 <div class="viewcode-block" id="open"><a class="viewcode-back" href="../api.html#io.open">[docs]</a><span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&quot;r&quot;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
          <span class="n">newline</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="s">r&quot;&quot;&quot;Open file and return a stream. If the file cannot be opened, an IOError is</span>
-<span class="s">    raised.</span>
+    <span class="sd">r&quot;&quot;&quot;Open file and return a stream. If the file cannot be opened, an IOError is</span>
+<span class="sd">    raised.</span>
 
-<span class="s">    file is either a string giving the name (and the path if the file</span>
-<span class="s">    isn&#39;t in the current working directory) of the file to be opened or an</span>
-<span class="s">    integer file descriptor of the file to be wrapped. (If a file</span>
-<span class="s">    descriptor is given, it is closed when the returned I/O object is</span>
-<span class="s">    closed, unless closefd is set to False.)</span>
+<span class="sd">    file is either a string giving the name (and the path if the file</span>
+<span class="sd">    isn&#39;t in the current working directory) of the file to be opened or an</span>
+<span class="sd">    integer file descriptor of the file to be wrapped. (If a file</span>
+<span class="sd">    descriptor is given, it is closed when the returned I/O object is</span>
+<span class="sd">    closed, unless closefd is set to False.)</span>
 
-<span class="s">    mode is an optional string that specifies the mode in which the file</span>
-<span class="s">    is opened. It defaults to &#39;r&#39; which means open for reading in text</span>
-<span class="s">    mode.  Other common values are &#39;w&#39; for writing (truncating the file if</span>
-<span class="s">    it already exists), and &#39;a&#39; for appending (which on some Unix systems,</span>
-<span class="s">    means that all writes append to the end of the file regardless of the</span>
-<span class="s">    current seek position). In text mode, if encoding is not specified the</span>
-<span class="s">    encoding used is platform dependent. (For reading and writing raw</span>
-<span class="s">    bytes use binary mode and leave encoding unspecified.) The available</span>
-<span class="s">    modes are:</span>
+<span class="sd">    mode is an optional string that specifies the mode in which the file</span>
+<span class="sd">    is opened. It defaults to &#39;r&#39; which means open for reading in text</span>
+<span class="sd">    mode.  Other common values are &#39;w&#39; for writing (truncating the file if</span>
+<span class="sd">    it already exists), and &#39;a&#39; for appending (which on some Unix systems,</span>
+<span class="sd">    means that all writes append to the end of the file regardless of the</span>
+<span class="sd">    current seek position). In text mode, if encoding is not specified the</span>
+<span class="sd">    encoding used is platform dependent. (For reading and writing raw</span>
+<span class="sd">    bytes use binary mode and leave encoding unspecified.) The available</span>
+<span class="sd">    modes are:</span>
 
-<span class="s">    ========= ===============================================================</span>
-<span class="s">    Character Meaning</span>
-<span class="s">    --------- ---------------------------------------------------------------</span>
-<span class="s">    &#39;r&#39;       open for reading (default)</span>
-<span class="s">    &#39;w&#39;       open for writing, truncating the file first</span>
-<span class="s">    &#39;a&#39;       open for writing, appending to the end of the file if it exists</span>
-<span class="s">    &#39;b&#39;       binary mode</span>
-<span class="s">    &#39;t&#39;       text mode (default)</span>
-<span class="s">    &#39;+&#39;       open a disk file for updating (reading and writing)</span>
-<span class="s">    &#39;U&#39;       universal newline mode (for backwards compatibility; unneeded</span>
-<span class="s">              for new code)</span>
-<span class="s">    ========= ===============================================================</span>
+<span class="sd">    ========= ===============================================================</span>
+<span class="sd">    Character Meaning</span>
+<span class="sd">    --------- ---------------------------------------------------------------</span>
+<span class="sd">    &#39;r&#39;       open for reading (default)</span>
+<span class="sd">    &#39;w&#39;       open for writing, truncating the file first</span>
+<span class="sd">    &#39;a&#39;       open for writing, appending to the end of the file if it exists</span>
+<span class="sd">    &#39;b&#39;       binary mode</span>
+<span class="sd">    &#39;t&#39;       text mode (default)</span>
+<span class="sd">    &#39;+&#39;       open a disk file for updating (reading and writing)</span>
+<span class="sd">    &#39;U&#39;       universal newline mode (for backwards compatibility; unneeded</span>
+<span class="sd">              for new code)</span>
+<span class="sd">    ========= ===============================================================</span>
 
-<span class="s">    The default mode is &#39;rt&#39; (open for reading text). For binary random</span>
-<span class="s">    access, the mode &#39;w+b&#39; opens and truncates the file to 0 bytes, while</span>
-<span class="s">    &#39;r+b&#39; opens the file without truncation.</span>
+<span class="sd">    The default mode is &#39;rt&#39; (open for reading text). For binary random</span>
+<span class="sd">    access, the mode &#39;w+b&#39; opens and truncates the file to 0 bytes, while</span>
+<span class="sd">    &#39;r+b&#39; opens the file without truncation.</span>
 
-<span class="s">    Python distinguishes between files opened in binary and text modes,</span>
-<span class="s">    even when the underlying operating system doesn&#39;t. Files opened in</span>
-<span class="s">    binary mode (appending &#39;b&#39; to the mode argument) return contents as</span>
-<span class="s">    bytes objects without any decoding. In text mode (the default, or when</span>
-<span class="s">    &#39;t&#39; is appended to the mode argument), the contents of the file are</span>
-<span class="s">    returned as strings, the bytes having been first decoded using a</span>
-<span class="s">    platform-dependent encoding or using the specified encoding if given.</span>
+<span class="sd">    Python distinguishes between files opened in binary and text modes,</span>
+<span class="sd">    even when the underlying operating system doesn&#39;t. Files opened in</span>
+<span class="sd">    binary mode (appending &#39;b&#39; to the mode argument) return contents as</span>
+<span class="sd">    bytes objects without any decoding. In text mode (the default, or when</span>
+<span class="sd">    &#39;t&#39; is appended to the mode argument), the contents of the file are</span>
+<span class="sd">    returned as strings, the bytes having been first decoded using a</span>
+<span class="sd">    platform-dependent encoding or using the specified encoding if given.</span>
 
-<span class="s">    buffering is an optional integer used to set the buffering policy.</span>
-<span class="s">    Pass 0 to switch buffering off (only allowed in binary mode), 1 to select</span>
-<span class="s">    line buffering (only usable in text mode), and an integer &gt; 1 to indicate</span>
-<span class="s">    the size of a fixed-size chunk buffer.  When no buffering argument is</span>
-<span class="s">    given, the default buffering policy works as follows:</span>
+<span class="sd">    buffering is an optional integer used to set the buffering policy.</span>
+<span class="sd">    Pass 0 to switch buffering off (only allowed in binary mode), 1 to select</span>
+<span class="sd">    line buffering (only usable in text mode), and an integer &gt; 1 to indicate</span>
+<span class="sd">    the size of a fixed-size chunk buffer.  When no buffering argument is</span>
+<span class="sd">    given, the default buffering policy works as follows:</span>
 
-<span class="s">    * Binary files are buffered in fixed-size chunks; the size of the buffer</span>
-<span class="s">      is chosen using a heuristic trying to determine the underlying device&#39;s</span>
-<span class="s">      &quot;block size&quot; and falling back on `io.DEFAULT_BUFFER_SIZE`.</span>
-<span class="s">      On many systems, the buffer will typically be 4096 or 8192 bytes long.</span>
+<span class="sd">    * Binary files are buffered in fixed-size chunks; the size of the buffer</span>
+<span class="sd">      is chosen using a heuristic trying to determine the underlying device&#39;s</span>
+<span class="sd">      &quot;block size&quot; and falling back on `io.DEFAULT_BUFFER_SIZE`.</span>
+<span class="sd">      On many systems, the buffer will typically be 4096 or 8192 bytes long.</span>
 
-<span class="s">    * &quot;Interactive&quot; text files (files for which isatty() returns True)</span>
-<span class="s">      use line buffering.  Other text files use the policy described above</span>
-<span class="s">      for binary files.</span>
+<span class="sd">    * &quot;Interactive&quot; text files (files for which isatty() returns True)</span>
+<span class="sd">      use line buffering.  Other text files use the policy described above</span>
+<span class="sd">      for binary files.</span>
 
-<span class="s">    encoding is the name of the encoding used to decode or encode the</span>
-<span class="s">    file. This should only be used in text mode. The default encoding is</span>
-<span class="s">    platform dependent, but any encoding supported by Python can be</span>
-<span class="s">    passed.  See the codecs module for the list of supported encodings.</span>
+<span class="sd">    encoding is the name of the encoding used to decode or encode the</span>
+<span class="sd">    file. This should only be used in text mode. The default encoding is</span>
+<span class="sd">    platform dependent, but any encoding supported by Python can be</span>
+<span class="sd">    passed.  See the codecs module for the list of supported encodings.</span>
 
-<span class="s">    errors is an optional string that specifies how encoding errors are to</span>
-<span class="s">    be handled---this argument should not be used in binary mode. Pass</span>
-<span class="s">    &#39;strict&#39; to raise a ValueError exception if there is an encoding error</span>
-<span class="s">    (the default of None has the same effect), or pass &#39;ignore&#39; to ignore</span>
-<span class="s">    errors. (Note that ignoring encoding errors can lead to data loss.)</span>
-<span class="s">    See the documentation for codecs.register for a list of the permitted</span>
-<span class="s">    encoding error strings.</span>
+<span class="sd">    errors is an optional string that specifies how encoding errors are to</span>
+<span class="sd">    be handled---this argument should not be used in binary mode. Pass</span>
+<span class="sd">    &#39;strict&#39; to raise a ValueError exception if there is an encoding error</span>
+<span class="sd">    (the default of None has the same effect), or pass &#39;ignore&#39; to ignore</span>
+<span class="sd">    errors. (Note that ignoring encoding errors can lead to data loss.)</span>
+<span class="sd">    See the documentation for codecs.register for a list of the permitted</span>
+<span class="sd">    encoding error strings.</span>
 
-<span class="s">    newline controls how universal newlines works (it only applies to text</span>
-<span class="s">    mode). It can be None, &#39;&#39;, &#39;\n&#39;, &#39;\r&#39;, and &#39;\r\n&#39;.  It works as</span>
-<span class="s">    follows:</span>
+<span class="sd">    newline controls how universal newlines works (it only applies to text</span>
+<span class="sd">    mode). It can be None, &#39;&#39;, &#39;\n&#39;, &#39;\r&#39;, and &#39;\r\n&#39;.  It works as</span>
+<span class="sd">    follows:</span>
 
-<span class="s">    * On input, if newline is None, universal newlines mode is</span>
-<span class="s">      enabled. Lines in the input can end in &#39;\n&#39;, &#39;\r&#39;, or &#39;\r\n&#39;, and</span>
-<span class="s">      these are translated into &#39;\n&#39; before being returned to the</span>
-<span class="s">      caller. If it is &#39;&#39;, universal newline mode is enabled, but line</span>
-<span class="s">      endings are returned to the caller untranslated. If it has any of</span>
-<span class="s">      the other legal values, input lines are only terminated by the given</span>
-<span class="s">      string, and the line ending is returned to the caller untranslated.</span>
+<span class="sd">    * On input, if newline is None, universal newlines mode is</span>
+<span class="sd">      enabled. Lines in the input can end in &#39;\n&#39;, &#39;\r&#39;, or &#39;\r\n&#39;, and</span>
+<span class="sd">      these are translated into &#39;\n&#39; before being returned to the</span>
+<span class="sd">      caller. If it is &#39;&#39;, universal newline mode is enabled, but line</span>
+<span class="sd">      endings are returned to the caller untranslated. If it has any of</span>
+<span class="sd">      the other legal values, input lines are only terminated by the given</span>
+<span class="sd">      string, and the line ending is returned to the caller untranslated.</span>
 
-<span class="s">    * On output, if newline is None, any &#39;\n&#39; characters written are</span>
-<span class="s">      translated to the system default line separator, os.linesep. If</span>
-<span class="s">      newline is &#39;&#39;, no translation takes place. If newline is any of the</span>
-<span class="s">      other legal values, any &#39;\n&#39; characters written are translated to</span>
-<span class="s">      the given string.</span>
+<span class="sd">    * On output, if newline is None, any &#39;\n&#39; characters written are</span>
+<span class="sd">      translated to the system default line separator, os.linesep. If</span>
+<span class="sd">      newline is &#39;&#39;, no translation takes place. If newline is any of the</span>
+<span class="sd">      other legal values, any &#39;\n&#39; characters written are translated to</span>
+<span class="sd">      the given string.</span>
 
-<span class="s">    If closefd is False, the underlying file descriptor will be kept open</span>
-<span class="s">    when the file is closed. This does not work when a file name is given</span>
-<span class="s">    and must be True in that case.</span>
+<span class="sd">    If closefd is False, the underlying file descriptor will be kept open</span>
+<span class="sd">    when the file is closed. This does not work when a file name is given</span>
+<span class="sd">    and must be True in that case.</span>
 
-<span class="s">    open() returns a file object whose type depends on the mode, and</span>
-<span class="s">    through which the standard file operations such as reading and writing</span>
-<span class="s">    are performed. When open() is used to open a file in a text mode (&#39;w&#39;,</span>
-<span class="s">    &#39;r&#39;, &#39;wt&#39;, &#39;rt&#39;, etc.), it returns a TextIOWrapper. When used to open</span>
-<span class="s">    a file in a binary mode, the returned class varies: in read binary</span>
-<span class="s">    mode, it returns a BufferedReader; in write binary and append binary</span>
-<span class="s">    modes, it returns a BufferedWriter, and in read/write mode, it returns</span>
-<span class="s">    a BufferedRandom.</span>
+<span class="sd">    open() returns a file object whose type depends on the mode, and</span>
+<span class="sd">    through which the standard file operations such as reading and writing</span>
+<span class="sd">    are performed. When open() is used to open a file in a text mode (&#39;w&#39;,</span>
+<span class="sd">    &#39;r&#39;, &#39;wt&#39;, &#39;rt&#39;, etc.), it returns a TextIOWrapper. When used to open</span>
+<span class="sd">    a file in a binary mode, the returned class varies: in read binary</span>
+<span class="sd">    mode, it returns a BufferedReader; in write binary and append binary</span>
+<span class="sd">    modes, it returns a BufferedWriter, and in read/write mode, it returns</span>
+<span class="sd">    a BufferedRandom.</span>
 
-<span class="s">    It is also possible to use a string or bytearray as a file for both</span>
-<span class="s">    reading and writing. For strings StringIO can be used like a file</span>
-<span class="s">    opened in a text mode, and for bytes a BytesIO can be used like a file</span>
-<span class="s">    opened in a binary mode.</span>
-<span class="s">    &quot;&quot;&quot;</span>
+<span class="sd">    It is also possible to use a string or bytearray as a file for both</span>
+<span class="sd">    reading and writing. For strings StringIO can be used like a file</span>
+<span class="sd">    opened in a text mode, and for bytes a BytesIO can be used like a file</span>
+<span class="sd">    opened in a binary mode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">basestring</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;invalid file: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">file</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
@@ -538,14 +538,14 @@
     <span class="c">### Readline[s] and writelines ###</span>
 </div>
 <div class="viewcode-block" id="IOBase.readline"><a class="viewcode-back" href="../api.html#io.IOBase.readline">[docs]</a>    <span class="k">def</span> <span class="nf">readline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="s">r&quot;&quot;&quot;Read and return a line from the stream.</span>
+        <span class="sd">r&quot;&quot;&quot;Read and return a line from the stream.</span>
 
-<span class="s">        If limit is specified, at most limit bytes will be read.</span>
+<span class="sd">        If limit is specified, at most limit bytes will be read.</span>
 
-<span class="s">        The line terminator is always b&#39;\n&#39; for binary files; for text</span>
-<span class="s">        files, the newlines argument to open can be used to select the line</span>
-<span class="s">        terminator(s) recognized.</span>
-<span class="s">        &quot;&quot;&quot;</span>
+<span class="sd">        The line terminator is always b&#39;\n&#39; for binary files; for text</span>
+<span class="sd">        files, the newlines argument to open can be used to select the line</span>
+<span class="sd">        terminator(s) recognized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_checkClosed</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;peek&quot;</span><span class="p">):</span>
             <span class="k">def</span> <span class="nf">nreadahead</span><span class="p">():</span>
@@ -1418,27 +1418,27 @@
 
 <div class="viewcode-block" id="TextIOWrapper"><a class="viewcode-back" href="../api.html#io.TextIOWrapper">[docs]</a><span class="k">class</span> <span class="nc">TextIOWrapper</span><span class="p">(</span><span class="n">TextIOBase</span><span class="p">):</span>
 
-    <span class="s">r&quot;&quot;&quot;Character and line based layer over a BufferedIOBase object, buffer.</span>
+    <span class="sd">r&quot;&quot;&quot;Character and line based layer over a BufferedIOBase object, buffer.</span>
 
-<span class="s">    encoding gives the name of the encoding that the stream will be</span>
-<span class="s">    decoded or encoded with. It defaults to locale.getpreferredencoding.</span>
+<span class="sd">    encoding gives the name of the encoding that the stream will be</span>
+<span class="sd">    decoded or encoded with. It defaults to locale.getpreferredencoding.</span>
 
-<span class="s">    errors determines the strictness of encoding and decoding (see the</span>
-<span class="s">    codecs.register) and defaults to &quot;strict&quot;.</span>
+<span class="sd">    errors determines the strictness of encoding and decoding (see the</span>
+<span class="sd">    codecs.register) and defaults to &quot;strict&quot;.</span>
 
-<span class="s">    newline can be None, &#39;&#39;, &#39;\n&#39;, &#39;\r&#39;, or &#39;\r\n&#39;.  It controls the</span>
-<span class="s">    handling of line endings. If it is None, universal newlines is</span>
-<span class="s">    enabled.  With this enabled, on input, the lines endings &#39;\n&#39;, &#39;\r&#39;,</span>
-<span class="s">    or &#39;\r\n&#39; are translated to &#39;\n&#39; before being returned to the</span>
-<span class="s">    caller. Conversely, on output, &#39;\n&#39; is translated to the system</span>
-<span class="s">    default line separator, os.linesep. If newline is any other of its</span>
-<span class="s">    legal values, that newline becomes the newline when the file is read</span>
-<span class="s">    and it is returned untranslated. On output, &#39;\n&#39; is converted to the</span>
-<span class="s">    newline.</span>
+<span class="sd">    newline can be None, &#39;&#39;, &#39;\n&#39;, &#39;\r&#39;, or &#39;\r\n&#39;.  It controls the</span>
+<span class="sd">    handling of line endings. If it is None, universal newlines is</span>
+<span class="sd">    enabled.  With this enabled, on input, the lines endings &#39;\n&#39;, &#39;\r&#39;,</span>
+<span class="sd">    or &#39;\r\n&#39; are translated to &#39;\n&#39; before being returned to the</span>
+<span class="sd">    caller. Conversely, on output, &#39;\n&#39; is translated to the system</span>
+<span class="sd">    default line separator, os.linesep. If newline is any other of its</span>
+<span class="sd">    legal values, that newline becomes the newline when the file is read</span>
+<span class="sd">    and it is returned untranslated. On output, &#39;\n&#39; is converted to the</span>
+<span class="sd">    newline.</span>
 
-<span class="s">    If line_buffering is True, a call to flush is implied when a call to</span>
-<span class="s">    write contains a newline character.</span>
-<span class="s">    &quot;&quot;&quot;</span>
+<span class="sd">    If line_buffering is True, a call to flush is implied when a call to</span>
+<span class="sd">    write contains a newline character.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
 
@@ -1960,7 +1960,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010-2011, Dave Bridges.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
     </div>
   </body>
 </html>

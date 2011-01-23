@@ -134,9 +134,27 @@ WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
 </div>
 <div class="section" id="final-configuration-and-user-setup">
 <h2>Final Configuration and User Setup<a class="headerlink" href="#final-configuration-and-user-setup" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.</li>
-</ol>
+<p>Go to experimentdb/admin/auth/users/ and create users, selecting usernames, full names, password (or have the user set the password) and then choose group permissions.</p>
+</div>
+<div class="section" id="south-installation-for-database-migrations">
+<h2>South Installation for Database Migrations<a class="headerlink" href="#south-installation-for-database-migrations" title="Permalink to this headline">¶</a></h2>
+<p>ExperimentDB upgrades may involve schema changes.  We use south to control schema migrations.  To update database schema, first initial migrations must be run, shortly after installation.  If an upgrade (either via SVN or by a new download) involves a change in the database schema, errors may occur.  Look at HISTORY in the root folder to see if an upgrade invovles schema migrations.  To set up south, shortly after installation enter at the command line:</p>
+<div class="highlight-python"><pre>python manage.py schemamigration data --initial
+python manage.py schemamigration datasets --initial
+python manage.py schemamigration reagents --initial
+python manage.py schemamigration cloning --initial
+python manage.py schemamigration sharing --initial
+python manage.py schemamigration projects --initial
+python manage.py schemamigration external --initial
+python manage.py schemamigration proteins --initial
+python manage.py schemamigration hypotheses --initial
+python manage.py migrate --fake</pre>
+</div>
+<p>This will install the initial migration settings.  If an app is migrated during an upgrade enter the following where &#8220;APP&#8221; is data, datasets, reagents, cloning, sharing, projects, external, proteins or hypotheses without the quotes and the &#8220;OPTIONAL DESCRIPTION&#8221; is something describing the changes, if desired:</p>
+<div class="highlight-python"><pre>python manage.py schemamigration "APP" "OPTIONAL DESCRIPTION" --auto
+python manage.py migrate</pre>
+</div>
+<p>See the South documentation, or submit an issue if problems occur.</p>
 </div>
 </div>
 
@@ -154,6 +172,7 @@ WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
 <li><a class="reference internal" href="#database-setup">Database Setup</a></li>
 <li><a class="reference internal" href="#web-server-setup">Web Server Setup</a></li>
 <li><a class="reference internal" href="#final-configuration-and-user-setup">Final Configuration and User Setup</a></li>
+<li><a class="reference internal" href="#south-installation-for-database-migrations">South Installation for Database Migrations</a></li>
 </ul>
 </li>
 </ul>
@@ -206,7 +225,7 @@ WSGIScriptAlias /experimentdb /usr/src/django/experimentdb/apache/django.wsgi
     </div>
     <div class="footer">
         &copy; Copyright 2010-2011, Dave Bridges.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.6.
     </div>
   </body>
 </html>

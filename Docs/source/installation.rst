@@ -91,7 +91,7 @@ ExperimentDB upgrades may involve schema changes.  We use south to control schem
     python manage.py schemamigration external --initial	
     python manage.py schemamigration proteins --initial
     python manage.py schemamigration hypotheses --initial	
-	python manage.py migrate --fake
+    python manage.py migrate --fake
 	
 This will install the initial migration settings.  If an app is migrated during an upgrade enter the following where "APP" is data, datasets, reagents, cloning, sharing, projects, external, proteins or hypotheses without the quotes and the "OPTIONAL DESCRIPTION" is something describing the changes, if desired::
 

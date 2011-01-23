@@ -18,7 +18,7 @@ import sys, os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
-sys.path.append('/usr/src/django/experimentdb')
+sys.path.append('C:\Documents and Settings\Dave Bridges\My Documents\Source\experimentdb')
 #setup django
 import settings
 from django.core.management import setup_environ
