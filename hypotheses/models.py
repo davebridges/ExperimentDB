@@ -137,8 +137,8 @@ class Effect(models.Model):
 	
     Typically a manipulation stimulates, has no effect or inhibits a process or entity.  This model is populated as an initial data fixutre, but other modifiers can be added through the admin interface.  The effects have specified ontology representations."""
 	
-    effect = models.CharField(max_length=25)
-    description = models.TextField(max_length=100, blank=True, null=True)
+    effect = models.CharField(max_length=50)
+    description = models.TextField(max_length=250, blank=True, null=True)
     ontology = models.URLField(blank=True, null=True, help_text = "A defined ontology describing the effect")
 	
     def __unicode__(self):
