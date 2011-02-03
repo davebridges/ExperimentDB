@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
+from experimentdb.widgets import handlePopAdd
 from experimentdb.proteins.models import Protein
+from experimentdb.proteins.forms import ProteinFamilyForm
 from experimentdb.data.models import Experiment
 from experimentdb.reagents.models import Antibody, Construct, Primer
 from django.contrib.auth.decorators import login_required
@@ -35,5 +37,9 @@ def protein_isoform_detail(request, protein_id):
 		'xrefs':record.dbxrefs,
 		'features':record.features}
 		,context_instance=RequestContext(request))
+		
+@login_required
+def newProteinFamily(request):
+	return handlePopAdd(request, ProteinFamilyForm, 'protein_family')
 
 

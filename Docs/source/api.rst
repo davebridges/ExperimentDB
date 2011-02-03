@@ -3,6 +3,18 @@ Package Details
 
 .. automodule:: experimentdb
 
+Main Directory
+--------------
+
+.. automodule:: experimentdb.settings
+.. automodule:: experimentdb.context_processors
+.. automodule:: experimentdb.urls
+.. automodule:: experimentdb.views
+.. automodule:: experimentdb.setup
+.. automodule:: experimentdb.admin
+.. automodule:: experimentdb.widgets
+.. automodule:: experimentdb.tests
+
 
 Data Package
 ------------

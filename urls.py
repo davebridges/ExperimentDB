@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 	(r'^comments?/', include('django.contrib.comments.urls')),
 	(r'^search/$', 'experimentdb.views.search'),
 	(r'^ajax_select/', include('ajax_select.urls')),
+	(r'^add/protein_family/?$', 'experimentdb.proteins.views.newProteinFamily'),
 
 	(r'^experiments?/', include('experimentdb.data.urls.experiment')),
 	(r'^exps?/', include('experimentdb.data.urls.experiment')),
