@@ -135,6 +135,10 @@ class Manipulation(models.Model):
             return u'%s %s' % (self.protein_added, self.type)
         else:
             return u'%s %s' % (self.protein, self.type)
+            
+    @models.permalink
+    def get_absolute_url(self):
+        return ('manipulation-detail', [str(self.id)])	            
 			
 class Effect(models.Model):
     """The effect is a linker between a manipulation and a process.
@@ -169,7 +173,11 @@ class Process(models.Model):
 
     def __unicode__(self):
         """The unicode representation of a process is its name."""
-        return u'%s' % self.name	
+        return u'%s' % self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('process-detail', [str(self.id)])	        
 
     class Meta:
         verbose_name_plural = 'processes'			
