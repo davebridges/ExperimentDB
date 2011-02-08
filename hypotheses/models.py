@@ -89,6 +89,10 @@ class Hypothesis(models.Model):
             return u'%s %s %s' % (self.manipulation, self.effect, self.entity)
         else:
             return "Unspecified Hypothesis"
+			
+    @models.permalink
+    def get_absolute_url(self):
+        return ('hypothesis-detail', [str(self.id)])			
 
     class Meta:
         verbose_name_plural = 'hypotheses'			
@@ -245,9 +249,27 @@ class Evidence(models.Model):
         """This validates that evidence with a communication has a contact."""
         if self.evidence_type == "Presentation" and self.contact == None:
             raise ValidationError('Enter a contact for evidence from a presentation')
-			
+
+    def __unicode__(self):
+        """The unicode representation of a context is its evidence_type and its experiment."""
+        if self.experiment:
+            return u'Experiment - %s' % self.experiment
+        if self.paper:
+            return u'Paper - %s' % self.paper 		
+        if self.contact:
+            return u'Un-Published Communication - %s' % self.contact
+            
+    def get_absolute_url(self):
+        """The absolute url of evidence depends on the evidence type, and directs to that objects absolute url."""
+        if self.experiment:
+            return self.experiment.get_absolute_url()
+        if self.paper:
+            return self.paper.get_absolute_url()
+        if self.contact:
+            return self.contact.get_absolute_url()      
+            
     class Meta:
-        verbose_name_plural = 'evidence'				
+            verbose_name_plural = 'evidence'				
 
 		
 class CitationType(models.Model):

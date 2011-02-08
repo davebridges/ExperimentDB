@@ -3,5 +3,51 @@
 {% block head_title %}Hypothesis Detail - {{ object }}{% endblock %}
 {% block title %}Hypothesis Detail - {{ object }}{% endblock %}
 {% block content %}
-{{ object }}
+<h2>{{ object }}</h2>
+<table>
+	<tr>
+		<th>Start</th>
+		<td>{{ object.create_date }}</td>
+	</tr>
+	<tr>
+		<th>Updated</th>
+		<td>{{ object.update_date }}</td>
+	</tr>
+	<tr>
+		<th>Manipulation</th>
+		<td><a href="{{ object.manipulation }}">{{ object.manipulation }}</a></td>
+	</tr>    
+	<tr>
+		<th>Effect</th>
+		<td>{{ object.effect }}</td>
+	</tr>
+{% if object.process %}   
+	<tr>
+		<th>Process</th>
+		<td><a href="{{ object.process.get_absolute_url }}">{{ object.process }}</a></td>
+	</tr>
+{% endif %}
+{% if object.entity %}   
+	<tr>
+		<th>Entity</th>
+		<td><a href="{{ object.entity.get_absolute_url }}">{{ object.entity }}</a></td>
+	</tr>
+{% endif %} 
+{% if object.context %}   
+	<tr>
+		<th>Context</th>
+		<td><a href="{{ object.context.get_absolute_url }}">{{ object.context }}</a></td>
+	</tr>
+{% endif %} 
+{% if object.identical_hypotheses.count > 0 %}   
+	<tr>
+		<th>Identical Hypotheses</th>
+		<td><ul>{% for hypothesis in object.identical_hypotheses.all %}
+        <li><a href="{{ hypothesis.get_absolute_url }}">{{ hypothesis }}</a></li>
+        {% endfor %}</ul></td>
+	</tr>
+{% endif %}      
+</table>
+<h3>Evidence</h3>
+{% for evidence in object.evidence.all %}<li><a href="{{ evidence.get_absolute_url }}">{{ evidence }}</a> ({{ evidence.citation_type }})</li>{% endfor %}
 {% endblock %}
