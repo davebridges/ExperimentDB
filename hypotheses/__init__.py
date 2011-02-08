@@ -1,4 +1,4 @@
-"""The hypothesis app contains more detail about specific testable hypotheses.
+"""The hypotheses app contains more detail about specific testable hypotheses.
 
 The purpose of this app is to organize results and observations or summaries of experimental hypotheses in a systematic way.  A hypothesis is something that is observed about a biological process or biological entity.  It is supported by evidence, which could be an external publication or an experiment contained in this database.  The goal is to be able to say "X causes Y in this context, with the following evidence" 
 	

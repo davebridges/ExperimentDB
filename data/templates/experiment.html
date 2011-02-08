@@ -31,7 +31,6 @@
 
 	<h3><a href="#">Projects</a></h3>
 	<div id="Projects">
-	<h3>Projects:</h3>
 	<ul>
 	{% for project in experiment.project.all %}
 	<li><a href="{{ project.get_absolute_url }}">{{project}}</a></li>
@@ -40,7 +39,6 @@
 	
 	
 	<ul>
-	<h3>Subprojects</h3>
 	<ul>
 	{% for subproject in experiment.subproject.all %}
 	<li><a href="{{ subproject.get_absolute_url }}">{{subproject}}</a></li>
@@ -48,10 +46,20 @@
 	</ul>
 	</div>
 	
+	<h3><a href="#">Hypotheses</a></h3>	
+	<div id="hypotheses">
+	<ul>
+	{% for evidence in experiment.evidence_set.all %}
+	{% for hypothesis in evidence.hypothesis_set.all %}
+	<li>{{evidence.citation_type}} -- <a href="{{hypothesis.get_absolute_url }}">{{ hypothesis }}</a></li>
+	{% endfor %}
+	{% endfor %}
+	</ul>
+	</div>
+	
 	<h3><a href="#">Researchers</a></h3>	
 	<div id="Researchers">
 	<ul>
-	<h3>Researcher: </h3>
 	{% for researcher in experiment.researcher.all %}
 	<li>{{researcher}}</li>
 	{% endfor %}
@@ -60,7 +68,6 @@
 	
 	<h3><a href="#">Proteins</a></h3>
 	<div id="Proteins">
-	<h3>Proteins:</h3> 
 	 <ul>{% for protein in experiment.protein.all %}<li><a href="/{{protein.get_absolute_url}}">{{protein}}</a></li>{% endfor %}</ul>
 	</div>
 

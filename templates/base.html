@@ -8,13 +8,13 @@
 	xmlns:doap="http://usefulinc.com/ns/doap#" >
 
 <head>
+	{% include "base_css.html" %}
 	<link type="text/css" href="/static/css/vader/jquery-ui-1.7.2.custom.css" rel="Stylesheet" />
 	<script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script> 
 	<script type="text/javascript" src="/static/js/jquery-ui-1.7.2.custom.min.js"></script> 
 
 
 	{% block scripts %}
-	{% include "base_css.html" %}
 	{% endblock scripts %}
 	
 	<title>{% block head_title %}{% endblock %}</title>

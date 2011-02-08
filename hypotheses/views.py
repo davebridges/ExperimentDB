@@ -1,1 +1,1 @@
-# Create your views here.
+### This module describes the views for the hypotheses app"""
