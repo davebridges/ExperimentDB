@@ -13,6 +13,7 @@ Todo
 * Write docstrings for all .py files
 * Audit model and view docstrings
 * Combine external.Reference model with the Mendeley API
+* Need to migrate reagents_primer('protein_id' and 'id') into reagents_primer_protein
 
 Before uploading
 ----------------
