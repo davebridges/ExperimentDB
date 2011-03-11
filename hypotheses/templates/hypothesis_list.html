@@ -5,23 +5,7 @@
 {% block head_title %}Hypothesis List{% endblock %}
 {% block title %}Hypothesis List{% endblock %}
 {% block content %}
-<table>
-<tbody>
-	<tr><th>Hypothesis</th></tr>
-{% for hypothesis in object_list %}
-<tr>
-	<td><a href="{{hypothesis.get_absolute_url}}">{{hypothesis }}</a></td>
-	<td>
-		<a href="{% url hypothesis-detail hypothesis.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
-	{% if perms.hypothesis.change_hypothesis %}
-		<a href="{% url hypothesis-edit hypothesis.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
-	{% endif %}
-	{% if perms.hypothesis.delete_hypothesis %}
-		<a href="{% url hypothesis-delete hypothesis.id %}"><img src="/static/img/icons/Close.png" width=25 alt=delete></a>
-	{% endif %}
-	</td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+{% with object_list as hypothesis_list %}
+{% include "hypothesis_table.html" %}
+{% endwith %}
 {% endblock %}

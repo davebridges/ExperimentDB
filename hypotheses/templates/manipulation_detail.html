@@ -4,4 +4,30 @@
 {% block title %}Manipulation Detail - {{ object }}{% endblock %}
 {% block content %}
 <h2>{{ object }}</h2>
+<div class="fg-buttonset">
+{% if perms.hypotheses.create_manipulation %}
+<a href="{% url manipulation-new %}"><button class="fg-button ui-state-default ui-corner-left"><span class="ui-icon ui-icon-circle-plus"></span>Add New Manipulation</button></a>
+{% endif %}
+{% if perms.hypotheses.change_manipulation %}
+<a href="{% url manipulation-edit object.id %}"><button class="fg-button ui-state-default"><span class="ui-icon ui-icon-pencil"></span>Edit</button></a>
+{% endif %}
+{% if perms.hypotheses.delete_manipulation %}
+<a href="{% url manipulation-delete object.id %}"><button class="fg-button ui-state-default ui-corner-right"><span class="ui-icon ui-icon-trash"></span>Delete</button></a>
+{% endif %}
+</div>
+<table>
+    <tr><th>Type</th><td>{{object.type}}</td>
+    {% if object.time %}<tr><th>Time</th><td>{{object.time}}</td>{% endif %}
+    {% if object.concentration %}<tr><th>Concentration</th><td>{{object.concentration}}</td>{% endif %}
+    {% if object.chemical %}<tr><th>Chemical</th><td><a href="{{object.chemical.get_absolute_url}}">{{object.chemical}}</a></td>{% endif %}    
+    {% if object.protein_added %}<tr><th>Protein Added</th><td><a href="{{object.protein_added.get_absolute_url}}">{{object.protein_added}}</a></td>{% endif %}
+    {% if object.protein %}<tr><th>Target Protein</th><td><a href="{{object.protein.get_absolute_url}}">{{object.protein}}</a></td>{% endif %}    
+</table>
+
+<div id="hypotheses" class="grid_12">
+<h2>Tested Hypotheses</h2>
+{% with object.hypothesis_set.all as hypothesis_list %}
+{% include "hypothesis_table.html" %}
+{% endwith %}
+
 {% endblock %}

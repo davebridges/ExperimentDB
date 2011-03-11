@@ -4,4 +4,26 @@
 {% block title %}Process Detail - {{ object }}{% endblock %}
 {% block content %}
 <h2>{{ object }}</h2>
+<div class="fg-buttonset">
+{% if perms.hypotheses.create_manipulation %}
+<a href="{% url manipulation-new %}"><button class="fg-button ui-state-default ui-corner-left"><span class="ui-icon ui-icon-circle-plus"></span>Add New Manipulation</button></a>
+{% endif %}
+{% if perms.hypotheses.change_manipulation %}
+<a href="{% url manipulation-edit object.id %}"><button class="fg-button ui-state-default"><span class="ui-icon ui-icon-pencil"></span>Edit</button></a>
+{% endif %}
+{% if perms.hypotheses.delete_manipulation %}
+<a href="{% url manipulation-delete object.id %}"><button class="fg-button ui-state-default ui-corner-right"><span class="ui-icon ui-icon-trash"></span>Delete</button></a>
+{% endif %}
+</div>
+<table>
+    {% if object.gene_ontology_id %}<tr><th>Gene Ontology</th><td>{{object.gene_ontology_id}}</td>{% endif %}
+    {% if object.definition %}<tr><th>Definition</th><td>{{object.definition}}</td>{% endif %}
+    {% if object.assay.count > 0 %}<tr><th>Assay</th><td><ul>{% for assay in object.assay.all %}<li><a href="{{assay.get_absolute_url}}">{{assay}}</a></li>{% endfor %}</td>{% endif %}    
+</table>
+
+<div id="hypotheses" class="grid_12">
+<h2>Tested Hypotheses</h2>
+{% with object.hypothesis_set.all as hypothesis_list %}
+{% include "hypothesis_table.html" %}
+{% endwith %}
 {% endblock %}
