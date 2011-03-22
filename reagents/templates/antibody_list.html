@@ -12,6 +12,7 @@
 	<th>Antibody</th>
 	<th>Protein</th>
 	<th>Size</th>
+    <th>Dilution</th>
 	<th>Species</th>
 	<th>Catalog</th>
 	</tr>
@@ -22,6 +23,7 @@
 	<td><a href="{% url antibody-detail antibody.id %}">{{ antibody }}</a></td>
 	<td>{%for protein in antibody.protein.all%}<a href="/experimentdb/protein/{{protein}}">{{protein}} </a>{% endfor %}</td>
 	<td>{{antibody.protein_size}}</td>
+    <td>{{antibody.dilution}}</td>
 	<td>{{antibody.source_species}}</td>
 	<td>{{antibody.catalog}}</td>
 	<td>

@@ -8,9 +8,10 @@
  <thead>
  </thead>
  <tdata>
-  <tr><th>Antibody</th><td>{{object.antibody}}</td></tr>
-  <tr><th>Protein</th><td>{% for protein in object.protein_set.all %}{{ protein.count }} {% endfor %}</td></tr>
+  <tr><th>Antibody</th><td>{{object.name}}</td></tr>
+  <tr><th>Protein</th><td>{% for protein in object.protein.all %}<a href="{{ protein.get_absolute_url }}">{{ protein }}</a> {% endfor %}</td></tr>
   <tr><th>Size</th><td>{{object.protein_size}}</td></tr>
+  <tr><th>Dilution</th><td>{{ object.dilution }}</td></tr>
   <tr><th>Source Species</th><td>{{object.source_species}}</td></tr> 
   <tr><th>Location</th><td>{{object.location}}</td></tr>
   {% if object.vendor %}<tr><th>Vendor</th><td>{{ object.vendor }}</td></tr>{% endif %}
