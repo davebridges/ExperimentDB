@@ -30,6 +30,7 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media/files")
+STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -64,6 +65,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS  = (
 	'django.contrib.auth.context_processors.auth',
 	'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.static',
 )
 
 ROOT_URLCONF = 'experimentdb.urls'
@@ -85,6 +87,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django.contrib.staticfiles',
     'experimentdb.projects',
     'experimentdb.proteins',
     'experimentdb.reagents',
