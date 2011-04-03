@@ -21,5 +21,5 @@
 {% endfor %}
 </tbody>
 </table>
-{% if perms.projects.add_subproject %}<p>Click <a href="{% url subproject-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new subproject.</p>{% endif %}
+{% if perms.projects.add_subproject %}<p>Click <a href="{% url subproject-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new subproject.</p>{% endif %}
 {% endblock %}
