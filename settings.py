@@ -98,7 +98,8 @@ INSTALLED_APPS = (
     'experimentdb.data',
     'experimentdb.hypotheses',
     'ajax_select',
-    'south'
+    'south',
+    'PIL'
 )
 
 
