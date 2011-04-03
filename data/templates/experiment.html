@@ -2,15 +2,17 @@
 {% block head_title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block scripts %}
-<link rel="stylesheet" href="{{STATIC_URL}}js/thickbox/thickbox.css" type="text/css" media="screen" />
-<script type="text/javascript" src="{{STATIC_URL}}js/thickbox/thickbox.js"></script>
+<link rel="stylesheet" href="{{STATIC_URL}}js/colorbox/example5/colorbox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="{{STATIC_URL}}js/colorbox/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$("#accordion").accordion({
 			autoHeight: false
-		});
+            });
+        $("a[rel='figures']").colorbox({height:"75%"});
 	});
-	</script>
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -76,8 +78,8 @@
 	<h4>Results</h4>	
 	{% for result in experiment.result_set.all %}
 	<p>{{ result.conclusions }}</p>
-	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" class="thickbox"><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=200 /></a>{% endif %}
-	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" class="thickbox"><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=200 /></a>{% endif %}
+	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=200 /></a>{% endif %}
+	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" rel="figures" ><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=200 /></a>{% endif %}
 	{% endfor %}
 	<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
 
