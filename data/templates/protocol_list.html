@@ -13,7 +13,7 @@
 {% block head_title %}Protocols{% endblock %}
 {% block title %}Protocols{% endblock %}
 {% block content %}
-{% if perms.data.add_protocol %}<p>Click <a href="{% url protocol-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new protocol</p>{% endif %}
+{% if perms.data.add_protocol %}<p>Click <a href="{% url protocol-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new protocol</p>{% endif %}
 <h2>Protocols ({{object_list.count}})</h2>
 <table class="sortable">
 <thead>
@@ -28,12 +28,12 @@
 	<td><a href="{% url protocol-detail protocol.id %}">{{ protocol }}</a></td>
 	<td>{% if protocol.wiki_page %}<a href="/wiki/{{protocol.wiki_page}}">ProtocolWiki</a>{% else %}no{% endif %}</td>
 	<td>
-<a href="{% url protocol-detail protocol.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+<a href="{% url protocol-detail protocol.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.data.change_protocol %}
 <a href="{% url protocol-edit protocol.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
 {% endif %}
 {% if perms.data.delete_protocol %}
-<a href="{% url protocol-delete protocol.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+<a href="{% url protocol-delete protocol.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete"></a>
 {% endif %}
 	</td>
 </tr>
