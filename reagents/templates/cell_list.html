@@ -5,7 +5,7 @@
 {% block head_title %}Cell Line List{% endblock %}
 {% block title %}Cell Line List{% endblock %}
 {% block content %}
-{% if perms.reagents.add_cell %}<p>Click <a href="{% url cell-new %}"><img src="/static/img/icons/Add.png" width="25" alt="here"/></a> for a new cell line</p>{% endif %}
+{% if perms.reagents.add_cell %}<p>Click <a href="{% url cell-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width="25" alt="here"/></a> for a new cell line</p>{% endif %}
 <table class="sortable">
 <thead>
 	<tr>
@@ -23,13 +23,13 @@
 	<td>{{cell.location}}</td>
 	<td>{{cell.box}}</td>
 	<td>
-<a href="{% url cell-detail cell.id %}"><img src="/static/img/icons/Zoom.png" width="25" alt="Detail"/></a>
-{% if perms.reagents.change_cell %}<a href="{% url cell-edit cell.id %}"><img src="/static/img/icons/Document Write.png" width="25" alt="Edit"/></a>{% endif %}
-{% if perms.reagents.delete_cell %}<a href="{% url cell-delete cell.id %}"><img src="/static/img/icons/Close.png" width="25" alt="delete"/></a>{% endif %}
+<a href="{% url cell-detail cell.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width="25" alt="Detail"/></a>
+{% if perms.reagents.change_cell %}<a href="{% url cell-edit cell.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width="25" alt="Edit"/></a>{% endif %}
+{% if perms.reagents.delete_cell %}<a href="{% url cell-delete cell.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width="25" alt="delete"/></a>{% endif %}
 </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="/experimentdb/cell/new"><img src="/static/img/icons/add.png" width=25 alt="here"/></a> for a new cell line</p>
+<p>Click <a href="/experimentdb/cell/new"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a> for a new cell line</p>
 {% endblock %}

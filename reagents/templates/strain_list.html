@@ -5,7 +5,7 @@
 {% block head_title %}Strain List{% endblock %}
 {% block title %}Strain List{% endblock %}
 {% block content %}
-{% if perms.reagents.add_strain %}<p>Click <a href="{% url strain-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new strain</p>{% endif %}
+{% if perms.reagents.add_strain %}<p>Click <a href="{% url strain-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new strain</p>{% endif %}
 <div class="grid_12">
 <table class="sortable">
 <thead>
@@ -24,12 +24,12 @@
 	<td><ul>{% for construct in strain.plasmids_set %}<li><a href="/experimentdb/construct/{{construct.id}}" title="{{construct}}">{{construct}}</a></li>{% endfor %}</ul></td>
 	<td>{{strain.selection}}</td>
 	<td>
-<a href="{% url strain-detail strain.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+<a href="{% url strain-detail strain.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_strain %}
-<a href="{% url strain-edit strain.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+<a href="{% url strain-edit strain.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"></a>
 {% endif %}
 {% if perms.reagents.delete_strain %}
-<a href="{% url strain-delete strain.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+<a href="{% url strain-delete strain.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete"></a>
 {% endif %}
 </td>
 </tr>

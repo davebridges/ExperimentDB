@@ -5,7 +5,7 @@
 {% block head_title %}Chemical List{% endblock %}
 {% block title %}Chemical List{% endblock %}
 {% block content %}
-{% if perms.reagents.add_chemical %}<p>Click <a href="{% url chemical-new %}"><img src="/static/img/icons/Add.png" width=25 alt="here"></a> for a new chemical</p>{% endif %}
+{% if perms.reagents.add_chemical %}<p>Click <a href="{% url chemical-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new chemical</p>{% endif %}
 <table>
 <thead>
 	<tr>
@@ -21,16 +21,16 @@
 	<td>{{chemical.source}}</td>
 	<td>{{chemical.vendor}}</td>
 	<td>
-<a href="{% url chemical-detail chemical.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+<a href="{% url chemical-detail chemical.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_construct %}
-<a href="{% url chemical-edit chemical.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+<a href="{% url chemical-edit chemical.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"></a>
 {% endif %}
 {% if perms.reagents.delete_construct %}
-<a href="{% url chemical-delete chemical.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete"></a>
+<a href="{% url chemical-delete chemical.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete"></a>
 {% endif %}
 </tr>
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="{% url chemical-new %}"><img src="/static/img/icons/add.png" width=25 alt="here"></a> for a new chemical</p>
+<p>Click <a href="{% url chemical-new %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"></a> for a new chemical</p>
 {% endblock %}

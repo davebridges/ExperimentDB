@@ -14,7 +14,7 @@
 <tr><th>Notes</th><td>{{ object.notes }}</td></tr>
 </tr>
 </table>
-{% if perms.reagents.change_primer %}<p>To update primer details click <a href="{% url primer-edit object.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
+{% if perms.reagents.change_primer %}<p>To update primer details click <a href="{% url primer-edit object.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
 <div = "experiments">
 {% with object.experiment_set.all as experiment_list %}
 {% include "experiment_list_table.html" %}
