@@ -12,12 +12,12 @@
 <tr>
 	<td><a href="{{process.get_absolute_url}}">{{process }}</a></td>
 	<td>
-		<a href="{% url process-detail process.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+		<a href="{% url process-detail process.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 	{% if perms.hypothesis.change_process %}
-		<a href="{% url process-edit process.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+		<a href="{% url process-edit process.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"></a>
 	{% endif %}
 	{% if perms.hypothesis.delete_process %}
-		<a href="{% url process-delete process.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+		<a href="{% url process-delete process.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete></a>
 	{% endif %}
 	</td>
 </tr>

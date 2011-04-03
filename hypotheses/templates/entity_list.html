@@ -12,12 +12,12 @@
 <tr>
 	<td><a href="{{entity.get_absolute_url}}">{{entity }}</a></td>
 	<td>
-		<a href="{% url entity-detail entity.id %}"><img src="/static/img/icons/Zoom.png" width=25 alt="Detail"></a>
+		<a href="{% url entity-detail entity.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 	{% if perms.hypothesis.change_entity %}
-		<a href="{% url entity-edit entity.id %}"><img src="/static/img/icons/Document Write.png" width=25 alt="Edit"></a>
+		<a href="{% url entity-edit entity.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"></a>
 	{% endif %}
 	{% if perms.hypothesis.delete_entity %}
-		<a href="{% url entity-delete entity.id %}"><img src="/static/img/icons/Close.png" width=25 alt="delete></a>
+		<a href="{% url entity-delete entity.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete></a>
 	{% endif %}
 	</td>
 </tr>
