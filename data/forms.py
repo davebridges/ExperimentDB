@@ -24,10 +24,13 @@ class ExperimentForm(forms.ModelForm):
     class Meta:
         model = Experiment
     class Media:
+        """This form requires both a css and javascript file for the autocomplete function.
+        
+        The css/autocomplete.css file has been customized to match the vader theme."""
         css = {
-		    'all': ('javascript/jquery-ui/css/custom-theme/jquery-ui-1.7.2.custom.css','javascript/jquery-autocomplete/jquery.autocomplete.css', 'css/autocomplete.css')
-				}
-        js = ('javascript/jquery-1.3.2.js','javascript/jquery-ui/js/jquery-ui-1.7.2.custom.min.js', 'javascript/jquery-autocomplete/jquery.autocomplete.js')
+		    'all': ('css/autocomplete.css',),
+              }
+        js = ("js/jquery-autocomplete/jquery.autocomplete.js",)
 
 
 	
