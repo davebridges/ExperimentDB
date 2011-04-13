@@ -87,7 +87,7 @@
 	<div id="reagents">
 	<h4>Chemicals:</h4> 
 		<ul>{% for chemical in experiment.chemicals.all %}
-			<li><a href="/{{chemical.get_absolute_url}}">{{chemical}}</a></li>{% endfor %}
+			<li><a href="{{chemical.get_absolute_url}}">{{chemical}}</a></li>{% endfor %}
 		</ul>
 
 	<h4>Cell Lines:</h4> 
@@ -102,11 +102,11 @@
 
 	<h4>Antibodies:</h4>
 		<ul>{% for antibody in experiment.antibodies.all %}
-		<li><a href="/{{antibody.get_absolute_url}}">{{antibody}}</a></li>{% endfor %}</ul>
+		<li><a href="{{antibody.get_absolute_url}}">{{antibody}}</a></li>{% endfor %}</ul>
 		
 	<h4>Primers:</h4>
 		<ul>{% for primer in experiment.siRNA.all %}
-		<li><a href="/{{primer.get_absolute_url}}">{{primer}}</a></li>{% endfor %}</ul>
+		<li><a href="{{primer.get_absolute_url}}">{{primer}}</a></li>{% endfor %}</ul>
 		
 	<h4>Strains:</h4>
 		<ul>{% for strain in experiment.strain.all %}
