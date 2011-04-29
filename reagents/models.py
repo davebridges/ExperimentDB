@@ -241,6 +241,26 @@ class Strain(ReagentInfo):
     @models.permalink
     def get_absolute_url(self):
         return ("strain-detail", [str(self.id)])
+        
+class AnimalStrain(ReagentInfo):
+    '''Model describing animal strains.
+
+    This contains only basic information about an animal model.  For more details enter a URI in the url field for this strain.
+    This is a subclass of ReagentInfo abstract class
+    '''
+    background = models.CharField(max_length=100, blank=True, null=True)
+    strain_species = models.ForeignKey('Species', blank=True, null=True)
+    url = models.URLField(verify_exists=False, blank=True, null=True, help_text="Link to a URI the strain, for example from Jackson Labs or another online database")
+    
+    def save(self):
+        """The save is over-ridden to slugify the name field into a slugfield."""
+        self.slug = slugify( self.name )
+        super( AnimalStrain, self ).save()
+
+    @models.permalink
+    def get_absolute_url(self):
+        """The absolute url of this is the animal-detail page with the id number."""    
+        return ("animal-detail", [str(self.id)])        
 
 class Species(models.Model):
     '''Model for indicating specific species.  
