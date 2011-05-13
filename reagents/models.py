@@ -59,7 +59,7 @@ class ReagentInfo(models.Model):
     It orders all reagents by name, although this may be over-ridden in the model.  
     It also sets sets their __unicode__ representation to be "name".'''
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=20, blank=True, null=True)
     location = models.CharField(max_length=25, choices=LOCATIONS, blank=True, null=True, default="-20")
     box = models.CharField(max_length=25, blank=True, null=True)
     source = models.CharField(max_length=25, blank=True, null=True)
