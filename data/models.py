@@ -2,7 +2,7 @@ from django.db import models
 
 from experimentdb.projects.models import Project, SubProject
 from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain
+from experimentdb.reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain, AnimalStrain
 from experimentdb.external.models import Contact, Reference
 
 class Protocol(models.Model):
@@ -34,31 +34,38 @@ class Protocol(models.Model):
 
 
 class Experiment(models.Model):
-	project = models.ManyToManyField(Project, blank=True, null=True)
-	subproject = models.ManyToManyField(SubProject, blank=True, null=True)
-	experimentID = models.SlugField(max_length=50, help_text="ie DB-2008-11-11-A", primary_key=True)
-	experiment = models.CharField(max_length=100)
-	protocol = models.ManyToManyField(Protocol, blank=True, null=True)
-	assay = models.CharField(max_length=100, blank=True, null=True)
-	experiment_date = models.DateField(help_text="Date Performed")
-	cellline = models.ManyToManyField(Cell, blank=True, null=True)
-	antibodies = models.ManyToManyField(Antibody, blank=True, null=True)
-	chemicals = models.ManyToManyField(Chemical, blank=True, null=True)
-	constructs = models.ManyToManyField(Construct, blank=True, null=True)
-	siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
-	strain = models.ManyToManyField(Strain, blank=True, null=True)
-	comments = models.TextField(max_length=500, blank=True, null=True)
-	researcher = models.ManyToManyField(Contact, blank=True, null=True)
-	protein = models.ManyToManyField(Protein, blank=True, null=True)
-	public = models.BooleanField()
-	published = models.BooleanField()
-	sample_storage = models.CharField(max_length=100, blank=True)
-	def __unicode__(self):
-		return u'%s on %s; %s' % (self.experiment, self.assay, self.experiment_date)
-	def get_absolute_url(self):
-		return "/experimentdb/experiment/%s/" % self.experimentID
-	class Meta:
-		ordering = ['-experiment_date']
+    """Experiment objects are the central objects of this database.
+    
+    Experiment objects contain all details about an experiment including reagents, parameters, notes, results and data."""
+    project = models.ManyToManyField(Project, blank=True, null=True)
+    subproject = models.ManyToManyField(SubProject, blank=True, null=True)
+    experimentID = models.SlugField(max_length=50, help_text="ie DB-2008-11-11-A", primary_key=True)
+    experiment = models.CharField(max_length=100)
+    protocol = models.ManyToManyField(Protocol, blank=True, null=True)
+    assay = models.CharField(max_length=100, blank=True, null=True)
+    experiment_date = models.DateField(help_text="Date Performed")
+    cellline = models.ManyToManyField(Cell, blank=True, null=True)
+    antibodies = models.ManyToManyField(Antibody, blank=True, null=True)
+    chemicals = models.ManyToManyField(Chemical, blank=True, null=True)
+    constructs = models.ManyToManyField(Construct, blank=True, null=True)
+    siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
+    strain = models.ManyToManyField(Strain, blank=True, null=True)
+    animal_model = models.ManyToManyField(AnimalStrain, blank=True, null=True)
+    comments = models.TextField(max_length=500, blank=True, null=True)
+    researcher = models.ManyToManyField(Contact, blank=True, null=True)
+    protein = models.ManyToManyField(Protein, blank=True, null=True)
+    public = models.BooleanField()
+    published = models.BooleanField()
+    sample_storage = models.CharField(max_length=100, blank=True)
+    def __unicode__(self):
+        """The unicode representation of an experiment object is the experiment on assay; date."""
+        return u'%s on %s; %s' % (self.experiment, self.assay, self.experiment_date)
+    def get_absolute_url(self):
+        """The default url for an experiment is /experimentdb/experiment/experimentID."""
+        return "/experimentdb/experiment/%s/" % self.experimentID
+    class Meta:
+        """The default ordering for experiments is in reverse of the experiment_date."""
+        ordering = ['-experiment_date']
 
 class Result(models.Model):
 	experiment = models.ForeignKey(Experiment)
