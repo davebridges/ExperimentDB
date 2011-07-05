@@ -23,15 +23,12 @@
     {% for construct in license.construct_set.all %}
         <tr><th>Construct</th><td><a href="{{ construct.get_absolute_url }}">{{construct}}</a></td></tr>
     {% endfor %}
-    {% for chemical in license.construct_set.all %}
+    {% for chemical in license.chemical_set.all %}
         <tr><th>Chemical</th><td><a href="{{ chemical.get_absolute_url }}">{{chemical}}</a></td></tr>
     {% endfor %}
     {% for antibody in license.antibody_set.all %}
         <tr><th>Antibody</th><td><a href="{{ antibody.get_absolute_url }}">{{antibody}}</a></td></tr>
     {% endfor %}   
-    {% for construct in license.construct_set.all %}
-        <tr><th>Construct</th><td><a href="{{ construct.get_absolute_url }}">{{construct}}</a></td></tr>
-    {% endfor %}
     {% for strain in license.strain_set.all %}
         <tr><th>Strain</th><td><a href="{{ strain.get_absolute_url }}">{{strain}}</a></td></tr>
     {% endfor %}
