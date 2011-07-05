@@ -52,6 +52,9 @@ urlpatterns = patterns('',
 	url(r'^strains?/', include('experimentdb.reagents.urls.strain')),
 	url(r'^yeast_?strains?/', include('experimentdb.reagents.urls.strain')),
 	url(r'^yeasts?/', include('experimentdb.reagents.urls.strain')),
+    
+    url(r'^licenses?/', include('experimentdb.reagents.urls.license')),
+    url(r'^mtas?/', include('experimentdb.reagents.urls.license')),
 	
 	(r'^clones?/', include('experimentdb.cloning.urls')),
 	(r'^clonings?/', include('experimentdb.cloning.urls')),

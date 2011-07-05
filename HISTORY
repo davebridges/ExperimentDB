@@ -6,6 +6,7 @@ Release 0.2.dev
 * Added hypotheses app.  This allows for the summary of experimental findings.  It links a manipulation to a change in a biological process or entity, and lists the context and evidence for and against such a hypothesis
 * Added a URI field to the Cell model.  *This requires a migration of the reagents app*
 * Added a dilution field for Antibodies *This requires a migration of the reagents app*
+* Added a new model for License or Material Transfer Agreements.  *This requires a migration of the reagents app*
 * Moved static files into static folder.  The media folder is only for uploaded files.
 * Upgraded to be compatible with Django 1.3
 

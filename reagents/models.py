@@ -1,15 +1,17 @@
 """This package describes the models in the reagents app.
 
-The models are ReagentInfo, which is an abstract superclass of:
-- Primer
-- Cell
-- Antibody
-- Strain
-- Chemical
-- Construct
+The models are :class:`~experimentdb.models.ReagentInfo`, which is an abstract superclass of:
+* :class:`~experimentdb.models.Primer`
+* :class:`~experimentdb.models.Cell`
+* :class:`~experimentdb.models.Antibody`
+* :class:`~experimentdb.models.Strain`
+* :class:`~experimentdb.models.AnimalStrain`
+* :class:`~experimentdb.models.Chemical`
+* :class:`~experimentdb.models.Construct`
 
-The ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.
-This package also contains a Selection model, to be used for antibiotic selections, and a specied model, to be used to indicate various species.
+There are also separate models for :class:`~experimentdb.models.License`, :class:`~experimentdb.models.Species` and :class:`~experimentdb.models.Selection` which are supplementary to these models.
+
+The :class:`~experimentdb.models.ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.
 """
 
 from django.db import models
@@ -66,6 +68,7 @@ class ReagentInfo(models.Model):
     researcher = models.ManyToManyField(Contact, blank=True, null=True, related_name="%(class)s_researcher")
     vendor = models.ForeignKey(Vendor, blank=True, null=True, related_name="%(class)s_vendor")
     protein = models.ManyToManyField(Protein, null=True, blank=True)
+    license = models.ForeignKey('License', null=True, blank=True, help_text="Terms of Use")
     notes = models.TextField(max_length=250, blank=True, null=True)
     reference = models.ManyToManyField(Reference, blank=True, null=True)
     public = models.BooleanField()
@@ -286,4 +289,30 @@ class Species(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('species-detail', [str(self.id)])
+        
+class License(models.Model):
+    """These object define terms of use for reagents.
+    
+    License is an optional field for all reagent objects.  The only required field is name.
+    There are optional fields for notes (for pasting the entire agreement), url, and (as yes/no/unknown fields) for acknowledgements, distribution or sharing, use on human subjects, using them for commercialization purposes directly or through target modifications.
+    These details are commonly filled out in material transfer agreements."""
+    
+    name = models.CharField(max_length=50)
+    notes = models.TextField(max_length=1000, blank=True, null=True, help_text="Paste the entire license")
+    url = models.URLField(verify_exists=True, blank=True, null=True, help_text="Link to a web copy of the license")
+    acknowledgement = models.NullBooleanField(help_text="For use in publications, must the source be acknowledged?")
+    distributable = models.NullBooleanField(help_text="Can this reagent be distributed?")
+    human_subjects = models.NullBooleanField(help_text="Can this reagents be used on human subjects?")
+    commericalization = models.NullBooleanField(help_text="Can this reagent be used for commercialization purposes?")
+    modification = models.NullBooleanField(help_text="Can this reagent be modified?")
+    modification_license = models.NullBooleanField(help_text="Must the modified reagent conform to this license?")
+
+    def __unicode__(self):
+        """The unicode representation of a :class:`~experimentdb.models.License` object is its name."""
+        return u'%s' %self.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        """The url of a :class:`~experimentdb.models.License` object is **/licence/#**"""
+        return ('license-detail', [str(self.id)])    
 

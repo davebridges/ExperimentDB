@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head_title %}License Detail - {{ license }}{% endblock %}
+{% block title %}License Detail - {{ license }}{% endblock %}
+{% block content %}
+<table>
+	<tr><th>Name</th><td>{{ license }}</td></tr>
+    {% if license.url %}<tr><th>Link</th><td>{{ license.url }}</td></tr>{% endif %}
+    <tr><th>Acknowledgement</th><td>{{ license.acknowledgement|yesno:"Yes,No,Unknown" }}</td></tr>
+    <tr><th>Distributable</th><td>{{ license.distributable|yesno:"Yes,No,Unknown" }}</td></tr>
+    <tr><th>Use on Human Subjects</th><td>{{ license.human_subjects|yesno:"Yes,No,Unknown" }}</td></tr>
+    <tr><th>Commerical Uses</th><td>{{ license.commericalization|yesno:"Yes,No,Unknown" }}</td></tr>
+    <tr><th>Modifications Allowed</th><td>{{ license.modification|yesno:"Yes,No,Not Specified" }}</td></tr>
+</table>
+<div class="grid_5">
+<h2>License Test</h2>
+<p>{{license.notes}}</p>
+</div>
+
+<div class="grid_5">
+<h2>Materials Covered by this License</h2>
+<table>
+    {% for construct in license.construct_set.all %}
+        <tr><th>Construct</th><td><a href="{{ construct.get_absolute_url }}">{{construct}}</a></td></tr>
+    {% endfor %}
+    {% for chemical in license.construct_set.all %}
+        <tr><th>Chemical</th><td><a href="{{ chemical.get_absolute_url }}">{{chemical}}</a></td></tr>
+    {% endfor %}
+    {% for antibody in license.antibody_set.all %}
+        <tr><th>Antibody</th><td><a href="{{ antibody.get_absolute_url }}">{{antibody}}</a></td></tr>
+    {% endfor %}   
+    {% for construct in license.construct_set.all %}
+        <tr><th>Construct</th><td><a href="{{ construct.get_absolute_url }}">{{construct}}</a></td></tr>
+    {% endfor %}
+    {% for strain in license.strain_set.all %}
+        <tr><th>Strain</th><td><a href="{{ strain.get_absolute_url }}">{{strain}}</a></td></tr>
+    {% endfor %}
+    {% for primer in license.primer_set.all %}
+        <tr><th>Primer</th><td><a href="{{ primer.get_absolute_url }}">{{primer}}</a></td></tr>
+    {% endfor %}    
+    {% for cell in license.cell_set.all %}
+        <tr><th>Cell Line</th><td><a href="{{ cell.get_absolute_url }}">{{cell}}</a></td></tr>
+    {% endfor %}    
+</table>
+</div>
+
+<div class="grid_12">
+{% include "comment.html" %}
+</div>
+
+<div class="grid_12">
+{% if perms.reagents.change_license %}<p>To update license details click <a href="{% url license-edit license.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="here"></a></p>{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if license %}Update License {{license}}{% else %} New License {% endif %}{% endblock %}
+{% block title %}{% if license %}Update License {{license}}{% else %} New License {% endif %}{% endblock %}
+{% block content %}
+<form method="post" {% if license %} action="{% url license-edit license.id %}"{% else %} action="{% url license-new %}"{% endif%}>{% csrf_token %}
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}

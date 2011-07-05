@@ -7,12 +7,12 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from experimentdb.reagents.models import Primer, Cell, Antibody, Construct, Chemical, Strain, Species, Selection
+from experimentdb.reagents.models import Primer, Cell, Antibody, Construct, Chemical, Strain, Species, Selection, License
 from experimentdb.external.models import Reference, Contact, Vendor
 from experimentdb.proteins.models import Protein
 
 
-MODELS = [Primer, Cell, Antibody, Construct, Chemical, Species, Selection]
+MODELS = [Primer, Cell, Antibody, Construct, Chemical, Species, Selection, License]
 
 class PrimerModelTests(TestCase):
     """Tests the model attributes of Primer objects contained in the reagents app."""
@@ -366,3 +366,96 @@ class SelectionModelTests(TestCase):
             notes = "4932")
         test_selection.save()
         self.assertEquals(test_selection.__unicode__(), "test selection")
+
+class LicenseModelTests(TestCase):
+    """Tests the model attributes of :class:`~experimentdb.models.License` objects contained in the reagents app."""
+
+    fixtures = ['test_external','test_protein']
+    
+    def setUp(self):
+        """Instantiate the test client."""
+        self.client = Client()
+    
+    def tearDown(self):
+        """Depopulate created model instances from test database."""
+        for model in MODELS:
+            for obj in model.objects.all():
+                obj.delete()
+    
+    def test_create_license_minimal(self):
+        """This is a test for creating a new :class:`~experimentdb.models.License` object, with only the minimum fields being entered"""
+        test_license = License(name = "test license")
+        test_license.save()
+        self.assertEquals(test_license.__unicode__(), "test license")
+        
+    def test_license_url(self):
+        """This is a test for creating a new :class:`~experimentdb.models.License` object, and verifying that the url is set correctly."""
+        test_license = License(name = "test license")
+        test_license.save()
+        self.assertEquals(test_license.get_absolute_url(), "/license/1")    
+
+    def test_create_primer_all_fields(self):
+        """This is a test for creating a new :class:`~experimentdb.models.License` object, with only the all fields being entered"""
+        
+        pass
+        
+class LicenseViewTests(TestCase):
+
+    def setUp(self):
+        """Instantiate the test client.  Creates a test user."""
+        self.client = Client()
+        self.test_user = User.objects.create_user('testuser', 'blah@blah.com', 'testpassword')
+        self.test_user.is_superuser = True
+        self.test_user.is_active = True
+        self.test_user.save()
+        self.assertEqual(self.test_user.is_superuser, True)
+        login = self.client.login(username='testuser', password='testpassword')
+        self.failUnless(login, 'Could not log in')
+
+    def tearDown(self):
+        """Depopulate created model instances from test database."""
+        for model in MODELS:
+            for obj in model.objects.all():
+                obj.delete()
+
+    def test_license_detail(self):
+        """This tests the license-detail view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/license/1/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('license' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'license_detail.html')
+        self.assertEqual(test_response.context['license'].pk, 1)
+        self.assertEqual(test_response.context['license'].name, u'Fixture License')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/license/2/')
+        self.assertEqual(null_response.status_code, 404)  
+
+    def test_license_new(self):
+        """This tests the license-new view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/license/new/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTemplateUsed(test_response, 'base.html')
+        self.assertTemplateUsed(test_response, 'license_form.html') 
+
+    def test_license_edit(self):
+        """This tests the license-edit view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/license/1/edit')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('license' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'license_form.html')
+        self.assertEqual(test_response.context['license'].pk, 1)
+        self.assertEqual(test_response.context['license'].name, u'Fixture License')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/license/2/edit')
+        self.assertEqual(null_response.status_code, 404)          
