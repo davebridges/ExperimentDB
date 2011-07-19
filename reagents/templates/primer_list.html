@@ -13,9 +13,7 @@
 	<th>Primer</th>
 	<th>Type</th>
 	<th>Ordered</th>
-	<th>Protein</th>
 	<th>Vendor</th>
-	<th>Sequence</th>
 </tr>
 </thead>
 <tbody>
@@ -24,9 +22,7 @@
 	<td><a href="{% url primer-detail primer.id %}">{{ primer }}</a></td>
 	<td>{{primer.primer_type}}</td>
 	<td>{{primer.date_ordered}}</td>
-	<td><ul>{% for protein in primer.protein.all %}<ul><li><a href="{{ protein.get_absolute_url }}">{{protein}}</li></a>{% endfor %}</ul></td>
 	<td>{{primer.vendor}}</td>
-	<td>{{primer.sequence}}</td>
 	<td>
 <a href="{% url primer-detail primer.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_primer %}

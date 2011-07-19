@@ -12,18 +12,18 @@
 	<tr>
 	<th>Strain</th>
 	<th>Background</th>
-	<th>Plasmids</th>
 	<th>Selection</th>
 	</tr>
 </thead>
-{% for strain in object_list %}
 <tbody>
+{% for strain in object_list %}
 <tr>
-	<td><a href="{% url strain-detail strain.id %}">{{ strain|safe }}</a></td>
-	<td>{{strain.background|safe}}</td>
-	<td><ul>{% for construct in strain.plasmids_set %}<li><a href="/experimentdb/construct/{{construct.id}}" title="{{construct}}">{{construct}}</a></li>{% endfor %}</ul></td>
+{% autoescape off %}
+	<td><a href="{% url strain-detail strain.id %}">{{ strain }}</a></td>
+	<td>{{strain.background}}</td>
 	<td>{{strain.selection}}</td>
 	<td>
+{% endautoescape %}
 <a href="{% url strain-detail strain.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_strain %}
 <a href="{% url strain-edit strain.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"></a>
