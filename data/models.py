@@ -51,6 +51,7 @@ class Experiment(models.Model):
     siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
     strain = models.ManyToManyField(Strain, blank=True, null=True)
     animal_model = models.ManyToManyField(AnimalStrain, blank=True, null=True)
+    animal_cohort = models.ManyToManyField('AnimalCohort', blank=True, null=True)
     comments = models.TextField(max_length=500, blank=True, null=True)
     researcher = models.ManyToManyField(Contact, blank=True, null=True)
     protein = models.ManyToManyField(Protein, blank=True, null=True)
@@ -103,3 +104,20 @@ class Sequencing(models.Model):
 	lane_number = models.IntegerField(max_length=3, blank=True, null=True)
 	def __unicode__(self):
 		return u'%s-%s' % (self.construct,self.clone_name)
+        
+class AnimalCohort(models.Model):
+
+    """This model describes a particular cohort of animals.  
+    
+    As an example, an experiment might be dont with a particular knockout model, over several cohorts.
+    This model defines two required classes, name and a many to many field for  :class:`~experimentdb.reagents.models.AnimalStrain`, and optional notes, start and end dates.
+    The unicode name of this is "name" field and the url is /cohort/id where id is the primary key."""
+    name = models.CharField(max_length=50)
+    animal_model = models.ManyToManyField(AnimalStrain)
+    date_start = models.DateField(blank=True, null=True, help_text="Cohort Start Date")
+    date_end = models.DateField(blank=True, null=True, help_text="Cohort End Date")
+    notes = models.TextField(blank=True, null=True)
+    def __unicode__(self):
+        return u'%s' % (self.name) 
+    def get_absolute_url(self):
+        return "/cohort/%i/" % self.id        

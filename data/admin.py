@@ -1,4 +1,4 @@
-from experimentdb.data.models import Protocol, Experiment, Result, Sequencing
+from experimentdb.data.models import Protocol, Experiment, Result, Sequencing, AnimalCohort
 from django.contrib import admin
 
 class ResultInline(admin.TabularInline):
@@ -9,6 +9,10 @@ class ResultInline(admin.TabularInline):
 class ProtocolAdmin(admin.ModelAdmin):
 	pass
 admin.site.register(Protocol, ProtocolAdmin)
+
+class AnimalCohortAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(AnimalCohort, AnimalCohortAdmin)
 
 class ExperimentAdmin(admin.ModelAdmin):
 	fieldsets = (
