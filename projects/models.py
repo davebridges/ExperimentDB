@@ -26,10 +26,10 @@ class Project(models.Model):
     def get_absolute_url(self):
         return ('project-detail', [str(self.project_slug)])
 
-    def save(self):
-        """The save is over-ridden to slugify the project field into a slugfield."""
-        self.project_slug = slugify( self.project )
-        super( Project, self ).save()
+    #def save(self):
+     #   """The save is over-ridden to slugify the project field into a slugfield."""
+     #   self.project_slug = slugify( self.project )
+      #  super( Project, self ).save()
 
 
 
