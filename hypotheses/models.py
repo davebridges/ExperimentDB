@@ -45,6 +45,7 @@ EVIDENCE_TYPE = (
 	('Experiment', 'Experiment'),
 	('Un-Published Communication', 'Un-Published Communication'),
 	('Presentation', 'Presentation'),
+    ('Figure','Figure')
 )
 
 CITATION_GROUP = (
@@ -164,7 +165,7 @@ class Process(models.Model):
     gene_ontology_id = models.CharField(blank = True, null= True, max_length=15, help_text="This is a gene ontology accesion number in the format GO:0046323 where the number can change.  Find an appropriate gene ontology id at http://amigo.geneontology.org/cgi-bin/amigo/search.cgi")
     definition = models.CharField(max_length=100, blank=True, null=True)
     assay = models.ManyToManyField(Protocol, blank=True, null=True, help_text="The assay we use to monitor this process")
-    slug = models.SlugField(max_length=100, blank=True, null=True)
+    slug = models.SlugField(max_length=100, blank=True, null=True, editable=False)
 
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""
@@ -194,7 +195,11 @@ class Entity(models.Model):
 	
     name = models.CharField(max_length=100, unique=True, help_text="The specific name for the entity, such as pSer 473 or Akt mRNA")
     protein = models.ManyToManyField(Protein, blank=True, null=True, help_text="Select either a protein or a chemcial.")
-    chemical = models.ManyToManyField(Chemical, blank=True, null=True, help_text="Select either a protein or a chemcial.") 
+    chemical = models.ManyToManyField(Chemical, 
+        blank=True, 
+        null=True,
+        verbose_name="Small Molecule",
+        help_text="Select either a protein or a chemcial.") 
     slug = models.SlugField(max_length=100, blank=True, null=True, editable=False)
 	
     def save(self):
@@ -226,7 +231,7 @@ class Context(models.Model):
     cell_line = models.ManyToManyField(Cell, blank=True, null=True, help_text="Cell line specific context")
     species = models.ManyToManyField(Species, blank=True, null=True, help_text="Species specific context.")	
     uri = models.URLField(blank=True, null=True, help_text="If a specific URI is known for this context enter it here.  Search BioOntology at http://clkb.ncibi.org/browse.php for possible URI's")
-    slug = models.SlugField(blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, editable=False)
 	
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""
@@ -247,7 +252,8 @@ class Evidence(models.Model):
     citation_type = models.ForeignKey('CitationType')
     experiment = models.ForeignKey(Experiment, blank=True, null=True)	
     paper = models.ForeignKey(Reference, blank=True, null=True)	
-    contact = models.ForeignKey(Contact, blank=True, null=True, help_text="Source of unpublished evidence.")	
+    contact = models.ForeignKey(Contact, blank=True, null=True, help_text="Source of unpublished evidence.")
+    figure = models.ImageField(upload_to='evidence/%Y/%m/%d', blank=True, null=True, help_text="Select a file to upload.")
     notes = models.TextField(max_length=500, blank=True, null=True, help_text="Description of evidence")
     public = models.BooleanField(help_text="Is the evidence to be made public?")
     create_date = models.DateField(auto_now_add = True)
@@ -266,6 +272,8 @@ class Evidence(models.Model):
         """This validates that evidence with a communication has a contact."""
         if self.evidence_type == "Presentation" and self.contact == None:
             raise ValidationError('Enter a contact for evidence from a presentation')
+        if self.evidence_type == "Figure" and self.figure == None:
+            raise ValidationError('Enter a contact for evidence from a presentation')            
 
     def __unicode__(self):
         """The unicode representation of a context is its evidence_type and its experiment."""
