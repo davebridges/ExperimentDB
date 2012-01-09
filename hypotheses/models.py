@@ -190,14 +190,12 @@ class Entity(models.Model):
     If it is a part of a protein then that should be specified under the name field.
     An entity has to be something which can be regulated positively, negatively or unaffected by the :class:`~experimentdb.hypotheses.models.Manipulation` as part of a :class:`~experimentdb.hypotheses.models.Hypothesis`.  A :class:`~experimentdb.hypotheses.models.Hypothesis` should test either a :class:`~experimentdb.hypotheses.models.Process` or an :class:`~experimentdb.hypotheses.models.Entity` but not both.  With that said, a particular :class:`~experimentdb.hypotheses.models.Entity` could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the :class:`~experimentdb.hypotheses.models.Hypothesis` level.
 	
-    This model has no independent required fields, but either a protein or a chemical must be set."""
+    A unique name is a required field, and either a protein or a chemical must be chosen."""
 	
-    name = models.CharField(max_length=100, help_text="A specific biological entity such as a protein, a protein complex or a part of a protein.")
+    name = models.CharField(max_length=100, unique=True, help_text="The specific name for the entity, such as pSer 473 or Akt mRNA")
     protein = models.ManyToManyField(Protein, blank=True, null=True, help_text="Select either a protein or a chemcial.")
     chemical = models.ManyToManyField(Chemical, blank=True, null=True, help_text="Select either a protein or a chemcial.") 
-    uri = models.URLField(blank=True, null=True, help_text="A URI for a biological entity, if possible.  May be a link to a protein's PubMed page.")
-    identifier = models.CharField(max_length=50, blank=True, null=True, help_text="The Accession number of a protein, or Compound ID (from PubChem) for a chemical.")
-    slug = models.SlugField(max_length=100, blank=True, null=True)
+    slug = models.SlugField(max_length=100, blank=True, null=True, editable=False)
 	
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""
