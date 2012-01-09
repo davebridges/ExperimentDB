@@ -132,7 +132,14 @@ class Chemical(ReagentInfo):
     It is intended to describe chemicals used in experiments.
     The only required field is name.
     This model is a subclass of ReagentInfo."""
-    cas = models.CharField(max_length=12, help_text="Chemical Abstract Services Number", blank=True, null=True)
+    cas = models.CharField(max_length=12, 
+        verbose_name="Chemical Abstract Service Number",
+        blank=True,
+        null=True)
+    cid = models.CharField(max_length=12, 
+        verbose_name="PubChem Chemical Identification", 
+        blank=True, 
+        null=True)    
 
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""
