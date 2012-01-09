@@ -183,15 +183,20 @@ class Process(models.Model):
         verbose_name_plural = 'processes'			
 
 class Entity(models.Model):
-    """Each hypothesis involves a potential manipulation of either a process or an entity.
+    """Each hypothesis involves a potential :class:`~experimentdb.hypotheses.models.Manipulation` of either a :class:`~experimentdb.hypotheses.models.Process` or an :class:`~experimentdb.hypotheses.models.Entity`.
 	
-	An entity, generally a biological thing, but is usually a specific protein or part of a protein.  It could be a whole protein, or a phosphorylation site.  It has to be something which can be regulated positively, negatively or unaffected by the Manipulation as part of a Hypothesis.  A Hypothesis should test either a process or an identity but not both.  With that said, a particular entity could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the Hypothesis level.
+	An :class:`~experimentdb.hypotheses.models.Entity`, generally a biological thing, but is usually a specific :class:`~experimentdb.protein.models.Protein` or part of a protein or alternatively a :class:`~experimentdb.reagents.models.Chemical`.  
+    It could be a whole protein, or a phosphorylation site or a transcript.  
+    If it is a part of a protein then that should be specified under the name field.
+    An entity has to be something which can be regulated positively, negatively or unaffected by the :class:`~experimentdb.hypotheses.models.Manipulation` as part of a :class:`~experimentdb.hypotheses.models.Hypothesis`.  A :class:`~experimentdb.hypotheses.models.Hypothesis` should test either a :class:`~experimentdb.hypotheses.models.Process` or an :class:`~experimentdb.hypotheses.models.Entity` but not both.  With that said, a particular :class:`~experimentdb.hypotheses.models.Entity` could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the :class:`~experimentdb.hypotheses.models.Hypothesis` level.
 	
-    This model has two required fields, name and protein."""
+    This model has no independent required fields, but either a protein or a chemical must be set."""
 	
-    name = models.CharField(max_length=100, help_text="A specific biological entity such as a protein, a protein complex or a part of a protein")
-    protein = models.ManyToManyField(Protein, help_text="At least one protein must be selected")
-    uri = models.URLField(blank=True, null=True, help_text="A URI for a biological entity, if possible.  May be a link to a protein's PubMed page")
+    name = models.CharField(max_length=100, help_text="A specific biological entity such as a protein, a protein complex or a part of a protein.")
+    protein = models.ManyToManyField(Protein, blank=True, null=True, help_text="Select either a protein or a chemcial.")
+    chemical = models.ManyToManyField(Chemical, blank=True, null=True, help_text="Select either a protein or a chemcial.") 
+    uri = models.URLField(blank=True, null=True, help_text="A URI for a biological entity, if possible.  May be a link to a protein's PubMed page.")
+    identifier = models.CharField(max_length=50, blank=True, null=True, help_text="The Accession number of a protein, or Compound ID (from PubChem) for a chemical.")
     slug = models.SlugField(max_length=100, blank=True, null=True)
 	
     def save(self):
@@ -203,8 +208,14 @@ class Entity(models.Model):
         """The unicode representation of an entity is its name."""
         return u'%s' % self.name
 		
+    def clean(self):
+        """This validates that an entity has either a chemical or a protein noted."""
+        if self.chemical == None and self.protein == None:
+            raise ValidationError('Choose either a chemical or protein.')	
+        
     class Meta:
-        verbose_name_plural = 'processes'			
+        verbose_name_plural = 'processes'
+        
 	
 class Context(models.Model):
     """A context specifies the model system under which the hypothesis is tested.
