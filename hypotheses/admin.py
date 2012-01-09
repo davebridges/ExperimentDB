@@ -7,9 +7,10 @@ Currently each of the following models has the default admin interface:
 * Effect
 * Process
 * Entity
+* Context
 """
 
-from experimentdb.hypotheses.models import Hypothesis, Effect, Manipulation, Process, Entity, Evidence, CitationType
+from experimentdb.hypotheses.models import Hypothesis, Effect, Manipulation, Process, Entity, Evidence, CitationType, Context
 from django.contrib import admin
 
 class HypothesisAdmin(admin.ModelAdmin):
@@ -39,3 +40,7 @@ admin.site.register(Evidence, EvidenceAdmin)
 class CitationTypeAdmin(admin.ModelAdmin):
 	pass
 admin.site.register(CitationType, CitationTypeAdmin)
+
+class ContextAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Context, ContextAdmin)
