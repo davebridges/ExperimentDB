@@ -242,6 +242,7 @@ class Strain(ReagentInfo):
     species = models.CharField(max_length=50, choices=SPECIES, blank=True, null=True, default='brewers yeast')
     strain_species = models.ForeignKey('Species', blank=True, null=True)
     genotype = models.CharField(max_length=200, blank=True, help_text="BY4742 is MATa his3&Delta;1 leu2&Delta;0 lys2&Delta;0 ura3&Delta;0")
+    storage_name = models.CharField(max_length=10, blank=True, unique=True, null=True, help_text="storage and publication name of strain ie DB32")
     
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""

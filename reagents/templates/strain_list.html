@@ -11,6 +11,7 @@
 <thead>
 	<tr>
 	<th>Strain</th>
+    <th>Name</th>
 	<th>Background</th>
 	<th>Selection</th>
 	</tr>
@@ -20,9 +21,10 @@
 <tr>
 {% autoescape off %}
 	<td><a href="{% url strain-detail strain.id %}">{{ strain }}</a></td>
+	<td>{{strain.storage_name}}</td>
 	<td>{{strain.background}}</td>
 	<td>{{strain.selection}}</td>
-	<td>
+	<td width="100px">
 {% endautoescape %}
 <a href="{% url strain-detail strain.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
 {% if perms.reagents.change_strain %}
