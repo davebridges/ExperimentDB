@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block scripts %}
-	<script type="text/javascript" src="{{STATIC_URL}}js/dataTables-1.5/media/js/jquery.dataTables.js"</script>
-	<script type="text/javascript">
-	$(document).ready(function() { 
-		$(".sortable").dataTable( {
-			"bPaginate": false,
-			});
-		});
-    	</script>
-
+{% include "sortable_table_script.html" %}
 {% endblock scripts %}
 {% block head_title %}Protein List{% endblock %}
 {% block title %}Protein List{% endblock %}
