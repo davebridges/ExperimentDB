@@ -1,4 +1,4 @@
-from experimentdb.reagents.models import Antibody, Chemical, Cell, Construct, Primer, Strain, Selection, Species, AnimalStrain
+from experimentdb.reagents.models import Antibody, Chemical, Cell, Construct, Primer, Strain, Selection, Species, AnimalStrain, License
 from django.contrib import admin
 
 class AntibodyAdmin(admin.ModelAdmin):
@@ -36,3 +36,7 @@ admin.site.register(Selection, SelectionAdmin)
 class SpeciesAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Species, SpeciesAdmin)
+
+class LicenseAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(License, LicenseAdmin)
