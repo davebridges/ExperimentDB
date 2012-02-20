@@ -5,7 +5,7 @@
 {% block content %}
 <table>
 	<tr><th>Name</th><td>{{ license }}</td></tr>
-    {% if license.url %}<tr><th>Link</th><td>{{ license.url }}</td></tr>{% endif %}
+    {% if license.url %}<tr><th>Link</th><td><a href="{{ license.url }}">{{ license.url }}</a></td></tr>{% endif %}
     <tr><th>Acknowledgement</th><td>{{ license.acknowledgement|yesno:"Yes,No,Unknown" }}</td></tr>
     <tr><th>Distributable</th><td>{{ license.distributable|yesno:"Yes,No,Unknown" }}</td></tr>
     <tr><th>Use on Human Subjects</th><td>{{ license.human_subjects|yesno:"Yes,No,Unknown" }}</td></tr>

@@ -8,6 +8,7 @@ The models are :class:`~experimentdb.models.ReagentInfo`, which is an abstract s
 * :class:`~experimentdb.models.AnimalStrain`
 * :class:`~experimentdb.models.Chemical`
 * :class:`~experimentdb.models.Construct`
+* :class:`~experimentdb.models.License`
 
 There are also separate models for :class:`~experimentdb.models.License`, :class:`~experimentdb.models.Species` and :class:`~experimentdb.models.Selection` which are supplementary to these models.
 
