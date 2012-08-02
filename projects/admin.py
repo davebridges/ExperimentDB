@@ -1,5 +1,6 @@
-from experimentdb.projects.models import Project, SubProject
 from django.contrib import admin
+
+from projects.models import Project, SubProject
 
 class ProjectAdmin(admin.ModelAdmin):
 	pass

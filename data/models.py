@@ -1,9 +1,9 @@
 from django.db import models
 
-from experimentdb.projects.models import Project, SubProject
-from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain, AnimalStrain
-from experimentdb.external.models import Contact, Reference
+from projects.models import Project, SubProject
+from proteins.models import Protein
+from reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain, AnimalStrain
+from external.models import Contact, Reference
 
 class Protocol(models.Model):
     """Describes the protocol or protocols used to perform each experiment.  
@@ -37,24 +37,24 @@ class Experiment(models.Model):
     """Experiment objects are the central objects of this database.
     
     Experiment objects contain all details about an experiment including reagents, parameters, notes, results and data."""
-    project = models.ManyToManyField(Project, blank=True, null=True)
-    subproject = models.ManyToManyField(SubProject, blank=True, null=True)
+    project = models.ManyToManyField('projects.Project', blank=True, null=True)
+    subproject = models.ManyToManyField('projects.SubProject', blank=True, null=True)
     experimentID = models.SlugField(max_length=50, help_text="ie DB-2008-11-11-A", primary_key=True)
     experiment = models.CharField(max_length=100)
-    protocol = models.ManyToManyField(Protocol, blank=True, null=True)
+    protocol = models.ManyToManyField('Protocol', blank=True, null=True)
     assay = models.CharField(max_length=100, blank=True, null=True)
     experiment_date = models.DateField(help_text="Date Performed")
-    cellline = models.ManyToManyField(Cell, blank=True, null=True)
-    antibodies = models.ManyToManyField(Antibody, blank=True, null=True)
-    chemicals = models.ManyToManyField(Chemical, blank=True, null=True)
-    constructs = models.ManyToManyField(Construct, blank=True, null=True)
-    siRNA = models.ManyToManyField(Primer, blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
-    strain = models.ManyToManyField(Strain, blank=True, null=True)
-    animal_model = models.ManyToManyField(AnimalStrain, blank=True, null=True)
+    cellline = models.ManyToManyField('reagents.Cell', blank=True, null=True)
+    antibodies = models.ManyToManyField('reagents.Antibody', blank=True, null=True)
+    chemicals = models.ManyToManyField('reagents.Chemical', blank=True, null=True)
+    constructs = models.ManyToManyField('reagents.Construct', blank=True, null=True)
+    siRNA = models.ManyToManyField('reagents.Primer', blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
+    strain = models.ManyToManyField('reagents.Strain', blank=True, null=True)
+    animal_model = models.ManyToManyField('reagents.AnimalStrain', blank=True, null=True)
     animal_cohort = models.ManyToManyField('AnimalCohort', blank=True, null=True)
     comments = models.TextField(max_length=500, blank=True, null=True)
-    researcher = models.ManyToManyField(Contact, blank=True, null=True)
-    protein = models.ManyToManyField(Protein, blank=True, null=True)
+    researcher = models.ManyToManyField('external.Contact', blank=True, null=True)
+    protein = models.ManyToManyField('proteins.Protein', blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
     sample_storage = models.CharField(max_length=100, blank=True)
@@ -69,7 +69,7 @@ class Experiment(models.Model):
         ordering = ['-experiment_date']
 
 class Result(models.Model):
-	experiment = models.ForeignKey(Experiment)
+	experiment = models.ForeignKey('Experiment')
 	conclusions = models.TextField(max_length=500, blank=True)
 	#datafile = models.MultiFileField(upload_to='raw/%Y/%m/%d', blank=True)	
 	file1 = models.FileField(upload_to='raw/%Y/%m/%d', blank=True)
@@ -92,8 +92,8 @@ class Result(models.Model):
 
 class Sequencing(models.Model):
 	clone_name = models.CharField(max_length=15)
-	construct = models.ForeignKey(Construct)
-	primer = models.ForeignKey(Primer)
+	construct = models.ForeignKey('reagents.Construct')
+	primer = models.ForeignKey('reagents.Primer')
 	file = models.FileField(upload_to='sequencing/%Y/%m/%d', blank=True)
 	sequence = models.CharField(max_length=1500)
 	correct = models.BooleanField()
@@ -113,7 +113,7 @@ class AnimalCohort(models.Model):
     This model defines two required classes, name and a many to many field for  :class:`~experimentdb.reagents.models.AnimalStrain`, and optional notes, start and end dates.
     The unicode name of this is "name" field and the url is /cohort/id where id is the primary key."""
     name = models.CharField(max_length=50)
-    animal_model = models.ManyToManyField(AnimalStrain)
+    animal_model = models.ManyToManyField('reagents.AnimalStrain')
     date_start = models.DateField(blank=True, null=True, help_text="Cohort Start Date")
     date_end = models.DateField(blank=True, null=True, help_text="Cohort End Date")
     notes = models.TextField(blank=True, null=True)

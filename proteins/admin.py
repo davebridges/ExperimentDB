@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from experimentdb.proteins.models import ProteinFamily, Protein, Species, ProteinDetail
+from proteins.models import ProteinFamily, Protein, Species, ProteinDetail
 
 
 class ProteinFamilyAdmin(admin.ModelAdmin):

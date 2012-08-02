@@ -3,7 +3,7 @@
 See http://code.google.com/p/django-ajax-selects/ for information about configuring the ajax lookups.
 """
 
-from experimentdb.proteins.models import Protein
+from proteins.models import Protein
 
 from django.db.models import Q
 

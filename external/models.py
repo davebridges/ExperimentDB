@@ -51,7 +51,7 @@ class Reference(models.Model):
     current_lab = models.BooleanField(help_text="Is this paper from our group?")
     pubMedID = models.CharField(max_length=20, blank=True, null=True)
     doiLink = models.URLField(blank=True, null=True)
-    researchers = models.ManyToManyField(Contact, blank=True, null=True)
+    researchers = models.ManyToManyField('external.Contact', blank=True, null=True)
     public = models.BooleanField()
 
     def __unicode__(self):

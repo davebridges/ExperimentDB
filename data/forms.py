@@ -9,7 +9,7 @@ from django.forms.models import inlineformset_factory
 
 from ajax_select.fields import AutoCompleteSelectMultipleField, AutoCompleteSelectField
 
-from experimentdb.data.models import Experiment, Result
+from data.models import Experiment, Result
 
 class ExperimentForm(forms.ModelForm):
     """This is a modelform for the creation and editing of experimental data."""

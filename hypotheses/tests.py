@@ -8,9 +8,9 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from experimentdb.hypotheses.models import Hypothesis, Manipulation, Effect, Process, Context, Evidence
-from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Chemical
+from hypotheses.models import Hypothesis, Manipulation, Effect, Process, Context, Evidence
+from proteins.models import Protein
+from reagents.models import Chemical
 
 MODELS = [Hypothesis, Manipulation, Effect, Process, Context, Evidence]
 

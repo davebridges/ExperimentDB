@@ -1,10 +1,10 @@
-"""This package defines url routing for :class:`~experimentdb.models.License` objects.
+"""This package defines url routing for :class:`~reagents.models.License` objects.
 
 """
 
 from django.conf.urls.defaults import *
 
-from experimentdb.reagents import views
+from reagents import views
 
 urlpatterns = patterns('',
 	url(r'^(?P<pk>[\d]+)/?$', views.LicenseDetail.as_view(), name="license-detail"),

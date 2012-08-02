@@ -11,7 +11,7 @@ All views in this app start from a request of /experimentdb/cloning and direct t
 
 from django.conf.urls.defaults import *
 
-from experimentdb.cloning.models import Cloning, Mutagenesis
+from cloning.models import Cloning, Mutagenesis
 
 urlpatterns = patterns('',
 	url(r'^plasmid/new/$', 'django.views.generic.create_update.create_object', {

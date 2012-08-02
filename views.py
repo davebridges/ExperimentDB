@@ -1,11 +1,12 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.db.models import Q
-from experimentdb.projects.models import Project, SubProject
-from experimentdb.data.models import Protocol, Result, Experiment
-from experimentdb.reagents.models import Antibody, Chemical, Construct, Cell
-from experimentdb.proteins.models import Protein
-from experimentdb.external.models import Contact, Reference
+
+from projects.models import Project, SubProject
+from data.models import Protocol, Result, Experiment
+from reagents.models import Antibody, Chemical, Construct, Cell
+from proteins.models import Protein
+from external.models import Contact, Reference
 
 def index(request):
     return render_to_response('index.html')

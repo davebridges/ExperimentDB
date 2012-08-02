@@ -1,5 +1,6 @@
-from experimentdb.data.models import Protocol, Experiment, Result, Sequencing, AnimalCohort
 from django.contrib import admin
+
+from data.models import Protocol, Experiment, Result, Sequencing, AnimalCohort
 
 class ResultInline(admin.TabularInline):
 	model = Result

@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import permission_required
 
-from experimentdb.data.forms import ExperimentForm
+from data.forms import ExperimentForm
 
 urlpatterns = patterns('',
 	url(r'^new/$', 'django.views.generic.create_update.create_object', {

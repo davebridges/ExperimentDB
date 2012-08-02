@@ -1,14 +1,16 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
-from experimentdb.widgets import handlePopAdd
-from experimentdb.proteins.models import Protein
-from experimentdb.proteins.forms import ProteinFamilyForm
-from experimentdb.data.models import Experiment
-from experimentdb.reagents.models import Antibody, Construct, Primer
+from reagents.models import Antibody, Construct, Primer
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+
 from Bio import Entrez
 from Bio import SeqIO
-from django.template import RequestContext
+
+from widgets import handlePopAdd
+from proteins.models import Protein
+from proteins.forms import ProteinFamilyForm
+from data.models import Experiment
 
 @login_required
 def index(request):

@@ -10,8 +10,9 @@ Currently each of the following models has the default admin interface:
 * Context
 """
 
-from experimentdb.hypotheses.models import Hypothesis, Effect, Manipulation, Process, Entity, Evidence, CitationType, Context
 from django.contrib import admin
+
+from hypotheses.models import Hypothesis, Effect, Manipulation, Process, Entity, Evidence, CitationType, Context
 
 class HypothesisAdmin(admin.ModelAdmin):
 	pass

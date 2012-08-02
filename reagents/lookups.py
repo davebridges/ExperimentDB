@@ -3,7 +3,7 @@
 See http://code.google.com/p/django-ajax-selects/ for information about configuring the ajax lookups.
 """
 
-from experimentdb.reagents.models import Antibody, Construct, Chemical, Strain, Primer, Cell
+from reagents.models import Antibody, Construct, Chemical, Strain, Primer, Cell
 
 from django.db.models import Q
 

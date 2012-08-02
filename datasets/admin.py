@@ -1,5 +1,6 @@
 from django.contrib import admin
-from experimentdb.datasets.models import SGD_phenotypes, SGD_interactions, SGD_GeneNames, PI35P2_Binding_Screen_SP
+
+from datasets.models import SGD_phenotypes, SGD_interactions, SGD_GeneNames, PI35P2_Binding_Screen_SP
 
 class SGD_phenotypesAdmin(admin.ModelAdmin):
 	search_fields = ['Phenotype', 'Gene_Name', 'Chemical', 'Condition']

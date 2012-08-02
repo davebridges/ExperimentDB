@@ -3,7 +3,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
 
-from experimentdb.hypotheses.models import Process
+from hypotheses.models import Process
 
 @login_required
 def process_list(*args, **kwargs):

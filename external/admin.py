@@ -1,5 +1,6 @@
-from experimentdb.external.models import Reference, Contact, Vendor
 from django.contrib import admin
+
+from external.models import Reference, Contact, Vendor
 
 class ReferenceAdmin(admin.ModelAdmin):
 	pass

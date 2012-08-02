@@ -1,9 +1,10 @@
 from django.contrib import admin
-from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Antibody, Construct, Chemical, Cell, Purified_Protein
-from experimentdb.data.models import Experiment, Result, Protocol
-from experimentdb.projects.models import Project, SubProject
-from experimentdb.external.models import Contact, Reference
+
+from proteins.models import Protein
+from reagents.models import Antibody, Construct, Chemical, Cell, Purified_Protein
+from data.models import Experiment, Result, Protocol
+from projects.models import Project, SubProject
+from external.models import Contact, Reference
 
 class ProteinAdmin(admin.ModelAdmin):
     pass

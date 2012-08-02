@@ -3,7 +3,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
 
-from experimentdb.reagents.models import Primer
+from reagents.models import Primer
 
 @login_required
 def primer_list(*args, **kwargs):

@@ -3,7 +3,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
 
-from experimentdb.projects.models import Project
+from projects.models import Project
 
 @login_required
 def project_list(*args, **kwargs):

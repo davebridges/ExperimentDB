@@ -19,12 +19,6 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from experimentdb.reagents.models import Primer, Construct, Chemical, Species, Cell, Strain
-from experimentdb.proteins.models import Protein
-from experimentdb.data.models import Protocol, Experiment
-from experimentdb.external.models import Contact, Reference
-
-
 MANIPULATION_TYPE = (
 	('Treatment', 'Treatment'),
 	('Overexpression', 'Overexpression'),
@@ -107,9 +101,9 @@ class Manipulation(models.Model):
     type = models.CharField(max_length=25, choices=MANIPULATION_TYPE)
     time = models.TimeField(blank=True, null=True, help_text = "Enter if an incubation time is relevant.  Use format hour,min,sec with min and sec")
     concentration = models.CharField(max_length=25, blank=True, null=True, help_text = "Enter if a particular concentration or amount of chemical/protein is used")
-    chemical = models.ForeignKey(Chemical, blank=True, null=True, help_text="Enter a chemical or a protein_added when type is treatment")
-    protein_added = models.ForeignKey(Protein, blank=True, null=True, related_name="stimulating_protein", help_text="Use this or chemical when type is treatment.  This refers to a stimulating protein, not a protein being tested")	
-    protein = models.ForeignKey(Protein, blank=True, null=True, related_name="target_protein", help_text="Select the target of the knockdown/knockout/inhibition/overexpression.")
+    chemical = models.ForeignKey('reagents.Chemical', blank=True, null=True, help_text="Enter a chemical or a protein_added when type is treatment")
+    protein_added = models.ForeignKey('proteins.Protein', blank=True, null=True, related_name="stimulating_protein", help_text="Use this or chemical when type is treatment.  This refers to a stimulating protein, not a protein being tested")	
+    protein = models.ForeignKey('proteins.Protein', blank=True, null=True, related_name="target_protein", help_text="Select the target of the knockdown/knockout/inhibition/overexpression.")
 	
     def clean(self):
         """This validates that a treatment has a chemical or a protein_added."""
@@ -164,7 +158,7 @@ class Process(models.Model):
     name = models.CharField(max_length=100, help_text="A biological process, such as endocytosis")
     gene_ontology_id = models.CharField(blank = True, null= True, max_length=15, help_text="This is a gene ontology accesion number in the format GO:0046323 where the number can change.  Find an appropriate gene ontology id at http://amigo.geneontology.org/cgi-bin/amigo/search.cgi")
     definition = models.CharField(max_length=100, blank=True, null=True)
-    assay = models.ManyToManyField(Protocol, blank=True, null=True, help_text="The assay we use to monitor this process")
+    assay = models.ManyToManyField('data.Protocol', blank=True, null=True, help_text="The assay we use to monitor this process")
     slug = models.SlugField(max_length=100, blank=True, null=True, editable=False)
 
     def save(self):
@@ -194,8 +188,8 @@ class Entity(models.Model):
     A unique name is a required field, and either a protein or a chemical must be chosen."""
 	
     name = models.CharField(max_length=100, unique=True, help_text="The specific name for the entity, such as pSer 473 or Akt mRNA")
-    protein = models.ManyToManyField(Protein, blank=True, null=True, help_text="Select either a protein or a chemcial.")
-    chemical = models.ManyToManyField(Chemical, 
+    protein = models.ManyToManyField('proteins.Protein', blank=True, null=True, help_text="Select either a protein or a chemcial.")
+    chemical = models.ManyToManyField('reagents.Chemical', 
         blank=True, 
         null=True,
         verbose_name="Small Molecule",
@@ -227,9 +221,9 @@ class Context(models.Model):
 
     name = models.CharField(max_length=100, help_text="A description of the specific context of the hypotheses.")
     type = models.CharField(max_length=50, choices=CONTEXT_TYPE, help_text="A general category")
-    strain = models.ManyToManyField(Strain, blank=True, null=True, help_text="Strain specific context")
-    cell_line = models.ManyToManyField(Cell, blank=True, null=True, help_text="Cell line specific context")
-    species = models.ManyToManyField(Species, blank=True, null=True, help_text="Species specific context.")	
+    strain = models.ManyToManyField('reagents.Strain', blank=True, null=True, help_text="Strain specific context")
+    cell_line = models.ManyToManyField('reagents.Cell', blank=True, null=True, help_text="Cell line specific context")
+    species = models.ManyToManyField('reagents.Species', blank=True, null=True, help_text="Species specific context.")	
     uri = models.URLField(blank=True, null=True, help_text="If a specific URI is known for this context enter it here.  Search BioOntology at http://clkb.ncibi.org/browse.php for possible URI's")
     slug = models.SlugField(blank=True, null=True, editable=False)
 	
@@ -250,9 +244,9 @@ class Evidence(models.Model):
 
     evidence_type = models.CharField(max_length=50, choices = EVIDENCE_TYPE, help_text="Type of evidence")
     citation_type = models.ForeignKey('CitationType')
-    experiment = models.ForeignKey(Experiment, blank=True, null=True)	
-    paper = models.ForeignKey(Reference, blank=True, null=True)	
-    contact = models.ForeignKey(Contact, blank=True, null=True, help_text="Source of unpublished evidence.")
+    experiment = models.ForeignKey('data.Experiment', blank=True, null=True)	
+    paper = models.ForeignKey('external.Reference', blank=True, null=True)	
+    contact = models.ForeignKey('external.Contact', blank=True, null=True, help_text="Source of unpublished evidence.")
     figure = models.ImageField(upload_to='evidence/%Y/%m/%d', blank=True, null=True, help_text="Select a file to upload.")
     notes = models.TextField(max_length=500, blank=True, null=True, help_text="Description of evidence")
     public = models.BooleanField(help_text="Is the evidence to be made public?")

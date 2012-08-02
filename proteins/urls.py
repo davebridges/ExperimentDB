@@ -22,8 +22,8 @@ from django.views.generic.create_update import create_object, update_object, del
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic.list_detail import object_list, object_detail
 
-from experimentdb.proteins.forms import ProteinForm
-from experimentdb.proteins.models import ProteinFamily, ProteinDetail, Protein
+from proteins.forms import ProteinForm
+from proteins.models import ProteinFamily, ProteinDetail, Protein
 
 @login_required
 def restricted_object_list(*args, **kwargs):
@@ -101,6 +101,6 @@ urlpatterns = patterns('',
 		'login_required':True,
 		'post_delete_redirect': '/experimentdb/protein'
 		,}, name="protein-detail-delete"),			
-	url(r'^(?P<protein_id>[\d]+)/$', 'experimentdb.proteins.views.protein_isoform_detail', name='protein-isoform-detail'),
-	url(r'^(?P<protein>[-\w\d]+)/$', 'experimentdb.proteins.views.detail', name='protein-name-slug'),	
+	url(r'^(?P<protein_id>[\d]+)/$', 'proteins.views.protein_isoform_detail', name='protein-isoform-detail'),
+	url(r'^(?P<protein>[-\w\d]+)/$', 'proteins.views.detail', name='protein-name-slug'),	
 )

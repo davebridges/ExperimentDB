@@ -14,8 +14,6 @@ In the terms of this application, **ConstructShipments** are sent to **Recipient
 """
 
 from django.db import models
-from experimentdb.reagents.models import Construct
-from experimentdb.external.models import Contact
 
 INSTITUTE_TYPE = (
 	('academic', 'Academic'),
@@ -51,8 +49,8 @@ class Laboratory(models.Model):
     The laboratory may or may not also be a contact, as defined in the external app.
     """
     principal_investigator = models.CharField(max_length=25, help_text="Last Name of PI", verbose_name="Principal Investigator")
-    contact = models.ForeignKey(Contact, blank=True, null=True, help_text="If the laboratory is also a contact as defined in the external app")
-    institution = models.ForeignKey(Institution)
+    contact = models.ForeignKey('external.Contact', blank=True, null=True, help_text="If the laboratory is also a contact as defined in the external app")
+    institution = models.ForeignKey('Institution')
     department = models.CharField(max_length=100, blank=True, null=True)
     address_line_1 = models.CharField(max_length=100, blank=True, null=True)
     address_line_2 = models.CharField(max_length=100, blank=True, null=True)
@@ -85,7 +83,7 @@ class ConstructShipment(models.Model):
 
     The required fields are **constructs**, **ship_date**, **recipient** (who is defined as part of a Laboratory and in turn an Institution).
     """
-    constructs = models.ManyToManyField(Construct)
+    constructs = models.ManyToManyField('reagents.Construct')
     ship_date = models.DateField()
     recieved_date = models.DateField(blank=True, null=True)
     recipient = models.ForeignKey(Recipient)

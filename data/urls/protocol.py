@@ -9,7 +9,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
 
-from experimentdb.data.models import Protocol
+from data.models import Protocol
 
 @login_required
 def protocol_list(*args, **kwargs):

@@ -6,7 +6,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import permission_required, login_required
 
-from experimentdb.external.models import Contact
+from external.models import Contact
 
 @login_required
 def contact_list(*args, **kwargs):

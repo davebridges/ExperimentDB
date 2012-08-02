@@ -3,7 +3,7 @@ from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import login_required, permission_required
 
-from experimentdb.reagents.models import Antibody
+from reagents.models import Antibody
 
 @login_required
 def antibody_list(*args, **kwargs):
@@ -50,5 +50,5 @@ urlpatterns = patterns('',
 		'template_name': 'confirm_delete.html',
 		'post_delete_redirect': '/experimentdb/antibody'
 		,}, name="antibody-delete"),
-	url(r'^lookup/$', 'experimentdb.reagents.views.antibody_lookup', name="antibody-lookup")
+	url(r'^lookup/$', 'reagents.views.antibody_lookup', name="antibody-lookup")
 )

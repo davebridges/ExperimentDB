@@ -1,5 +1,6 @@
 from django.contrib import admin
-from experimentdb.cloning.models import Cloning, Mutagenesis
+
+from cloning.models import Cloning, Mutagenesis
 
 class CloningAdmin(admin.ModelAdmin):
 	fieldsets = (

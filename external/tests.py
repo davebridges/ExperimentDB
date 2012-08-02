@@ -16,7 +16,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from experimentdb.external.models import Reference, Contact, Vendor
+from external.models import Reference, Contact, Vendor
 
 
 MODELS = [Contact, Vendor, Reference]

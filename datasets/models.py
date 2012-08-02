@@ -36,7 +36,7 @@ class SGD_phenotypes(models.Model):
 #download updated phenotypes ftp://genome-ftp.stanford.edu/pub/yeast/literature_curation/phenotype_data.tab
 	Feature_Name = models.CharField(max_length=20, help_text="The feature name of the gene") 
 	Feature_Type = models.CharField(max_length=50, help_text="The feature type of the gene")
-	Gene_Name = models.ForeignKey(SGD_GeneNames, blank=True, help_text="The standard name of the gene")
+	Gene_Name = models.ForeignKey('SGD_GeneNames', blank=True, help_text="The standard name of the gene")
 	SGDID = models.CharField(max_length= 15, help_text="The SGDID of the gene")
 	Reference = models.CharField(max_length= 50, help_text ="PMID: #### SGD_REF: #### (separated by pipe)(one reference per row")
 	Experiment_Type  = models.CharField(max_length=250, help_text="The method used to detect and analyze the phenotype")
@@ -55,9 +55,9 @@ class SGD_phenotypes(models.Model):
 
 class SGD_interactions(models.Model):
 	Feature_Name_Bait = models.CharField(max_length=50, help_text="The feature name of the gene used as the bait")
-	Standard_Gene_Name_Bait = models.ForeignKey(SGD_GeneNames, help_text="The standard gene name of the gene used as the bait", blank=True, related_name = 'Bait_GeneName')
+	Standard_Gene_Name_Bait = models.ForeignKey('SGD_GeneNames', help_text="The standard gene name of the gene used as the bait", blank=True, related_name = 'Bait_GeneName')
 	Feature_Name_Hit = models.CharField(max_length=50, help_text="The feature name of the gene that interacts with the bait")
-	Standard_Gene_Name_Hit = models.ForeignKey(SGD_GeneNames, help_text="The standard gene name of the gene that interacts with the bait", blank=True, related_name='Hit_GeneName')
+	Standard_Gene_Name_Hit = models.ForeignKey('SGD_GeneNames', help_text="The standard gene name of the gene that interacts with the bait", blank=True, related_name='Hit_GeneName')
 	Experiment_Type = models.CharField(max_length=50, help_text="A description of the experimental used to identify the interaction")
 	Genetic_or_Physical_Interaction = models.CharField(max_length=100, help_text="Indicates whether the experimental method is a genetic or physical interaction")
 	Source = models.CharField(max_length=50, help_text="Lists the database source for the interaction")
@@ -73,7 +73,7 @@ class SGD_interactions(models.Model):
 
 		
 class PI35P2_Binding_Screen_SP(models.Model):
-	Gene_Name = models.ForeignKey(SGD_GeneNames, related_name="PI3PBP_Gene_Name")
+	Gene_Name = models.ForeignKey('SGD_GeneNames', related_name="PI3PBP_Gene_Name")
 	Gain_of_Function = models.IntegerField(choices=STRENGTH_CHOICES)
 	Loss_of_Function = models.IntegerField(choices=EFFECT_CHOICES, blank=True, null=True)
 	Candidate = models.CharField(max_length=50, blank=True, null=True)

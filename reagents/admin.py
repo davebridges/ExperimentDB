@@ -1,5 +1,6 @@
-from experimentdb.reagents.models import Antibody, Chemical, Cell, Construct, Primer, Strain, Selection, Species, AnimalStrain, License
 from django.contrib import admin
+
+from reagents.models import Antibody, Chemical, Cell, Construct, Primer, Strain, Selection, Species, AnimalStrain, License
 
 class AntibodyAdmin(admin.ModelAdmin):
     pass

@@ -11,9 +11,9 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from experimentdb.sharing.models import Institution, Laboratory, Recipient, ConstructShipment
-from experimentdb.reagents.models import Construct
-from experimentdb.external.models import Contact
+from sharing.models import Institution, Laboratory, Recipient, ConstructShipment
+from reagents.models import Construct
+from external.models import Contact
 
 MODELS = [Institution, Laboratory, Recipient, ConstructShipment]
 

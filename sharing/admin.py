@@ -1,5 +1,6 @@
-from experimentdb.sharing.models import Institution, Laboratory, Recipient, ConstructShipment
 from django.contrib import admin
+
+from sharing.models import Institution, Laboratory, Recipient, ConstructShipment
 
 class InstitutionAdmin(admin.ModelAdmin):
 	pass

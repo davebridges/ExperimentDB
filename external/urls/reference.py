@@ -6,7 +6,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.contrib.auth.decorators import permission_required, login_required
 
-from experimentdb.external.models import Reference
+from external.models import Reference
 
 @login_required
 def reference_list(*args, **kwargs):

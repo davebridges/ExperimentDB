@@ -68,7 +68,7 @@ TEMPLATE_CONTEXT_PROCESSORS  = (
     'django.core.context_processors.static',
 )
 
-ROOT_URLCONF = 'experimentdb.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -88,15 +88,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.staticfiles',
-    'experimentdb.projects',
-    'experimentdb.proteins',
-    'experimentdb.reagents',
-    'experimentdb.external',
-    'experimentdb.cloning',
-    'experimentdb.datasets',
-    'experimentdb.sharing',
-    'experimentdb.data',
-    'experimentdb.hypotheses',
+    'projects',
+    'proteins',
+    'reagents',
+    'external',
+    'cloning',
+    'datasets',
+    'sharing',
+    'data',
+    'hypotheses',
     'ajax_select',
     'south',
     'PIL'

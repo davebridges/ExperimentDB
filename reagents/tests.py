@@ -7,9 +7,9 @@ from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
 
-from experimentdb.reagents.models import Primer, Cell, Antibody, Construct, Chemical, Strain, Species, Selection, License
-from experimentdb.external.models import Reference, Contact, Vendor
-from experimentdb.proteins.models import Protein
+from reagents.models import Primer, Cell, Antibody, Construct, Chemical, Strain, Species, Selection, License
+from external.models import Reference, Contact, Vendor
+from proteins.models import Protein
 
 
 MODELS = [Primer, Cell, Antibody, Construct, Chemical, Species, Selection, License]

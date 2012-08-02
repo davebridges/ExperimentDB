@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView, UpdateView
 
-from experimentdb.reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License
+from reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License
 
 @login_required
 def index(request):

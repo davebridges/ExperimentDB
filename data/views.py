@@ -4,15 +4,16 @@ This module will generate index and detail views for experiments and protocols a
 
 from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
-from experimentdb.data.models import Experiment, Result, Protocol
-from experimentdb.data.forms import ResultForm, ResultFormSet, ExperimentForm
-from experimentdb.proteins.models import Protein
-from experimentdb.reagents.models import Chemical, Antibody, Cell
-from experimentdb.projects.models import Project, SubProject
-from experimentdb.external.models import Reference, Contact
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+
+from data.models import Experiment, Result, Protocol
+from data.forms import ResultForm, ResultFormSet, ExperimentForm
+from proteins.models import Protein
+from reagents.models import Chemical, Antibody, Cell
+from projects.models import Project, SubProject
+from external.models import Reference, Contact
 
 
 @login_required

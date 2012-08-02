@@ -5,7 +5,7 @@ The two models are for projects and subprojects, with the latter having a foreig
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from experimentdb.external.models import Contact, Reference
+from external.models import Contact, Reference
 
 class Project(models.Model):
     """This defines the major project model.
@@ -16,8 +16,8 @@ class Project(models.Model):
     comments = models.TextField(max_length=250, blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
-    collaborators = models.ManyToManyField(Contact, blank=True, null=True)
-    papers = models.ManyToManyField(Reference, blank=True, null=True)
+    collaborators = models.ManyToManyField('external.Contact', blank=True, null=True)
+    papers = models.ManyToManyField('external.Reference', blank=True, null=True)
 
     def __unicode__(self):
         return u'%s ' % self.project
@@ -37,14 +37,14 @@ class SubProject(models.Model):
     """This model defines a subproject.
 
     These projects are generally offshoots of major projectsand are paper or thesis sized projects."""
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey('Project')
     subproject = models.CharField(max_length=50)
     project_slug = models.SlugField(max_length=15, primary_key=True) #this field is slugified on save
     comments = models.TextField(max_length=250, blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
-    collaborators = models.ManyToManyField(Contact, blank=True, null=True)
-    papers = models.ManyToManyField(Reference, blank=True, null=True)
+    collaborators = models.ManyToManyField('external.Contact', blank=True, null=True)
+    papers = models.ManyToManyField('external.Reference', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = "Sub-Projects"

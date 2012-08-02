@@ -18,12 +18,6 @@ The :class:`~experimentdb.models.ReagentInfo class provides generic fields to al
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from experimentdb.proteins.models import Protein
-from experimentdb.external.models import Contact, Reference, Vendor
-
-
-
-
 SPECIES = (
 	('rabbit', 'rabbit'),
 	('mouse', 'mouse'),
@@ -66,12 +60,12 @@ class ReagentInfo(models.Model):
     location = models.CharField(max_length=25, choices=LOCATIONS, blank=True, null=True, default="-20")
     box = models.CharField(max_length=50, blank=True, null=True)
     source = models.CharField(max_length=25, blank=True, null=True)
-    researcher = models.ManyToManyField(Contact, blank=True, null=True, related_name="%(class)s_researcher")
-    vendor = models.ForeignKey(Vendor, blank=True, null=True, related_name="%(class)s_vendor")
-    protein = models.ManyToManyField(Protein, null=True, blank=True)
+    researcher = models.ManyToManyField('external.Contact', blank=True, null=True, related_name="%(class)s_researcher")
+    vendor = models.ForeignKey('external.Vendor', blank=True, null=True, related_name="%(class)s_vendor")
+    protein = models.ManyToManyField('proteins.Protein', null=True, blank=True)
     license = models.ForeignKey('License', null=True, blank=True, help_text="Terms of Use")
     notes = models.TextField(max_length=250, blank=True, null=True)
-    reference = models.ManyToManyField(Reference, blank=True, null=True)
+    reference = models.ManyToManyField('external.Reference', blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
 
@@ -237,8 +231,8 @@ class Strain(ReagentInfo):
     The only required field is **name**.
     This is a subclass of ReagentInfo abstract class
     '''
-    background = models.ForeignKey('Strain', blank=True, null=True)
-    plasmids = models.ManyToManyField('Construct', blank=True, null=True)
+    background = models.ForeignKey('reagents.Strain', blank=True, null=True)
+    plasmids = models.ManyToManyField('reagents.Construct', blank=True, null=True)
     selection = models.ForeignKey('Selection', blank=True, null=True)
     species = models.CharField(max_length=50, choices=SPECIES, blank=True, null=True, default='brewers yeast')
     strain_species = models.ForeignKey('Species', blank=True, null=True)
@@ -261,7 +255,7 @@ class AnimalStrain(ReagentInfo):
     This is a subclass of ReagentInfo abstract class
     '''
     background = models.CharField(max_length=100, blank=True, null=True)
-    strain_species = models.ForeignKey('Species', blank=True, null=True)
+    strain_species = models.ForeignKey('reagents.Species', blank=True, null=True)
     url = models.URLField(verify_exists=False, blank=True, null=True, help_text="Link to a URI the strain, for example from Jackson Labs or another online database")
     
     def save(self):
