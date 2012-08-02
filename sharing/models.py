@@ -73,7 +73,7 @@ class Recipient(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     initials = models.CharField(max_length=25, blank=True, null=True)
-    lab = models.ForeignKey(Laboratory)
+    lab = models.ForeignKey('Laboratory')
 
     def __unicode__(self):
         return u'%s %s (%s)' %(self.first_name, self.last_name, self.lab)
@@ -86,7 +86,7 @@ class ConstructShipment(models.Model):
     constructs = models.ManyToManyField('reagents.Construct')
     ship_date = models.DateField()
     recieved_date = models.DateField(blank=True, null=True)
-    recipient = models.ForeignKey(Recipient)
+    recipient = models.ForeignKey('Recipient')
     notes = models.TextField(max_length=500, blank=True, null=True, help_text="Paste in the request details here.")
 
     def __unicode__(self):
