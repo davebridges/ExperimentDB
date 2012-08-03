@@ -68,7 +68,7 @@ TEMPLATE_CONTEXT_PROCESSORS  = (
     'django.core.context_processors.static',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'experimentdb.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
