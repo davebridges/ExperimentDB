@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import *
 from django.views.generic.list_detail import object_list, object_detail
 from django.views.generic.create_update import create_object, update_object, delete_object
