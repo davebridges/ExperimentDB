@@ -1,6 +1,8 @@
 *.py[co]
 
 localsettings.py
+#any sqlite database files
+*.db
 
 # Packages
 *.egg
