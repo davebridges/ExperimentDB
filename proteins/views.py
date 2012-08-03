@@ -7,7 +7,7 @@ from django.template import RequestContext
 from Bio import Entrez
 from Bio import SeqIO
 
-from widgets import handlePopAdd
+from experimentdb.widgets import handlePopAdd
 from proteins.models import Protein
 from proteins.forms import ProteinFamilyForm
 from data.models import Experiment

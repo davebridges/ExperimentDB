@@ -1,7 +1,7 @@
 from django import forms
 
 from proteins.models import Protein, ProteinFamily
-from widgets import SelectWithPop
+from experimentdb.widgets import SelectWithPop
 
 
 class ProteinForm(forms.ModelForm):
