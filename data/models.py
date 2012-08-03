@@ -1,10 +1,5 @@
 from django.db import models
 
-from projects.models import Project, SubProject
-from proteins.models import Protein
-from reagents.models import Construct, Antibody, Cell, Primer, Chemical, Strain, AnimalStrain
-from external.models import Contact, Reference
-
 class Protocol(models.Model):
     """Describes the protocol or protocols used to perform each experiment.  
     

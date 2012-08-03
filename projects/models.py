@@ -5,8 +5,6 @@ The two models are for projects and subprojects, with the latter having a foreig
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from external.models import Contact, Reference
-
 class Project(models.Model):
     """This defines the major project model.
 
