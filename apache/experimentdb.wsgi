@@ -1,7 +1,7 @@
 import os
 import sys
 
-path = 'C:\Documents and Settings\davebrid\My Documents\SRC'
+path = 'C:\Documents and Settings\davebrid\My Documents\GitHub\ExperimentDB'
 
 if path not in sys.path:
     sys.path.append(path)
