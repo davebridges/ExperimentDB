@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
 	(r'^comments?/', include('django.contrib.comments.urls')),
-	(r'^search/$', 'experimemtdb.views.search'),
+	#(r'^search/$', 'views.search'),
 	(r'^ajax_select/', include('ajax_select.urls')),
 	(r'^add/protein_family/?$', 'proteins.views.newProteinFamily'),
 
@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 	url(r'^projects?/', include('projects.urls.project')),
 	url(r'^subprojects?/', include('projects.urls.subproject')),
 
-	url(r'^hypotheses/', include('hypotheses.urls.hypotheses')),
+	url(r'^hypotheses/', include('hypotheses.urls.hypothesis')),
 	url(r'^process/', include('hypotheses.urls.process')),
 	url(r'^manipulation/', include('hypotheses.urls.manipulation')),    
 
