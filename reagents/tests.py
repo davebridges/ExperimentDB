@@ -401,6 +401,8 @@ class LicenseModelTests(TestCase):
         
 class LicenseViewTests(TestCase):
 
+    fixtures = ['test_license',]
+
     def setUp(self):
         """Instantiate the test client.  Creates a test user."""
         self.client = Client()
@@ -423,7 +425,7 @@ class LicenseViewTests(TestCase):
 
         This view uses a user with superuser permissions so does not test the permission levels for this view."""
         
-        test_response = self.client.get('/license/1/')
+        test_response = self.client.get('/license/1')
         self.assertEqual(test_response.status_code, 200)
         self.assertTrue('license' in test_response.context)        
         self.assertTemplateUsed(test_response, 'license_detail.html')
@@ -431,7 +433,7 @@ class LicenseViewTests(TestCase):
         self.assertEqual(test_response.context['license'].name, u'Fixture License')
 
         #verifies that a non-existent object returns a 404 error.
-        null_response = self.client.get('/license/2/')
+        null_response = self.client.get('/license/2')
         self.assertEqual(null_response.status_code, 404)  
 
     def test_license_new(self):
@@ -449,7 +451,7 @@ class LicenseViewTests(TestCase):
 
         This view uses a user with superuser permissions so does not test the permission levels for this view."""
         
-        test_response = self.client.get('/license/1/edit')
+        test_response = self.client.get('/license/1/edit/')
         self.assertEqual(test_response.status_code, 200)
         self.assertTrue('license' in test_response.context)        
         self.assertTemplateUsed(test_response, 'license_form.html')
