@@ -39,7 +39,7 @@
 	<li><a href="{% url protein-list %}" target="_self">Proteins</a></li>
 	<li><a href="{% url reagent-list %}" target="_self">Reagents</a></li>
 	<li><a href="{% url protocol-list %}" target="_self">Protocols</a></li>
-	{% if user.is_staff %}<li><a href="{% url admin:home %}" target="_self">Admin</a></li>{% endif %}
+	{% if user.is_staff %}<li><a href="{% url admin:index %}" target="_self">Admin</a></li>{% endif %}
 	<li><a href="{% url search %}" target="_self">Search</a></li>
 	</ul>
 </div>
