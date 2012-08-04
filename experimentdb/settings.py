@@ -7,10 +7,6 @@ STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
-
 try:
     from localsettings import *
 except ImportError:
