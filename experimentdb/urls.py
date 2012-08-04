@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-from datasets.models import SGD_GeneNames, SGD_phenotypes, PI35P2_Binding_Screen_SP
+from datasets.models import SGD_GeneNames, SGD_phenotypes
 
 urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
