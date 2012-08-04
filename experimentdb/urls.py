@@ -51,6 +51,6 @@ urlpatterns = patterns('',
     (r'^contacts?/', include('external.urls.contact')),
     (r'^references?/', include('external.urls.reference')),
     
-    url(r'^', views.index, name='home'),
+    url(r'^$', views.index, name='home'),
 
 	)
