@@ -43,8 +43,15 @@ class VendorModelTests(TestCase):
         self.assertEquals(test_vendor.__unicode__(), "test vendor")
 
     def test_vendor_absolute_url(self):
+        '''This tests that the absolute url for a vendor is set correctly.'''
         test_vendor = Vendor.objects.get(pk=1)
         self.assertEquals(test_vendor.get_absolute_url(), "/companies/1/")
+        
+    def test_vendor_slugify(self):
+        '''This tests that the vendor name is accurately converted to a slugfield upon saving.''' 
+        test_vendor = Vendor(company = "test vendor")
+        test_vendor.save()
+        self.assertEquals(test_vendor.company_slug, "test-vendor")           
 
 
 class ReferenceModelTests(TestCase):
