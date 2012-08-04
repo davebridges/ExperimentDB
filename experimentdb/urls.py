@@ -3,12 +3,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 from datasets.models import SGD_GeneNames, SGD_phenotypes
+from experimentdb import views
 
 urlpatterns = patterns('',
 	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
 	(r'^comments?/', include('django.contrib.comments.urls')),
-	#(r'^search/$', 'views.search'),
+	url(r'^search/$', views.search, name='search'),
 	(r'^ajax_select/', include('ajax_select.urls')),
 	(r'^add/protein_family/?$', 'proteins.views.newProteinFamily'),
 
