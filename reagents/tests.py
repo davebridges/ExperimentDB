@@ -205,7 +205,7 @@ class CellModelTests(TestCase):
 class ChemicalModelTests(TestCase):
     """Tests the model attributes of Chemical objects contained in the reagents app."""
 
-    fixtures = ['test_external', 'test_publicaiton','test_protein']
+    fixtures = ['test_external', 'test_publication','test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
