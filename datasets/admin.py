@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from datasets.models import SGD_phenotypes, SGD_interactions, SGD_GeneNames, PI35P2_Binding_Screen_SP
+from datasets.models import SGD_phenotypes, SGD_interactions, SGD_GeneNames
 
 class SGD_phenotypesAdmin(admin.ModelAdmin):
 	search_fields = ['Phenotype', 'Gene_Name', 'Chemical', 'Condition']
@@ -17,10 +17,4 @@ class SGD_GeneNamesAdmin(admin.ModelAdmin):
 	search_fields = ['Locus_name', 'Other_name', 'Description', 'ORF_name', 'Phenotype', 'Gene_product']
 	list_display = ('Locus_name', 'Other_name', 'Description', 'Gene_product')
 admin.site.register(SGD_GeneNames, SGD_GeneNamesAdmin)
-
-class PI35P2_Binding_Screen_SPAdmin(admin.ModelAdmin):
-	list_display = ('Gene_Name', 'Gain_of_Function', 'Loss_of_Function', 'Candidate', 'Comments')
-	search_fields = ('Gene_Name',)
-	list_filter = ('Gain_of_Function', 'Loss_of_Function')
-admin.site.register(PI35P2_Binding_Screen_SP, PI35P2_Binding_Screen_SPAdmin)
 
