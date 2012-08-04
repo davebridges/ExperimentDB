@@ -53,7 +53,6 @@ urlpatterns = patterns('',
 		,}, name="protocol-edit"),
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_protocol, {
 		'model': Protocol, 
-		'login_required':True,
-		'post_delete_redirect': reverse('protocol-list')
+		'login_required':True
 		,}, name="protocol-delete"),
 )
