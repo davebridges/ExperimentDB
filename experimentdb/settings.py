@@ -40,7 +40,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware'
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'debug_toolbar.middleware.DebugToolbarMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS  = (
@@ -80,9 +81,11 @@ INSTALLED_APPS = (
     'hypotheses',
     'ajax_select',
     'south',
-    'PIL'
+    'PIL',
+	'debug_toolbar',
 )
 
+INTERNAL_IPS = ('127.0.0.1',)
 
 AJAX_LOOKUP_CHANNELS = {
 	'antibody' : ('experimentdb.reagents.lookups', 'AntibodyLookup'),
