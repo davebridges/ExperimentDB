@@ -20,10 +20,15 @@ class Protocol(models.Model):
     public = models.BooleanField()
     published = models.BooleanField()
     inactive = models.BooleanField()
+
     def __unicode__(self):
         return u'%s ' % self.protocol
+
+    @models.permalink
     def get_absolute_url(self):
-        return "/experimentdb/protocol/%i/" % self.id
+        """The absolute url for a protocol is defined by the protocol-detail view."""
+        return ('protocol-detail', [str(self.id)]) 
+
 	class Meta:
 		ordering = ['-protocol']
 
@@ -53,12 +58,16 @@ class Experiment(models.Model):
     public = models.BooleanField()
     published = models.BooleanField()
     sample_storage = models.CharField(max_length=100, blank=True)
+
     def __unicode__(self):
         """The unicode representation of an experiment object is the experiment on assay; date."""
         return u'%s on %s; %s' % (self.experiment, self.assay, self.experiment_date)
+
+    @models.permalink
     def get_absolute_url(self):
-        """The default url for an experiment is /experimentdb/experiment/experimentID."""
-        return "/experimentdb/experiment/%s/" % self.experimentID
+        """The default url for an experiment is defined for the experiment-detail."""
+        return ('experiment-detail', [str(self.experimentID)]) 
+
     class Meta:
         """The default ordering for experiments is in reverse of the experiment_date."""
         ordering = ['-experiment_date']

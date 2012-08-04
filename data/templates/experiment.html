@@ -70,7 +70,7 @@
 	
 	<h3><a href="#">Proteins</a></h3>
 	<div id="Proteins">
-	 <ul>{% for protein in experiment.protein.all %}<li><a href="/{{protein.get_absolute_url}}">{{protein}}</a></li>{% endfor %}</ul>
+	 <ul>{% for protein in experiment.protein.all %}<li><a href="{{protein.get_absolute_url}}">{{protein}}</a></li>{% endfor %}</ul>
 	</div>
 
 	<h3><a href="#">Results and Conclusions</a></h3>
@@ -81,7 +81,7 @@
 	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=200 /></a>{% endif %}
 	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" rel="figures" ><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=200 /></a>{% endif %}
 	{% endfor %}
-	<p>Add new result <a href="/experimentdb/experiment/{{experiment.experimentID}}/result/new"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
+	<p>Add new result <a href="{% url result-new experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
 
 	<h3><a href="#">Reagents</a></h3>
 	<div id="reagents">

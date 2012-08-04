@@ -1,6 +1,6 @@
 """This module provides url direction for protocol pages.
 
-Generic pages are used for all views.  Pages are located at /experimentdb/protocol/##/(new/edit/delete).
+Generic pages are used for all views.  Pages are located at **/protocol/<id>/(new/edit/delete)**.
 Restrictions are placed on list/detail pages for login and appropriate permissions for add/edit/delete pages.
 """
 
@@ -54,6 +54,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_protocol, {
 		'model': Protocol, 
 		'login_required':True,
-		'post_delete_redirect': '/experimentdb/protocol'
+		'post_delete_redirect': reverse('protocol-list')
 		,}, name="protocol-delete"),
 )
