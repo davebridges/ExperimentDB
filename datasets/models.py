@@ -15,19 +15,25 @@ EFFECT_CHOICES = (
 	
 
 class SGD_GeneNames(models.Model):
-	Locus_name = models.CharField(max_length=50, primary_key=True)
-	Other_name = models.CharField(max_length=50)
-	Description = models.CharField(max_length=250, blank=True)
-	Gene_product = models.CharField(max_length=100, blank=True)
-	Phenotype = models.TextField(max_length=500, blank=True)
-	ORF_name = models.CharField(max_length=50)
-	SGDID = models.CharField(max_length=25) 
-	class Meta:
-		verbose_name_plural = "SGD Gene Names"
-	def __unicode__(self):
-		return u'%s' % self.Locus_name
-	def get_absolute_url(self):
-		return "/sgd/%s/" % self.Locus_name
+    Locus_name = models.CharField(max_length=50, primary_key=True)
+    Other_name = models.CharField(max_length=50)
+    Description = models.CharField(max_length=250, blank=True)
+    Gene_product = models.CharField(max_length=100, blank=True)
+    Phenotype = models.TextField(max_length=500, blank=True)
+    ORF_name = models.CharField(max_length=50)
+    SGDID = models.CharField(max_length=25) 
+
+    class Meta:
+        verbose_name_plural = "SGD Gene Names"
+
+    def __unicode__(self):
+        '''The unicode representation of a SGD_GeneName is the Locus_name.'''
+        return u'%s' % self.Locus_name	
+
+    @models.permalink
+    def get_absolute_url(self):
+        '''the absolute url of a SGD_GeneName is defined by sgd-gene-detail.'''
+        return ('sgd-gene-detail', [str(self.Locus_name)]) 			
 
 class SGD_phenotypes(models.Model):
 #schema is described in http://wiki.yeastgenome.org/index.php/Specification_for_New_Interactions_and_Phenotype_FTP_files
