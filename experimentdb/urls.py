@@ -66,10 +66,10 @@ urlpatterns = patterns('',
 	(r'^shipped_items?/', include('sharing.urls')),
 	(r'^shipped?/', include('sharing.urls')),
 
-        (r'^vendors?/', include('external.urls.vendor')),
-        (r'^company/', include('external.urls.vendor')),
-        (r'^companies/', include('external.urls.vendor')),
-        (r'^contacts?/', include('external.urls.contact')),
-        (r'^references?/', include('external.urls.reference')),
+    (r'^vendors?/', include('external.urls.vendor')),
+    (r'^company/', include('external.urls.vendor')),
+    (r'^companies/', include('external.urls.vendor')),
+    (r'^contacts?/', include('external.urls.contact')),
+    (r'^references?/', include('external.urls.reference')),
 
 	)
