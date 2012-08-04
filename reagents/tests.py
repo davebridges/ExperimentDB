@@ -17,7 +17,7 @@ MODELS = [Primer, Cell, Antibody, Construct, Chemical, Species, Selection, Licen
 class PrimerModelTests(TestCase):
     """Tests the model attributes of Primer objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external', 'test_publication', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -64,7 +64,7 @@ class PrimerModelTests(TestCase):
 class AntibodyModelTests(TestCase):
     """Tests the model attributes of Antibody objects contained in the reagents app."""
 
-    fixtures = ['test_external', 'test_species', 'test_protein']
+    fixtures = ['test_external', 'test_publication', 'test_species', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -112,7 +112,7 @@ class AntibodyModelTests(TestCase):
 class ConstructModelTests(TestCase):
     """Tests the model attributes of Construct objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_selection']
+    fixtures = ['test_external','test_publication', 'test_protein', 'test_selection']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -158,7 +158,7 @@ class ConstructModelTests(TestCase):
 class CellModelTests(TestCase):
     """Tests the model attributes of Cell objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_species']
+    fixtures = ['test_external', 'test_publication', 'test_protein', 'test_species']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -205,7 +205,7 @@ class CellModelTests(TestCase):
 class ChemicalModelTests(TestCase):
     """Tests the model attributes of Chemical objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external', 'test_publicaiton','test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -250,7 +250,7 @@ class ChemicalModelTests(TestCase):
 class StrainModelTests(TestCase):
     """Tests the model attributes of Strain objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_selection', 'test_strain', 'test_construct', 'test_species']
+    fixtures = ['test_external','test_publication', 'test_protein', 'test_selection', 'test_strain', 'test_construct', 'test_species']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -370,7 +370,7 @@ class SelectionModelTests(TestCase):
 class LicenseModelTests(TestCase):
     """Tests the model attributes of :class:`~experimentdb.models.License` objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external','test_publication', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
