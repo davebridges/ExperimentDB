@@ -49,11 +49,13 @@ class Cloning(models.Model):
         return ('cloning_detail', [str(self.id)])
 
 class Mutagenesis(models.Model):
-    """This model contains data describing the generation of muationns in clones"""
-    construct = models.ForeignKey('reagents.Construct', related_name="mutant")
+    """This model contains data describing the generation of muationns in clones.
+    
+    The required fields are construct, mutation, template and method."""
+    construct = models.ForeignKey('reagents.Construct', related_name="mutant", help_text="Finished Construct")
     mutation = models.CharField(max_length=25)
-    template = models.ForeignKey('reagents.Construct', related_name="template")
-    date_completed = models.DateField()
+    template = models.ForeignKey('reagents.Construct', related_name="template", help_text="Initial Template Construct")
+    date_completed = models.DateField(blank=True, null=True)
     method = models.CharField(max_length=50, default = "Stratagene QuickChange")
     protocol = models.ForeignKey('data.Protocol', blank=True, null=True)
     sense_primer = models.ForeignKey('reagents.Primer', blank=True, null=True, related_name="sense_primer")
@@ -61,10 +63,16 @@ class Mutagenesis(models.Model):
     colonies = models.IntegerField(blank=True, null=True)
     sequencing = models.ManyToManyField('data.Sequencing', blank=True, null=True)
     researcher = models.ManyToManyField('external.Contact', blank=True, null=True)
-    notes = models.TextField(max_length=250, blank=True)
+    notes = models.TextField(max_length=250, blank=True, null=True)
+
     class Meta:
         verbose_name_plural = "Mutageneses"
+
     def __unicode__(self):
-        return u'%s ' % self.construct
+        '''The unicode name for a mutagenesis is the final construct with the word mutageneis.'''
+        return u'%s mutagenesis' % self.construct
+
+    @models.permalink
     def get_absolute_url(self):
-        return "experimentdb/clones/mutagenesis/%i/" % self.id
+        '''The permalink for a mutagenesis object is the primary key linked to **/clones/mutagenesis/<ID>**'''
+        return ('mutagenesis_detail', [str(self.id)])
