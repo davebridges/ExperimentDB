@@ -3,10 +3,16 @@
 
 from django.views.generic import DetailView
 
-from cloning.models import Cloning
+from cloning.models import Cloning, Mutagenesis
 
-class CloningDetail(DetailView):
+class CloningDetailView(DetailView):
     '''This view is for seeing the details of a Cloning object.'''
     
     model = Cloning
     context_object_name = 'cloning'
+    
+class MutagenesisDetailView(DetailView):
+    '''This view is for seeing the details of a Cloning object.'''
+    
+    model = Mutagenesis
+    context_object_name = 'mutagenesis'    

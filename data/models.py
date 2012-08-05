@@ -1,22 +1,25 @@
 from django.db import models
+from django.template.defaultfilters import slugify
+
+from external.models import Reference
 
 class Protocol(models.Model):
     """Describes the protocol or protocols used to perform each experiment.  
     
     This model stores information about the protocol used for an experiment.    
-
+    The only required field is the protocol.
     An experiment may have several protocols attached to it.  For example, one could culture and transfect cells, then generate lysates then do some western blots.
     
     Since migrating to a mediawiki based protocol storage system, the wiki_page attribute indicates the protocol wiki page.  In this model, the **protocol_revision** attribute indicates the particular revision of the protocol used for that particular experiment.  In this way a permalink can be generated to the specific protocol used for a particular experiment.  To find the protocol revision number, mouse over the permanent link on the protocol and record the number at the end of the url.
     """
        
     protocol = models.CharField(max_length=50)
-    protocol_slug = models.SlugField(max_length=25)
-    #reference = models.ManyToManyField(Reference, blank=True)
-    protocol_file = models.FileField(upload_to='protocol', blank=True)
+    protocol_slug = models.SlugField(max_length=25, blank=True, null=True)
+    reference = models.ManyToManyField(Reference, blank=True)
+    protocol_file = models.FileField(upload_to='protocol', blank=True, null=True)
     protocol_revision = models.IntegerField(blank=True, null=True, help_text="ProtocolWiki page revision number")
-    wiki_page = models.CharField(max_length=75, blank=True, help_text="ProtocolWiki page (via MediaWiki)")
-    comments = models.TextField(max_length=500, blank=True)	
+    wiki_page = models.CharField(max_length=75, blank=True, null=True, help_text="ProtocolWiki page (via MediaWiki)")
+    comments = models.TextField(max_length=500, blank=True, null=True)	
     public = models.BooleanField()
     published = models.BooleanField()
     inactive = models.BooleanField()
@@ -28,6 +31,12 @@ class Protocol(models.Model):
     def get_absolute_url(self):
         """The absolute url for a protocol is defined by the protocol-detail view."""
         return ('protocol-detail', [str(self.id)]) 
+        
+    def save(self, *args, **kwargs):
+        '''The save command is over-ridden to automatically generate the protocol-slug for the first save.'''
+        if not self.id:
+            self.protocol_slug = slugify(self.protocol)
+        super(Protocol, self).save(*args, **kwargs)            
 
 	class Meta:
 		ordering = ['-protocol']

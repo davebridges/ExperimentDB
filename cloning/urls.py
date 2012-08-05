@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 		'template_name': 'cloning_form.html', 
 		'login_required':True 
 		}, name="cloning-new"),
-	url(r'^cloning/(?P<pk>\d+)/$', views.CloningDetail.as_view(), name='cloning_detail'),	
+	url(r'^cloning/(?P<pk>\d+)/$', views.CloningDetailView.as_view(), name='cloning_detail'),	
 	url(r'^mutagenesis/new/$', 'django.views.generic.create_update.create_object', {
 		'model': Mutagenesis, 
 		'template_name': 'mutagenesis_form.html', 
@@ -36,8 +36,5 @@ urlpatterns = patterns('',
 		"queryset": Mutagenesis.objects.all(), 
 		'template_name': 'mutagenesis_list.html',
 		}, name="mutagenesis-list"),
-	url(r'^mutagenesis/(?P<object_id>[\d]+)/$', 'django.views.generic.list_detail.object_detail', {
-		"queryset": Mutagenesis.objects.all(), 
-		'template_name': 'mutagenesis_detail.html'
-		,}, name="mutagenesis-detail"),
+	url(r'^mutagenesis/(?P<pk>\d+)/$', views.MutagenesisDetailView.as_view(), name='mutagenesis_detail'),
 )

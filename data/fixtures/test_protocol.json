@@ -1,0 +1,18 @@
+[
+    {
+        "pk": 1, 
+        "model": "data.protocol", 
+        "fields": {
+            "protocol": "Fixture Protocol", 
+            "reference": [], 
+            "protocol_slug": "fixture-protocol", 
+            "protocol_revision": null, 
+            "comments": null, 
+            "protocol_file": "", 
+            "inactive": false, 
+            "wiki_page": null, 
+            "public": false, 
+            "published": false
+        }
+    }
+]
