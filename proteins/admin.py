@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from proteins.models import ProteinFamily, Protein, Species, ProteinDetail
+from proteins.models import ProteinFamily, Protein, ProteinDetail
 
 
 class ProteinFamilyAdmin(admin.ModelAdmin):
@@ -10,10 +10,6 @@ admin.site.register(ProteinFamily, ProteinFamilyAdmin)
 class ProteinAdmin(admin.ModelAdmin):
 	list_display = ('name',)
 admin.site.register(Protein, ProteinAdmin)
-
-class SpeciesAdmin(admin.ModelAdmin):
-	pass
-admin.site.register(Species, SpeciesAdmin)
 
 class ProteinDetailAdmin(admin.ModelAdmin):
 	list_display = ('name', 'protein', 'gene', 'RefSeqProtein', 'RefSeqNucleotide')
