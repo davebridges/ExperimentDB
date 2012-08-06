@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.db.models import Q
+from django.template import RequestContext
 
 from projects.models import Project, SubProject
 from data.models import Protocol, Result, Experiment
@@ -9,7 +10,7 @@ from proteins.models import Protein
 from external.models import Contact, Reference
 
 def index(request):
-    return render_to_response('index.html')
+    return render_to_response('index.html', context_instance=RequestContext(request))
 
 def search(request):
     query = request.GET.get('q', '')
@@ -32,5 +33,5 @@ def search(request):
     return render_to_response("search.html", {
         "results": results,
         "query": query
-    })
+    }, context_instance=RequestContext(request))
 
