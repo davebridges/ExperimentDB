@@ -53,6 +53,5 @@ urlpatterns = patterns('',
 	url(r'^(?P<id>[\d]+)/delete$', delete_contact, {
 		'model': Contact, 
 		'login_required':True,
-		'post_delete_redirect': '/experimentdb/contact'
 		}, name="contact-delete"),
 )

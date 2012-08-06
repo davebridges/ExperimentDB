@@ -48,7 +48,6 @@ urlpatterns = patterns('',
 		}, name="reference-edit"),
 	url(r'^(?P<id>[\d]+)/delete$', delete_reference, {
 		'model': Reference, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/reference'
+		'login_required':True
 		}, name="reference-delete"),
 )
