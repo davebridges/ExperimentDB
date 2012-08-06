@@ -52,7 +52,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<slug>[\w-]+)/delete$', delete_subproject, {
 		'model': SubProject, 
 		'login_required':True,
-		'slug_field' : 'project_slug',
-		'post_delete_redirect': '/experimentdb/subproject'
+		'slug_field' : 'project_slug'
 		,}, name="subproject-delete"),
 )
