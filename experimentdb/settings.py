@@ -97,3 +97,7 @@ AJAX_LOOKUP_CHANNELS = {
 	'protein' : ('proteins.lookups', 'ProteinLookup'),		
 	'protocol' : ('data.lookups', 'ProtocolLookup'),		
 	}
+    
+# magically include jqueryUI/js/css
+AJAX_SELECT_BOOTSTRAP = True
+AJAX_SELECT_INLINES = 'inline'    
