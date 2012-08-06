@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.admin',
+    'django.contrib.admindocs',    
     'django.contrib.staticfiles',
     'projects',
     'proteins',
