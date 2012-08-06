@@ -17,7 +17,7 @@ MODELS = [Primer, Cell, Antibody, Construct, Chemical, Species, Selection, Licen
 class PrimerModelTests(TestCase):
     """Tests the model attributes of Primer objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external', 'test_publication', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -64,7 +64,7 @@ class PrimerModelTests(TestCase):
 class AntibodyModelTests(TestCase):
     """Tests the model attributes of Antibody objects contained in the reagents app."""
 
-    fixtures = ['test_external', 'test_species', 'test_protein']
+    fixtures = ['test_external', 'test_publication', 'test_species', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -112,7 +112,7 @@ class AntibodyModelTests(TestCase):
 class ConstructModelTests(TestCase):
     """Tests the model attributes of Construct objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_selection']
+    fixtures = ['test_external','test_publication', 'test_protein', 'test_selection']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -158,7 +158,7 @@ class ConstructModelTests(TestCase):
 class CellModelTests(TestCase):
     """Tests the model attributes of Cell objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_species']
+    fixtures = ['test_external', 'test_publication', 'test_protein', 'test_species']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -205,7 +205,7 @@ class CellModelTests(TestCase):
 class ChemicalModelTests(TestCase):
     """Tests the model attributes of Chemical objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external', 'test_publication','test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -250,7 +250,7 @@ class ChemicalModelTests(TestCase):
 class StrainModelTests(TestCase):
     """Tests the model attributes of Strain objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein', 'test_selection', 'test_strain', 'test_construct', 'test_species']
+    fixtures = ['test_external','test_publication', 'test_protein', 'test_selection', 'test_strain', 'test_construct', 'test_species']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -370,7 +370,7 @@ class SelectionModelTests(TestCase):
 class LicenseModelTests(TestCase):
     """Tests the model attributes of :class:`~experimentdb.models.License` objects contained in the reagents app."""
 
-    fixtures = ['test_external','test_protein']
+    fixtures = ['test_external','test_publication', 'test_protein']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -401,6 +401,8 @@ class LicenseModelTests(TestCase):
         
 class LicenseViewTests(TestCase):
 
+    fixtures = ['test_license',]
+
     def setUp(self):
         """Instantiate the test client.  Creates a test user."""
         self.client = Client()
@@ -423,7 +425,7 @@ class LicenseViewTests(TestCase):
 
         This view uses a user with superuser permissions so does not test the permission levels for this view."""
         
-        test_response = self.client.get('/license/1/')
+        test_response = self.client.get('/license/1')
         self.assertEqual(test_response.status_code, 200)
         self.assertTrue('license' in test_response.context)        
         self.assertTemplateUsed(test_response, 'license_detail.html')
@@ -431,7 +433,7 @@ class LicenseViewTests(TestCase):
         self.assertEqual(test_response.context['license'].name, u'Fixture License')
 
         #verifies that a non-existent object returns a 404 error.
-        null_response = self.client.get('/license/2/')
+        null_response = self.client.get('/license/2')
         self.assertEqual(null_response.status_code, 404)  
 
     def test_license_new(self):
@@ -449,7 +451,7 @@ class LicenseViewTests(TestCase):
 
         This view uses a user with superuser permissions so does not test the permission levels for this view."""
         
-        test_response = self.client.get('/license/1/edit')
+        test_response = self.client.get('/license/1/edit/')
         self.assertEqual(test_response.status_code, 200)
         self.assertTrue('license' in test_response.context)        
         self.assertTemplateUsed(test_response, 'license_form.html')

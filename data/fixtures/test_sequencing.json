@@ -1,0 +1,19 @@
+[
+    {
+        "pk": 1, 
+        "model": "data.sequencing", 
+        "fields": {
+            "sequence": "AAAAAAAAAAAAAA", 
+            "notes": "", 
+            "clone_name": "A1", 
+            "construct": 1, 
+            "sample_number": null, 
+            "file": "", 
+            "date": "2012-01-01", 
+            "lane_number": null, 
+            "primer": 1, 
+            "correct": false, 
+            "gel_number": null
+        }
+    }
+]

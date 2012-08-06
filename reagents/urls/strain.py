@@ -53,7 +53,6 @@ urlpatterns = patterns('',
 		'model': Strain,
 		'template_name': 'strain_form.html',
 		'login_required':True ,
-		'template_name': 'confirm_delete.html',
-		'post_delete_redirect': "/experimentdb/strain"
+		'template_name': 'confirm_delete.html'
 		,}, name="strain-delete"),
 )

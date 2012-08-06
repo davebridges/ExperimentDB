@@ -10,6 +10,33 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db import models
 
+#Publication types are based on http://apidocs.mendeley.com/home/documenttypes
+PUBLICATION_TYPES = (
+	('Most Common', (
+			('journal-article','Journal Article'),
+			('book-section', 'Book Section'),
+			)
+	),
+	('Less Common', (		
+		('bill', 'Bill'),
+		('book', 'Book'),
+		('case', 'Case'),
+		('computer-program', 'Computer Program'),
+		('conference-proceedings', 'Conference Proceedings'),
+		('encyclopedia-article', 'Encyclopedia Article'),
+		('film', 'Film'),
+		('generic', 'Generic'),
+		('magazine-article','Magazine Article'),
+		('newspaper-article','Newspaper Article'),
+		('patent', 'Patent'),
+		('report','Report'),
+		('statute', 'Statute'),
+		('television-broadcast', 'Television Broadcast'),
+		('web-page', 'Web Page'),
+		)
+	),
+)
+
 class Contact(models.Model):
     """This model defines a contact.
 
@@ -42,24 +69,68 @@ class Contact(models.Model):
         super( Contact, self ).save()
 
 class Reference(models.Model):
-    """This model contains objects of the class reference.
-
-    It is intended to keep track of specific papers that pertain to protocols, experiments or projects.
-
-    The only required field for this model is a title."""
-    title = models.CharField(max_length=255, help_text="This can be a preliminary manuscript, just ensure that public is not checked")
-    current_lab = models.BooleanField(help_text="Is this paper from our group?")
-    pubMedID = models.CharField(max_length=20, blank=True, null=True)
-    doiLink = models.URLField(blank=True, null=True)
-    researchers = models.ManyToManyField('external.Contact', blank=True, null=True)
-    public = models.BooleanField()
-
+    '''This model covers publications of several types.
+    
+    The publication fields are based on Mendeley and PubMed fields.
+    For the author, there is a ManyToMany link to a group of authors with the order and other details.  See `::class:AuthorDetails`.
+    '''
+    mendeley_url = models.URLField(blank=True, null=True)
+    title = models.CharField(max_length=150)
+    authors = models.ManyToManyField('AuthorDetails', blank=True, null=True)
+    title_slug = models.SlugField(blank=True, null=True, max_length=150)
+    mendeley_id = models.IntegerField(blank=True, null=True)
+    doi = models.CharField(blank=True, null=True, max_length=50, help_text="Digital Object Identifier", verbose_name="DOI")
+    pmid = models.IntegerField(blank=True, null=True, help_text='PubMed Idenfifier', verbose_name="PMID")
+    pmcid = models.IntegerField(blank=True, null=True, help_text='PubMed Central Idenfifier', verbose_name="PMCID")    
+    journal = models.CharField(max_length=100, blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True)
+    volume = models.CharField(max_length=15, blank=True, null=True)    
+    issue = models.CharField(max_length=15, blank=True, null=True)
+    pages = models.CharField(max_length=15, blank=True, null=True)
+    abstract = models.TextField(blank=True, null=True)
+    type = models.CharField(choices = PUBLICATION_TYPES, max_length=20, blank=True, null=True)
+    laboratory_paper = models.BooleanField(help_text="Is this paper from our lab?")
+    interesting_paper = models.BooleanField(help_text="Is this paper of interest but from another lab?")
+    date_last_modified = models.DateField(auto_now=True)
+    date_added = models.DateField(auto_now_add=True)    
+    
+    def doi_link(self):
+        '''This turns the DOI into a link.'''
+        return 'http://dx.doi.org/%s' % self.doi
+        
+    def full_pmcid(self):
+        '''Converts the integer to a full PMCID'''
+        return 'PMC%s' % self.pmcid    
+    
     def __unicode__(self):
-        return u'%s' % self.title
-
+        '''The unicode representation for a Publication is its title'''
+        return self.title
+        
     @models.permalink
     def get_absolute_url(self):
-        return ('reference-detail', [str(self.id)])
+        '''the permalink for a paper detail page is /papers/[title_slug]'''
+        return ('paper-details', [str(self.title_slug)])   
+
+    def save(self, *args, **kwargs):
+        '''The title is slugified upon saving into title_slug.'''
+        if not self.id:
+            self.title_slug = slugify(self.title)
+        super(Reference, self).save(*args, **kwargs)
+        
+class AuthorDetails(models.Model):
+    '''This is a group of authors for a specific paper.
+        
+    Because each `::class:Reference` has a list of authors and the order matters, the authors are listed in this linked model.
+    This model has a ManyToMany link with a paper as well as marks for order, and whether an author is a corresponding or equally contributing author.
+    '''
+    author = models.ForeignKey('Contact')
+    order = models.IntegerField(help_text='The order in which the author appears (do not duplicate numbers)')
+    corresponding_author = models.BooleanField()
+    equal_contributors = models.BooleanField(help_text='Check both equally contributing authors')
+        
+    def __unicode__(self):
+        '''The unicode representation is the author name.'''
+        return '%s' %self.author
 	
 class Vendor(models.Model):
     """This model contains objects of the class vendor.

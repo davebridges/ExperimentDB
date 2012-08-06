@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from datasets.models import SGD_GeneNames, SGD_phenotypes, SGD_interactions, PI35P2_Binding_Screen_SP
+from datasets.models import SGD_GeneNames, SGD_phenotypes, SGD_interactions
 
 def sgd_gene_detail(request, gene):
 	genename = get_object_or_404(SGD_GeneNames, Locus_name__iexact=gene)

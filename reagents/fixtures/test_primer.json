@@ -1,0 +1,24 @@
+[
+    {
+        "pk": 1, 
+        "model": "reagents.primer", 
+        "fields": {
+            "box": null, 
+            "date_ordered": null, 
+            "vendor": null, 
+            "name": "Fixture Primer", 
+            "license": null, 
+            "sequence": null, 
+            "researcher": [], 
+            "notes": null, 
+            "public": false, 
+            "source": null, 
+            "location": "-20", 
+            "published": false, 
+            "protein": [], 
+            "primer_type": "cloning", 
+            "slug": "fixture-primer", 
+            "reference": []
+        }
+    }
+]

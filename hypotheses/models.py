@@ -52,7 +52,7 @@ CITATION_GROUP = (
 class Hypothesis(models.Model):
     """This model is the main model for this app, defining the particular hypothesis under consideration.
 
-    This app has many to many field links to Manipulation, Context and Evidence and a ForeignKey link to an Effect and either a Process or Entity.  The required fields are manipulation, effect and either a process or entity.  The unicode representation of this model is going to be "(manipulation) (effects)/(process or entity in which there could be several).  The absolute url for an instance is /experimentdb/hypothesis/# where # is the primary key.  Tests are generated to test model formation with required and all fields, as well as to test the clean and absolute_url.  
+    This app has many to many field links to Manipulation, Context and Evidence and a ForeignKey link to an Effect and either a Process or Entity.  The required fields are manipulation, effect and either a process or entity.  The unicode representation of this model is going to be "(manipulation) (effects)/(process or entity in which there could be several).  The absolute url for an instance is /hypothesis/# where # is the primary key.  Tests are generated to test model formation with required and all fields, as well as to test the clean and absolute_url.  
     """
 	
     manipulation = models.ForeignKey('Manipulation')
@@ -178,12 +178,12 @@ class Process(models.Model):
         verbose_name_plural = 'processes'			
 
 class Entity(models.Model):
-    """Each hypothesis involves a potential :class:`~experimentdb.hypotheses.models.Manipulation` of either a :class:`~experimentdb.hypotheses.models.Process` or an :class:`~experimentdb.hypotheses.models.Entity`.
+    """Each hypothesis involves a potential :class:`~hypotheses.models.Manipulation` of either a :class:`~hypotheses.models.Process` or an :class:`~hypotheses.models.Entity`.
 	
-	An :class:`~experimentdb.hypotheses.models.Entity`, generally a biological thing, but is usually a specific :class:`~experimentdb.protein.models.Protein` or part of a protein or alternatively a :class:`~experimentdb.reagents.models.Chemical`.  
+	An :class:`~hypotheses.models.Entity`, generally a biological thing, but is usually a specific :class:`~protein.models.Protein` or part of a protein or alternatively a :class:`~reagents.models.Chemical`.  
     It could be a whole protein, or a phosphorylation site or a transcript.  
     If it is a part of a protein then that should be specified under the name field.
-    An entity has to be something which can be regulated positively, negatively or unaffected by the :class:`~experimentdb.hypotheses.models.Manipulation` as part of a :class:`~experimentdb.hypotheses.models.Hypothesis`.  A :class:`~experimentdb.hypotheses.models.Hypothesis` should test either a :class:`~experimentdb.hypotheses.models.Process` or an :class:`~experimentdb.hypotheses.models.Entity` but not both.  With that said, a particular :class:`~experimentdb.hypotheses.models.Entity` could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the :class:`~experimentdb.hypotheses.models.Hypothesis` level.
+    An entity has to be something which can be regulated positively, negatively or unaffected by the :class:`~hypotheses.models.Manipulation` as part of a :class:`~hypotheses.models.Hypothesis`.  A :class:`~hypotheses.models.Hypothesis` should test either a :class:`~hypotheses.models.Process` or an :class:`~hypotheses.models.Entity` but not both.  With that said, a particular :class:`~hypotheses.models.Entity` could be a readout for a biological function.  The reverse is also possibly true.  These cases are defined by symmetrical hypotheses at the :class:`~hypotheses.models.Hypothesis` level.
 	
     A unique name is a required field, and either a protein or a chemical must be chosen."""
 	

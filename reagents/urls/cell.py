@@ -47,7 +47,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_cell, {
 		'model': Cell, 
 		'login_required':True,
-		'template_name': 'confirm_delete.html',
-		'post_delete_redirect': '/experimentdb/cell'
+		'template_name': 'confirm_delete.html'
 		,}, name="cell-delete"),
 )

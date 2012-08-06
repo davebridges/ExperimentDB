@@ -27,22 +27,17 @@ def delete_project(*args, **kwargs):
 
 
 urlpatterns = patterns('',
-	url(r'^$', project_list, {
-		"queryset": Project.objects.all(), 
-		'template_name': 'project_list.html',
-		'template_object_name': 'project'
-		}, name="project-list"),
-	url(r'^(?P<slug>[\w-]+)/$', project_detail, {
-		"queryset": Project.objects.all(), 
-		'template_name': 'project_detail.html',
-		'template_object_name': 'project',
-		'slug_field' : 'project_slug'
-		,}, name="project-detail"),
 	url(r'^new/$', create_project, {
 		'model': Project, 
 		'template_name': 'project_form.html', 
 		'login_required':True 
 		}, name="project-new"),
+    url(r'^(?P<slug>[\w-]+)/$', project_detail, {
+		"queryset": Project.objects.all(), 
+		'template_name': 'project_detail.html',
+		'template_object_name': 'project',
+		'slug_field' : 'project_slug'
+		,}, name="project-detail"),
 	url(r'^(?P<slug>[\w-]+)/edit$', change_project, {
 		'model': Project, 
 		'template_name': 'project_form.html',
@@ -52,7 +47,11 @@ urlpatterns = patterns('',
 	url(r'^(?P<slug>[\w-]+)/delete$', delete_project, {
 		'model': Project, 
 		'login_required':True,
-		'slug_field' : 'project_slug',
-		'post_delete_redirect': '/experimentdb/project'
+		'slug_field' : 'project_slug'
 		,}, name="project-delete"),
+    url(r'^$', project_list, {
+		"queryset": Project.objects.all(), 
+		'template_name': 'project_list.html',
+		'template_object_name': 'project'
+		}, name="project-list"),
 )

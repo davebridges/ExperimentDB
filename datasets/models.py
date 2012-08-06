@@ -15,21 +15,25 @@ EFFECT_CHOICES = (
 	
 
 class SGD_GeneNames(models.Model):
-	Locus_name = models.CharField(max_length=50, primary_key=True)
-	Other_name = models.CharField(max_length=50)
-	Description = models.CharField(max_length=250, blank=True)
-	Gene_product = models.CharField(max_length=100, blank=True)
-	Phenotype = models.TextField(max_length=500, blank=True)
-	ORF_name = models.CharField(max_length=50)
-	SGDID = models.CharField(max_length=25) 
-	class Meta:
-		verbose_name_plural = "SGD Gene Names"
-	def __unicode__(self):
-		return u'%s' % self.Locus_name
-	def get_absolute_url(self):
-		return "/sgd/%s/" % self.Locus_name
+    Locus_name = models.CharField(max_length=50, primary_key=True)
+    Other_name = models.CharField(max_length=50)
+    Description = models.CharField(max_length=250, blank=True)
+    Gene_product = models.CharField(max_length=100, blank=True)
+    Phenotype = models.TextField(max_length=500, blank=True)
+    ORF_name = models.CharField(max_length=50)
+    SGDID = models.CharField(max_length=25) 
 
+    class Meta:
+        verbose_name_plural = "SGD Gene Names"
 
+    def __unicode__(self):
+        '''The unicode representation of a SGD_GeneName is the Locus_name.'''
+        return u'%s' % self.Locus_name	
+
+    @models.permalink
+    def get_absolute_url(self):
+        '''the absolute url of a SGD_GeneName is defined by sgd-gene-detail.'''
+        return ('sgd-gene-detail', [str(self.Locus_name)]) 			
 
 class SGD_phenotypes(models.Model):
 #schema is described in http://wiki.yeastgenome.org/index.php/Specification_for_New_Interactions_and_Phenotype_FTP_files
@@ -70,52 +74,4 @@ class SGD_interactions(models.Model):
 		verbose_name_plural = "SGD Interactions"
 	def __unicode__(self):
 		return u'%s with %s' % (self.Feature_Name_Bait, self.Feature_Name_Hit)
-
-		
-class PI35P2_Binding_Screen_SP(models.Model):
-	Gene_Name = models.ForeignKey('SGD_GeneNames', related_name="PI3PBP_Gene_Name")
-	Gain_of_Function = models.IntegerField(choices=STRENGTH_CHOICES)
-	Loss_of_Function = models.IntegerField(choices=EFFECT_CHOICES, blank=True, null=True)
-	Candidate = models.CharField(max_length=50, blank=True, null=True)
-	Comments = models.TextField(max_length=100, blank=True, null=True)
-	class Meta:
-		verbose_name = "In vivo PI(3,5)P2 Effector"
-		verbose_name_plural = "In vivo PI(3,5)P2 Effectors"
-		ordering = ('Gene_Name',)
-	def __unicode__(self):
-		return u'%s' % self.Gene_Name
-		
-class IL10_TNFa_Microarray(models.Model):
-	ill_ID = models.IntegerField()
-	Control_1_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	Control_2_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	Control_1_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Control_2_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Control_3_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Control_4_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_1_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_2_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_1_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_2_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_3_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	TNFa_4_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_1_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_2_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_1_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_2_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_3_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	Both_4_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_1_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_2_2008 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_1_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_2_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_3_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	IL10_4_2009 = models.DecimalField(max_digits=20, decimal_places=19)
-	GeneSymbol = models.CharField(max_length=50)
-	GeneID = models.CharField(max_length=50)
-	GeneName = models.CharField(max_length=200)
-	def __unicode__(self):
-		return u'%i' % self.ill_ID
-
-	
 

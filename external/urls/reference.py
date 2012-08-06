@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import permission_required, login_required
 
 from external.models import Reference
 
+from external import views
+
 @login_required
 def reference_list(*args, **kwargs):
 	return object_list(*args, **kwargs)
@@ -30,16 +32,10 @@ def delete_reference(*args, **kwargs):
 
 
 urlpatterns = patterns('',
-	url(r'^$', reference_list, {
-		"queryset": Reference.objects.all(), 
-		'template_name': 'reference_list.html',
-		'template_object_name': 'reference'
-		}, name="reference-list"),
-	url(r'^(?P<id>[\d]+)/$', reference_detail, {
-		"queryset": Reference.objects.all(), 
-		'template_name': 'reference_detail.html',
-		'template_object_name': 'reference',
-		}, name="reference-detail"),
+	url(r'^$', views.PaperListView.as_view(), name="reference-list"),
+	url(r'^lab-papers/?$', views.LaboratoryPaperListView.as_view, name='lab-reference-list'),
+	url(r'^interesting-papers/?$', views.InterestingPaperListView.as_view, name='lab-reference-list'),
+    url(r'^(?P<title_slug>[-\w]+)/$', views.PaperDetailView.as_view(), name="paper-details"), 		
 	url(r'^new/$', create_reference, {
 		'model': Reference, 
 		'template_name': 'reference_form.html', 
@@ -52,7 +48,6 @@ urlpatterns = patterns('',
 		}, name="reference-edit"),
 	url(r'^(?P<id>[\d]+)/delete$', delete_reference, {
 		'model': Reference, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/reference'
+		'login_required':True
 		}, name="reference-delete"),
 )

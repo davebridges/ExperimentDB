@@ -1,0 +1,17 @@
+[
+    {
+        "pk": 1, 
+        "model": "reagents.license", 
+        "fields": {
+            "commericalization": null, 
+            "name": "Fixture License", 
+            "acknowledgement": null, 
+            "url": "", 
+            "distributable": null, 
+            "notes": "", 
+            "modification_license": null, 
+            "modification": null, 
+            "human_subjects": null
+        }
+    }
+]

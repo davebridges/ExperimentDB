@@ -1,5 +1,8 @@
 *.py[co]
 
+#for mac
+*.DS_STORE
+
 localsettings.py
 #any sqlite database files
 *.db

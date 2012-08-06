@@ -1,18 +1,18 @@
 """This package describes the models in the reagents app.
 
-The models are :class:`~experimentdb.models.ReagentInfo`, which is an abstract superclass of:
-* :class:`~experimentdb.models.Primer`
-* :class:`~experimentdb.models.Cell`
-* :class:`~experimentdb.models.Antibody`
-* :class:`~experimentdb.models.Strain`
-* :class:`~experimentdb.models.AnimalStrain`
-* :class:`~experimentdb.models.Chemical`
-* :class:`~experimentdb.models.Construct`
-* :class:`~experimentdb.models.License`
+The models are :class:`~models.ReagentInfo`, which is an abstract superclass of:
+* :class:`~models.Primer`
+* :class:`~models.Cell`
+* :class:`~models.Antibody`
+* :class:`~models.Strain`
+* :class:`~models.AnimalStrain`
+* :class:`~models.Chemical`
+* :class:`~models.Construct`
+* :class:`~models.License`
 
-There are also separate models for :class:`~experimentdb.models.License`, :class:`~experimentdb.models.Species` and :class:`~experimentdb.models.Selection` which are supplementary to these models.
+There are also separate models for :class:`~models.License`, :class:`~models.Species` and :class:`~models.Selection` which are supplementary to these models.
 
-The :class:`~experimentdb.models.ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.
+The :class:`~models.ReagentInfo class provides generic fields to all the models, while each subclass provides extra specific fields.
 """
 
 from django.db import models
@@ -202,7 +202,7 @@ class Selection(models.Model):
 
     This object has one required field, being **selection**.  An optional comments field is also available.
 
-    Initial data upon installation includes resistance to ampicillin or kanamycin.  Other selective markers should be added at /experimentdb/selection/new
+    Initial data upon installation includes resistance to ampicillin or kanamycin.  Other selective markers should be added at /selection/new
     '''
     selection = models.CharField(max_length=50)
     selection_slug = models.SlugField(max_length=50)
@@ -275,7 +275,7 @@ class Species(models.Model):
     This is used with Strain, Cell and Antibody objects.
     Currently the species field, with the old choices=SPECIES is present until data can be migrated.  
     Upon installation, initial data is provided for rabbit, mouse, human, yeast and goat species.  
-    More species can be added at /experimentdb/species/new.
+    More species can be added at /species/new.
     '''
     common_name = models.CharField(max_length=50, help_text="Generic name of the species")
     species_slug = models.SlugField(max_length=50, help_text="Will be automatically generated upon saving.")
@@ -311,11 +311,11 @@ class License(models.Model):
     modification_license = models.NullBooleanField(help_text="Must the modified reagent conform to this license?")
 
     def __unicode__(self):
-        """The unicode representation of a :class:`~experimentdb.models.License` object is its name."""
+        """The unicode representation of a :class:`~License` object is its name."""
         return u'%s' %self.name
 
     @models.permalink
     def get_absolute_url(self):
-        """The url of a :class:`~experimentdb.models.License` object is **/licence/#**"""
+        """The url of a :class:`~License` object is **/licence/#**"""
         return ('license-detail', [str(self.id)])    
 

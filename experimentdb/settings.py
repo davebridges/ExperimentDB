@@ -7,10 +7,6 @@ STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
-
 try:
     from localsettings import *
 except ImportError:
@@ -32,21 +28,6 @@ USE_I18N = True
 MEDIA_ROOT = os.path.join(PROJECT_DIR, "media/files")
 STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
-
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin-media/'
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'ci%^08ig-0qu*&b(kz_=n6lvbx*puyx6=8!yxzm0+*z)w@7+%6'
-
-LOGIN_URL = '/experimentdb/accounts/login/'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
@@ -59,7 +40,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 	'django.middleware.csrf.CsrfViewMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware'
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'debug_toolbar.middleware.DebugToolbarMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS  = (
@@ -99,9 +81,11 @@ INSTALLED_APPS = (
     'hypotheses',
     'ajax_select',
     'south',
-    'PIL'
+    'PIL',
+	'debug_toolbar',
 )
 
+INTERNAL_IPS = ('127.0.0.1',)
 
 AJAX_LOOKUP_CHANNELS = {
 	'antibody' : ('experimentdb.reagents.lookups', 'AntibodyLookup'),

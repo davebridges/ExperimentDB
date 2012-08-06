@@ -47,7 +47,6 @@ urlpatterns = patterns('',
 		,}, name="shipment-detail"),
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_shipment, {
 		'model': ConstructShipment, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/shipments'
+		'login_required':True
 		,}, name="shipment-delete"),
 	)

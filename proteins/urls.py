@@ -1,7 +1,7 @@
 """
 This package defines url redirections for the proteins app.
 
-This app takes a url request in the form of /experimentdb/protein/something and redirects to the following views:
+This app takes a url request in the form of /protein/something and redirects to the following views:
 * protein-list
 * protein-detail
 * protein-new
@@ -60,7 +60,6 @@ urlpatterns = patterns('',
 		'form_class': ProteinForm, 
 		'template_name': 'protein_form.html', 
 		'login_required':True ,
-		'post_save_redirect':"/experimentdb/protein"
 		}, name='protein-new'),
 	url(r'^(?P<object_id>[\d]+)/edit$', restricted_change_protein, {
 		'model': Protein, 
@@ -69,8 +68,7 @@ urlpatterns = patterns('',
 		,}, name="protein-edit"),
 	url(r'^(?P<object_id>[\d]+)/delete$', restricted_delete_protein, {
 		'model': Protein, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/protein'
+		'login_required':True
 		,}, name="protein-delete"),		
 	url(r'^family/$', restricted_object_list, {
 		"queryset": ProteinFamily.objects.all(), 
@@ -83,8 +81,7 @@ urlpatterns = patterns('',
 	url(r'^family/new/$', restricted_create_protein, {
 		'model': ProteinFamily, 
 		'template_name': 'protein_family_form.html', 
-		'login_required':True ,
-		'post_save_redirect': "/experimentdb/protein/family"
+		'login_required':True
 		}, name='protein-family-new'),	
 	url(r'^detail/new/$', restricted_create_protein, {
 		'model': ProteinDetail, 
@@ -98,8 +95,7 @@ urlpatterns = patterns('',
 		,}, name="protein-detail-edit"),
 	url(r'^detail/(?P<object_id>[\d]+)/delete$', restricted_delete_protein, {
 		'model': ProteinDetail, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/protein'
+		'login_required':True
 		,}, name="protein-detail-delete"),			
 	url(r'^(?P<protein_id>[\d]+)/$', 'proteins.views.protein_isoform_detail', name='protein-isoform-detail'),
 	url(r'^(?P<protein>[-\w\d]+)/$', 'proteins.views.detail', name='protein-name-slug'),	

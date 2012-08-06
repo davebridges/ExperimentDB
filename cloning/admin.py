@@ -13,7 +13,7 @@ class CloningAdmin(admin.ModelAdmin):
 		}),
 		('Digestion Details', {
 			'classes' : ('collapse', ),
-			'fields': ('restriction_enzyme_5prime', 'vector_restriction_enzyme_5prime','destroyed_5prime','restriction_enzyme_3prime', 'vector_restriction_enzyme_3prime', 'destroyed_3prime', 'vector_CIP', 'ligation_temperaturee', 'ligation_time')
+			'fields': ('restriction_enzyme_5prime', 'vector_restriction_enzyme_5prime','destroyed_5prime','restriction_enzyme_3prime', 'vector_restriction_enzyme_3prime', 'destroyed_3prime', 'vector_CIP', 'ligation_temperature', 'ligation_time')
 		}),
 		('Other Information', {
 			'classes' : ('collapse', ),

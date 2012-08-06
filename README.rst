@@ -69,17 +69,17 @@ Downloading and/or unzipping will create a directory named ExperimentDB.  You ca
 
 Database Setup
 --------------
-1. Create a new database.  You need to record the user, password, host and database name.  Refer to the database documentation for how to do this with a specific database engine.  If you are using SQLite3, you only need to set the engine and the database name.  It is recommended to use MySQL.
-2. Go to localsettings_empty.py and edit the settings::
+1. Create a new database.  You need to record the user, password, host and database name.  Refer to the database documentation for how to do this with a specific database engine.  If you are using SQLite3, you only need to set the engine and the database name.  It is recommended to use PostgreSQL.
+2. Go to experimentdb/localsettings_empty.py and edit the ADMINS and TIME_ZONE settings.  Change the secret key to a random sequence of letters.  Depending on your webserver you may also want to set the MEDIA_URL, LOGIN_URL and STATIC_URL settings::
 
-    ENGINE: 'mysql', 'postgresql_psycopg2' or 'sqlite3 depending on the database software used.
+    ENGINE: 'django.db.backends.sqlite3', #  Choose one of 'django.db.backends.postgresql_psycopg2','django.db.backends.postgresql', 'django.db.backends.mysql', 'django.db.backends.sqlite3', 'django.db.backends.oracle' depending on the database software used.
     NAME: database name
     USER: database user.  Unless using sqlite3
     PASSWORD: database password.  Unless using sqlite3
     HOST: database host.
 
-3. Save this file as localsettings.py in the main ExperimentDB directory.
-4. Run the test client by going into the experimentdb directory and running the following.  There should be no errors at this point::
+3. Save this file as localsettings.py in the experimentdb directory.
+4. Run the test client by going into the main directory and running the following.  There should be no errors at this point::
 
     python manage.py test
 	 

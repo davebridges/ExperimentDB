@@ -52,7 +52,6 @@ urlpatterns = patterns('',
 		}, name="vendor-edit"),
 	url(r'^(?P<id>[\d]+)/delete$', delete_vendor, {
 		'model': Vendor, 
-		'login_required':True,
-		'post_delete_redirect': '/experimentdb/vendor'
+		'login_required':True
 		}, name="vendor-delete"),
 )

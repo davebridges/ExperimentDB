@@ -47,8 +47,7 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_antibody, {
 		'model': Antibody, 
 		'login_required':True,
-		'template_name': 'confirm_delete.html',
-		'post_delete_redirect': '/experimentdb/antibody'
+		'template_name': 'confirm_delete.html'
 		,}, name="antibody-delete"),
 	url(r'^lookup/$', 'reagents.views.antibody_lookup', name="antibody-lookup")
 )
