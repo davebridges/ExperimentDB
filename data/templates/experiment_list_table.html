@@ -10,7 +10,7 @@
 	<tbody>
 	{% for experiment in experiment_list %}
 		<tr>
-		<td><a href="{% experiment.get_absolute_url %}">{{ experiment.experimentID }}</td>
+		<td><a href="{{ experiment.get_absolute_url }}">{{ experiment.experimentID }}</td>
 		<td>{{ experiment.assay }}</td>
 		<td>{{ experiment.experiment }}</td>
 		</tr>

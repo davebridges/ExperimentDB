@@ -2,7 +2,7 @@
 {% block head_title %}Experiment List{% endblock %}
 {% block title %}Experiment List{% endblock %}
 {% block content %}
-<a class="fg-button ui-state-default ui-corner-all" href="{% experiment-new %}" la>Add a new experiment</a>
+<a class="fg-button ui-state-default ui-corner-all" href="{% url experiment-new %}" la>Add a new experiment</a>
 <div = "experiments">
 {% include "experiment_list_table.html" %}
 </div>
