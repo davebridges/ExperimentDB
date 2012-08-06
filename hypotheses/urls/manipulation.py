@@ -47,7 +47,6 @@ urlpatterns = patterns('',
 	url(r'^(?P<object_id>[\d]+)/delete$', delete_manipulation, {
 		'model': Manipulation, 
 		'login_required':True,
-		'template_name': 'confirm_delete.html',
-		'post_delete_redirect': '/experimentdb/manipulation'
+		'template_name': 'confirm_delete.html'
 		,}, name="manipulation-delete"),
 )
