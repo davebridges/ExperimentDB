@@ -92,9 +92,6 @@ class ConstructShipment(models.Model):
     def __unicode__(self):
         return u'%s (%s)' % (self.recipient.lab, self.ship_date)
 
-    def get_absolute_url(self):
-        return '/experimentdb/shipment/%i' % self.id
-
     @models.permalink
     def get_absolute_url(self):
         return ("shipment-detail", [str(self.id)])
