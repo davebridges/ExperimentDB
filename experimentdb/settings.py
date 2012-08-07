@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'south',
     'PIL',
 	'debug_toolbar',
+	'braces'
 )
 
 INTERNAL_IPS = ('127.0.0.1',)

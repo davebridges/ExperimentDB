@@ -3,15 +3,17 @@
 
 from django.views.generic import DetailView
 
+from braces.views import LoginRequiredMixin
+
 from cloning.models import Cloning, Mutagenesis
 
-class CloningDetailView(DetailView):
+class CloningDetailView(LoginRequiredMixin, DetailView):
     '''This view is for seeing the details of a Cloning object.'''
     
     model = Cloning
     context_object_name = 'cloning'
     
-class MutagenesisDetailView(DetailView):
+class MutagenesisDetailView(LoginRequiredMixin, DetailView):
     '''This view is for seeing the details of a Cloning object.'''
     
     model = Mutagenesis
