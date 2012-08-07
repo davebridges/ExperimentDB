@@ -1,12 +1,7 @@
-"""This package defines the url redirections for the cloning app.
+"""This package defines the url configuration for the cloning app.
 
-All views in this app start from a request of /experimentdb/cloning and direct to the following views:
-* cloning-new
-* mutagenesis-new
-* mutagenesis-detail
-* mutagenesis-edit
-* mutagenesis-list
-
+All views in this app start from a request /cloning/cloning or /cloning/mutagenesis.
+There are simple new, edit, delete, detail and list views for each of cloning and mutagenesis.
 """
 
 from django.conf.urls.defaults import *
