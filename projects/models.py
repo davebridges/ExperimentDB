@@ -10,7 +10,7 @@ class Project(models.Model):
 
     Projects are thought of as large, grant sized groups of data, whereas subprojects are paper sized projects, attached to a main project."""
     project = models.CharField(max_length=50)
-    project_slug = models.SlugField(max_length=15, blank=True, null=True, editable=False) #this field is slugified on save
+    project_slug = models.SlugField(max_length=50, blank=True, null=True, editable=False) #this field is slugified on save
     comments = models.TextField(max_length=250, blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
@@ -39,7 +39,7 @@ class SubProject(models.Model):
     These projects are generally offshoots of major projectsand are paper or thesis sized projects."""
     project = models.ForeignKey('Project')
     subproject = models.CharField(max_length=50)
-    project_slug = models.SlugField(max_length=15, blank=True, null=True, editable=False) #this field is slugified on save
+    project_slug = models.SlugField(max_length=50, blank=True, null=True, editable=False) #this field is slugified on save
     comments = models.TextField(max_length=250, blank=True, null=True)
     public = models.BooleanField()
     published = models.BooleanField()
