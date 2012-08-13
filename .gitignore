@@ -7,6 +7,9 @@ localsettings.py
 #any sqlite database files
 *.db
 
+#any migrations
+*/migrations/*
+
 # Packages
 *.egg
 *.egg-info
