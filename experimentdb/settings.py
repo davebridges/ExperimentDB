@@ -3,6 +3,8 @@
 import os.path
 PROJECT_DIR = os.path.dirname(__file__)
 STATIC_DOC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR, "static"),
+)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
