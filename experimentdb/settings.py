@@ -23,10 +23,6 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
