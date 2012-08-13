@@ -83,33 +83,34 @@ Database Setup
 
     python manage.py test
 	 
-5. Generate the initial database tables by entering::
+5. Generate the initial database tables then move the static files to the STATIC_ROOT by entering::
 
     python manage.py syncdb
+    python manage.py collectstatic
 
-6. When asked generate an administrative superuser and set the email and password.
+6. When asked, generate an administrative superuser and set the email and password.
 
 Web Server Setup
 ----------------
 You need to set up a server to serve both the django installation and saved files.  Ideally a separate webserver would be set up to serve both the /static and /media files.  Although if it is easier you can use apache for both.  You can serve media and static files from any location on your server, just indicate this by setting STATIC_ROOT and MEDIA_ROOT in localsettings.  You can also choose to serve from a different url (rather than /media or /static) by changing the MEDIA_URL or STATIC_URL respectively.
 The preferred setup for the django files is to use Apache2 with mod\_wsgi.  The following is a httpd.conf example where the code is placed in /usr/src/django/ExperimentDB::
-
-    Alias /static /usr/src/django/ExperimentDB/experimentdb/static
     
+    #this is for static files (css, images and javascript)
+    Alias /static /usr/src/django/ExperimentDB/experimentdb/static
     <Directory /usr/src/django/ExperimentDB/experimentdb/static>
         Order allow,deny
         Allow from all
     </Directory>
     
+    #this is for media files (user uploaded files)
     Alias /media /usr/src/django/ExperimentDB/experimentdb/media
-    
-	<Directory /usr/src/django/ExperimentDB/experimentdb/media>
+    <Directory /usr/src/django/ExperimentDB/experimentdb/media>
         Order allow,deny
         Allow from all
     </Directory>
 
+    #this is for the base code serving
     WSGIScriptAlias /experimentdb /usr/src/django/ExperimentDB/apache/django.wsgi
-
     <Directory /usr/src/django/ExperimentDB/apache>
         Order deny,allow
         Allow from all
