@@ -25,7 +25,6 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(PROJECT_DIR, "media/files")
 STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
 
 # List of callables that know how to import templates from various sources.

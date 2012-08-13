@@ -7,9 +7,10 @@ MANAGERS = ADMINS
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/' #serve the MEDIA_ROOT to this url
 LOGIN_URL = '/accounts/login/'
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "media/files") #set to where pictures and files will be stored.  Default is media folder
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'ci%^08ig-0qu*&b(kz_=n6lvbx*puyx6=8!yxzm0+*z)w@7+%6'
