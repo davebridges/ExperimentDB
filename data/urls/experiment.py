@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import permission_required
 
 from data.forms import ExperimentForm
 
+from data import views
+
 urlpatterns = patterns('',
 	url(r'^new/$', 'django.views.generic.create_update.create_object', {
 		'form_class': ExperimentForm, 
@@ -12,6 +14,6 @@ urlpatterns = patterns('',
 		}, name="experiment-new"),
 	url(r'^(?P<experimentID>[-\w]+)/$', 'data.views.experiment', name="experiment-detail"),
 	url(r'^(?P<experimentID>[-\w]+)/result/new/$', 'data.views.result_new', name="result-new"),
-	url(r'^(?P<experimentID>[-\w]+)/edit/$', 'data.views.experiment_edit', name="experiment-edit"),
+	url(r'^(?P<slug>[-\w]+)/edit/$', views.ExperimentEdit.as_view(), name="experiment-edit"),
 	url(r'^$', 'data.views.index', name="experiment-list"),
 )

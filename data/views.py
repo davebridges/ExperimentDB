@@ -7,6 +7,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.views.generic.edit import UpdateView
+from django.utils.decorators import method_decorator
 
 from data.models import Experiment, Result, Protocol
 from data.forms import ResultForm, ResultFormSet, ExperimentForm
@@ -71,23 +73,20 @@ def result_new(request, experimentID):
 	else:
 		form = ResultForm()
 	return render_to_response('result_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
-	
-@permission_required('data.change_experiment')
-def experiment_edit(request, experimentID):
-    """Renders a form to edit an experiment and associated formsets for experimental results.
-	
-    Takes a request in the form of experiment/(experimentID)/edit and returns the experiment_result_form.html form."""
-    experiment = get_object_or_404(Experiment, pk=experimentID)
-    if request.method == "POST":
-        form = ExperimentForm(request.POST)
-        if form.is_valid():
-            experiment = form.save(commit=False)
-            formset = ResultFormSet(request.POST, instance=experiment)
-            if result_formset.is_valid():
-                experiment.save()
-                result_formset.save()                
-            return HttpResponseRedirect( experiment.get_absolute_url() )
-    else:
-        form = ExperimentForm()
-        formset = ResultFormSet(instance=Experiment())
-    return render_to_response("experiment_result_form.html", {"form": form,"formset": formset,}, context_instance=RequestContext(request))
+	 
+class ExperimentEdit(UpdateView):
+    '''This view is for editing experiments.
+    
+    it is controled by the named url experiment-edit and a paramater ExperimentID.'''
+    
+    model = Experiment
+    slug_field = 'experimentID'
+    form_class = ExperimentForm
+    context_object_name = 'experiment'
+    template_name = 'experiment_form.html'
+    
+    @method_decorator(permission_required('data.change_experiment'))
+    def dispatch(self, *args, **kwargs):
+        """This decorator sets this view to have restricted permissions."""
+        return super(ExperimentEdit, self).dispatch(*args, **kwargs)  
+    

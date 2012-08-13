@@ -2,6 +2,7 @@
 {% block head_title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block title %}Experiment Summary - {{experiment}}{% endblock %}
 {% block scripts %}
+{% include "base_jquery.html" %}
 <link rel="stylesheet" href="{{STATIC_URL}}js/colorbox/example5/colorbox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="{{STATIC_URL}}js/colorbox/colorbox/jquery.colorbox.js"></script>
 <script type="text/javascript">
@@ -29,6 +30,7 @@
 	</table>
 	<h3>Notes</h3>
 	<p>{{experiment.comments}}</p>
+    <p>Edit this experiment: <a href="{% url experiment-edit experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" alt="Edit Button"></a>
 	</div>
 
 	<h3><a href="#">Projects</a></h3>
