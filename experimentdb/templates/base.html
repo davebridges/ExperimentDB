@@ -8,6 +8,7 @@
 	xmlns:doap="http://usefulinc.com/ns/doap#" >
 
 <head>
+    {% include "base_jquery.html" %}
 	{% include "base_css.html" %}
 	{% block scripts %}
 	{% endblock scripts %}
@@ -20,11 +21,16 @@
 <div class="container_12">
 
 <div id = "identification" class = "grid_3">
+    <script>
+    $(function() {
+		$('button.login').button({ icons: {secondary:'ui-icon-person'} });
+      });
+    </script>
         {% if user.is_authenticated %}
-                <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }} </span><span property="foaf:surname">{{ user.last_name }}</span><br />
-		<a class="fg-button ui-state-default ui-corner-all" href="{% url django.contrib.auth.views.login  %}">Change User</a></p>
+                Welcome, <span property="foaf:givenname">{{ user.first_name }} </span><span property="foaf:surname">{{ user.last_name }}</span><br />
+		<button class="login"><a href="{% url django.contrib.auth.views.login  %}">Change User</a></button>
         {% else %}
-                <p>Welcome, please <a class="fg-button ui-state-default ui-corner-all"  href="{% url django.contrib.auth.views.login %}">log in.</a></p>
+                <div>Welcome, please <a  href="{% url django.contrib.auth.views.login %}"><button class="login">log in.</button></a></div>
         {% endif %}
 </div>
 <div id = "menu" class = "grid_9">
