@@ -223,6 +223,7 @@ class Context(models.Model):
     type = models.CharField(max_length=50, choices=CONTEXT_TYPE, help_text="A general category")
     strain = models.ManyToManyField('reagents.Strain', blank=True, null=True, help_text="Strain specific context")
     cell_line = models.ManyToManyField('reagents.Cell', blank=True, null=True, help_text="Cell line specific context")
+    animal_model = models.ManyToManyField('reagents.AnimalStrain', blank=True, null=True, help_text="Animal Model specific context")    
     species = models.ManyToManyField('reagents.Species', blank=True, null=True, help_text="Species specific context.")	
     uri = models.URLField(blank=True, null=True, help_text="If a specific URI is known for this context enter it here.  Search BioOntology at http://clkb.ncibi.org/browse.php for possible URI's")
     slug = models.SlugField(blank=True, null=True, editable=False)
