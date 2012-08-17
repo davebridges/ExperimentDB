@@ -1,14 +1,111 @@
 [
     {
-        "pk": 1, 
+        "pk": 3, 
         "model": "hypotheses.evidence", 
         "fields": {
-            "modified_date": "2011-01-23", 
-            "create_date": "2011-01-23", 
+            "modified_date": "2011-02-08", 
+            "create_date": "2011-02-08", 
+            "experiment": "DB-2011-01-31", 
+            "figure": "", 
+            "evidence_type": "Experiment", 
+            "notes": "", 
+            "citation_type": 4, 
+            "contact": null, 
+            "paper": null, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2011-02-28", 
+            "create_date": "2011-02-28", 
+            "experiment": "GlucoseIncorporation-2008-10-23", 
+            "figure": "", 
+            "evidence_type": "Experiment", 
+            "notes": "", 
+            "citation_type": 4, 
+            "contact": null, 
+            "paper": null, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2011-03-16", 
+            "create_date": "2011-03-16", 
             "experiment": null, 
+            "figure": "", 
             "evidence_type": "Publication", 
-            "notes": null, 
-            "citation_type": 1, 
+            "notes": "Authors looked at gene expression from primary human myocytes differentiated into myotubes and transfected with SREBP1a or SREBP1c.  They also measured glycogen synthesis at basal levels.  They showed increased glycogen synthesis but did not rule out whether this is due to increased glucose uptake.", 
+            "citation_type": 4, 
+            "contact": null, 
+            "paper": 1, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2011-04-13", 
+            "create_date": "2011-04-13", 
+            "experiment": "DB-2007-05-25", 
+            "figure": "", 
+            "evidence_type": "Experiment", 
+            "notes": "", 
+            "citation_type": 4, 
+            "contact": null, 
+            "paper": null, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2011-04-13", 
+            "create_date": "2011-04-13", 
+            "experiment": "DB-2011-04-05", 
+            "figure": "", 
+            "evidence_type": "Experiment", 
+            "notes": "", 
+            "citation_type": 4, 
+            "contact": null, 
+            "paper": null, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2012-01-11", 
+            "create_date": "2012-01-11", 
+            "experiment": "KF-2012-01-10", 
+            "figure": "evidence/2012/01/11/Liver_Glycogen_Barplot.png", 
+            "evidence_type": "Experiment", 
+            "notes": "", 
+            "citation_type": 8, 
+            "contact": null, 
+            "paper": null, 
+            "public": false
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "hypotheses.evidence", 
+        "fields": {
+            "modified_date": "2012-08-17", 
+            "create_date": "2012-08-17", 
+            "experiment": "DB-2012-08-08", 
+            "figure": "", 
+            "evidence_type": "Experiment", 
+            "notes": "not statistically significant", 
+            "citation_type": 4, 
             "contact": null, 
             "paper": null, 
             "public": false

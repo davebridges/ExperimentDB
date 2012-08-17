@@ -84,8 +84,7 @@ def test_create_hypothesis_create_date(self):
         self.assertEquals(test_hypothesis.__unicode__(), "Fixture Protein Overexpression positively regulates glucose import")
         self.assertEquals(test_hypothesis.create_date, datetime.date.today())		
         self.assertEquals(test_hypothesis.modified_date, datetime.date.today())			
-		
-		
+				
 class ManipulationModelTests(TestCase):
     """Tests the model attributes of Manipulation objects contained in the hypotheses app."""
 
@@ -148,4 +147,68 @@ class ManipulationModelTests(TestCase):
 			protein = Protein.objects.get(pk=1)
 			)
         test_manipulation.save()
-        self.assertEquals(test_manipulation.__unicode__(), "Fixture Protein Knockout")			
+        self.assertEquals(test_manipulation.__unicode__(), "Fixture Protein Knockout")		
+
+class EvidenceViewTests(TestCase):
+    '''This class tests the views for :class:`~hypotheses.models.Evidence` objects.'''
+
+    fixtures = ['test_evidence',]
+
+    def setUp(self):
+        """Instantiate the test client.  Creates a test user."""
+        self.client = Client()
+        self.test_user = User.objects.create_user('testuser', 'blah@blah.com', 'testpassword')
+        self.test_user.is_superuser = True
+        self.test_user.is_active = True
+        self.test_user.save()
+        self.assertEqual(self.test_user.is_superuser, True)
+        login = self.client.login(username='testuser', password='testpassword')
+        self.failUnless(login, 'Could not log in')
+
+    def tearDown(self):
+        """Depopulate created model instances from test database."""
+        for model in MODELS:
+            for obj in model.objects.all():
+                obj.delete()
+
+    def test_evidence_new(self):
+        """This tests the evidence-new view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/hypotheses/evidence/new/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTemplateUsed(test_response, 'base.html')
+        self.assertTemplateUsed(test_response, 'evidence_form.html') 
+
+    def test_evidence_edit(self):
+        """This tests the evidence-edit view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/hypotheses/evidence/1/edit/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('evidence' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'evidence_form.html')
+        self.assertEqual(test_response.context['evidence'].pk, 1)
+        self.assertEqual(test_response.context['evidence'].name, u'Fixture Evidence')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/hypotheses/evidence/2/edit/')
+        self.assertEqual(null_response.status_code, 404)   
+
+    def test_evidence_delete(self):
+        """This tests the evidence-delete view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/hypotheses/evidence/1/delete/')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('evidence' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'confirm_delete.html')
+        self.assertEqual(test_response.context['evidence'].pk, 1)
+        self.assertEqual(test_response.context['evidence'].name, u'Fixture Evidence')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/hypotheses/evidence/2/delete/')
+        self.assertEqual(null_response.status_code, 404)         

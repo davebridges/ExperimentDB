@@ -91,7 +91,6 @@ class Hypothesis(models.Model):
 
     class Meta:
         verbose_name_plural = 'hypotheses'			
-
 	
 class Manipulation(models.Model):
     """This model defines particular manipulations of experimental systems.
@@ -146,7 +145,6 @@ class Effect(models.Model):
 	
     def __unicode__(self):
         return u'%s' % self.effect
-
 
 class Process(models.Model):
     """Each hypothesis involves a potential manipulation of either a process or an entity.
@@ -212,8 +210,7 @@ class Entity(models.Model):
         
     class Meta:
         verbose_name_plural = 'processes'
-        
-	
+        	
 class Context(models.Model):
     """A context specifies the model system under which the hypothesis is tested.
 
@@ -236,7 +233,6 @@ class Context(models.Model):
     def __unicode__(self):
         """The unicode representation of a context is its name."""
         return u'%s' % self.name	
-
 	
 class Evidence(models.Model):
     """Evidence instances are supporting or dissenting experiments, papers or communications regarding a hypothesis.

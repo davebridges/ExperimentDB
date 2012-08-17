@@ -6,6 +6,7 @@ from django.views.generic.create_update import create_object, update_object, del
 from django.contrib.auth.decorators import login_required, permission_required
 
 from hypotheses.models import Hypothesis
+from hypotheses import views
 
 @login_required
 def hypothesis_list(*args, **kwargs):
@@ -28,6 +29,9 @@ def delete_hypothesis(*args, **kwargs):
 	return delete_object(*args, **kwargs)
 
 urlpatterns = patterns('',
+	url(r'^evidence/new/$', views.EvidenceCreateView.as_view(), name="evidence-new"),
+	url(r'^evidence/(?P<pk>[\d]+)/edit$', views.EvidenceUpdateView.as_view(), name="evidence-edit"),
+	url(r'^evidence/(?P<pk>[\d]+)/delete$', views.EvidenceDeleteView.as_view(), name="hypothesis-delete"),
 	url(r'^$', hypothesis_list, {
 		"queryset": Hypothesis.objects.all(), 
 		'template_name': 'hypothesis_list.html',
