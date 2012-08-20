@@ -2,11 +2,14 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
+from ajax_select import urls as ajax_select_urls
+
 from datasets.models import SGD_GeneNames, SGD_phenotypes
 from experimentdb import views
 
 urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/lookups/', include(ajax_select_urls)),    
 	(r'^admin/', include(admin.site.urls)),
 	(r'^accounts/login/', 'django.contrib.auth.views.login'),
 	(r'^comments?/', include('django.contrib.comments.urls')),
