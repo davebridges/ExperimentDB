@@ -87,34 +87,47 @@
 
 	<h3><a href="#">Reagents</a></h3>
 	<div id="reagents">
+    {% if experiment.chemicals.all %}
 	<h4>Chemicals:</h4> 
 		<ul>{% for chemical in experiment.chemicals.all %}
 			<li><a href="{{chemical.get_absolute_url}}">{{chemical}}</a></li>{% endfor %}
 		</ul>
-
+    {% endif %}
+    {% if experiment.cellline.all %}    
 	<h4>Cell Lines:</h4> 
 		<ul>{% for cell in experiment.cellline.all %}
 			<li><a href="{{cell.get_absolute_url}}">{{cell}}</a></li>{% endfor %}
 		</ul>
-		
+    {% endif %}    
+    {% if experiment.constructs.all %}		
 	<h4>Constructs:</h4> 
 		<ul>{% for construct in experiment.constructs.all %}
 			<li><a href="{{construct.get_absolute_url}}">{{construct}}</a></li>{% endfor %}
 		</ul>
-
+    {% endif %}    
+    {% if experiment.antibodies.all %}	
 	<h4>Antibodies:</h4>
 		<ul>{% for antibody in experiment.antibodies.all %}
 		<li><a href="{{antibody.get_absolute_url}}">{{antibody}}</a></li>{% endfor %}</ul>
-		
+    {% endif %}    
+    {% if experiment.primers.all %}			
 	<h4>Primers:</h4>
 		<ul>{% for primer in experiment.siRNA.all %}
 		<li><a href="{{primer.get_absolute_url}}">{{primer}}</a></li>{% endfor %}</ul>
-		
+    {% endif %}    
+    {% if experiment.strain.all %}			
 	<h4>Strains:</h4>
 		<ul>{% for strain in experiment.strain.all %}
 		<li><a href="{{strain.get_absolute_url}}">{{strain|safe}}</a></li>{% endfor %}</ul>
 	</div>
-
+    {% endif %}
+    {% if experiment.animal_model.all %}			
+	<h4>Animal Models:</h4>
+		<ul>{% for animal_model in experiment.animal_model.all %}
+		<li><a href="{{ animal_model.get_absolute_url }}">{{ animal_model }}</a></li>{% endfor %}</ul>
+	</div>
+    {% endif %}    
+    </div>
 	<h3><a href="#">Raw Data Files</a></h3>
 	<div id="files">
 	{% for result in experiment.result_set.all %}
