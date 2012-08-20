@@ -14,7 +14,7 @@ class Protocol(models.Model):
     """
        
     protocol = models.CharField(max_length=50)
-    protocol_slug = models.SlugField(max_length=25, blank=True, null=True)
+    protocol_slug = models.SlugField(max_length=50, blank=True, null=True)
     reference = models.ManyToManyField(Reference, blank=True)
     protocol_file = models.FileField(upload_to='protocol', blank=True, null=True)
     protocol_revision = models.IntegerField(blank=True, null=True, help_text="ProtocolWiki page revision number")
