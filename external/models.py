@@ -4,6 +4,7 @@ It defines the structure and behavior of the following models:
 * Contact
 * Vendor
 * Reference
+* AuthorDetails
 
 """
 from django.contrib.auth.models import User
