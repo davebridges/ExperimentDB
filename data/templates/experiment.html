@@ -49,7 +49,7 @@
 	{% endfor %}
 	</ul>
 	</div>
-	
+	{% if evidence.hypothesis_set.all %}
 	<h3><a href="#">Hypotheses</a></h3>	
 	<div id="hypotheses">
 	<ul>
@@ -60,7 +60,7 @@
 	{% endfor %}
 	</ul>
 	</div>
-	
+	{% endif %}
 	<h3><a href="#">Researchers</a></h3>	
 	<div id="Researchers">
 	<ul>
