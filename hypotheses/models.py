@@ -155,7 +155,7 @@ class Process(models.Model):
 
     name = models.CharField(max_length=100, help_text="A biological process, such as endocytosis")
     gene_ontology_id = models.CharField(blank = True, null= True, max_length=15, help_text="This is a gene ontology accesion number in the format GO:0046323 where the number can change.  Find an appropriate gene ontology id at http://amigo.geneontology.org/cgi-bin/amigo/search.cgi")
-    definition = models.CharField(max_length=100, blank=True, null=True)
+    definition = models.CharField(max_length=500, blank=True, null=True)
     assay = models.ManyToManyField('data.Protocol', blank=True, null=True, help_text="The assay we use to monitor this process")
     slug = models.SlugField(max_length=100, blank=True, null=True, editable=False)
 
