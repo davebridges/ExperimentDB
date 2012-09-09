@@ -54,7 +54,7 @@ Software Dependencies
 Downloading and/or unzipping will create a directory named ExperimentDB.  You can update to the newest revision at any time either using git or downloading and re-installing the newer version.  Changing or updating software versions will not alter any saved data, but you will have to update the localsettings.py file (described below).
 
 2. **Python**.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from Python_.
-3. **Django**.  Download from Django_.  This will be automatically installed if you installed experimentdb with pip.  This will be automatically installed if you installed experimentdb with pip.
+3. **Django**.  Download from Django_.  This will be automatically installed if you installed experimentdb with pip.  This will be automatically installed if you installed experimentdb with pip.  The current version supported is Django 1.4
 4. **Database software**.  Typically MySQL is used, but PostgreSQL, Oracle or SQLite can also be used.  You also need to install the python driver for this database (unless you are using SQLite, which is internal to Python 2.5+).  For more information see Instructions_.
 5. **Biopython Packages**.  Download and install from Biopython_. This will be automatically installed if you installed experimentdb with pip.
 6. **South**.  Install using pip (**pip install south**).  This will be automatically installed if you installed experimentdb with pip.
