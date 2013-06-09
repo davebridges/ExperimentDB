@@ -1,57 +1,14 @@
+'''This package is the url redirection for the projects app.'''
+
 from django.conf.urls.defaults import *
-from django.views.generic.list_detail import object_list, object_detail
-from django.views.generic.create_update import create_object, update_object, delete_object
-from django.contrib.auth.decorators import login_required, permission_required
 
-from projects.models import Project
-
-@login_required
-def project_list(*args, **kwargs):
-	return object_list(*args, **kwargs)
-
-@login_required
-def project_detail(*args, **kwargs):
-	return object_detail(*args, **kwargs)
-
-@permission_required('projects.add_project')
-def create_project(*args, **kwargs):
-	return create_object(*args, **kwargs)
-
-@permission_required('projects.change_project')
-def change_project(*args, **kwargs):
-	return update_object(*args, **kwargs)
-
-@permission_required('projects.delete_project')
-def delete_project(*args, **kwargs):
-	return delete_object(*args, **kwargs)
+from projects import views
 
 
 urlpatterns = patterns('',
-	url(r'^new/$', create_project, {
-		'model': Project, 
-		'template_name': 'project_form.html', 
-		'login_required':True 
-		}, name="project-new"),
-    url(r'^(?P<slug>[\w-]+)/$', project_detail, {
-		"queryset": Project.objects.all(), 
-		'template_name': 'project_detail.html',
-		'template_object_name': 'project',
-		'slug_field' : 'project_slug'
-		,}, name="project-detail"),
-	url(r'^(?P<slug>[\w-]+)/edit$', change_project, {
-		'model': Project, 
-		'template_name': 'project_form.html',
-		'login_required':True,
-		'slug_field' : 'project_slug'		
-		,}, name="project-edit"),
-	url(r'^(?P<slug>[\w-]+)/delete$', delete_project, {
-		'model': Project, 
-		'login_required':True,
-		'slug_field' : 'project_slug'
-		,}, name="project-delete"),
-    url(r'^$', project_list, {
-		"queryset": Project.objects.all(), 
-		'template_name': 'project_list.html',
-		'template_object_name': 'project'
-		}, name="project-list"),
+	url(r'^new/$', views.ProjectCreate.as_view(), name="project-new"),
+    url(r'^(?P<slug>[\w-]+)/$', views.ProjectDetail.as_view(), name="project-detail"),
+	url(r'^(?P<slug>[\w-]+)/edit$', views.ProjectUpdate.as_view(), name="project-edit"),
+	url(r'^(?P<slug>[\w-]+)/delete$', views.ProjectDelete.as_view(), name="project-delete"),
+    url(r'^$', views.ProjectList.as_view(), name="project-list"),
 )

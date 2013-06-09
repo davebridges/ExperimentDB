@@ -256,7 +256,7 @@ class AnimalStrain(ReagentInfo):
     '''
     background = models.CharField(max_length=100, blank=True, null=True)
     strain_species = models.ForeignKey('reagents.Species', blank=True, null=True)
-    url = models.URLField(verify_exists=False, blank=True, null=True, help_text="Link to a URI the strain, for example from Jackson Labs or another online database")
+    url = models.URLField(blank=True, null=True, help_text="Link to a URI the strain, for example from Jackson Labs or another online database")
     
     def save(self):
         """The save is over-ridden to slugify the name field into a slugfield."""
@@ -302,7 +302,7 @@ class License(models.Model):
     
     name = models.CharField(max_length=50)
     notes = models.TextField(max_length=1000, blank=True, null=True, help_text="Paste the entire license")
-    url = models.URLField(verify_exists=True, blank=True, null=True, help_text="Link to a web copy of the license")
+    url = models.URLField(blank=True, null=True, help_text="Link to a web copy of the license")
     acknowledgement = models.NullBooleanField(help_text="For use in publications, must the source be acknowledged?")
     distributable = models.NullBooleanField(help_text="Can this reagent be distributed?")
     human_subjects = models.NullBooleanField(help_text="Can this reagents be used on human subjects?")

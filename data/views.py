@@ -9,6 +9,9 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
+
+from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
 from data.models import Experiment, Result, Protocol
 from data.forms import ResultForm, ResultFormSet, ExperimentForm
@@ -73,8 +76,16 @@ def result_new(request, experimentID):
 	else:
 		form = ResultForm()
 	return render_to_response('result_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
+	
+class ExperimentCreate(PermissionRequiredMixin, CreateView):
+    '''This view is for creating a new Experiment object.'''
+    
+    model = Experiment
+    form_class = ExperimentForm
+    template_name = 'experiment_form.html'
+    permission_required = "data.create_experiment" 	
 	 
-class ExperimentEdit(UpdateView):
+class ExperimentEdit(PermissionRequiredMixin, UpdateView):
     '''This view is for editing experiments.
     
     it is controled by the named url experiment-edit and a paramater ExperimentID.'''
@@ -84,9 +95,42 @@ class ExperimentEdit(UpdateView):
     form_class = ExperimentForm
     context_object_name = 'experiment'
     template_name = 'experiment_form.html'
+    permission_required = "data.update_experiment"
+
+class ProtocolCreate(PermissionRequiredMixin, CreateView):
+    '''This view is for creating a new Protocol.'''
     
-    @method_decorator(permission_required('data.change_experiment'))
-    def dispatch(self, *args, **kwargs):
-        """This decorator sets this view to have restricted permissions."""
-        return super(ExperimentEdit, self).dispatch(*args, **kwargs)  
+    model = Protocol
+    template_name = 'protocol_form.html'
+    permission_required = "data.create_protocol"
+
+class ProtocolDetail(LoginRequiredMixin, DetailView):
+    '''This view is for viewing Protocol.'''
     
+    model = Protocol
+    template_name = 'protocol_detail.html'
+    template_object_name = 'protocol'
+
+    
+class ProtocolUpdate(PermissionRequiredMixin, UpdateView):
+    '''This view is for editing a Protocol.'''
+    
+    model = Protocol
+    template_name = 'protocol_form.html'
+    template_object_name = 'protocol'
+    permission_required = "data.update_protocol"    
+    
+class ProtocolDelete(PermissionRequiredMixin, DeleteView):
+    '''This view is for deleting a Protocol.'''
+    
+    model = Protocol
+    template_name = 'confirm_delete.html'
+    template_object_name = 'object'
+    permission_required = "data.delete_protocol"              
+    
+class ProtocolList(LoginRequiredMixin, ListView):
+    '''This view is for viewing a list of Protocol.'''
+    
+    model = Protocol
+    template_name = 'protocol_list.html'
+    template_object_name = 'protocol_list'         

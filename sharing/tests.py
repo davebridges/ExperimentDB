@@ -20,7 +20,7 @@ MODELS = [Institution, Laboratory, Recipient, ConstructShipment]
 class ConstructShipmentModelTests(TestCase):
     """Tests the model attributes of ConstructShipment objects contained in the reagents app."""
 
-    fixtures = ['test_construct','test_recipient', 'test_laboratory']
+    fixtures = ['test_construct','test_recipient', 'test_laboratory','test_institution']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -54,7 +54,7 @@ class ConstructShipmentModelTests(TestCase):
 class RecipientModelTests(TestCase):
     """Tests the model attributes of Recipient objects contained in the reagents app."""
 
-    fixtures = ['test_laboratory',]
+    fixtures = ['test_laboratory','test_institution']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -125,7 +125,7 @@ class LaboratoryModelTests(TestCase):
 class InstitutionModelTests(TestCase):
     """Tests the model attributes of Laboratory objects contained in the reagents app."""
 
-    fixtures = []
+    fixtures = ['test_laboratory','test_institution']
     
     def setUp(self):
         """Instantiate the test client."""

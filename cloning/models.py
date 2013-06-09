@@ -50,7 +50,7 @@ class Cloning(models.Model):
     @models.permalink
     def get_absolute_url(self):
         '''The permalink for a cloning object is the primary key linked to **/clones/cloning/<ID>**'''
-        return ('cloning_detail', [str(self.id)])
+        return ('cloning-detail', [str(self.id)])
 
 class Mutagenesis(models.Model):
     """This model contains data describing the generation of muationns in clones.
@@ -84,4 +84,4 @@ class Mutagenesis(models.Model):
     @models.permalink
     def get_absolute_url(self):
         '''The permalink for a mutagenesis object is the primary key linked to **/clones/mutagenesis/<ID>**'''
-        return ('mutagenesis_detail', [str(self.id)])
+        return ('mutagenesis-detail', [str(self.id)])
