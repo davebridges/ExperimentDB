@@ -17,7 +17,7 @@ MODELS = [Hypothesis, Manipulation, Effect, Process, Context, Evidence]
 class HypothesisModelTests(TestCase):
     """Tests the model attributes of Hypothesis objects contained in the hypotheses app."""
 
-    fixtures = ['test_manipulation','test_protein', 'test_process', 'test_entity', 'test_context', 'test_evidence', 'test_hypothesis', 'initial_data']
+    fixtures = ['test_manipulation','test_protein', 'test_process', 'test_entity', 'test_context', 'test_evidence', 'test_hypothesis', 'test_effect']
     
     def setUp(self):
         """Instantiate the test client.  Creates a test user."""
