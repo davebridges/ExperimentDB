@@ -56,16 +56,13 @@ Downloading and/or unzipping will create a directory named ExperimentDB.  You ca
 2. **Python**.  Requires Version 2.6, is not yet compatible with Python 3.0.  Download from Python_.
 3. **Django**.  Download from Django_.  This will be automatically installed if you installed experimentdb with pip.  This will be automatically installed if you installed experimentdb with pip.  The current version supported is Django 1.4
 4. **Database software**.  Typically MySQL is used, but PostgreSQL, Oracle or SQLite can also be used.  You also need to install the python driver for this database (unless you are using SQLite, which is internal to Python 2.5+).  For more information see Instructions_.
-5. **Biopython Packages**.  Download and install from Biopython_. This will be automatically installed if you installed experimentdb with pip.
-6. **South**.  Install using pip (**pip install south**).  This will be automatically installed if you installed experimentdb with pip.
-7. **Django Ajax Select**.  Install using pip (**pip install django-ajax-selects**).  This will be automatically installed if you installed experimentdb with pip.
-8. **Python Imaging Library**.  Install using pip (**pip install pil**).  Available at PIL_.  This will be automatically installed if you installed experimentdb with pip.
+5. **Python Dependencies** These can be automatically installed using pip with the following command from the root directory::
+
+    pip install -r requirements.txt
 
 .. _Python: http://www.python.org/download
 .. _Django: http://www.djangoproject.com/download/
 .. _Instructions: http://docs.djangoproject.com/en/dev/topics/install/database-installation
-.. _Biopython: http://biopython.org
-.. _PIL: http://www.pythonware.com/products/pil/
 
 Database Setup
 --------------
@@ -85,6 +82,7 @@ Database Setup
     
 6. ExperimentDB upgrades may involve schema changes.  We use south to control schema migrations.  To update database schema, first initial migrations must be run, shortly after installation.  If an upgrade (either via SVN or by a new download) involves a change in the database schema, errors may occur.  Look at HISTORY in the root folder to see if an upgrade invovles schema migrations.  To set up south, shortly after installation enter at the command line::
 
+    python manage.py syncdb
     python manage.py schemamigration data --initial
     python manage.py schemamigration datasets --initial
     python manage.py schemamigration reagents --initial
@@ -97,8 +95,7 @@ Database Setup
 	 
 7. Generate the initial database tables then move the static files to the STATIC_ROOT by entering::
 
-    python manage.py syncdb
-    python manage.py migrate
+    python manage.py migrate --fake
     python manage.py collectstatic
 
 8. When asked, generate an administrative superuser and set the email and password.
