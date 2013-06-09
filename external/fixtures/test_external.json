@@ -13,7 +13,22 @@
             "address": "", 
             "email": ""
         }
-    }, 
+    },
+    {
+        "pk": 2, 
+        "model": "external.contact", 
+        "fields": {
+            "website": "", 
+            "first_name": "Test", 
+            "last_name": "User2", 
+            "contactID": "", 
+            "comments": "", 
+            "public": false, 
+            "middle_names": "", 
+            "address": "", 
+            "email": ""
+        }
+    },     
     {
         "pk": 1, 
         "model": "external.vendor", 

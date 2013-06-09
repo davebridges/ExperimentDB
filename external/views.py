@@ -29,7 +29,7 @@ class ReferenceDetail(LoginRequiredMixin, DetailView):
     model = Reference
     template_name = 'reference_detail.html'
     template_object_name = 'reference'
-
+    slug_field = 'title_slug'
     
 class ReferenceUpdate(PermissionRequiredMixin, UpdateView):
     '''This view is for editing a Reference.'''
@@ -37,7 +37,8 @@ class ReferenceUpdate(PermissionRequiredMixin, UpdateView):
     model = Reference
     template_name = 'reference_form.html'
     template_object_name = 'reference'
-    permission_required = "external.update_reference"    
+    permission_required = "external.update_reference" 
+    slug_field = 'title_slug'       
     
 class ReferenceDelete(PermissionRequiredMixin, DeleteView):
     '''This view is for deleting a Reference.'''
@@ -45,7 +46,8 @@ class ReferenceDelete(PermissionRequiredMixin, DeleteView):
     model = Reference
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
-    permission_required = "external.delete_reference"              
+    permission_required = "external.delete_reference"
+    slug_field = 'title_slug'              
     
 class ReferenceList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Reference.'''

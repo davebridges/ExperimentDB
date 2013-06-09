@@ -24,7 +24,7 @@ MODELS = [Contact, Vendor, Reference]
 class VendorModelTests(TestCase):
     """Tests the model attributes of Vendor objects contained in the reagents app."""
 
-    fixtures = ['test_external']
+    fixtures = ['test_external', 'test_publication']
     
     def setUp(self):
         """Instantiate the test client."""
@@ -99,6 +99,7 @@ class ReferenceModelTests(TestCase):
     def test_paper_absolute_url(self):
         '''This tests the title_slug field of a `::class:Reference`.'''
         test_publication = Reference(title='Test Publication', laboratory_paper=True)
+        test_publication.get_absolute_url()
         test_publication.save()
         self.assertEqual(test_publication.get_absolute_url(), "/reference/test-publication/") 
      
@@ -158,7 +159,7 @@ class AuthorDetailsModelTests(TestCase):
 class ContactModelTests(TestCase):
     """Tests the model attributes of Contact objects contained in the reagents app."""
 
-    fixtures = ['test_external']
+    fixtures = ['test_external', 'test_publication']
     
     def setUp(self):
         """Instantiate the test client."""

@@ -109,7 +109,7 @@ class Reference(models.Model):
     @models.permalink
     def get_absolute_url(self):
         '''the permalink for a paper detail page is /papers/[title_slug]'''
-        return ('paper-details', [str(self.title_slug)])   
+        return ('reference-details', [str(self.title_slug),])   
 
     def save(self, *args, **kwargs):
         '''The title is slugified upon saving into title_slug.'''
