@@ -300,7 +300,7 @@ class StrainModelTests(TestCase):
 class SpeciesModelTests(TestCase):
     """Tests the model attributes of Species objects contained in the reagents app."""
 
-    fixtures = []
+    fixtures = ['test_species',]
     
     def setUp(self):
         """Instantiate the test client."""
@@ -335,7 +335,7 @@ class SpeciesModelTests(TestCase):
 class SelectionModelTests(TestCase):
     """Tests the model attributes of Selection objects contained in the reagents app."""
 
-    fixtures = []
+    fixtures = ['test_selection',]
     
     def setUp(self):
         """Instantiate the test client."""
