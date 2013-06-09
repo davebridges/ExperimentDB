@@ -10,7 +10,7 @@
 	</script>
 {% endblock %}
 {% block content %}
-<form method="POST" {% if experiment %} action="{% url experiment-edit experiment.experimentID %}"{% else %} action="{% url experiment-new %}"{% endif%}>{% csrf_token %}
+<form method="POST" {% if experiment %} action="{% url 'experiment-edit' experiment.experimentID %}"{% else %} action="{% url 'experiment-new' %}"{% endif%}>{% csrf_token %}
 <table class="sortable">
 {{form}}
  </table>

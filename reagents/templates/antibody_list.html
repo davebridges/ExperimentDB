@@ -5,7 +5,7 @@
 {% block head_title %}Antibody List{% endblock %}
 {% block title %}Antibody List{% endblock %}
 {% block content %}
-{% if perms.reagents.add_antibody %}<p>Click <a href="{% url antibody-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" alt="here" /></a> for a new antibody</p>{% endif %}
+{% if perms.reagents.add_antibody %}<p>Click <a href="{% url 'antibody-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" alt="here" /></a> for a new antibody</p>{% endif %}
 <table class="sortable">
 <thead>
 	<tr>
@@ -20,23 +20,23 @@
 <tbody>
 {% for antibody in object_list %}
 <tr>
-	<td><a href="{% url antibody-detail antibody.id %}">{{ antibody }}</a></td>
+	<td><a href="{% url 'antibody-detail' antibody.id %}">{{ antibody }}</a></td>
 	<td>{{antibody.protein_size}}</td>
     <td>{{antibody.dilution}}</td>
 	<td>{{antibody.source_species}}</td>
 	<td>{{antibody.catalog}}</td>
 	<td>
-<a href="{% url antibody-detail antibody.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" alt="Detail" /></a>
+<a href="{% url 'antibody-detail' antibody.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" alt="Detail" /></a>
 {% if perms.reagents.change_antibody %}
-<a href="{% url antibody-edit antibody.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" alt="Edit"/></a>
+<a href="{% url 'antibody-edit' antibody.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" alt="Edit"/></a>
 {% endif %}
 {% if perms.reagents.delete_antibody %}
-<a href="{% url antibody-delete antibody.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" alt="Delete"/></a>
+<a href="{% url 'antibody-delete' antibody.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" alt="Delete"/></a>
 {% endif %}
 </td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="{% antibody-new %}">here</a> for a new antibody</p>
+<p>Click <a href="{% url 'antibody-new' %}">here</a> for a new antibody</p>
 {% endblock %}

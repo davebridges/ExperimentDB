@@ -22,20 +22,20 @@
 <div id = "identification" class = "grid_3">
         {% if user.is_authenticated %}
                 <p typeof="foaf:Person">Welcome, <span property="foaf:givenname">{{ user.first_name }} </span><span property="foaf:surname">{{ user.last_name }}</span><br />
-		<a class="fg-button ui-state-default ui-corner-all" href="{% url django.contrib.auth.views.login  %}">Change User</a></p>
+		<a class="fg-button ui-state-default ui-corner-all" href="{% url 'django.contrib.auth.views.login'  %}">Change User</a></p>
         {% else %}
-                <p>Welcome, please <a class="fg-button ui-state-default ui-corner-all"  href="{% url django.contrib.auth.views.login %}">log in.</a></p>
+                <p>Welcome, please <a class="fg-button ui-state-default ui-corner-all"  href="{% url 'django.contrib.auth.views.login' %}">log in.</a></p>
         {% endif %}
 </div>
 <div id = "menu" class = "grid_9">
 	<ul>
-	<li><a href="{% url project-list %}" target="_self">Projects</a></li>
-	<li><a href="{% url experiment-list %}" target="_self">Experiments</a></li>
-	<li><a href="{% url protein-list %}" target="_self">Proteins</a></li>
-	<li><a href="{% url reagent-list %}" target="_self">Reagents</a></li>
-	<li><a href="{% url protocol-list %}" target="_self">Protocols</a></li>
-	{% if user.is_staff %}<li><a href="{% url admin:index %}" target="_self">Admin</a></li>{% endif %}
-	<li><a href="{% url search %}" target="_self">Search</a></li>
+	<li><a href="{% url 'project-list' %}" target="_self">Projects</a></li>
+	<li><a href="{% url 'experiment-list' %}" target="_self">Experiments</a></li>
+	<li><a href="{% url 'protein-list' %}" target="_self">Proteins</a></li>
+	<li><a href="{% url 'reagent-list' %}" target="_self">Reagents</a></li>
+	<li><a href="{% url 'protocol-list' %}" target="_self">Protocols</a></li>
+	{% if user.is_staff %}<li><a href="{% url 'admin:index' %}" target="_self">Admin</a></li>{% endif %}
+	<li><a href="{% url 'search' %}" target="_self">Search</a></li>
 	</ul>
 </div>
 

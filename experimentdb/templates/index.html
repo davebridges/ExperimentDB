@@ -51,20 +51,20 @@
 <div class="dialog" id="data-info" title="Data Entry">
 	<p>You can look at a list of experimental results:</p>
 	<ul>
-	<li><a href="{% url experiment-list %}"><button class='idea'>Experiment List</button></a></li>
-	<li><a href="{% url project-list %}"><button class='idea'>Project Summaries</button></a></li>
+	<li><a href="{% url 'experiment-list' %}"><button class='idea'>Experiment List</button></a></li>
+	<li><a href="{% url 'project-list' %}"><button class='idea'>Project Summaries</button></a></li>
 	</ul>	
 </div>
 
 <div class="dialog" id="reagents-info" title="Reagent Information">
-	<p>You can see a full list of reagents <a href={% url reagent-list %}><button class='reagent'>here</button></a> or you can look for specific reagent types below:</p>
+	<p>You can see a full list of reagents <a href={% url 'reagent-list' %}><button class='reagent'>here</button></a> or you can look for specific reagent types below:</p>
 	<ul>
-	<li><a href="{% url construct-list %}"><button class='reagent'>Plasmids and DNA Constructs</button></a></li>
-	<li><a href="{% url antibody-list %}"><button class='reagent'>Antibodies</button></a></li>
-	<li><a href="{% url chemical-list %}"><button class='reagent'>Chemicals</button></a></li>	
-	<li><a href="{% url primer-list %}"><button class='reagent'>Primers and RNAi</button></a></li>
-	<li><a href="{% url strain-list %}"><button class='reagent'>Bacterial and Strains</button></a></li>
-	<li><a href="{% url cell-list %}"><button class='reagent'>Cell Lines</button></a></li>
+	<li><a href="{% url 'construct-list' %}"><button class='reagent'>Plasmids and DNA Constructs</button></a></li>
+	<li><a href="{% url 'antibody-list' %}"><button class='reagent'>Antibodies</button></a></li>
+	<li><a href="{% url 'chemical-list' %}"><button class='reagent'>Chemicals</button></a></li>	
+	<li><a href="{% url 'primer-list' %}"><button class='reagent'>Primers and RNAi</button></a></li>
+	<li><a href="{% url 'strain-list' %}"><button class='reagent'>Bacterial and Strains</button></a></li>
+	<li><a href="{% url 'cell-list' %}"><button class='reagent'>Cell Lines</button></a></li>
 	<li><a href=""><button class='reagent'>Animal Models</button></a></li>
 	</ul>
 </div>

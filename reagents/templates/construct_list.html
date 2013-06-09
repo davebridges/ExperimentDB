@@ -6,9 +6,9 @@
 {% block title %}Construct List{% endblock %}
 {% block content %}
 {% if perms.reagents.add_construct %}
-<p>Click <a href="{% url construct-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" alt="here" /></a> for a new construct</p>
+<p>Click <a href="{% url 'construct-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" alt="here" /></a> for a new construct</p>
 {% endif %}
-<p>To see contructs shipped out click <a href="{% url shipment-list %}"><img src="{{STATIC_URL}}img/icons/Network Connections.png" alt="here" width=25/></a></p>
+<p>To see contructs shipped out click <a href="{% url 'shipment-list' %}"><img src="{{STATIC_URL}}img/icons/Network Connections.png" alt="here" width=25/></a></p>
 <table class="sortable">
 	<thead>
 		<tr>
@@ -20,11 +20,11 @@
 	<tbody>
 {% for construct in object_list %}
 		<tr>
-			<td><a href="{% url construct-detail construct.id %}">{{ construct }}</a></td>
+			<td><a href="{% url 'construct-detail' construct.id %}">{{ construct }}</a></td>
 			<td>{{ construct.plasmid }}</td>
 			<td>{{ construct.box }}</td>
 			<td>
-<a href="{% url construct-detail construct.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"/></a>{% if perms.reagents.change_construct %}<a href="{% url construct-edit construct.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"/></a>{% endif %}{% if perms.reagents.delete_construct %}<a href="{% url construct-delete construct.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete"/></a>
+<a href="{% url 'construct-detail' construct.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"/></a>{% if perms.reagents.change_construct %}<a href="{% url 'construct-edit' construct.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="Edit"/></a>{% endif %}{% if perms.reagents.delete_construct %}<a href="{% url 'construct-delete' construct.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width=25 alt="delete"/></a>
 {% endif %}
 			</td>
 		</tr>

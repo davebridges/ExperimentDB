@@ -14,12 +14,12 @@
 <tbody>
 {% for subproject in subproject_list %}
 <tr>
- <th><a href="{% url subproject-detail subproject.subproject_slug %}">{{ subproject }}</a></th>
+ <th><a href="{% url 'subproject-detail' subproject.subproject_slug %}">{{ subproject }}</a></th>
  <td>{{ subproject.comments }}</td>
  <td>{{ subproject.experiment_set.count }}</td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
-{% if perms.projects.add_subproject %}<p>Click <a href="{% url subproject-new %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new subproject.</p>{% endif %}
+{% if perms.projects.add_subproject %}<p>Click <a href="{% url 'subproject-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"></a> for a new subproject.</p>{% endif %}
 {% endblock %}

@@ -6,13 +6,13 @@
 <h2>{{ object }}</h2>
 <div class="fg-buttonset">
 {% if perms.hypotheses.create_manipulation %}
-<a href="{% url manipulation-new %}"><button class="fg-button ui-state-default ui-corner-left"><span class="ui-icon ui-icon-circle-plus"></span>Add New Manipulation</button></a>
+<a href="{% url 'manipulation-new' %}"><button class="fg-button ui-state-default ui-corner-left"><span class="ui-icon ui-icon-circle-plus"></span>Add New Manipulation</button></a>
 {% endif %}
 {% if perms.hypotheses.change_manipulation %}
-<a href="{% url manipulation-edit object.id %}"><button class="fg-button ui-state-default"><span class="ui-icon ui-icon-pencil"></span>Edit</button></a>
+<a href="{% url 'manipulation-edit' object.id %}"><button class="fg-button ui-state-default"><span class="ui-icon ui-icon-pencil"></span>Edit</button></a>
 {% endif %}
 {% if perms.hypotheses.delete_manipulation %}
-<a href="{% url manipulation-delete object.id %}"><button class="fg-button ui-state-default ui-corner-right"><span class="ui-icon ui-icon-trash"></span>Delete</button></a>
+<a href="{% url 'manipulation-delete' object.id %}"><button class="fg-button ui-state-default ui-corner-right"><span class="ui-icon ui-icon-trash"></span>Delete</button></a>
 {% endif %}
 </div>
 <table>
