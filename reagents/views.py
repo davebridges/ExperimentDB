@@ -7,6 +7,7 @@ from django.utils import simplejson
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
+from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
@@ -69,7 +70,8 @@ class ConstructDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_construct"              
-    
+    success_url = reverse_lazy('construct-list')   
+
 class ConstructList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Construct.'''
     
@@ -107,7 +109,8 @@ class AntibodyDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_antibody"              
-    
+    success_url	= reverse_lazy('antibody-list')
+
 class AntibodyList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Antibody.'''
     
@@ -145,6 +148,7 @@ class ChemicalDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_chemical"              
+    success_url	= reverse_lazy('chemical-list')
     
 class ChemicalList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Chemical.'''
@@ -183,6 +187,7 @@ class CellDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_cell"              
+    success_url	= reverse_lazy('cell-list')
     
 class CellList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Cell.'''
@@ -221,6 +226,7 @@ class PrimerDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_primer"              
+    success_url	= reverse_lazy('primer-list')
     
 class PrimerList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Primer.'''
@@ -259,6 +265,7 @@ class StrainDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_strain"              
+    success_url	= reverse_lazy('strain-list')
     
 class StrainList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of Strain.'''
@@ -297,6 +304,7 @@ class LicenseDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'confirm_delete.html'
     template_object_name = 'object'
     permission_required = "reagents.delete_license"              
+    success_url	= reverse_lazy('license-list')
     
 class LicenseList(LoginRequiredMixin, ListView):
     '''This view is for viewing a list of License.'''
