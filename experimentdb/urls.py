@@ -39,6 +39,8 @@ urlpatterns = patterns('',
 	(r'^cell-lines?/', include('reagents.urls.cell')),
 
 	(r'^chemicals?/', include('reagents.urls.chemical')),
+
+        (r'^animal_models?/', include('reagents.urls.animal_model')),
 	
 	(r'^yeast_strains?/', include('reagents.urls.strain')),
     
