@@ -205,11 +205,6 @@ class Entity(models.Model):
         """The unicode representation of an entity is its name."""
         return u'%s' % self.name
 		
-    def clean(self):
-        """This validates that an entity has either a chemical or a protein noted."""
-        if self.chemical == None and self.protein == None:
-            raise ValidationError('Choose either a chemical or protein.')	
-        
     class Meta:
         verbose_name_plural = 'entities'
         
@@ -243,7 +238,7 @@ class Evidence(models.Model):
     The required fields for a piece of evidence are the evidence_type, the citation_type and whether it is public (which is set to False as a default).  There are optional fields for paper or contact.  The clean method is over-ridden to ensure that when a evidence_type is a reference, a paper is entered and when a evidence_type is a communication then a contact is entered."""
 
     evidence_type = models.CharField(max_length=50, choices = EVIDENCE_TYPE, help_text="Type of evidence")
-    citation_type = models.ForeignKey('CitationType')
+    citation_type = models.ForeignKey('CitationType', help_text="See http://purl.org/spar/cito/")
     experiment = models.ForeignKey('data.Experiment', blank=True, null=True)	
     paper = models.ForeignKey('external.Reference', blank=True, null=True)	
     contact = models.ForeignKey('external.Contact', blank=True, null=True, help_text="Source of unpublished evidence.")

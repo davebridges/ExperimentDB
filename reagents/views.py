@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
-from reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License
+from reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License, AnimalStrain
 
 @login_required
 def index(request):
@@ -21,7 +21,15 @@ def index(request):
 	cells = Cell.objects.all()
 	primers = Primer.objects.all()
 	strains = Strain.objects.all()
-	return render_to_response('reagent_list.html', {'constructs':constructs, 'antibodies':antibodies, 'chemicals': chemicals, 'cells':cells, 'primers':primers, 'strains':strains },context_instance=RequestContext(request)) 
+        animals = AnimalStrain.objects.all()
+	return render_to_response('reagent_list.html', {'constructs':constructs, 
+                                                        'antibodies':antibodies, 
+                                                        'chemicals': chemicals, 
+                                                        'cells':cells, 
+                                                        'primers':primers, 
+                                                        'strains':strains,
+                                                        'animals':animals
+                                  },context_instance=RequestContext(request)) 
 
 	
 def antibody_lookup(request):
@@ -312,3 +320,42 @@ class LicenseList(LoginRequiredMixin, ListView):
     model = License
     template_name = 'license_list.html'
     template_object_name = 'license_list'                     
+
+class AnimalStrainCreate(PermissionRequiredMixin, CreateView):
+    '''This view is for creating a new AnimalStrain.'''
+    
+    model = AnimalStrain
+    template_name = 'animalstrain_form.html'
+    permission_required = "reagents.create_animalstrain"
+
+class AnimalStrainDetail(LoginRequiredMixin, DetailView):
+    '''This view is for viewing AnimalStrain.'''
+    
+    model = AnimalStrain
+    template_name = 'animalstrain_detail.html'
+    template_object_name = 'animalstrain'
+
+    
+class AnimalStrainUpdate(PermissionRequiredMixin, UpdateView):
+    '''This view is for editing a AnimalStrain.'''
+    
+    model = AnimalStrain
+    template_name = 'animalstrain_form.html'
+    template_object_name = 'animalstrain'
+    permission_required = "reagents.update_animalstrain"    
+    
+class AnimalStrainDelete(PermissionRequiredMixin, DeleteView):
+    '''This view is for deleting a AnimalModel.'''
+    
+    model = AnimalStrain
+    template_name = 'confirm_delete.html'
+    template_object_name = 'object'
+    permission_required = "reagents.delete_animalstrain"              
+    success_url = reverse_lazy('animal-list')   
+
+class AnimalStrainList(LoginRequiredMixin, ListView):
+    '''This view is for viewing a list of AnimalStrain.'''
+    
+    model = AnimalStrain
+    template_name = 'animalstrain_list.html'
+    template_object_name = 'animalstrain_list' 
