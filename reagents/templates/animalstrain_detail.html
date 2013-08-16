@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head_title %}Animal Model Detail - {{ object }}{% endblock %}
+{% block title %}Animal Model Detail - {{ object }}{% endblock %}
+{% block content %}
+<div = "summary">
+<p>{{ object.notes|safe }}</p>
+
+{% if perms.reagents.change_animalstrain %}<p>To update this animal model details click <a href="{% url 'animal-edit' object.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width=25 alt="edit"></a></p>{% endif %}
+  </div>
+<div id="cohorts">
+<h2>Cohorts of This Model</h2>
+<ul>
+{% for cohort in object.animalcohort_set.all %}
+<li><a href="{{ cohort.get_absolute_url }}">{{ cohort }}</a></li>
+{% endfor %}
+</ul>
+</div>
+<div id="experiments">
+{% with object.experiment_set.all as experiment_list %}
+{% include "experiment_list_table.html" %}
+{% endwith %}
+</div>
+{% include "comment.html" %}
+{% endblock %}

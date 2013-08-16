@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if object %}Update Animal Strain {{object}}{% else %} New Animal Strain {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Animal Strain {{object}}{% else %} New Animal Strain {% endif %}{% endblock %}
+{% block content %}
+<form method="post" {% if object %} action="{% url 'animal-edit' object.id %}"{% else %} action="{% url 'animal-new' %}"{% endif%}>{% csrf_token %}
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}
