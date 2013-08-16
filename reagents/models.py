@@ -84,7 +84,7 @@ class Antibody(ReagentInfo):
     """
     protein_size = models.CharField(max_length=30, blank=True, null=True)
     source_species = models.CharField(max_length=25, choices=SPECIES, help_text="The species in which the antibody was raised in, i.e. which secondary antibody to use")
-    species = models.ForeignKey('Species', blank=True, null=True, help_text="The species in which the antibody was raised in, i.e. which secondary antibody to use")
+    #species = models.ForeignKey('Species', blank=True, null=True, help_text="The species in which the antibody was raised in, i.e. which secondary antibody to use")
     catalog = models.CharField(max_length=25, blank =True, null=True)
     dilution = models.IntegerField(blank=True, null=True, help_text="What fold dilution is appropriate for this antibody")
 
