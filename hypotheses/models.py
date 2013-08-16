@@ -211,7 +211,7 @@ class Entity(models.Model):
             raise ValidationError('Choose either a chemical or protein.')	
         
     class Meta:
-        verbose_name_plural = 'processes'
+        verbose_name_plural = 'entities'
         
 	
 class Context(models.Model):
