@@ -1,0 +1,24 @@
+[
+{
+    "pk": 1, 
+    "model": "reagents.animalstrain", 
+    "fields": {
+        "box": null, 
+        "strain_species": null, 
+        "vendor": null, 
+        "name": "Fixture Animal Strain", 
+        "license": null, 
+        "url": null, 
+        "notes": null, 
+        "researcher": [], 
+        "public": false, 
+        "source": null, 
+        "location": "-20", 
+        "background": null, 
+        "published": false, 
+        "protein": [], 
+        "slug": "fixture-animal-strain", 
+        "reference": []
+    }
+}
+]

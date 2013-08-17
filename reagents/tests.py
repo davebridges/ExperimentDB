@@ -461,3 +461,94 @@ class LicenseViewTests(TestCase):
         #verifies that a non-existent object returns a 404 error.
         null_response = self.client.get('/license/2/edit')
         self.assertEqual(null_response.status_code, 404)          
+       
+class AnimalStrainViewTests(TestCase):
+
+    fixtures = ['test_animalstrain',]
+
+    def setUp(self):
+        """Instantiate the test client.  Creates a test user."""
+        self.client = Client()
+        self.test_user = User.objects.create_user('testuser', 'blah@blah.com', 'testpassword')
+        self.test_user.is_superuser = True
+        self.test_user.is_active = True
+        self.test_user.save()
+        self.assertEqual(self.test_user.is_superuser, True)
+        login = self.client.login(username='testuser', password='testpassword')
+        self.failUnless(login, 'Could not log in')
+
+    def tearDown(self):
+        """Depopulate created model instances from test database."""
+        for model in MODELS:
+            for obj in model.objects.all():
+                obj.delete()
+
+    def test_animal_detail(self):
+        """This tests the animal-detail view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/animal_model/1')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('object' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'animalstrain_detail.html')
+        self.assertEqual(test_response.context['object'].pk, 1)
+        self.assertEqual(test_response.context['object'].name, u'Fixture Animal Strain')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/animal_model/2')
+        self.assertEqual(null_response.status_code, 404)  
+
+    def test_animal_new(self):
+        """This tests the license-new view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/animal_model/new')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTemplateUsed(test_response, 'base.html')
+        self.assertTemplateUsed(test_response, 'animalstrain_form.html') 
+
+    def test_animal_edit(self):
+        """This tests the animal-edit view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/animal_model/1/edit')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('object' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'animalstrain_form.html')
+        self.assertEqual(test_response.context['object'].pk, 1)
+        self.assertEqual(test_response.context['object'].name, u'Fixture Animal Strain')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/animal_model/2/edit')
+        self.assertEqual(null_response.status_code, 404)        
+        
+    def test_animal_delete(self):
+        """This tests the animal-delete view, ensuring that templates are loaded correctly.  
+
+        This view uses a user with superuser permissions so does not test the permission levels for this view."""
+        
+        test_response = self.client.get('/animal_model/1/delete')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('object' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'confirm_delete.html')
+        self.assertEqual(test_response.context['object'].pk, 1)
+        self.assertEqual(test_response.context['object'].name, u'Fixture Animal Strain')
+
+        #verifies that a non-existent object returns a 404 error.
+        null_response = self.client.get('/animal_model/2/delete')
+        self.assertEqual(null_response.status_code, 404)
+        
+    def test_animal_list(self):
+        """This tests the animal-list view, ensuring that templates and objects are loaded correctly.
+        
+        This view uses as user with superuser permissions so does not test the permission levels for this view."""  
+        
+        test_response = self.client.get('/animal_model')
+        self.assertEqual(test_response.status_code, 200)
+        self.assertTrue('animalstrain_list' in test_response.context)        
+        self.assertTemplateUsed(test_response, 'animalstrain_list.html')
+        self.assertEqual(test_response.context['animalstrain_list'][0].pk, 1)
+        self.assertEqual(test_response.context['animalstrain_list'][0].name, u'Fixture Animal Strain')     
