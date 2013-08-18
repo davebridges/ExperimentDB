@@ -10,6 +10,9 @@ localsettings.py
 #any migrations
 */migrations/*
 
+#build directories from documentation
+_build*
+
 # Packages
 *.egg
 *.egg-info

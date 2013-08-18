@@ -11,6 +11,16 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   README
+   modules/data
+   modules/reagents
+   modules/hypotheses
+   modules/projects
+   modules/proteins
+   modules/cloning
+   modules/sharing
+   modules/external
+   modules/datasets
 
 
 Indices and tables
