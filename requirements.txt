@@ -3,4 +3,5 @@ South
 PIL
 django-ajax-selects
 braces
+django-debug-toolbar
 biopython
