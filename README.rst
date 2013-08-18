@@ -1,3 +1,5 @@
+.. image:: https://api.travis-ci.org/davebridges/ExperimentDB.png
+
 ExperimentDB
 ============
 
