@@ -78,7 +78,6 @@ INSTALLED_APPS = (
     'ajax_select',
     'south',
     'PIL',
-	'debug_toolbar',
 	'braces'
 )
 
