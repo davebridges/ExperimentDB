@@ -24,6 +24,7 @@ MANIPULATION_TYPE = (
 	('Overexpression', 'Overexpression'),
 	('Knockdown', 'Knockdown'),
 	('Knockout', 'Knockout'),
+        ('Process','Process')
 )
 
 CONTEXT_TYPE = (
@@ -104,6 +105,7 @@ class Manipulation(models.Model):
     chemical = models.ForeignKey('reagents.Chemical', blank=True, null=True, help_text="Enter a chemical or a protein_added when type is treatment")
     protein_added = models.ForeignKey('proteins.Protein', blank=True, null=True, related_name="stimulating_protein", help_text="Use this or chemical when type is treatment.  This refers to a stimulating protein, not a protein being tested")	
     protein = models.ForeignKey('proteins.Protein', blank=True, null=True, related_name="target_protein", help_text="Select the target of the knockdown/knockout/inhibition/overexpression.")
+    process = models.ForeignKey('Process', blank=True, null=True, help_text='A normal or abnormal biological process')
 	
     def clean(self):
         """This validates that a treatment has a chemical or a protein_added."""
@@ -116,9 +118,10 @@ class Manipulation(models.Model):
         if self.type == "Knockdown" and self.protein == None:
             raise ValidationError('Choose a protein which is knocked down.')
         """This validates that a knockout has a protein target.""" 
-        if self.type == "Knockout"	and self.protein == None:
+        if self.type == "Knockout" and self.protein == None:
             raise ValidationError('Choose a protein which is knocked out')
-
+        if self.type == "Process" and self.process == None:
+            raise ValidationError('Chose a relevant biological process.')
 			
     def __unicode__(self):
         """The unicode representation depends on the type of manipulation."""	
@@ -126,6 +129,8 @@ class Manipulation(models.Model):
             return u'%s and %s %s' % (self.chemical, self.protein_added, self.type)
         elif self.type == "Treatment" and self.chemical:
             return u'%s %s' % (self.chemical, self.type)
+        elif self.type == "Process" and self.process:
+            return u'%s' %self.process
         elif self.type == "Treatment" and self.protein_added:
             return u'%s %s' % (self.protein_added, self.type)
         else:
