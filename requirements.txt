@@ -2,6 +2,6 @@ Django==1.5.1
 South
 PIL
 django-ajax-selects
-braces
+django-braces
 django-debug-toolbar
 biopython
