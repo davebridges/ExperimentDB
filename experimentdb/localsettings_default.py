@@ -31,7 +31,7 @@ TIME_ZONE = 'America/Detroit'
 
 DATABASES = {
     'default': {
-        'NAME': 'test.db', # Or path to database file if using sqlite3.
+        'NAME': 'default.db' # Or path to database file if using sqlite3.
         'ENGINE': 'django.db.backends.sqlite3', #  Choose one of 'django.db.backends.postgresql_psycopg2','django.db.backends.postgresql', 'django.db.backends.mysql', 'django.db.backends.sqlite3', 'django.db.backends.oracle'
         'USER': '',  # Not used with sqlite3.
         'PASSWORD': '', # Not used with sqlite3
