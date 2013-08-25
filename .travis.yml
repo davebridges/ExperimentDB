@@ -5,7 +5,7 @@ python:
 env:
   global:
   - DJANGO="1.5"
-  - DJANGO_SETTINGS_MODULE="experimentdb.settings"
+  - DJANGO_SETTINGS_MODULE="experimentdb.travis_settings"
 
 # command to install dependencies
 install:
