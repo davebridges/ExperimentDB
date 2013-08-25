@@ -94,7 +94,6 @@ class AntibodyModelTests(TestCase):
              name = "test antibody", 
              protein_size = "120 kDa",
              source_species = "rabbit",
-             species = Species.objects.get(pk=1),
              catalog = "abc1234",
              location = "-20",
              box = "sample box",

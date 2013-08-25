@@ -12,7 +12,6 @@ TEMPLATE_DEBUG = DEBUG
 try:
     from localsettings import *
 except ImportError:
-    from localsettings_defualt import *
     print 'localsetting could not be imported'
 
 # Language code for this installation. All choices can be found here:
