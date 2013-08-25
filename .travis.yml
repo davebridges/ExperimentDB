@@ -5,7 +5,7 @@ python:
 env:
   global:
   - DJANGO="1.5"
-  - DJANGO_SETTINGS_MODULE="experimentdb.settings"
+  - DJANGO_SETTINGS_MODULE="settings"
   - PIP_USE_MIRRORS=true
 
 # command to install dependencies
