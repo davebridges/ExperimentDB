@@ -3,7 +3,11 @@ python:
   - "2.6"
   - "2.7"
 env:
-  - DJANGO=1.5
+  global:
+  - DJANGO="1.5"
+  - DJANGO_SETTINGS_MODULE="experimentdb.settings"
+  - PIP_USE_MIRRORS=true
+
 # command to install dependencies
 install:
   - pip install -r requirements.txt --use-mirrors
