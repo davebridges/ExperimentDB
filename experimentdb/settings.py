@@ -13,7 +13,6 @@ try:
     from localsettings import *
 except ImportError:
     print 'localsetting could not be imported'
-    pass #Or raise
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html

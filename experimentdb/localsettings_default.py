@@ -12,8 +12,8 @@ LOGIN_URL = '/accounts/login/'
 STATIC_URL = '/static/'
 
 #these locations can be absolue paths or relative to the installation (as is shown here)
-MEDIA_ROOT = os.path.join(PROJECT_DIR, "media/files") #set to where pictures and files will be stored.  Default is media folder and this is where MEDIA_URL on your webserver should point
-STATIC_ROOT = os.path.join(PROJECT_DIR, "served-static") #this folder is populated by the collectstatic command and is where STATIC_URL on your webserver should point
+MEDIA_ROOT = "/var/www/media/files" #set to where pictures and files will be stored.  Default is media folder and this is where MEDIA_URL on your webserver should point
+STATIC_ROOT = "/var/www/served-static" #this folder is populated by the collectstatic command and is where STATIC_URL on your webserver should point
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'ci%^08ig-0qu*&b(kz_=n6lvbx*puyx6=8!yxzm0+*z)w@7+%6'
@@ -31,7 +31,7 @@ TIME_ZONE = 'America/Detroit'
 
 DATABASES = {
     'default': {
-        'NAME': 'test.db', # Or path to database file if using sqlite3.
+        'NAME': 'default.db', # Or path to database file if using sqlite3.
         'ENGINE': 'django.db.backends.sqlite3', #  Choose one of 'django.db.backends.postgresql_psycopg2','django.db.backends.postgresql', 'django.db.backends.mysql', 'django.db.backends.sqlite3', 'django.db.backends.oracle'
         'USER': '',  # Not used with sqlite3.
         'PASSWORD': '', # Not used with sqlite3
