@@ -49,5 +49,9 @@
 {% endif %}      
 </table>
 <h3>Evidence</h3>
-{% for evidence in object.evidence.all %}<li><a href="{{ evidence.get_absolute_url }}">{{ evidence }}</a> ({{ evidence.citation_type }})</li>{% endfor %}
+<dl>
+{% for evidence in object.evidence.all %}<dt><a href="{{ evidence.get_absolute_url }}">{{ evidence }}</a> ({{ evidence.citation_type }})</dt>
+<dd>{{ evidence.notes }}</dd>
+{% endfor %}
+</dl>
 {% endblock %}
