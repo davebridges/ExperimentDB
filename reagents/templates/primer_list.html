@@ -13,6 +13,7 @@
 	<th>Primer</th>
 	<th>Type</th>
 	<th>Ordered</th>
+        <th>Location</th>
 	<th>Vendor</th>
 </tr>
 </thead>
@@ -22,6 +23,7 @@
 	<td><a href="{% url 'primer-detail' primer.id %}">{{ primer }}</a></td>
 	<td>{{primer.primer_type}}</td>
 	<td>{{primer.date_ordered}}</td>
+        <td>{{primer.location}} ({{primer.box}})</td>
 	<td>{{primer.vendor}}</td>
 	<td>
 <a href="{% url 'primer-detail' primer.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="Detail"></a>
@@ -35,5 +37,4 @@
 {% endfor %}
 </tbody>
 </table>
-<p>Click <a href="{% url 'primer-new' %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"></a> for a new primer</p>
 {% endblock %}
