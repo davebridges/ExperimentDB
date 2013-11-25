@@ -185,7 +185,7 @@ class Primer(ReagentInfo):
     sequence = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
-        ordering = ['primer_type']
+        ordering = ['primer_type','name']
 
     @models.permalink
     def get_absolute_url(self):
