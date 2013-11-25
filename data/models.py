@@ -57,7 +57,12 @@ class Experiment(models.Model):
     antibodies = models.ManyToManyField('reagents.Antibody', blank=True, null=True)
     chemicals = models.ManyToManyField('reagents.Chemical', blank=True, null=True)
     constructs = models.ManyToManyField('reagents.Construct', blank=True, null=True)
-    siRNA = models.ManyToManyField('reagents.Primer', blank=True, null=True, limit_choices_to = {'primer_type': 'siRNA'})
+    siRNA = models.ManyToManyField('reagents.Primer', blank=True, null=True,
+        limit_choices_to = {'primer_type': 'siRNA'},
+         related_name='siRNA_primer')
+    qPCR_primers = models.ManyToManyField('reagents.Primer', blank=True, null=True,
+        limit_choices_to = {'primer_type':'RT-PCR'},
+        related_name='qPCR_primer')
     strain = models.ManyToManyField('reagents.Strain', blank=True, null=True)
     animal_model = models.ManyToManyField('reagents.AnimalStrain', blank=True, null=True)
     animal_cohort = models.ManyToManyField('AnimalCohort', blank=True, null=True)
