@@ -14,7 +14,7 @@ from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 from Bio import Entrez
 from Bio import SeqIO
 
-from proteins.models import Protein, ProteinFamily
+from proteins.models import Protein, ProteinFamily, ProteinDetail
 from proteins.forms import ProteinFamilyForm
 from data.models import Experiment
 
