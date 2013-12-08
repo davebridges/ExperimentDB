@@ -81,6 +81,7 @@
         {{ experiment.resultfigure.all }}
         {% for figure in experiment.resultfigure_set.all %}
         <a href="{{figure.file.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{figure.file.url}}" width=200 /></a>
+        <p>{{ figure.notes }}</p>
         {% endfor %}
         	
 	{% for result in experiment.result_set.all %}
@@ -88,8 +89,8 @@
 	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=200 /></a>{% endif %}
 	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" rel="figures" ><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=200 /></a>{% endif %}
 	{% endfor %}
-        <p>Add a new figure <a href="{% url 'figure-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p>
-	<p>Add new raw data <a href="{% url 'raw-data-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
+        <p>Add a new figure <a href="{% url 'figure-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"/></a></p>
+        </div>
 
 	<h3><a href="#">Reagents</a></h3>
 	<div id="reagents">
@@ -123,12 +124,13 @@
 
 	<h3><a href="#">Raw Data Files</a></h3>
 	<div id="files">
+        <p>Add new raw data <a href="{% url 'raw-data-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"/></a></p>
+        <ul> 
         {% for data in experiment.rawdatafile_set.all %}       
-        <a href="{{data.file.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{data.file.url}}" width=200 /></a>
+        <li><a href="{{data.file.url}}">{{ data.file }}</a> {{ data.notes }}</li>
         {% endfor %}
 
 	{% for result in experiment.result_set.all %}
-	<ul>
 	{% if result.file1 %}<li><a href="{{result.file1.url}}">{{result.file1}}</a></li>{% endif %}
 	{% if result.file2 %}<li><a href="{{result.file2.url}}">{{result.file2}}</a></li>{% endif %}
 	{% if result.file3 %}<li><a href="{{result.file3.url}}">{{result.file3}}</a></li>{% endif %}
