@@ -18,6 +18,12 @@ from proteins.models import Protein, ProteinFamily
 from proteins.forms import ProteinFamilyForm
 from data.models import Experiment
 
+class ProteinList(LoginRequiredMixin,ListView):
+    '''This view displays protein objects'''
+
+    model = Protein
+    template_name = 'protein_index.html'
+
 @login_required
 def index(request):
 	protein_list = Protein.objects.order_by('name')
