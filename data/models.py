@@ -121,6 +121,9 @@ class DataFile(models.Model):
     def get_absolute_url(self):
         return "/result/%i/" % self.id	
 		
+    class Meta:
+        abstract = True
+
 class RawDataFile(DataFile):
     ''''This class contains raw data files, which can be anything other than final images.'''
     file = models.FileField(upload_to='raw/%Y/%m/%d')	
@@ -136,7 +139,6 @@ class ResultFigure(DataFile):
     def __unicode__(self):
         '''The unicode representation of a Result Figure is in the format **Figure for Experiment ABCD (File #123)**'''
         return u'Figure for Experiment %s (File #%i)' %(self.experiment, self.id)				
-
 
 class Sequencing(models.Model):
 	clone_name = models.CharField(max_length=15)

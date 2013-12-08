@@ -78,6 +78,7 @@
 	<h3><a href="#">Results and Conclusions</a></h3>
 	<div id="conclusions">
 	<h4>Results</h4>
+        {{ experiment.resultfigure.all }}
         {% for figure in experiment.resultfigure_set.all %}
         <a href="{{figure.file.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{figure.file.url}}" width=200 /></a>
         {% endfor %}
