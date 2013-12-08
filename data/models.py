@@ -101,6 +101,36 @@ class Result(models.Model):
 		return u'%s ' % self.experiment
 	def get_absolute_url(self):
 		return "/result/%i/" % self.id
+		
+class DataFile(models.Model):
+    '''This class contains raw data files associated with an experiment.
+    
+    This class is subclassed into RawDataFile or ResultFigure objects.
+    '''
+    
+    experiment = models.ForeignKey('Experiment', help_text="Which experiment does this file correspond to?")
+    notes = models.TextField(max_length=500, blank=True, null=True, help_text="Enter some notes about this file")
+    public = models.BooleanField(help_text="Should this image be publicly visible?")
+    published = models.BooleanField(help_text="Was this data file published?")
+	
+    def get_absolute_url(self):
+        return "/result/%i/" % self.id	
+		
+class RawDataFile(DataFile):
+    ''''This class contains raw data files, which can be anything other than final images.'''
+    file = models.FileField(upload_to='raw/%Y/%m/%d')	
+    
+    def __unicode__(self):
+        '''The unicode representation of a Raw Data File is in the format **Raw Data File for Experiment ABCD (File #123)**'''
+        return u'Raw Data File for Experiment %s (File #%i)' %(self.experiment, self.id)
+		
+class ResultFigure(DataFile):
+    ''''This class contains image files, which summarize the results.'''
+    result_figure = models.ImageField(upload_to='final/%Y/%m/%d')
+    
+    def __unicode__(self):
+        '''The unicode representation of a Result Figure is in the format **Figure for Experiment ABCD (File #123)**'''
+        return u'Figure for Experiment %s (File #%i)' %(self.experiment, self.id)				
 
 
 class Sequencing(models.Model):
