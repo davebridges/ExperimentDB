@@ -12,11 +12,16 @@
 {% endblock %}
 {% block content %}
 <h2>{{ protein }}</h2>
+
+{% if potein.protein_family.exists %}
 <h3>Protein Families</h3>
 <ul>{% for family in protein.protein_family.all %}
  <li><a href="{{family.get_absolute_url}}">{{family}}</a></li>
 {% endfor %}
  </ul>
+ {% endif %}
+ 
+{% if protein.proteindetail_set.exists %}
 <table>
  <thead>
   <tr>
@@ -42,9 +47,11 @@
 {% endfor %}
  </tbody>
  </table>
+ {% endif %}
  <p>Add new protein isoform <a href="{% url 'protein-detail-new' %}">here</a></p>
 
 <div id ="accordion">
+{% if protein.antibody_set.exists %}
 <h3><a href="#">Antibodies ({{ protein.antibody_set.count }})</a></h3>
 <div>
 <table>
@@ -59,10 +66,10 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
 
-
-
+{% if protein.construct_set.exists %}
 <h3><a href="#">Constructs ({{ protein.construct_set.count }})</a></h3>
 <div>
 <table>
@@ -77,7 +84,9 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
+{% if protein.primer_set.exists %}
 <h3><a href="#">Primers ({{protein.primer_set.count}})</a></h3>
 <div>
 <table>
@@ -97,8 +106,9 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
-
+{% if protein.strain_set.exists %}
 <h3><a href="#">Strains ({{protein.strain_set.count}})</a></h3>
 <div>
 <table>
@@ -113,7 +123,9 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
+{% if protein.experiment_set.exists %}
 <h3><a href="#">Experiments ({{ protein.experiment_set.count }})</a></h3>
 <div>
 <table>
@@ -128,9 +140,7 @@
 {% endfor %}
   </table>
   </div>
+{% endif %}
 
-{% with protein as object %}
-{% include "comment.html" %}
-{% endwith %}
   </div>
 {% endblock %}
