@@ -131,7 +131,7 @@ class RawDataFile(DataFile):
 		
 class ResultFigure(DataFile):
     ''''This class contains image files, which summarize the results.'''
-    result_figure = models.ImageField(upload_to='final/%Y/%m/%d')
+    file = models.ImageField(upload_to='final/%Y/%m/%d')
     
     def __unicode__(self):
         '''The unicode representation of a Result Figure is in the format **Figure for Experiment ABCD (File #123)**'''
