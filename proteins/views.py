@@ -1,6 +1,9 @@
 
 '''This package controls the views generated for the proteins app'''
+from urllib import urlencode
+from urllib2 import urlopen
 
+import json
 
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
@@ -8,6 +11,7 @@ from reagents.models import Antibody, Construct, Primer
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
+from django.conf import settings
 
 from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
@@ -17,6 +21,17 @@ from Bio import SeqIO
 from proteins.models import Protein, ProteinFamily, ProteinDetail
 from proteins.forms import ProteinFamilyForm
 from data.models import Experiment
+
+def omim_search(query):
+    '''This function performs a standard OMIM search based on this query.
+    
+    It returns json parsed into a dict'''
+    base_api_url = 'http://api.omim.org/api/entry/search?'  
+    params = {'apiKey': settings.OMIM_API_KEY, 'format' :'json', 'include' : 'geneMap', 'search':query}
+    url_call = base_api_url+urlencode(params)
+    response = urlopen(url_call)
+    dict = json.load(response)
+    return dict['omim']['searchResponse']['entryList']
 
 @login_required
 def detail(request, protein):
@@ -58,7 +73,12 @@ class ProteinDetail(LoginRequiredMixin, DetailView):
     model = Protein
     template_name = 'protein_detail.html'
     template_object_name = 'protein'
-
+    
+    def get_context_data(self, **kwargs):
+        '''This function searches OMIM for the search key, returning OMIM entries.'''
+        context = super(ProteinDetail, self).get_context_data(**kwargs)
+        context['omim_data'] = omim_search(self.get_object().name)
+        return context
     
 class ProteinUpdate(PermissionRequiredMixin, UpdateView):
     '''This view is for editing a Protein.'''

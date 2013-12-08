@@ -143,4 +143,23 @@
 {% endif %}
 
   </div>
+  
+<section id='omim-data'>
+<h2>Data from OMIM</h2>  
+  <dl>
+  {% for entry in omim_data %}
+  <dt>{{ entry.entry.geneMap.geneSymbols }} {% if entry.entry.geneMap.geneName %}({{ entry.entry.geneMap.geneName }}) {% endif %}</dt>
+  <dd>
+  <ul>
+  {% for phenotype in entry.entry.geneMap.phenotypeMapList %}
+  <li>
+  <strong><a href="http://www.omim.org/{{ phenotype.phenotypeMap.phenotypeMimNumber }}">{{ phenotype.phenotypeMap.phenotype }}</a></strong> -- {{ phenotype.phenotypeMap.phenotypeInheritance }}
+  </li>
+  {% endfor %}
+  </ul>
+  </dd>
+  {% endfor %}
+  </dl>
+  </section>
+
 {% endblock %}
