@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block head_title %}New Figure for {{ experiment }}{% endblock %}
+{% block title %}New Figure for {{experiment}}{% endblock %}
+{% block content %}
+<form enctype="multipart/form-data" method="POST" action="{% url 'figure-file-new' experiment.experimentID %}">{% csrf_token %}
+<table>
+{{form}}
+</table>
+ <input type="submit" value="Submit" />
+ </form>
+ 
+{% endblock %}
