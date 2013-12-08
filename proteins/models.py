@@ -20,7 +20,7 @@ class Protein(models.Model):
     The intent is so that a protein can be referred to generically in a species and isoform independent manner.
     '''
     protein_family = models.ManyToManyField('ProteinFamily', blank=True, null=True)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, help_text="This is our generic, isoform and species agnostic name for the protein")
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -39,14 +39,14 @@ class ProteinDetail(models.Model):
     
     Since a Protein object is a generic link to all isoforms/splice variants and species of a protein this allows for links to the specific protein details when needed.'''
     
-    name = models.CharField(max_length=50, help_text="Our Name for the Protein")
+    name = models.CharField(max_length=50, help_text="Our name for the protein, should include the species and isoform/splice variant")
     protein = models.ForeignKey('Protein')
     gene = models.CharField(max_length=10, blank=True)
     species = models.ForeignKey('reagents.Species', blank=True, null=True)
     geneID = models.IntegerField(blank=True, null=True)
-    RefSeqProtein = models.CharField(max_length=15, blank=True, null=True, verbose_name="Protein Sequence (RefSeq)")
+    RefSeqProtein = models.CharField(max_length=15, blank=True, null=True, verbose_name="Protein ID (RefSeq)")
     RefSeqProtein_gi = models.IntegerField(max_length=20, blank=True, null=True)
-    RefSeqNucleotide = models.CharField(max_length=15, blank=True, null=True, verbose_name="Nucleotide Sequence (RefSeq)")
+    RefSeqNucleotide = models.CharField(max_length=15, blank=True, null=True, verbose_name="Nucleotide ID (RefSeq)")
     RefSeqNucleotide_gi = models.IntegerField(max_length=10, blank=True, null=True)
     WormBaseID = models.CharField(max_length=50, blank=True, null=True)
     FlyBaseID = models.CharField(max_length=50, blank=True, null=True)
