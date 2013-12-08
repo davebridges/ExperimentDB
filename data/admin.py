@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from data.models import Protocol, Experiment, Result, Sequencing, AnimalCohort
+from data.models import Protocol, Experiment, Result, Sequencing, AnimalCohort, ResultFigure, RawDataFile
 
 class ResultInline(admin.TabularInline):
 	model = Result
@@ -38,6 +38,14 @@ admin.site.register(Experiment, ExperimentAdmin)
 class ResultAdmin(admin.ModelAdmin):
 	pass
 admin.site.register(Result, ResultAdmin)
+
+class RawDataFileAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(RawDataFile, RawDataFileAdmin)
+
+class ResultFigureAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(ResultFigure, ResultFigureAdmin)
 
 class SequencingAdmin(admin.ModelAdmin):
 	pass

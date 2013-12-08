@@ -1,9 +1,17 @@
-.. image:: https://api.travis-ci.org/davebridges/ExperimentDB.png
 
 ExperimentDB
 ============
 
 The experimentDB is a web-based application for the storage, organization and communication of experimental data with a focus on molecular biology and biochemical data. This application also stores data regarding reagents, including antibodies, constructs and other biomolecules as well as tracks the distribution of reagents. There is also some preliminary interfaces to other web resources.
+
+Current Build and Testing Status
+---------------------------------
+
+.. image:: https://travis-ci.org/BridgesLab/ExperimentDB.png?branch=master   
+    :target: https://travis-ci.org/BridgesLab/mousedb
+
+.. image:: https://coveralls.io/repos/BridgesLab/ExperimentDB/badge.png?branch=master
+    :target: https://coveralls.io/r/BridgesLab/mousedb
 
 This project contains several sub-applications as described below:
 
