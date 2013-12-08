@@ -18,17 +18,6 @@ from proteins.models import Protein, ProteinFamily
 from proteins.forms import ProteinFamilyForm
 from data.models import Experiment
 
-class ProteinList(LoginRequiredMixin,ListView):
-    '''This view displays protein objects'''
-
-    model = Protein
-    template_name = 'protein_index.html'
-
-@login_required
-def index(request):
-	protein_list = Protein.objects.order_by('name')
-	return render_to_response('protein_index.html', {'protein_list': protein_list},context_instance=RequestContext(request))
-
 @login_required
 def detail(request, protein):
 	protein = get_object_or_404(Protein, name=protein)
@@ -132,3 +121,9 @@ class ProteinFamilyList(LoginRequiredMixin, ListView):
     template_name = 'proteinfamily_list.html'
     template_object_name = 'proteinfamily_list'         
 
+class ProteinDetailCreate(PermissionRequiredMixin, CreateView):
+    '''This view is for creating a new ProteinDetail.'''
+
+    model = ProteinDetail
+    template_name = 'proteindetail_form.html'
+    permission_required = "proteins.create_proteindetail"
