@@ -6,7 +6,7 @@ There are simple new, edit, delete, detail and list views for each of cloning an
 
 '''This is the urlconf for protocol urls.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from cloning import views
 

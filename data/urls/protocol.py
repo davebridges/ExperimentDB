@@ -1,6 +1,6 @@
 '''This is the urlconf for protocol urls.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from data import views
 

@@ -1,6 +1,6 @@
 '''This is the urlconf for reference urls.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from external import views
 

@@ -1,6 +1,6 @@
 '''This package is the url redirection for the projects app.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from projects import views
 

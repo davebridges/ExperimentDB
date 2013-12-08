@@ -1,6 +1,6 @@
 '''This is the urlconf for purified proteins.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from reagents import views
 

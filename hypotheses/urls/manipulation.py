@@ -1,6 +1,6 @@
 '''This is the urlconf for manipulation objects.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from hypotheses import views
 
