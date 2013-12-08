@@ -17,7 +17,7 @@ This app takes a url request in the form of /protein/something and redirects to 
 * protein-name-slug
 """
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from proteins import views
 

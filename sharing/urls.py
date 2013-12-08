@@ -1,6 +1,6 @@
 '''This is the urlconf for construct-shipment urls.'''
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 from sharing import views
 
