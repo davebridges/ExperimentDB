@@ -14,7 +14,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView,
 from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
 from data.models import Experiment, Result, Protocol
-from data.forms import ResultForm, ResultFormSet, ExperimentForm
+from data.forms import RawDataFileForm, FigureFileForm, ExperimentForm
 from proteins.models import Protein
 from reagents.models import Chemical, Antibody, Cell
 from projects.models import Project, SubProject
@@ -59,14 +59,14 @@ def protocol_detail(request, protocol_slug):
 	return render_to_response ('protocol_detail.html', {'protocol': protocol, 'protocol_experiments':protocol_experiments},context_instance=RequestContext(request))
 
 @login_required
-def result_new(request, experimentID):
-	"""This renders a form to add a new result.
+def raw_data_file_new(request, experimentID):
+	"""This renders a form to add a new piece of raw data.
 
-	This view will be sent from a particular experiment and will attach the result to that particular experiment.	
+	This view will be sent from a particular experiment and will attach the raw data to that particular experiment.	
 	"""
 	experiment = get_object_or_404(Experiment, pk=experimentID)
 	if request.method == "POST":
-		form = ResultForm(request.POST, request.FILES)
+		form = RawDataFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			result = form.save(commit=False)
 			result.experiment_id = experiment.experimentID
@@ -74,8 +74,27 @@ def result_new(request, experimentID):
 			form.save()
 			return HttpResponseRedirect( experiment.get_absolute_url() )
 	else:
-		form = ResultForm()
-	return render_to_response('result_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
+		form = RawDataFileForm()
+	return render_to_response('raw_data_file_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
+
+@login_required
+def figure_file_new(request, experimentID):
+	"""This renders a form to add a new figure.
+
+	This view will be sent from a particular experiment and will attach the figure to that particular experiment.	
+	"""
+	experiment = get_object_or_404(Experiment, pk=experimentID)
+	if request.method == "POST":
+		form = FigureFileForm(request.POST, request.FILES)
+		if form.is_valid():
+			result = form.save(commit=False)
+			result.experiment_id = experiment.experimentID
+			result.save()
+			form.save()
+			return HttpResponseRedirect( experiment.get_absolute_url() )
+	else:
+		form = FigureFileForm()
+	return render_to_response('figure_file_form.html', {'form':form, 'experiment':experiment},context_instance=RequestContext(request))
 	
 class ExperimentCreate(PermissionRequiredMixin, CreateView):
     '''This view is for creating a new Experiment object.'''

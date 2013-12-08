@@ -9,7 +9,7 @@ from django.forms.models import inlineformset_factory
 
 from ajax_select.fields import AutoCompleteSelectMultipleField, AutoCompleteSelectField
 
-from data.models import Experiment, Result
+from data.models import Experiment, RawDataFile, ResultFigure
 
 class ExperimentForm(forms.ModelForm):
     """This is a modelform for the creation and editing of experimental data."""
@@ -31,18 +31,16 @@ class ExperimentForm(forms.ModelForm):
 		    'all': ('css/autocomplete.css',),
               }
         js = ("js/jquery-autocomplete/jquery.autocomplete.js",)
-
-
-	
 		
-class ResultForm(forms.ModelForm):
-	"""This is a modelform for the creation and editing of specific results."""
+class RawDataFileForm(forms.ModelForm):
+	"""This is a modelform for the adding of raw data."""
 	class Meta:
-		model = Result
-		exclude = ['experiment']
-		
-ResultFormSet = inlineformset_factory(Experiment, Result, can_delete=True, extra=5)
+		model = RawDataFile
+                exclude =['experiment','public','published']
 
 
-
-
+class FigureFileForm(forms.ModelForm):
+	"""This is a modelform for the adding of a figure."""
+	class Meta:
+		model = ResultFigure
+                exclude =['experiment','public','published']

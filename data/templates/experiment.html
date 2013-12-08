@@ -83,7 +83,8 @@
 	{% if result.result_figure1 %}<a href="{{result.result_figure1.url}}" rel="figures" ><img class="figure" alt="Figure 1" src="{{result.result_figure1.url}}" width=200 /></a>{% endif %}
 	{% if result.result_figure2 %}<a href="{{result.result_figure2.url}}" rel="figures" ><img class="figure" alt="Figure 2" src="{{result.result_figure2.url}}" width=200 /></a>{% endif %}
 	{% endfor %}
-	<p>Add new result <a href="{% url 'result-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
+        <p>Add a new figure <a href="{% url 'figure-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p>
+	<p>Add new raw data <a href="{% url 'raw-data-file-new' experiment.experimentID %}"><img src="{{STATIC_URL}}img/icons/add.png" width=25 alt="here"/></a></p></div>
 
 	<h3><a href="#">Reagents</a></h3>
 	<div id="reagents">
