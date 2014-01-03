@@ -41,10 +41,12 @@ urlpatterns = patterns('',
 	(r'^chemicals?/', include('reagents.urls.chemical')),
 
         (r'^animal_models?/?', include('reagents.urls.animal_model')),
+
+        (r'^fly_strains?/?', include('reagents.urls.fly_strains')),
 	
 	(r'^yeast_strains?/', include('reagents.urls.strain')),
     
-    (r'^licenses?/', include('reagents.urls.license')),
+        (r'^licenses?/', include('reagents.urls.license')),
 	
 	(r'^clonings?/', include('cloning.urls')),
 	

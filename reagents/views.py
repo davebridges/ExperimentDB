@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse_lazy
 
 from braces.views import LoginRequiredMixin, PermissionRequiredMixin
 
-from reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License, AnimalStrain
+from reagents.models import Construct, Antibody, Chemical, Cell, Primer, Strain, License, AnimalStrain, FlyStrain
 
 @login_required
 def index(request):
@@ -358,4 +358,43 @@ class AnimalStrainList(LoginRequiredMixin, ListView):
     
     model = AnimalStrain
     template_name = 'animalstrain_list.html'
-    template_object_name = 'animalstrain_list' 
+    template_object_name = 'animalstrain_list'
+
+class FlyStrainCreate(PermissionRequiredMixin, CreateView):
+    '''This view is for creating a new FlyStrain.'''
+    
+    model = FlyStrain
+    template_name = 'fly_strain_form.html'
+    permission_required = "reagents.create_flystrain"
+
+class FlyStrainDetail(LoginRequiredMixin, DetailView):
+    '''This view is for viewing a FlyStrain.'''
+    
+    model = FlyStrain
+    template_name = 'fly_strain_detail.html'
+    template_object_name = 'fly_strain'
+
+    
+class FlyStrainUpdate(PermissionRequiredMixin, UpdateView):
+    '''This view is for editing a FlyStrain.'''
+    
+    model = FlyStrain
+    template_name = 'fly_strain_form.html'
+    template_object_name = 'fly_strain'
+    permission_required = "reagents.update_flystrain"    
+    
+class FlyStrainDelete(PermissionRequiredMixin, DeleteView):
+    '''This view is for deleting a FlyStrain'''
+    
+    model = FlyStrain
+    template_name = 'confirm_delete.html'
+    template_object_name = 'object'
+    permission_required = "reagents.delete_fly_strain"              
+    success_url        = reverse_lazy('fly-strain-list')
+    
+class FlyStrainList(LoginRequiredMixin, ListView):
+    '''This view is for viewing a list of FlyStrain objects.'''
+    
+    model = FlyStrain
+    template_name = 'fly_strain_list.html'
+    template_object_name = 'fly_strain_list'  
