@@ -64,6 +64,7 @@ class Experiment(models.Model):
         limit_choices_to = {'primer_type':'RT-PCR'},
         related_name='qPCR_primer')
     strain = models.ManyToManyField('reagents.Strain', blank=True, null=True)
+    fly_strain = models.ManyToManyField('reagents.FlyStrain', blank=True, null=True)
     animal_model = models.ManyToManyField('reagents.AnimalStrain', blank=True, null=True)
     animal_cohort = models.ManyToManyField('AnimalCohort', blank=True, null=True)
     comments = models.TextField(max_length=500, blank=True, null=True)

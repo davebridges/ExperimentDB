@@ -22,13 +22,15 @@ def index(request):
 	primers = Primer.objects.all()
 	strains = Strain.objects.all()
         animals = AnimalStrain.objects.all()
+        fly_strains = FlyStrain.objects.all()
 	return render_to_response('reagent_list.html', {'constructs':constructs, 
                                                         'antibodies':antibodies, 
                                                         'chemicals': chemicals, 
                                                         'cells':cells, 
                                                         'primers':primers, 
                                                         'strains':strains,
-                                                        'animals':animals
+                                                        'animals':animals,
+                                                        'fly_strains':fly_strains
                                   },context_instance=RequestContext(request)) 
 
 	

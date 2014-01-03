@@ -48,5 +48,12 @@
  <td><a href="{% url 'animal-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="new"/></a></td>
  <td><a href="{% url 'animal-list' %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="view"/></a></td>
 </tr>
+<tr>
+ <th><a href="{% url 'fly-strain-list' %}">Fly Models</a></th>
+ <td>{{ fly_strains.count }}</td>
+ <td><a href="{% url 'fly-strain-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="new"/></a></td>
+ <td><a href="{% url 'fly-strain-list' %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width=25 alt="view"/></a></td>
+</tr>
+</table>
 </table>
 {% endblock %}

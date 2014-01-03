@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block scripts %}
+{% include "sortable_table_script.html" %}
+{% endblock scripts %}
+{% block head_title %}Fly Strain List{% endblock %}
+{% block title %}Fly Strain List{% endblock %}
+{% block content %}
+{% if perms.reagents.add_flystrain %}<p>Click <a href="{% url 'fly-strain-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" width="25" alt="here"/></a> for a new fly strain</p>{% endif %}
+<table class="sortable">
+<thead>
+	<tr>
+	<th>Name</th>
+	<th>Source</th>
+	<th>Location</th>
+        <th>Genotype</th>
+	</tr>
+</thead>
+<tbody>
+{% for strain in object_list %}
+<tr>
+	<td><a href="{% url 'fly-strain-detail' cell.id %}">{{ strain }}</a></td>
+	<td>{{strain.source}}</td>
+	<td>{{strain.location}}</td>
+	<td>{{strain.genotype}}</td>
+	<td>
+<a href="{% url 'strain-detail' strain.id %}"><img src="{{STATIC_URL}}img/icons/Zoom.png" width="25" alt="Detail"/></a>
+{% if perms.reagents.change_flystrain %}<a href="{% url 'fly-strain-edit' strain.id %}"><img src="{{STATIC_URL}}img/icons/Document Write.png" width="25" alt="Edit"/></a>{% endif %}
+{% if perms.reagents.delete_flystrain %}<a href="{% url 'fly-strain-delete' strain.id %}"><img src="{{STATIC_URL}}img/icons/Close.png" width="25" alt="delete"/></a>{% endif %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Click <a href="{% url 'fly-strain-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" width=25 alt="here"/></a> for a new fly strain</p>
+{% endblock %}

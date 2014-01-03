@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block head_title %}{% if object %}Update Fly Strain {{object}}{% else %} New Fly Strain {% endif %}{% endblock %}
+{% block title %}{% if object %}Update Fly Strain {{object}}{% else %} New Fly Strain {% endif %}{% endblock %}
+{% block content %}
+<form method="post" {% if object %} action="{% url 'fly-strain-edit' object.id %}"{% else %} action="{% url 'fly-strain-new' %}"{% endif%}>{% csrf_token %}
+<table>{{ form }}</table>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}
