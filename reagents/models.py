@@ -268,6 +268,26 @@ class AnimalStrain(ReagentInfo):
         """The absolute url of this is the animal-detail page with the id number."""    
         return ("animal-detail", [str(self.id)])        
 
+class FlyStrain(ReagentInfo):
+    """This model describes objects of the class Fly Strain.
+
+    It is intended to describe fy strains used in experiments.
+    The only required field is name.
+    This model is a subclass of ReagentInfo."""
+    stock_number = models.IntegerField(help_text="Stock ID number", blank=True, null=True)
+    genotype = models.CharField(max_length=50, help_text="Genotype of the stock", blank=True, null=True)
+    date_generated = models.DateField(help_text="The date this stock was generated or purchased", blank=True, null=True)
+    
+    def save(self):
+        """The save is over-ridden to slugify the name field into a slugfield."""
+        self.slug = slugify( self.name )
+        super( FlyStrain, self ).save()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ("fly-strain-detail", [str(self.id)])
+
+	
 class Species(models.Model):
     '''Model for indicating specific species.  
        
