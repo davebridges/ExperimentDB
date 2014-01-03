@@ -46,6 +46,7 @@ LOCATIONS = (
 	('4', 'Small Fridge'),
 	('-80', '-80 Freezer'),
 	('liquid nitrogen', 'Liquid Nitrogen Tank'),
+        ('18C Room', '18C Room')
 )
 
 
