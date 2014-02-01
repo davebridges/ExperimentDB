@@ -18,7 +18,7 @@
 <tbody>
 {% for strain in object_list %}
 <tr>
-	<td><a href="{% url 'fly-strain-detail' cell.id %}">{{ strain }}</a></td>
+	<td><a href="{% url 'fly-strain-detail' strain.id %}">{{ strain }}</a></td>
 	<td>{{strain.source}}</td>
 	<td>{{strain.location}}</td>
 	<td>{{strain.genotype}}</td>
