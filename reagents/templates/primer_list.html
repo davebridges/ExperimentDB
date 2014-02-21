@@ -12,7 +12,8 @@
 <tr>
 	<th>Primer</th>
 	<th>Type</th>
-	<th>Ordered</th>
+        <th>Protein</th>
+ 	<th>Ordered</th>
         <th>Location</th>
 	<th>Vendor</th>
 </tr>
@@ -22,7 +23,12 @@
 <tr>
 	<td><a href="{% url 'primer-detail' primer.id %}">{{ primer }}</a></td>
 	<td>{{primer.primer_type}}</td>
-	<td>{{primer.date_ordered}}</td>
+	<td>
+              {% for protein in primer.protein.all %}
+               <a href="{{ protein.get_absolute_url }}">{{ protein }}</a>
+              {% endfor%}
+          </td>
+        <td>{{primer.date_ordered}}</td>
         <td>{{primer.location}} ({{primer.box}})</td>
 	<td>{{primer.vendor}}</td>
 	<td>
