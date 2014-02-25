@@ -8,7 +8,7 @@
 {% if perms.reagents.add_construct %}
 <p>Click <a href="{% url 'construct-new' %}"><img src="{{STATIC_URL}}img/icons/Add.png" alt="here" /></a> for a new construct</p>
 {% endif %}
-<p>To see contructs shipped out click <a href="{% url 'shipment-list' %}"><img src="{{STATIC_URL}}img/icons/Network Connections.png" alt="here" width=25/></a></p>
+<p>To see contructs shipped out click <a href="{% url 'construct-shipment-list' %}"><img src="{{STATIC_URL}}img/icons/Network Connections.png" alt="here" width=25/></a></p>
 <table class="sortable">
 	<thead>
 		<tr>
