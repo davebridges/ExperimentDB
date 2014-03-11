@@ -142,6 +142,23 @@
   </div>
 {% endif %}
 
+{% if protein.flystrain_set.exists %}
+<h3><a href="#">Drosophila Strains ({{ protein.flystrain_set.count }})</a></h3>
+<div>
+<table>
+ <thead>
+ </thead>
+ <tbody>
+{% for fly in protein.flystrain_set.all %}
+   <tr>
+   <td><a href="{{fly.get_absolute_url }}">{{ fly }}</a></td>
+   </tr>
+  </tbody>
+{% endfor %}
+  </table>
+  </div>
+{% endif %}
+
   </div>
   
 <section id='omim-data'>
