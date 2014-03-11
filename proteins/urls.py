@@ -23,8 +23,8 @@ from proteins import views
 
 urlpatterns = patterns('',			
 	url(r'^protein-detail/(?P<protein_id>[\d]+)/$', 'proteins.views.protein_isoform_detail', name='protein-isoform-detail'),
-	url(r'^pritein-detail/(?P<protein>[-\w\d]+)/$', 'proteins.views.detail', name='protein-name-slug'),
-	url(r'^/new/$', views.ProteinCreate.as_view(), name="protein-new"),
+	url(r'^protein-detail/(?P<protein>[-\w\d]+)/$', 'proteins.views.detail', name='protein-name-slug'),
+	url(r'^new/?$', views.ProteinCreate.as_view(), name="protein-new"),
         url(r'^(?P<pk>\d+)/?$', views.ProteinDetail.as_view(), name='protein-detail'),        
 	url(r'^(?P<pk>\d+)/edit/?$', views.ProteinUpdate.as_view(), name="protein-edit"),
 	url(r'^(?P<pk>\d+)/delete/?$', views.ProteinDelete.as_view(), name="protein-delete"),
