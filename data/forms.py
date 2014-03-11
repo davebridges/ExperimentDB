@@ -14,14 +14,15 @@ from data.models import Experiment, RawDataFile, ResultFigure
 
 class ExperimentForm(forms.ModelForm):
     """This is a modelform for the creation and editing of experimental data."""
-    antibodies = AutoCompleteSelectMultipleField('antibody', required=False)
-    constructs = AutoCompleteSelectMultipleField('construct', required=False)	
-    cellline = AutoCompleteSelectMultipleField('cell', required=False)
-    chemicals = AutoCompleteSelectMultipleField('chemical', required=False)
-    siRNA = AutoCompleteSelectMultipleField('siRNA', required=False)	
-    strain = AutoCompleteSelectMultipleField('strain', required=False)	
+    antibodies = make_ajax_field(Experiment, 'antibodies', 'antibody')
+    constructs = make_ajax_field(Experiment, 'constructs', 'construct')	
+    cellline = make_ajax_field(Experiment, 'cellline', 'cell')
+    chemicals = make_ajax_field(Experiment, 'chemicals', 'chemical')
+    siRNA = make_ajax_field(Experiment, 'siRNA', 'siRNA')	
+    strain = make_ajax_field(Experiment, 'strain', 'strain')	
     protein = make_ajax_field(Experiment, 'protein', 'protein')		
-    protocol = AutoCompleteSelectMultipleField('protocol', required=False)	
+    protocol = make_ajax_field(Experiment, 'protocol', 'protocol')	
+
     class Meta:
         model = Experiment
 	
