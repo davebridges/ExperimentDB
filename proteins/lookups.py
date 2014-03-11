@@ -6,31 +6,34 @@ See http://code.google.com/p/django-ajax-selects/ for information about configur
 from proteins.models import Protein
 
 from django.db.models import Q
+from django.utils.html import escape
 
-class ProteinLookup(object):
+from ajax_select import LookupChannel
+
+class ProteinLookup(LookupChannel):
     """This is the generic lookup for antibodies.
 	
 	It is to be used for all protein requests and directs to the 'protein' channel.
 	"""
+
+    model = Protein
+
     def get_query(self,q,request):
         """ This sets up the query for the lookup.
 		
 		The lookup searches the name of the protein."""
         return Protein.objects.filter(name__icontains=q)
 
-    def format_result(self,protein):
+    def get_result(self,obj):
+        """This result is the completion of what the person typed"""
+        return obj.name
+
+    def format_match(self,obj):
         """ This controls the display of the dropdown menu.
 		
 		This is set to show the unicode name of the protein."""
-        return unicode(protein)
+        return self.format_item_display(obj)
 
-    def format_item(self,protein):
+    def format_item_display(self,obj):
         """ the display of a currently selected object in the area below the search box. html is OK """
-        return unicode(protein)
-
-    def get_objects(self,ids):
-        """ given a list of ids, return the objects ordered as you would like them on the admin page.
-            this is for displaying the currently selected items (in the case of a ManyToMany field)
-        """
-        return Protein.objects.filter(pk__in=ids)
-	
+        return u"<div><strong>%s</strong></div>" % escape(obj.name)
